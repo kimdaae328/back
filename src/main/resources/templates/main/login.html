@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/login.css">
+    <link rel="stylesheet" href="/fonts/pretendard/font.css">
+    <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div id="__next">
+        <div>
+
+            <div class="login-wrap">
+                <div class="login-text">로그인</div>
+                <div class="seller-buyer">
+                    <button class="login-buyer login-choice-active" type="submit" height="54" radius="6">
+                        <span class="buyer-inner">구매 로그인</span>
+                    </button>
+                    <button class="login-seller" type="submit" height="54" radius="6">
+                        <span class="seller-inner">판매 로그인</span>
+                    </button>
+                </div>
+                <form class="seller-login">
+                    <div class="login-body">
+                        <div>
+                            <div class="fail-login"></div>
+                            <div>
+                            <div class="id-password-wrap">
+                                <div class="id-password">
+                                    <input type="text"  name="id" placeholder="이메일을 입력해주세요" class="login-id">
+                                </div>
+                            </div>
+                            <div class="id-password-wrap">
+                                <div class="id-password">
+                                    <input type="password" name="password" placeholder="비밀번호를 입력해주세요" class="login-password">
+                                </div>
+                            </div>  
+                            </div>
+                            <div class="search-id-password">
+                                <a href="" class="search-password">비밀번호 찾기</a>
+                            </div>
+                            <div class="button-wrap">
+                                <button class="enter-login popup-trigger" type="submit" height="54" radius="6" data-target="#popup2">
+                                    <span class="enter-login-text">로그인</span>
+                                </button>
+                                <button class="joinus-button" type="button" height="54" radius="6">
+                                    <span class="enter-login-text">회원가입</span>
+                                </button>
+                            </div>
+                            <div class="login-footer">
+                                <p class="easy-login">간편 로그인</p>
+                                <button type="button" class="joinus-kakao">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="black">
+                                        <path d="M12 2C6.5 2 2 5.9 2 10.5c0 2.5 1.6 4.7 4.1 6.2L5 22l4.3-2.3c.8.1 1.6.2 2.7.2 5.5 0 10-3.9 10-8.5S17.5 2 12 2z"/>
+                                    </svg>
+
+                                    <p class="joinus-kakao-p">카카오로 계속하기</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form class="buyer-login">
+                    <div class="login-body">
+                        <div>
+                            <div class="login-footer">
+                                <!-- <p class="easy-login">간편 로그인</p> -->
+                                <button type="button" class="joinus-kakao buyer-kakao">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="black">
+                                        <path d="M12 2C6.5 2 2 5.9 2 10.5c0 2.5 1.6 4.7 4.1 6.2L5 22l4.3-2.3c.8.1 1.6.2 2.7.2 5.5 0 10-3.9 10-8.5S17.5 2 12 2z"/>
+                                    </svg>
+
+                                    <p class="joinus-kakao-p">카카오로 계속하기</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 로그인 실패  팝업 -->
+     <div class="popup-wrapper" id="popup2">
+        <div class="popup-inner">
+            <div class="dim"></div>
+            <div class="popup-container">
+                <div class="popup-content">
+                    <div class="popup-message">
+                        <p>로그인에 실패하였습니다. <br>
+                            고객센터로 문의 주시기 바랍니다. <br><br>
+
+                            이용에 불편을 드려 죄송합니다.</p>
+                    </div>
+                    <div class="popup-footer">
+                        <button type="button" class="btn-default popup-close">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/main/login.js"></script>
+</html>

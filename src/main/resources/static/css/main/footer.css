@@ -1,0 +1,145 @@
+/* 공통 요소 */
+*, :after, :before, legend, td, th {
+    padding: 0;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+a, abbr, acronym, address, applet, article, 
+aside, audio, b, big, blockquote, body, 
+button, canvas, caption, center, cite, code, 
+dd, del, details, dfn, div, dl, dt, em, 
+embed, fieldset, figcaption, figure, footer, 
+form, h1, h2, h3, h4, h5, h6, header, 
+hgroup, html, i, iframe, img, ins, kbd, 
+label, legend, li, mark, menu, nav, object, 
+ol, output, p, pre, q, ruby, s, samp, 
+section, small, span, strike, strong, sub, 
+summary, sup, table, tbody, td, tfoot, th, 
+thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+ol, ul {
+    list-style: none;
+    list-style-type: none;
+}
+
+html, body, span, div, button, input, label, select, option, textarea {
+    font-family: "Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,system-ui,Roboto,"Helvetica Neue","Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+}
+
+/* footer */
+
+.footer-big {
+    padding-top: 30px;
+    border-top: 1px solid #f7f7f7;
+}
+
+.footer-top {
+    width: 1050px;
+    margin: 0 auto;
+}
+
+.footer-top-top {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.footer-constructor {
+    display: flex;
+    align-items: center;
+}
+
+.team-name {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+}
+
+.team-name-members {
+    position: relative;
+    display: block;
+    font-size: 16px;
+    line-height: 40px;
+    margin-left: 30px;
+}
+
+.footer-top-floor {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 26px 0 33px;
+    border-top: 1px solid #eee;
+}
+
+.center-time {
+    margin-left: 8px;
+    font-weight: normal;
+}
+
+.informations {
+    display: flex;
+    flex-direction: column;
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.information-button {
+    display: block;
+    width: 140px;
+    height: 40px;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    line-height: 39px;
+    text-align: center;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.information-text {
+    color: #999;
+    letter-spacing: -0.5px;
+    line-height: 16.8px;
+}
+
+.footer-bar {
+    margin: 0 6px;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.footer-top-top-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-top {
+    display: flex;
+    width: 100%;
+    padding-bottom: 29px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgb(238, 238, 238);
+}
+
+.footer-bottom  p {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 12px;
+    color: #999;
+}

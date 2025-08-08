@@ -1,0 +1,927 @@
+/* 공통 */
+
+*,:after,:before,
+legend,
+td,
+th {
+    padding: 0;
+}
+
+*,:after,:before {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html, body, span, div, button, input, label, 
+select, option, textarea {
+    font-family: "Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,system-ui,Roboto,"Helvetica Neue","Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+button,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    line-height: 1;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-size: 14px;
+    color: #333;
+}
+
+canvas,
+img,
+video {
+    max-width: 100%;
+}
+
+img,
+legend {
+    border: 0;
+    vertical-align: top;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+button {
+    border-radius: 0;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button {
+    overflow: visible;
+    background-color: transparent;
+    border: none;
+}
+
+.blind::before {
+    display: block;
+    width: 0;
+    height: 0;
+    content: '\00a0';
+    font-size: 0;
+}
+
+
+/* 마이 페이지 시작 */
+
+/* 목록 */
+.mypage {
+    position: relative;
+    min-width: 1050px;
+    height: 100%; /*   */
+    background-color: rgb(242, 245, 248);
+}
+
+.mypage-sales {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    justify-content: center;
+    padding: 50px 0 80px;
+    margin: 0 auto;
+}
+
+.mypage-list {
+    overflow: hidden;
+    width: 255px;
+    border-radius: 16px;
+}
+
+.mypage-list-inner {
+    padding-bottom: 0;
+    background-color: rgb(242, 245, 248);
+}
+
+.mypage-list-inner .top-info-section {
+    margin-bottom: 8px;
+    padding: 24px 20px 20px;
+}
+
+.mypage-list-inner > div {
+    background-color: rgb(255, 255, 255);
+}
+
+.welcom-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grade-name {
+    display: flex;
+    align-items: center;
+    min-width: calc(100% - 100px);
+}
+
+.hello-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(50, 116, 63);
+    line-height: 25px
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 20px;
+    overflow: hidden;
+    padding-left: 5px;
+    line-height: 28px;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.often {
+    margin: 0;
+    padding: 20px 25px;
+}
+
+.often-text {
+    width: 100%;
+    padding: 12px 0 6px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgb(181, 181, 181);
+}
+
+.menu-wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu-wrap .menu-link {
+    display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 18px;
+    cursor: pointer;
+    flex-direction: row;
+    min-width: 100%;
+    font-weight: 500;
+    height: 54px;
+    padding: 16px 0;
+    font-size: 16px;
+}
+
+.menu-wrap .menu-link > svg {
+    margin: 0 8px 0 0;
+}
+
+.menu-list {
+    display: flex;
+    gap: 2px;
+}
+
+.active {
+    color: rgb(50, 116, 63);
+}
+
+/* 주문 목록 시작 */
+
+.sales-list-wrap {
+    width: 730px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+}
+
+.sales-list-text {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    padding: 25px 0 20px;
+    border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+.sales-detail {
+    display: flex;
+    
+    align-items: flex-end;
+}
+
+.sales-details-text {
+    font-weight: 600;
+    font-size: 14px;
+    padding :9px 0;
+    color: #333;
+    letter-spacing: -0.5px;
+    line-height: 28px;
+}
+
+.sales-list {
+    background-color: #f2f5f8;
+}
+
+.find-sales {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    position: relative;
+    top: 0;
+    transition: none;
+    transform: none;
+    padding: 20px 16px;
+    border-radius: 0 0 16px 16px;
+}
+
+.find-sales-button-wrap {
+    position: relative;
+    margin-right: 8px;
+}
+
+.find-sales-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #dfe4eb;
+    height: 40px;
+    width: 73px;
+}
+
+.sales-search {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.sales-search-bar {
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.sales-search-bar-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: #f2f5f8;
+    border-radius: 8px;
+    padding-right: 16px;
+}
+
+.sales-search-box {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    padding-left: 12px;
+    align-items: center;
+}
+
+.search-box-input {
+    position: relative;
+    width: 100%;
+    margin-left: 6px;
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    border: none;
+    background-color: #f2f5f8;
+}
+
+.search-box-input::placeholder {
+    color: #848f9a;
+}
+
+.sales-search-cancel {
+    margin-left: 14px;
+    background: none;
+    cursor: pointer;
+}
+
+.custom-dropdown {
+    position: relative;
+    width: 100px;
+    font-family: sans-serif;
+    user-select: none;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    color: rgb(50, 116, 63);
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-dropdown:has(.active) .dropdown-toggle svg {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdown-toggle svg {
+    transition: transform 0.3s;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%)
+}
+
+.custom-dropdown:has(.active) .dropdown-menu {
+    display: block;
+}
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    display: none;
+    z-index: 10;
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-menu li:hover {
+    background-color: rgb(240, 255, 240);
+    color: rgb(50, 116, 63);
+}
+
+.sales-list-card-wrap {
+    background-color: #f2f5f8;
+}
+
+.sales-list-cards-warp {
+    position: relative;
+    margin-top: 0;
+    transition: transform, 0.2s ease-out;
+    overscroll-behavior-y: contain;
+}
+
+.sales-list-cards {
+    padding: 20px 0 0;
+}
+
+.sales-list-card {
+    padding: 16px 16px 20px;
+    background-color: #fff;
+    border-radius: 16px;
+}
+
+.sales-info-wrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sales-info {
+    flex-shrink: 0;
+}
+
+.sales-date {
+    padding-bottom: 2px;
+    color: #222;
+    line-height: 26px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.sales-detail {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    position: absolute;
+    right: -6px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.sales-state {
+    display: flex;
+    margin-bottom: 16px;
+    justify-content: space-between;
+}
+
+.sales-state {
+    display: inline-flex;
+}
+
+/* 배송 완료시 */
+.sales-state-completion {
+    margin-right: 4px;
+    color: rgb(50, 116, 63);
+    line-height: 26px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/* 배송중 */
+/* .sales-state-completion {
+    color: #222;
+} */
+
+.completion-date {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 4px;
+    color: rgb(50, 116, 63);
+}
+
+.sales-product-wrap {
+    display: flex;
+    margin-bottom: 16px;
+    flex-direction: column;
+}
+
+.sales-product-wrap.fold {
+    display: none;
+}
+
+.sales-product {
+    display: flex;
+    flex-direction: row;
+}
+
+.sales-product-img-wrap {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 12px;
+    line-height: 0;
+}
+
+.sales-product-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: rgb(245, 245, 245);
+}
+
+.sales-product-info {
+    box-sizing: border-box;
+}
+
+.delivery-type {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.delivery-type-text {
+    color: #848f9a;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.product-info-title {
+    color: #222;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-info-detail {
+    color: #848f9a;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.sales-product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.buy-product-price {
+    color: #222;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.origin-product-price {
+    color: #bcc4cc;
+    font-size: 13px;
+    line-height: 18px;
+    text-decoration-line: line-through;
+    margin-left: 4px;
+}
+
+.product-price-bar {
+    min-width: 1px;
+    min-height: 10px;
+    margin: 0 6px;
+    background-color: #eceff3;
+}
+
+.quantity {
+    color: #565e67;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.add-cart {
+    display: flex;
+    padding: 10px 10.5px 10px 9.5px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dfe4eb;
+    border-radius: 8px;
+    color: #222;
+    margin-left: 8px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.view-more {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a7b2bc;
+    margin: 18px 0 20px;
+}
+
+.view-more.fold {
+    display: none;
+}
+
+.view-more.fold > svg {
+    transform: rotate(180deg);
+}
+
+.view-more-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding-right: 4px;
+}
+
+.sales-card-footer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.sales-card-return {
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-right: 16px;
+    padding-left: 16px;
+    height: 48px;
+    background-color: #eceff3;
+    color: #222;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.sales-card-review {
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-right: 16px;
+    padding-left: 16px;
+    height: 48px;
+    background-color: rgb(215, 236, 219);
+    color: rgb(50, 116, 63);
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 6px;
+}
+
+/* 배송 준비중일 때 */
+.sales-card-cancel {
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-right: 16px;
+    padding-left: 16px;
+    height: 48px;
+    background-color: rgb(215, 236, 219);
+    color: rgb(50, 116, 63);
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 6px;
+}
+
+
+img.sales-icon {
+    width: 28px;
+    height: 28px;
+    margin: 0 8px 0 0;
+}
+
+/* 판매 목록 카드 */
+div.info-wrap{
+    font-weight: 500;
+    font-size: 14px;
+    color: #565e67;
+}
+div.info-key-wrap{
+    margin-right: 10px;
+    border-right: 1px solid #f4f4f4;
+    padding-right: 10px;
+}
+div.info-val-wrap{
+    margin-right: 28px;
+}
+div.sales-product-info-container div.sales-details{
+    display: flex;
+    
+}
+
+div.sales-details.title h2.sales-details-text{
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    padding: 0px;
+    line-height: 28px;
+}
+div.sales-details.content{
+    margin-top: 8px;
+    font-size: 14px;
+}
+div.sales-product-content-wrap{
+    display: flex;
+    border-bottom: 1px solid #f4f4f4; 
+    padding-bottom: 12px;
+}
+
+div.sales-summary{
+    gap: 14px;
+    margin: 7px 0px;
+    display: flex;
+}
+
+div.sales-summary h2{
+    font-size: 14px;
+    font-weight: 400;
+}
+h2.order-num{
+    color: #848f9a;
+}
+/* /판매 목록 카드 */
+
+/* 검색결과없음 */
+span.no-serch-text{
+    text-align: center;
+    font-size: 16px;
+    color: rgb(181, 181, 181);
+    margin-top: 16px;
+    line-height: 20px;
+}
+div.no-search-text-container{
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+/* /검색결과없음 */
+
+
+
+/* pagenation */
+.pagenation {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.pagenation button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.pagenation .prev {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-activated.svg);
+}
+
+.pagenation .prev:disabled {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-disabled.svg);
+    cursor: default;
+}
+
+.pagenation .prev:hover {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-hover.svg);
+}
+
+.pagenation .next:hover {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-next-hover.svg);
+}
+
+.pagenation .next {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-next-activated.svg);
+}
+
+.pagenation .next:disabled {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-next-disabled.svg);
+    cursor: default;
+}
+/* /pagenation */
+
+/* 결제 상태, 배송상태 색 */
+span.info-val.await{
+    color: rgb(250,98,47);
+}
+span.info-val.completed{
+    color: rgb(84,156,98);
+}
+span.info-val.transit{
+    color: rgb(77,190,215);
+}
+/*  /결제 상태, 배송상태 색 */

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>너도먹고나도먹고</title>
+        <link rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="stylesheet" href="/fonts/pretendard/font.css">
+        <link rel="stylesheet" href="/css/mypage-seller/seller-dashboard.css">
+        <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
+
+    </head>
+    <body>
+        <div id="__next">
+            <div class="mypage-container">
+                <div class="mypage">
+                    <div class="mypage-seller">
+                        <div class="mypage-list">
+                            <div class="mypage-list-inner">
+                                <div class="top-info-section">
+                                    <div class="welcom-wrap">
+                                        <div class="grade-name">
+                                            <div class="lottie-text" style="min-width: 76px; width: 81px; height: 28px; margin-top: 3px;">
+                                                <span class="hello-text">반가워요!</span>
+                                            </div>
+                                            <div class="user-name">너도나도 님</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="often">
+                                    <div class="often-text">자주찾는 메뉴</div>
+                                    <div class="menu-wrap">
+                                        <button class="active menu-link">
+                                            <img src="/images/seller/goods.png" class="seller-icon">
+                                            <div class="menu-list">상품목록</div>
+                                        </button>
+                                        <button class="menu-link">
+                                            <img src="/images/seller/shopping-bag.png" class="seller-icon">
+                                            <div class="menu-list">주문목록</div>
+                                        </button>
+                                        <button class="menu-link">
+                                            <img src="/images/seller/profits.png" class="seller-icon">
+                                            <div class="menu-list">통계/정산 내역</div>
+                                        </button>
+                                        <button class="menu-link">
+                                            <svg width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="28" height="28" fill="none"></rect>
+                                                <path d="M6 5C6 3.89543 6.89543 3 8 3H25C26.1046 3 27 3.89543 27 5V21C27 23.7614 24.7614 26 22 26H8C6.89543 26 6 25.1046 6 24V5Z" fill="#fff" stroke="rgb(50, 116, 63)" stroke-width="1.5"></path>
+                                                <path d="M10 9H22" stroke="rgb(50, 116, 63)" stroke-width="1.5" stroke-linecap="round"></path>
+                                                <path d="M10 13H18" stroke="rgb(50, 116, 63)" stroke-width="1.5" stroke-linecap="round"></path>
+                                                <path d="M10.5 19H16.5" stroke="rgb(50, 116, 63)" stroke-width="1.5" stroke-linecap="round"></path>
+                                                <path d="M18.1147 19H1V22C1 24.2091 2.79086 26 5 26H22L20.9008 25.7162C18.0662 24.9843 16.7336 21.7314 18.2399 19.2211C18.2983 19.1238 18.2281 19 18.1147 19Z" fill="#fff" stroke="rgb(50, 116, 63)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                            <div class="menu-list">내 정보관리</div>
+                                        </button>
+                                        <!-- <button class="menu-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" style="enable-background:new 0 0 256 256; width: 29px;" version="1.1" viewbox="0 0 256 256" xml:space="preserve">
+                                                <g>
+                                                    <path d="M178.4,186.2c0.9,0.3,2.2,0.7,3.7,0.6c2.5-0.1,4.8-1.1,6.6-2.9c1.9-1.9,2.9-4.4,2.8-7c-0.2-16.7,10.4-31.3,26.2-36.3   c1.1-0.3,2.2-0.9,3-1.5c2.1-1.6,3.4-3.9,3.8-6.3c0.5-2.6-0.2-5.2-1.8-7.4c-10-13.4-10-31.4-0.1-44.7l0.7-0.8   c0.4-0.5,0.6-0.9,0.8-1.5c0.1-0.1,0.2-0.5,0.2-0.6c0.8-2.5,0.5-5.2-0.6-7.4c-1.2-2.4-3.3-4.1-5.8-4.9c-15.8-5-26.4-19.5-26.2-36.1   c0-1.2-0.2-2.4-0.6-3.4c-0.8-2.4-2.6-4.4-5-5.6c-2.4-1.1-4.9-1.2-7.3-0.4c-3.9,1.3-8,2-12.1,2C154.5,21.8,143,15.9,136,6   c-0.7-1-1.5-1.8-2.3-2.3C129.3,0.6,123.1,1.6,120,6c-7,9.9-18.5,15.8-30.6,15.8c-4.1,0-8.2-0.7-11.9-2c-3.3-1.2-7.6-0.3-10.2,2.4   c-1.9,1.9-2.9,4.4-2.8,7c0.2,16.7-10.4,31.2-26.2,36.2c-1.1,0.3-2.1,0.8-3.2,1.6c-4.3,3.2-5.2,9.4-2,13.7c10,13.4,10,31.4,0,44.8   c-0.6,0.9-1.1,1.9-1.4,2.8c-0.8,2.5-0.6,5,0.7,7.5c1.3,2.3,3.3,4,5.7,4.8c15.9,5.1,26.4,19.7,26.2,36.1c-0.1,1.2,0.1,2.4,0.5,3.6   c0.8,2.4,2.6,4.4,5,5.6c2.3,1.1,5,1.2,7.4,0.4c4-1.3,8.1-2,12.2-2c12.2,0,23.3,5.8,30.5,15.8c0.6,0.9,1.4,1.7,2.3,2.3   c1.7,1.2,3.6,1.8,5.7,1.8c0.6,0,1.1-0.1,1.7-0.1c2.6-0.5,4.9-1.9,6.3-4C145.6,186.5,162.7,180.9,178.4,186.2z M128,194.4   c-8.9-12.5-23.3-20-38.5-20c-5.2,0-10.4,0.9-15.3,2.6c0.3-21-13-39.4-33-45.7c12.6-16.9,12.6-39.7-0.1-56.5   c20.1-6.3,33.5-24.7,33.1-45.6c4.9,1.7,10,2.5,15.2,2.5c15.3,0,29.8-7.5,38.5-20c8.9,12.5,23.3,20,38.7,20c5.2,0,10.3-0.9,15.1-2.5   c-0.2,20.9,13.1,39.2,33.1,45.3l-0.1,0.1c-12.6,16.9-12.5,39.7,0.2,56.5c-20.1,6.3-33.5,24.7-33.2,45.7c0,0-0.1,0-0.1,0   C161.7,170.1,140,177.1,128,194.4z" style="fill: rgb(50, 116, 63); stroke:rgb(50, 116, 63); stroke-width: 3px;"/>
+                                                    <path d="M128,58c-24.8,0-45,20.2-45,45s20.2,45,45,45s45-20.2,45-45S152.8,58,128,58z M128,138.2c-19.4,0-35.1-15.8-35.1-35.1   s15.8-35.1,35.1-35.1s35.1,15.8,35.1,35.1S147.3,138.2,128,138.2z" style="fill: rgb(50, 116, 63); stroke: rgb(50, 116, 63); stroke-width: 3px;"/>
+                                                    <path d="M94.3,201c-2.3-1.5-5.4-0.9-6.9,1.4l-23.9,36.7L51.2,214c-0.8-1.7-2.5-2.8-4.4-2.8l-25.3-0.1l25-38.3   c0.5-0.8,0.8-1.7,0.8-2.7v0c0-2.7-2.2-4.9-5-4.9c-1.8,0-3.4,1-4.2,2.4L8.2,213.4c-1,1.5-1.1,3.5-0.2,5.1c0.9,1.6,2.5,2.6,4.3,2.6   l31.4,0.1l14.8,30.2c0.8,1.6,2.4,2.7,4.1,2.8c0.1,0,0.2,0,0.3,0c1.7,0,3.2-0.8,4.1-2.2l28.7-44C97.3,205.6,96.6,202.5,94.3,201z" style=" fill: rgb(50, 116, 63); stroke:rgb(50, 116, 63); stroke-width: 3px;"/>
+                                                    <path d="M247.8,213.4l-30.1-46.1c-1.5-2.3-4.6-2.9-6.9-1.4c-2.3,1.5-2.9,4.6-1.4,6.9l25.1,38.4l-25.4,0.1c-1.9,0-3.6,1.1-4.4,2.8   l-12.3,25.1l-24-36.7c-1.5-2.3-4.6-2.9-6.9-1.4c-2.3,1.5-2.9,4.6-1.4,6.9l28.8,44c0.9,1.4,2.5,2.2,4.1,2.2c0.1,0,0.2,0,0.3,0   c1.8-0.1,3.4-1.2,4.1-2.8l14.7-30.2l31.4-0.1c1.8,0,3.5-1,4.3-2.6C248.9,216.8,248.8,214.9,247.8,213.4z" style=" fill: rgb(50, 116, 63); stroke: rgb(50, 116, 63); stroke-width: 3px;"/></g>
+                                            </svg>
+                                            <div class="menu-list">너도나도 멤버스</div>
+                                        </button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seller-list-wrap">
+                            <div class="seller-list-text">
+                                <div class="seller-details">
+                                    <h2 class="seller-details-text">통계/정산 내역</h2>
+                                </div>
+                            </div>
+                            <div class="seller-list">
+                                <div class="find-seller">
+                                    <div class="custom-dropdown">
+                                        <button class="dropdown-toggle">
+                                            <span>3개월</span>
+                                            <svg width="11" height="16" viewbox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.99602 6.23332L12.2889 0.94043L13.7031 2.35464L6.99602 9.06175L0.288912 2.35464L1.70312 0.94043L6.99602 6.23332Z" fill="#222"></path>
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li data-value="3">3개월</li>
+                                            <li data-value="6">6개월</li>
+                                            <li data-value="12">1년</li>
+                                            <li data-value="36">3년</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="seller-search">
+                                        <div class="seller-search-bar">
+                                            <div class="seller-search-bar-inner">
+                                                <div class="seller-search-box">
+                                                    <svg width="20" height="20" viewbox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5215 15.9359C13.0742 17.0781 11.2466 17.7598 9.25977 17.7598C4.56535 17.7598 0.759766 13.9542 0.759766 9.25977C0.759766 4.56535 4.56535 0.759766 9.25977 0.759766C13.9542 0.759766 17.7598 4.56535 17.7598 9.25977C17.7598 11.2467 17.078 13.0744 15.9357 14.5217L21.2402 19.8262L19.826 21.2404L14.5215 15.9359ZM15.7598 9.25977C15.7598 12.8496 12.8496 15.7598 9.25977 15.7598C5.66991 15.7598 2.75977 12.8496 2.75977 9.25977C2.75977 5.66991 5.66991 2.75977 9.25977 2.75977C12.8496 2.75977 15.7598 5.66991 15.7598 9.25977Z" fill="#a7b2bc"></path>
+                                                    </svg>
+                                                    <input type="text" class="search-box-input" placeholder="상품명으로 검색해보세요" maxlength="20" name="search">
+                                                </div>
+                                                <button class="seller-search-cancel">
+                                                    <svg width="13" height="13" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="seller-list-card-wrap">
+                                    <div class="seller-list-cards-warp">
+                                        <div class="seller-list-cards">
+                                            <div class="seller-list-card">
+                                                <div class="seller-product-wrap">
+                                                    <!-- 상단 대시보드 -->
+                                                    <div class="dashboard-title-container">
+                                                        <h3>판매자 통계/정산 내역</h3>
+                                                    </div>
+                                                    <div class="dashboard-statistics-container">
+                                                        <ul class="dashboard-statistics-list">
+                                                            <li>
+                                                                <div class="dashboard-statistics-item product-count">
+                                                                    <h3 class="item-title">상품 수</h3>
+                                                                    <span class="item-count">21개</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="dashboard-statistics-item ">
+                                                                    <h3 class="item-title">주문 수</h3>
+                                                                    <span class="item-count">15개</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="dashboard-statistics-item">
+                                                                    <h3 class="item-title">판매량</h3>
+                                                                    <span class="item-count">152개</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="dashboard-statistics-item">
+                                                                    <h3 class="item-title">총 판매금액</h3>
+                                                                    <span class="item-count">752,610원</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- /상단 대시보드 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 두 번째 부분 -->
+                                <div class="seller-list-card-wrap-section">
+                                <!-- 중간 왼쪽 부분 -->
+                                    <div class="seller-list-card-wrap center">
+                                        <div class="seller-list-cards-warp">
+                                            <div class="seller-list-cards">
+                                                <div class="seller-list-card seller-list-card-wrap">
+                                                    <!-- cl-상세부분 -->
+                                                    <div class="seller-product-wrap center-left">
+                                                        <div class="dashboard-title-container">
+                                                            <h3>정산 가능 금액</h3>
+                                                        </div>
+                                                        <div class="dashboard-statistics-container">
+                                                            <h1>752,610원</h1>
+                                                        </div>
+                                                        <div class="request-payout-btn-wrap">
+                                                            <button class="request-payout-btn">
+                                                                <h3>정산하기</h3>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /cl-상세부분 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- /중간 왼쪽 부분-->
+                                <!-- 중간 오른쪽 부분 -->
+                                <div class="seller-list-card-wrap center">
+                                    <div class="seller-list-cards-warp">
+                                        <div class="seller-list-cards">
+                                            <div class="seller-list-card seller-list-card-wrap">
+                                                <!-- cr-상세부분 -->
+                                                <div class="seller-product-wrap center-right">
+                                                    <div class="dashboard-title-container">
+                                                        <h3>오늘 매출</h3>
+                                                    </div>
+                                                    <div class="dashboard-statistics-container">
+                                                        <h1>0원</h1>
+                                                    </div>
+                                                </div>
+                                                <!-- /cr-상세부분 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /중간 오른쪽 부분-->
+                                </div>
+                                <!-- /두 번째 부분 -->
+                                <!-- 세 번째 부분 -->
+                                <div class="seller-list-card-wrap">
+                                    <div class="seller-list-cards-warp">
+                                        <div class="seller-list-cards">
+                                            <div class="seller-list-card">
+                                                <div class="seller-product-wrap">
+                                                    <!-- 상단 대시보드 -->
+                                                    <div class="dashboard-title-container">
+                                                        <h3>주간 매출</h3>
+                                                    </div>
+                                                    <div class="dashboard-statistics-container">
+                                                        <!-- 그래프 부분 -->
+                                                        <!-- /그래프 부분 -->
+                                                    </div>
+                                                    <!-- /상단 대시보드 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- /세 번째 부분 -->
+                                <!-- 네 번째 부분 -->
+                                <div class="seller-list-card-wrap">
+                                    <div class="seller-list-cards-warp">
+                                        <div class="seller-list-cards">
+                                            <div class="seller-list-card">
+                                                <div class="seller-product-wrap">
+                                                    <div class="dashboard-title-container payout">
+                                                        <h3>정산 내역</h3>
+                                                    </div>
+                                                    <!-- 정산 내역이 있으면 나오는 부분 -->
+                                                    <div class="payout-date-wrap">
+                                                        <h3>2025.07.22</h3>
+                                                    </div>
+                                                    <div class="payout-date-wrap payout-count-wrap">
+                                                        <h3>정산 완료 <span class="payout-count">35</span> 건</h3>
+                                                    </div>
+                                                    <div class="payout-list-container">
+                                                        <ul class="payout-list-wrap">
+                                                            <li>
+                                                                <div class="payout-item-content-container">
+                                                                    <div class="payout-item-date">
+                                                                        <h3>2025.07.22</h3>
+                                                                    </div>
+                                                                    <div class="payout-item-info-wrap">
+                                                                        <div class="payout-item-info">
+                                                                            <div class="text-wrap"><h3>정산완료 35건</h3></div>
+                                                                            <div class="text-wrap"><h3>(프로모션 판매 서비스)???</h3></div>
+                                                                            <div class="text-wrap"><h3>(결제수단 판매 서비스)</h3></div>
+                                                                        </div>
+                                                                        <div class="payout-item-price">
+                                                                            <div class="text-wrap"><h3>228,950 원</h3></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="payout-list-container">
+                                                        <ul class="payout-list-wrap">
+                                                            <li>
+                                                                <div class="payout-item-content-container">
+                                                                    <div class="payout-item-date">
+                                                                        <h3>2025.07.22</h3>
+                                                                    </div>
+                                                                    <div class="payout-item-info-wrap">
+                                                                        <div class="payout-item-info">
+                                                                            <div class="text-wrap"><h3>정산완료 35건</h3></div>
+                                                                            <div class="text-wrap"><h3>(프로모션 판매 서비스)???</h3></div>
+                                                                            <div class="text-wrap"><h3>(결제수단 판매 서비스)</h3></div>
+                                                                        </div>
+                                                                        <div class="payout-item-price">
+                                                                            <div class="text-wrap"><h3>228,950 원</h3></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- /정산 내역이 있으면 나오는 부분 -->
+                                                    <!-- 정산 내역이 없으면 나오는 부분 -->
+                                                    <div class="no-search-text-container">
+                                                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_368_6766)"><path d="M22.0732 43.1463C33.7116 43.1463 43.1463 33.7116 43.1463 22.0732C43.1463 10.4348 33.7116 1 22.0732 1C10.4348 1 1 10.4348 1 22.0732C1 33.7116 10.4348 43.1463 22.0732 43.1463Z" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path><path d="M47.8293 47.8291L37.2927 37.2925" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path></g><defs><clipPath id="clip0_368_6766"><rect width="48" height="48" fill="#fff"></rect></clipPath></defs></svg>
+                                                        <span class="no-search-text">
+                                                            검색된 상품이 없습니다.
+                                                            <br>
+                                                            다른 검색어를 입력해 주세요.
+                                                        </span>
+                                                    </div>
+                                                    <div class="pagenation">
+                                                        <button type="button" class="prev" disabled></button>
+                                                        <button type="button" class="next"></button>
+                                                    </div>
+                                                    <!-- /정산 내역이 없으면 나오는 부분 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /네 번째 부분 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-wrapper" id="popup3">
+                    <div class="popup-inner">
+                        <div class="dim"></div>
+                        <div class="popup-container scroll">
+                            <div class="popup-container-inner">
+                                <div class="popup-content">
+                                    <div class="popup-header">
+                                        <div class="popup-title-wrap">
+                                            <p class="popup-title">정산 요청 내역</p>
+                                        </div>
+                                        <button type="button" class="btn-close popup-close">
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2073_60924)"><path d="M26 26L6 6" stroke="#999" stroke-linecap="square" stroke-width="0"></path><path d="M6 26L26 6" stroke="#999" stroke-linecap="square" stroke-width="0"></path></g><path fill-rule="evenodd" clip-rule="evenodd" d="M6.28431 5.58859L6.35355 5.64645L16 15.293L25.6464 5.64645C25.8417 5.45118 26.1583 5.45118 26.3536 5.64645C26.5271 5.82001 26.5464 6.08944 26.4114 6.28431L26.3536 6.35355L16.707 16L26.3536 25.6464C26.5488 25.8417 26.5488 26.1583 26.3536 26.3536C26.18 26.5271 25.9106 26.5464 25.7157 26.4114L25.6464 26.3536L16 16.707L6.35355 26.3536C6.15829 26.5488 5.84171 26.5488 5.64645 26.3536C5.47288 26.18 5.4536 25.9106 5.58859 25.7157L5.64645 25.6464L15.293 16L5.64645 6.35355C5.45118 6.15829 5.45118 5.84171 5.64645 5.64645C5.82001 5.47288 6.08944 5.4536 6.28431 5.58859Z" fill="#999"></path></svg>
+                                        </button>
+                                    </div>
+                                    <div class="payout-scroll-section btn-input-active">
+                                        <div class="payout-content-header">
+                                            <div class="payout-application-content">
+                                                <label class="payout-lable">정산 대상 금액 :</label>
+                                                <label class="payout-lable">752,610원</label>
+                                            </div>
+                                            <div class="payout-application-content">
+                                                <label class="payout-lable">정산 예정일 :</label>
+                                                <label class="payout-lable">2025-08-08</label>
+                                            </div>
+                                            <div class="payout-application-content">
+                                                <label class="payout-lable">정산 수단 :</label>
+                                                <label class="payout-lable">oo은행 123-456-789000</label>
+                                            </div>
+                                            <div class="payout-application-content">
+                                                <label class="payout-lable">예금주 :</label>
+                                                <label class="payout-lable">김다애</label>
+                                            </div>
+                                        </div>
+                                        <div class="payout-content-wrap">
+                                            <div class="popup-footer center">
+                                                <button type="button" class="btn-primary popup-close">등록</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-wrapper" id="popup5">
+                    <div class="popup-inner">
+                        <div class="dim"></div>
+                        <div class="popup-container">
+                            <div class="popup-content">
+                                <div class="popup-message">
+                                    <p>정산 완료!</p>
+                                </div>
+                                <div class="popup-footer">
+                                    <button type="button" class="btn-default popup-close">확인</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        <script src="/js/mypage-seller/seller-dashboard/event.js"></script>
+    </body>
+</html>
