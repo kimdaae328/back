@@ -19,7 +19,6 @@ create table tbl_product(
 
 alter table tbl_product modify product_category enum('vegetables','fruits','fisheries','butchers','etc') not null;
 
-
 select * from tbl_product;
 
 drop table tbl_product;
