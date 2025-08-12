@@ -1,7 +1,7 @@
 package com.example.youeatieat.controller;
 
 
-import com.example.youeatieat.mapper.ProductMapper;
+import com.example.youeatieat.mapper.ProductDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/together-product/**")
-public class ProductController {
+public class ProductDetailController {
 
-    private final ProductMapper productMapper;
+//    private final ProductDetailMapper productDetailMapper;
 
-//    상품 추가 (사용 x)
+//    장바구니 추가
     @GetMapping("detail")
-    public String detail(){ return "/detail";}
+    public String detail(){ return "/together-product//detail";}
 }

@@ -19,3 +19,6 @@ select * from tbl_member;
 
 drop table tbl_member;
 
+insert into tbl_member (member_email,member_role)
+values ('test@gmail.com', 'admin');
+
