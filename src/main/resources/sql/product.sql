@@ -17,8 +17,13 @@ create table tbl_product(
                                 references tbl_member(id)
 );
 
-# alter table tbl_product modify product_category enum('vegetables','fruits','fisheries','butchers','etc') not null;
+alter table tbl_product modify product_category enum('vegetables','fruits','fisheries','butchers','etc') not null;
 
 select * from tbl_product;
+
+insert into app.tbl_product(
+product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, member_id
+)
+values ('포도', '10000','1.5kg','fruits','img~~','img~~','3','1');
 
 drop table tbl_product;
