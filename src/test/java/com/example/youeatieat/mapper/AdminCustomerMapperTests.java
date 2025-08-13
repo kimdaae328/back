@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class MemberMapperTests {
+public class AdminCustomerMapperTests {
     @Autowired
-    private MemberListMapper MemberListMapper;
+    private CustomerMapper MemberListMapper;
 
     @Test
     public void testSelectMemberAll(){

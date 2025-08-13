@@ -21,3 +21,5 @@ create table tbl_request(
 select * from tbl_request;
 
 drop table tbl_request;
+
+alter table tbl_request add updated_date datetime default current_timestamp;

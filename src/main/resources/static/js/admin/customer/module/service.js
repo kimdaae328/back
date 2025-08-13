@@ -1,16 +1,16 @@
-const memberService = (() => {
+const customeService = (() => {
     const getPost = async (page=1, callback) => {
         const response = await fetch(`/api/customer/list/${page}`);
-        const membersCriteria = await response.json();
+        const customersCriteria = await response.json();
 
         console.log(`요청 URL: /api/customer/list/${page}`);
         console.log("Response 객체:", response);
-        console.log("받아온 JSON:", membersCriteria);
+        console.log("받아온 JSON:", customersCriteria);
 
 
         if(callback){
             setTimeout(() => {
-                callback(membersCriteria);
+                callback(customersCriteria);
             }, 1000)
         }
 
@@ -23,7 +23,7 @@ const memberService = (() => {
             console.log(error);
         }
 
-        return membersCriteria;
+        return customersCriteria;
     }
 
     return {getPost: getPost}

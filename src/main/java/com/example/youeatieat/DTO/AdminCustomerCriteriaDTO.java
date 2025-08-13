@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @Getter @Setter @ToString
-public class MemberCriteriaDTO {
-    private List<MemberDTO> posts;
+public class AdminCustomerCriteriaDTO {
+    private List<MemberDTO> customers;
     private Criteria criteria;
 }

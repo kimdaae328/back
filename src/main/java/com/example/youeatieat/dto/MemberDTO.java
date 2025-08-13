@@ -1,7 +1,7 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.MemberGender;
-import com.example.youeatieat.common.enumeration.MemberRole;
+import com.example.youeatieat.enumeration.MemberGender;
+import com.example.youeatieat.enumeration.MemberRole;
 import com.example.youeatieat.common.enumeration.Provider;
 import com.example.youeatieat.common.enumeration.Status;
 import lombok.EqualsAndHashCode;

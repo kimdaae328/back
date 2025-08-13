@@ -19,3 +19,5 @@ create table tbl_request_payment(
 select * from tbl_request_payment;
 
 drop table tbl_request_payment;
+
+alter table tbl_request_payment add updated_date datetime default current_timestamp;

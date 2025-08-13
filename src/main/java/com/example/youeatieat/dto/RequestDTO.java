@@ -1,6 +1,6 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.Request;
+import com.example.youeatieat.enumeration.Request;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +18,6 @@ public class RequestDTO {
     private Long memberId;
     private Long groupIndexNumber;
     private Long productId;
+    private String createdDatetime;
+    private String updatedDatetime;
 }
