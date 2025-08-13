@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface CustomerMapper {
+public interface AdminCustomerMapper {
 //    목록
-    public List<MemberDTO> selectMemberAll(Criteria criteria);
+    public List<MemberDTO> selectCustomerAll(Criteria criteria);
 //    전체 개수
     public int selectCountAll();
 }
