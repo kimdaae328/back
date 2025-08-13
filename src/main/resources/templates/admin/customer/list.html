@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
     <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsSAAALEgHS3X78AAAEEklEQVRYw72YP0wbdxTHP3ZGnxMPlWNLiRoQ9oRUrKqNcQc7hVIJWzKbUQagStrBiajZQDGq2yQKsGCXxmoTWpGhbTK0Acl0aapiD85N/FHoUIygliLZcZXwz0goHdyBs2XjA9/xJ0/ycPK79/v83vve/d47TaFQQKnZHZ4OoANoAt6RcVkA5oFJMRmbVBpXUwvC7vAYgID0O4Ny2wDCQFhMxtYPDWF3eAJASOXicjABMRmbUAUh7X4C8HJ89kCCWa8JIQHM7FPzo9oC4NoLopVxPCkApLhVgtXuyUJYDYBe0DEyHMTtblUD4pTWqS6H3eFxAX+qAYhGh9ALOkwmIx+1+djKb6uBuSQmYzN7MzGhJoLFWo+loQ5B0AFgNp9VW5pQRTmkl9DbSu+2WuoZGQqSWl7l4aMpUsurRO/ewWqpV1sWV3kmetQARO/eIZPN4ff3M/79T/j9/WSyucOA9ABoLja7DcCaUg1YGupILa/i9/dXaEAv6Pju2xGMxrdKgAo0siEmYwatdA7UtGh0iPzWbtDR8L2qBbby2/z482MEQUd+a5todEhJ2DN2h8elBVxKSmBpqMNmawTA3S7/SL7/3u5+bLZGzCaj0tI0aZVqILW8iv/6AOHIfdztLQwG+yr8BoN9fNzmYuybH/BfH1CjEcOpc+etIeCCnAaa7e8yMhws1Tidfs7iX3+Tyea4euUyZvNZEgmRwWAf7vYWbt4O88uv02QyOZ78nsDpbKbT5yWdfs6rl2u8fv2fHERcc7HZPQM41YgQwO1uZfBGoHR983aY6eknqI0DfKmVzorK1A72YTYZyee3icefyqo8tbQCwNzcIgCzs8+qfLak+7PZHHpBRyDwmWw9ZDVR3JEg6HA6m9FLb8Vy8/m8bG7msdka2dzMc/XKZVk9dfq8mExGBEFHIvFUbrl1rdSOVRYpIdLa5qOruxezyVg6I8pF6G5vITI2jt3hITI2XiXWoqABurp7aW3zEU+IchDzp86dt2aBfrl/X75aQxRn6fR5+fDSB2Rf/EtPt68kwmLGUqmVCrFqgJHhIAD+awMspVb2fTTEZOwTTaFQwO7wTB7URVkt9XwduYXBcBqAcOQ+Dx9NVfl1+rwEPv+0dN3V3XsgADAlJmMdRU0c2BkvpVbY2dlhbm5xV6zyaS0JOLW8SjabqwVQOrm1UkomgPRB3qPhewh6Hf5rA2QyL9hP0NO//YFe0PHVrdFaAOniWFDe1HQAj3lzVt3USFQP3hBApAgg954ISB3xSdpCeVdVBSG14q4TBFHW8peBxI8ZIC4HoGQMDAFfHHHxDWkeDR1lIL4g1bD7kKNfSEzG/jnSVL5nPOyRSuXaZ0jekE7lSenzwPqxfBqoAdYEGIB1MRmbP2yc/wEm+tU03FWIvQAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon">
-    <link rel="stylesheet" href="/css/admin/customer-list/customer-list.css">
+    <link rel="stylesheet" href="/css/admin/customer/list.css">
     <link rel="shorcut icon" href="/images/main/favicon.png" type="image/x-icon">
 </head>
 <body>
@@ -239,11 +239,10 @@
                                 </div>
                             </div>
                             <div class="fill-table-layout">
-                                <table class="table grey-header-table w-100 member-table">
+                                <table class="table-container table grey-header-table w-100 member-table">
                                     <thead>
                                         <tr>
                                             <th class="td-name">회원번호</th>
-                                            
                                             <th class="td-amount pr-4">이름</th>
                                             <th class="td-email">이메일</th>
                                             <th class="td-phone">핸드폰 번호</th>
@@ -254,227 +253,227 @@
                                     </thead>
                                     <!-- 회원 목록 페이지 당 10명 -->
                                     <!-- 첫 번째 회원 -->
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tbody>
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                     </tbody>
                                     <!-- 두 번째 회원 -->
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">Test01
-                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                                                </div>
-                                                <div class="member-id">TestId01</div>
-                                            </td>
-                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-                                                <span class="amount-unit"> 님</span>
-                                            </td>
-                                            <td class="td-email">test01@gmail.com</td>
-                                            <td class="td-phone">010-1234-5678</td>
-                                            <td class="td-start">2025-06-12</td>
-                                            <td class="td-recent">2025-07-29</td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
+<!--                                    <tbody class="">-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">Test01-->
+<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">TestId01</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
+<!--                                                <span class="amount-unit"> 님</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">test01@gmail.com</td>-->
+<!--                                            <td class="td-phone">010-1234-5678</td>-->
+<!--                                            <td class="td-start">2025-06-12</td>-->
+<!--                                            <td class="td-recent">2025-07-29</td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                    </tbody>-->
                                 </table>
                             </div>
                             <!-- 페이지 번호 -->
@@ -687,5 +686,13 @@
         </div>
     </div>
 </body>
-<script src="/js/admin/customer-list/customer-list.js"></script>
+
+<script th:inline="javascript">
+    const customersCriteriaDTO  = [[${customersCriteriaDTO}]];
+    const customers = customersCriteriaDTO.customers;
+    const criteria = customersCriteriaDTO.criteria;
+</script>
+<script src="/js/admin/customer/event.js"></script>
+<script src="/js/admin/customer/module/service.js"></script>
+<script src="/js/admin/customer/module/layout.js"></script>
 </html>

@@ -17,4 +17,6 @@ public class RequestPaymentDTO {
     private PaymentStatus paymentStatus;
     private Long memberId;
     private Long requestId;
+    private String createdDatetime;
+    private String updatedDatetime;
 }

@@ -1,6 +1,6 @@
 package com.example.youeatieat.config.mybatis.handler;
 
-import com.example.youeatieat.common.enumeration.Request;
+import com.example.youeatieat.enumeration.Request;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;

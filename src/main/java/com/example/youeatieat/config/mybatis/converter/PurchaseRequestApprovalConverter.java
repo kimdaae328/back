@@ -1,7 +1,6 @@
 package com.example.youeatieat.config.mybatis.converter;
 
-import com.example.youeatieat.common.enumeration.MemberRole;
-import com.example.youeatieat.common.enumeration.PurchaseRequestApproval;
+import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
