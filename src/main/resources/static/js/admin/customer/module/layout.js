@@ -1,6 +1,7 @@
-const customeLayout = (() => {
+const customerLayout = (() => {
     const showList = (customersCriteria) => {
-        const memberContainer = document.querySelector(".table-container tbody");
+        const customerContainer = document.querySelector(".table-container tbody");
+
         let text = ``;
         customersCriteria.customers.forEach((customer) => {
             text += `
@@ -16,7 +17,7 @@ const customeLayout = (() => {
                     </td>
                     <td class="td-email">${customer.memberEmail}</td>
                     <td class="td-phone">${customer.memberPhone}</td>
-                    <td class="td-start">${customer.createdDate}</td>
+                    <td class="td-start">2025-07-29</td>
                     <td class="td-recent">2025-07-29</td>
                     <td class="td-action text-center">
                         <div class="action-btn">
@@ -26,7 +27,34 @@ const customeLayout = (() => {
                 </tr>
            `;
         });
-        memberContainer.innerHTML += text;
+        customerContainer.innerHTML = text;
     }
-    return {showList: showList};
+
+    const pagination = document.querySelector(".rebound-pagination");
+    const renderPagination = (criteria) => {
+        let html = ``;
+
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+        pagination.innerHTML = html;
+    };
+
+    const connectToPagination = (navigate) => {
+        pagination.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.getAttribute("href");
+            navigate(page);
+        });
+    };
+
+    return {showList, renderPagination, connectToPagination,};
 })();

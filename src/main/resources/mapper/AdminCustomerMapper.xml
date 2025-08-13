@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.youeatieat.mapper.CustomerMapper">
-    <select id="selectMemberAll">
+<mapper namespace="com.example.youeatieat.mapper.AdminCustomerMapper">
+    <select id="selectCustomerAll">
         select m.id, m.member_name, m.member_email,
                m.member_phone, m.created_date, m.updated_date
         from tbl_member m
