@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 public class AdminCustomerMapperTests {
     @Autowired
-    private CustomerMapper MemberListMapper;
+    private AdminCustomerMapper MemberListMapper;
 
     @Test
     public void testSelectMemberAll(){

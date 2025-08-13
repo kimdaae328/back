@@ -18,7 +18,7 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
     public AdminCustomerCriteriaDTO getList(int page) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
         Criteria criteria = new Criteria(page, memberDAO.findCountAll());
-        List<MemberDTO> customers = memberDAO.findMemberAll(criteria);
+        List<MemberDTO> customers = memberDAO.findCustomerAll(criteria);
 //        customers.forEach((post) -> {
 //            post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDatetime()));
 //        });

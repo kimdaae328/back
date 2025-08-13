@@ -1,11 +1,11 @@
-const customeService = (() => {
-    const getPost = async (page=1, callback) => {
-        const response = await fetch(`/api/customer/list/${page}`);
+const customerService = (() => {
+    const getCustomer = async (page, callback) => {
+        const response = await fetch(`/api/admin/customers/list/${page}`);
         const customersCriteria = await response.json();
 
-        console.log(`요청 URL: /api/customer/list/${page}`);
-        console.log("Response 객체:", response);
-        console.log("받아온 JSON:", customersCriteria);
+        //확인
+        console.log(response);
+        console.log(customersCriteria);
 
 
         if(callback){
@@ -26,5 +26,5 @@ const customeService = (() => {
         return customersCriteria;
     }
 
-    return {getPost: getPost}
+    return {getCustomer: getCustomer}
 })();
