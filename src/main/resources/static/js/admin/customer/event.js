@@ -257,3 +257,136 @@ closeFooterButton.addEventListener("click", (e) => {
         modal.style.display = "none";
     }, 100);
 });
+
+
+// ########################### 회원목록 ###########################
+document.addEventListener("DOMContentLoaded", () => {
+    const memberContainer = document.querySelector(".table-container tbody");
+
+    // 1페이지 데이터 불러오기 (필요하면 동적으로 page 값 변경 가능)
+    fetch("/api/admin/customers/list/1")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("데이터 불러오기 실패");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const members = data.posts; // API에서 내려온 회원 목록
+            let text = "";
+
+            members.forEach((member) => {
+                text += `
+                   <tr>
+                    <td class="td-name">
+                        <div class="member-name">${member.memberName}
+                            <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
+                        </div>
+                        <div class="member-id">${member.id}</div>
+                    </td>
+                    <td class="td-amount text-center pr-4 font-weight-bold">${member.memberName}
+                        <span class="amount-unit"> 님</span>
+                    </td>
+                    <td class="td-email">${member.memberEmail}</td>
+                    <td class="td-phone">${member.memberPhone}</td>
+                    <td class="td-start">${member.createdDate}</td>
+                    <td class="td-recent">2025-07-29</td>
+                    <td class="td-action text-center">
+                        <div class="action-btn">
+                            <i class="mdi mdi-chevron-right"></i>
+                        </div>
+                    </td>
+                </tr>
+                `;
+            });
+
+            memberContainer.innerHTML = text;
+        })
+        .catch(error => {
+            console.error(error);
+            memberContainer.innerHTML = `<tr><td colspan="2">데이터가 없습니다.</td></tr>`;
+        });
+});
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const memberContainer = document.querySelector(".table-container tbody");
+//     memberContainer.classList.add("adddd");
+//
+//     let text = ``;
+//     members.forEach((member) => {
+//         text += `
+//            <tr>
+//                 <td>${member.id}</td>
+//                 <td>${member.memberName}</td>
+//             </tr>
+//        `;
+//     });
+//     memberContainer.innerHTML = text;
+// });
+// const memberContainer = document.querySelector(".table-container tbody");
+// memberContainer.classList.add("adddd");
+// let text = ``;
+// members.forEach((member) => {
+//     text += `
+//        <tr>
+//             <td>${member.id}</td>
+//             <td>${member.memberName}</td>
+//         </tr>
+//    `;
+// });
+// fetch("/api/admin/customer/list/1") // 1페이지 데이터
+//     .then(res => res.json())
+//     .then(data => {
+//         const members = data.members; // MemberCriteriaDTO 안의 posts
+//         members.forEach((member) => {
+//             text += `
+//                 <tr>
+//                     <td class="td-name">
+//                         <div class="member-name">${member.memberName}
+//                             <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
+//                         </div>
+//                         <div class="member-id">TestId01</div>
+//                     </td>
+//                     <td class="td-amount text-center pr-4 font-weight-bold">테스트01
+//                         <span class="amount-unit"> 님</span>
+//                     </td>
+//                     <td class="td-email">test01@gmail.com</td>
+//                     <td class="td-phone">010-1234-5678</td>
+//                     <td class="td-start">2025-06-12</td>
+//                     <td class="td-recent">2025-07-29</td>
+//                     <td class="td-action text-center">
+//                         <div class="action-btn">
+//                             <i class="mdi mdi-chevron-right"></i>
+//                         </div>
+//                     </td>
+//                 </tr>
+//             `;
+//         });
+//         memberContainer.innerHTML = text;
+//     });
+// members.forEach((member) => {
+//    text += `
+//         <tr>
+//             <td class="td-name">
+//                 <div class="member-name">${member.memberName}
+//                     <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
+//                 </div>
+//                 <div class="member-id">TestId01</div>
+//             </td>
+//             <td class="td-amount text-center pr-4 font-weight-bold">테스트01
+//                 <span class="amount-unit"> 님</span>
+//             </td>
+//             <td class="td-email">test01@gmail.com</td>
+//             <td class="td-phone">010-1234-5678</td>
+//             <td class="td-start">2025-06-12</td>
+//             <td class="td-recent">2025-07-29</td>
+//             <td class="td-action text-center">
+//                 <div class="action-btn">
+//                     <i class="mdi mdi-chevron-right"></i>
+//                 </div>
+//             </td>
+//         </tr>
+//    `;
+// });
+
+memberContainer.innerHTML = text;
