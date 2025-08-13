@@ -7,6 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Getter @ToString
 @SuperBuilder
 public abstract class Period {
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
 }

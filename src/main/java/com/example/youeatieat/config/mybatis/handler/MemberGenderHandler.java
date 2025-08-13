@@ -1,6 +1,6 @@
 package com.example.youeatieat.config.mybatis.handler;
 
-import com.example.youeatieat.common.enumeration.MemberGender;
+import com.example.youeatieat.enumeration.MemberGender;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;

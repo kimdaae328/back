@@ -7,6 +7,8 @@ create table tbl_request_payment(
     payment_status enum('success', 'failed', 'refunded') not null ,
     member_id bigint unsigned not null,
     request_id bigint unsigned not null,
+    created_date datetime default current_timestamp,
+    updated_date datetime default current_timestamp,
     constraint fk_request_payment_member foreign key (member_id)
         references tbl_member(id),
     constraint fk_request_payment_request foreign key (request_id)
@@ -17,3 +19,5 @@ create table tbl_request_payment(
 select * from tbl_request_payment;
 
 drop table tbl_request_payment;
+
+alter table tbl_request_payment add updated_date datetime default current_timestamp;
