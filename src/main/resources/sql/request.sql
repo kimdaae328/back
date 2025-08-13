@@ -8,6 +8,8 @@ create table tbl_request(
     member_id bigint unsigned not null,
     group_index_number bigint not null,
     product_id bigint unsigned not null,
+    created_date datetime default current_timestamp,
+    updated_date datetime default current_timestamp,
     constraint fk_request_member foreign key (member_id)
       references tbl_member(id),
     constraint fk_request_product foreign key (product_id)
@@ -19,3 +21,5 @@ create table tbl_request(
 select * from tbl_request;
 
 drop table tbl_request;
+
+alter table tbl_request add updated_date datetime default current_timestamp;

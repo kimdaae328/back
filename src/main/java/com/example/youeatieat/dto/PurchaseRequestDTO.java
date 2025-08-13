@@ -1,6 +1,6 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.PurchaseRequestApproval;
+import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.common.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +15,7 @@ public class PurchaseRequestDTO {
     private Long id;
     private String purchaseRequestProductName;
     private String purchaseRequestDescription;
-    private ProductCategory purchaseRequestCategory;
+//    private ProductCategory purchaseRequestCategory;
     private int purchaseRequestQuantityKg;
     private int purchaseRequestProposedPricePerKg;
     private String purchaseRequestCountryOfOrigin;
