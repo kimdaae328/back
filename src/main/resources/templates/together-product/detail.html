@@ -5,505 +5,657 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/together-product/detail.css">
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     <title>너도먹고나도먹고</title>
 </head>
 <body>
     <div class="sub">
         <div>
+            <header th:replace="~{/main/header.html :: header}"></header>
             <div class="layout-wrapper">
-                <div class="container">
-                    <div class="product-section detail">
-                        <div class="product-top">
-                            <div class="product-img-section">
-                                <div class="product-img">
-                                    <img src="https://product-image.kurly.com/hdims/resize/%5E%3E720x%3E936/cropcenter/720x936/quality/85/src/product/image/2e98dcf1-3940-499a-9476-0e1cb1908074.jpg">
+                <form>
+                    <div class="container">
+                        <div class="product-section detail">
+                            <div class="product-top">
+                                <div class="product-img-section">
+                                    <div class="product-img">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E720x%3E936/cropcenter/720x936/quality/85/src/product/image/2e98dcf1-3940-499a-9476-0e1cb1908074.jpg">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-info-section">
-                                <div class="product-info-title-top">
-                                    <div class="product-info-title">
-                                        <div class="product-meta-path">
-                                            <span class="product-delivery">너도나도 배송</span>
-                                            <button class="product-brand">
-                                                <span class="brand-name">오봉집</span>
-                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.84863 5.00001L3.42437 9.42427L2.57584 8.57574L6.15158 5.00001L2.57584 1.42427L3.42437 0.575745L7.84863 5.00001Z" fill="#b5b5b5"></path>
+                                <div class="product-info-section">
+                                    <div class="product-info-title-top">
+                                        <div class="product-info-title">
+                                            <div class="product-meta-path">
+                                                <span class="product-delivery">너도나도 배송</span>
+                                                <button type="button" class="product-brand">
+                                                    <span class="brand-name">너도나도</span>
+                                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.84863 5.00001L3.42437 9.42427L2.57584 8.57574L6.15158 5.00001L2.57584 1.42427L3.42437 0.575745L7.84863 5.00001Z" fill="#b5b5b5"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <h1 class="product-title" th:text="${product.productName}"></h1>
+                                        </div>
+                                    </div>
+                                    <div class="product-info-price">
+                                        <div class="discount-box">
+                                            <div class="sale-price-box">
+                                                <span class="sale-price"  th:text = "${product.productPrice}">14,310</span>
+                                                <span class="unit">원</span>
+                                            </div>
+                                        </div>
+                                        <span class="original-price-box">
+                                            <span class="original-price" th:text = "${product.productMinNumber}" style="margin-left: 10px;"></span>
+                                            <span class="original-price">개 모여야 살 수 있어요!</span>
+                                        </span>
+                                    </div>
+                                    <ul class="product-info-list">
+                                        <li class="product-info-item">
+                                            <span class="info-label">배송</span>
+                                            <div class="info-content">
+                                                <span class="info-value">너도나도 배송</span>
+                                                <p class="info-dec">23시 전 주문 시 수도권/충청 내일 아침 7시 전 도착(그 외 지역 아침 8시 전 도착)</p>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">판매자</span>
+                                            <div class="info-content">
+                                                <span class="info-value">너도나도</span>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">판매단위</span>
+                                            <div class="info-content">
+                                                <span class="info-value">1개</span>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">중량/용량</span>
+                                            <div class="info-content">
+                                                <span class="info-value"  th:text = "${product.productQuantity}">300g내외</span>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">소비기한/유통기한</span>
+                                            <div class="info-content">
+                                                <span class="info-value">농산물이므로 별도의 소비기한은 없으나 가급적 빠르게 드시기 바랍니다.</span>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">안내사항</span>
+                                            <div class="info-content">
+                                                <span class="info-value">식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다.<br/>신선식품 특성상 원물마다 크기 및 형태가 일정하지 않을 수 있습니다.</span>
+                                            </div>
+                                        </li>
+                                        <li class="product-info-item">
+                                            <span class="info-label">상품선택</span>
+                                            <div class="info-content">
+                                                <div class="product-option-item">
+                                                    <p class="option-name"  th:text = "${product.productName}">[오봉집] 오봉집 칼낙지 (2인분)</p>
+                                                    <div class="option-info">
+                                                        <div class="product-quantity-box">
+                                                            <button type="button" class="quantity-btn minus"></button>
+                                                            <div class="count">0</div>
+                                                            <input type="hidden" class="count" name="cartCount">
+                                                            <button type="button" class="quantity-btn plus"></button>
+                                                        </div>
+                                                        <div class="option-price">
+                                                            <span class="final-price"  th:text = "${product.productPrice}">14,310원</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="total-price-box">
+                                        <span class="total-label">총 상품금액 :</span>
+                                        <span class="total-amount">0</span>
+                                        <span class="total-unit">원</span>
+                                    </div>
+                                    <div class="product-action-buttons">
+                                        <button type="button" class="btn-wish" name="action" value="like">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                    <path d="M25.807 7.863a5.777 5.777 0 0 0-8.172 0L16 9.497l-1.635-1.634a5.779 5.779 0 1 0-8.173 8.172l1.634 1.634 7.466 7.467a1 1 0 0 0 1.415 0s0 0 0 0l7.466-7.467h0l1.634-1.634a5.777 5.777 0 0 0 0-8.172z" stroke="#32743f" stroke-width="1.6" fill="none" fill-rule="evenodd" stroke-linecap="round"/>
                                                 </svg>
+                                            </span>
+                                        </button>
+                                        <div class="btn-wrap">
+                                            <button type="button" class="btn-cart btn-primary" name="action" value="add">
+                                                <span>장바구니 담기</span>
                                             </button>
                                         </div>
-                                        <h1 class="product-title">[오봉집] 오봉집 칼낙지 (2인분)</h1>
-                                        <h2 class="product-description">칼국수와 낙지를 듬뿍 담은 시그니처 메뉴</h2>
-                                    </div>
-                                </div>
-                                <div class="product-info-price">
-                                    <div class="discount-box">
-                                        <span class="discount-rate">10%</span>
-                                        <div class="sale-price-box">
-                                            <span class="sale-price">14,310</span>
-                                            <span class="unit">원</span>
-                                        </div>
-                                    </div>
-                                    <span class="original-price-box">
-                                        <span class="original-price">15,900원</span>
-                                    </span>
-                                </div>
-                                <ul class="product-info-list">
-                                    <li class="product-info-item">
-                                        <span class="info-label">배송</span>
-                                        <div class="info-content">
-                                            <span class="info-value">너도나도 배송</span>
-                                            <p class="info-dec">23시 전 주문 시 수도권/충청 내일 아침 7시 전 도착(그 외 지역 아침 8시 전 도착)</p>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">판매자</span>
-                                        <div class="info-content">
-                                            <span class="info-value">너도나도</span>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">판매단위</span>
-                                        <div class="info-content">
-                                            <span class="info-value">1개</span>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">중량/용량</span>
-                                        <div class="info-content">
-                                            <span class="info-value">300g내외</span>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">소비기한/유통기한</span>
-                                        <div class="info-content">
-                                            <span class="info-value">농산물이므로 별도의 소비기한은 없으나 가급적 빠르게 드시기 바랍니다.</span>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">안내사항</span>
-                                        <div class="info-content">
-                                            <span class="info-value">식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다.<br/>신선식품 특성상 원물마다 크기 및 형태가 일정하지 않을 수 있습니다.</span>
-                                        </div>
-                                    </li>
-                                    <li class="product-info-item">
-                                        <span class="info-label">상품선택</span>
-                                        <div class="info-content">
-                                            <div class="product-option-item">
-                                                <p class="option-name" th:text${Produt}>[오봉집] 오봉집 칼낙지 (2인분)</p>
-                                                <div class="option-info">
-                                                    <div class="product-quantity-box">
-                                                        <button type="button" class="quantity-btn minus"></button>
-                                                        <div class="count">0</div>
-                                                        <button type="button" class="quantity-btn plus"></button>
-                                                    </div>
-                                                    <div class="option-price">
-                                                        <span class="origin-price">15,900원</span>
-                                                        <span class="final-price">14,310원</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="total-price-box">
-                                    <span class="total-label">총 상품금액 :</span>
-                                    <span class="total-amount">0</span>
-                                    <span class="total-unit">원</span>
-                                </div>
-                                <div class="product-action-buttons">
-                                    <button type="button" class="btn-wish">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                <path d="M25.807 7.863a5.777 5.777 0 0 0-8.172 0L16 9.497l-1.635-1.634a5.779 5.779 0 1 0-8.173 8.172l1.634 1.634 7.466 7.467a1 1 0 0 0 1.415 0s0 0 0 0l7.466-7.467h0l1.634-1.634a5.777 5.777 0 0 0 0-8.172z" stroke="#32743f" stroke-width="1.6" fill="none" fill-rule="evenodd" stroke-linecap="round"/>
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <!-- btn-alarm 버튼 비활성화 방법: disabled 추가시 -->
-                                    <button type="button" class="btn-alarm popup-trigger" data-target="#popup3">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                <g stroke="rgb(50, 116, 63)" stroke-width="1.6" fill="none" fill-rule="evenodd">
-                                                    <path d="M12.666 23a3.333 3.333 0 1 0 6.666 0"/>
-                                                    <path d="M25.998 22.738H6l.013-.03c.076-.135.471-.704 1.186-1.709l.75-1.05v-6.635c0-4.485 3.438-8.14 7.741-8.308L16 5c4.446 0 8.05 3.722 8.05 8.314v6.634l1.707 2.411c.173.253.254.38.242.38z" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </g>
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <div class="btn-wrap">
-                                        <button type="button" class="btn-cart btn-primary">
-                                            <span>장바구니 담기</span>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="product-description-section">
-                            <ul class="product-tab-menu">
-                                <li class="tab-item">
-                                    <a class="tab-link on" href="#product-goods">
-                                        <span class="name">상품설명</span>
-                                    </a>
-                                </li>
-                                <li class="tab-item">
-                                    <a class="tab-link" href="#product-detail">
-                                        <span class="name">상세정보</span>
-                                    </a>
-                                </li>
-                                <li class="tab-item">
-                                    <a class="tab-link" href="#product-review">
-                                        <span class="name">후기</span>
-                                        <span>(<span class="count">797</span>)</span>
-                                    </a>
-                                </li>
-                                <li class="tab-item">
-                                    <a class="tab-link" href="#product-inquiry">
-                                        <span class="name">문의</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="product-tab-content">
-                                <div id="product-goods" class="goods-wrap">
-                                    <div class="goods-intro">
-                                        <div class="pic">
-                                            <img src="https://img-cf.kurly.com/hdims/resize/%3E1010x/quality/90/src/shop/data/goodsview/20220726/gv40000392412_1.jpg">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="product-detail" class="detail-wrap">
-                                    <div class="detail-notice-wrap">
-                                        <h3>상품고시정보</h3>
-                                        <ul class="ul-table">
-                                            <li class="ul-table-th">품목 또는 명칭</li>
-                                            <li class="ul-table-td">식감이 좋은 아삭 복숭아(딱복) 1.2kg</li>
-                                            <li class="ul-table-th">포장단위별 내용물의 용량(중량), 수량, 크기</li>
-                                            <li class="ul-table-td">1.2kg</li>
-                                            <li class="ul-table-th">생산자, 수입품의 경우 수입자를 함께 표기</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지</li>
-                                            <li class="ul-table-td">국산</li>
-                                            <li class="ul-table-th">제조연월일, 소비기한 또는 품질유지기한</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">농수산물 – ｢농수산물 품질관리법｣에 따른 유전자변형농수산물 표시, 지리적 표시</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">축산물 - ｢축산법｣에 따른 등급 표시(1++ 등급 국내산 쇠고기의 경우 ｢소ㆍ돼지 식육의 표시방법 및 부위 구분기준｣에 따라 근내지방도 정보를 포함하여 표시), ｢가축 및 축산물 이력관리에 관한 법률｣에 따른 이력관리대상축산물 유무</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">수입 농수축산물 – “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">상품구성</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">보관방법 또는 취급방법</li>
-                                            <li class="ul-table-td">냉장보관</li>
-                                            <li class="ul-table-th">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
-                                            <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                            <li class="ul-table-th">소비자 상담 관련 전화번호</li>
-                                        </ul>
-                                    </div>
-                                    <div class="why-wrap">
-                                        <h3>WHY 너도나도</h3>
-                                        <ul class="why-list">
-                                            <li class="why-item icon-committee">
-                                                <div class="pic">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
-                                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <g id="-" transform="translate(-32.000000, -175.000000)">
-                                                                <g id="ic/01_check" transform="translate(32.000000, 175.000000)">
-                                                                    <circle id="Oval" fill="#32743f" fill-rule="nonzero" cx="20" cy="20" r="20"/>
-                                                                    <rect id="Rectangle" stroke="#FFFFFF" x="11.2" y="9.6" width="17.6" height="20.8" rx="1"/>
-                                                                    <g id="Group-2" stroke-linecap="round" transform="translate(14.400000, 13.600000)" stroke="#FFFFFF">
-                                                                        <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
-                                                                        <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
-                                                                    </g>
-                                                                    <g id="Group" stroke-linecap="round" transform="translate(14.400000, 18.800000)" stroke="#FFFFFF">
-                                                                        <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
-                                                                        <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
-                                                                    </g>
-                                                                    <g id="Group-4" stroke-linecap="round" transform="translate(14.400000, 24.000000)" stroke="#FFFFFF">
-                                                                        <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
-                                                                        <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <p class="why-title">깐깐한 상품위원회</p>
-                                                <p class="why-dec">깐깐한 상품위원회<br>마음으로 매주 상품을 직접 먹어보고,<br>경험해보고 성분, 맛, 안정성 등 다각도의<br>기준을 통과한 상품만을 판매합니다.
-                                                    <span>(온라인 기준 / 자사몰, 직구 제외)</span>
-                                                </p>
-                                            </li>
-                                            <li class="why-item icon-only">
-                                                <div class="pic">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
-                                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <g id="-" transform="translate(-32.000000, -307.000000)">
-                                                                <g id="ic/02_only" transform="translate(32.000000, 307.000000)">
-                                                                    <g id="ic/kurlyonly" fill="#32743f" fill-rule="nonzero">
-                                                                        <circle id="Oval" cx="20" cy="20" r="20"/>
-                                                                    </g>
-                                                                    <rect id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round" x="9.6" y="11.2" width="20.8" height="3.2" rx="1"/>
-                                                                    <path d="M10.4,14.4 L29.6,14.4 L29.6,28 C29.6,28.4418278 29.2418278,28.8 28.8,28.8 L11.2,28.8 C10.7581722,28.8 10.4,28.4418278 10.4,28 L10.4,14.4 L10.4,14.4 Z" id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round"/>
-                                                                    <g id="Group-6" stroke-linecap="round" transform="translate(17.600000, 18.240000)" stroke="#FFFFFF">
-                                                                        <path d="M0.4,0.16 L0.4,6.16" id="Path-4"/>
-                                                                        <path d="M1.7,2.8 L4.7,6" id="Path-4"/>
-                                                                        <path d="M0.4,0.4 L4.4,3.51126984" id="Path-4" transform="translate(2.400000, 1.955635) scale(-1, 1) translate(-2.400000, -1.955635) "/>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <p class="why-title">차별화된 너도나도 상품</p>
-                                                <p class="why-dec">전국 각지와 해외의 훌륭한 생산자가<br>믿고 선택하는 파트너, 너도나도.<br>3천여 개가 넘는 너도나도 단독 브랜드, 스펙의<br>너도나도 상품을 믿고 만나보세요.
-                                                    <span>(온라인 기준 / 자사몰, 직구 제외)</span>
-                                                </p>
-                                            </li>
-                                            <li class="why-item icon-coldchain">
-                                                <div class="pic">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
-                                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <g id="-" transform="translate(-32.000000, -611.000000)">
-                                                                <g id="ic/04_price" transform="translate(32.000000, 611.000000)">
-                                                                    <circle id="Oval" fill="#32743f" fill-rule="nonzero" cx="20" cy="20" r="20"/>
-                                                                    <circle id="Oval" stroke="#FFFFFF" fill="#32743f" fill-rule="nonzero" cx="19.2" cy="18.4" r="10.4"/>
-                                                                    <g id="Group-5" transform="translate(12.800000, 15.200000)">
-                                                                        <polyline id="Path-3" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="1.6 0 4 7.2 6.4 0 8.8 7.2 11.2 0"/>
-                                                                        <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="0" y="2.4" width="2.4" height="1" rx="0.5"/>
-                                                                        <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="10.4" y="2.4" width="2.4" height="1" rx="0.5"/>
-                                                                    </g>
-                                                                    <path d="M24.8769552,27.6769553 L31.4224098,27.6769553 C31.7839052,27.6769553 32.0769552,27.8560414 32.0769552,28.0769553 L32.0769552,28.8769553 C32.0769552,29.0978692 31.7839052,29.2769553 31.4224098,29.2769553 L24.8769552,29.2769553" id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round" transform="translate(28.476955, 28.476955) rotate(45.000000) translate(-28.476955, -28.476955) "/>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <p class="why-title">고객, 생산자를 위한 최선의 가격</p>
-                                                <p class="why-dec">매주 대형 마트와 주요 온라인 마트의 가격<br>변동 상황을 확인해 신선식품은 품질을<br>타협하지 않는 선에서 최선의 가격으로,<br>가공식품은 언제나 합리적인 가격으로<br>정기 조정합니다.</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="customer-guide-wrap">
-                                        <ul class="guide-list">
-                                            <li class="guide-item">
-                                                <div class="guide-top">
-                                                    <strong class="guide-title">홈페이지 문의</strong>
-                                                    <p class="guide-text">[로그인 &gt; 마이너도나도 &gt; 1:1 문의] 고객센터 운영 시간에 순차적으로 답변해드리겠습니다.</p>
-                                                </div>
-                                            </li>
-                                            <li class="guide-item">
-                                                <div class="guide-top">
-                                                    <strong class="guide-title">교환/환불 안내</strong>
-                                                    <p class="guide-text">교환 및 환불이 필요하신 경우 [마이너도나도 &gt; 주문내역]에서 직접 반품 접수하거나<br>고객행복센터로 문의해 주시기 바랍니다.</p>
-                                                    <button type="button" class="btn-more">
-                                                        <span>자세히 보기</span>
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_5233_20398)"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="rgb(50, 116, 63)"></path></g><defs><clipPath id="clip0_5233_20398"><rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect></clipPath></defs></svg>
-                                                    </button>
-                                                </div>
-                                                <div class="guide-bottom">
-                                                    <ul class="guide-detail-list">
-                                                        <li class="guide-detail-item">
-                                                            <b class="guide-detail-title">01. 상품에 문제가 있는 경우</b>
-                                                            <p class="guide-detail-text">받으신 상품이 표시·광고 내용 또는 계약 내용과 다른 경우에는 상품을 받은 날부터 3개월 이내,
-                                                                그 사실을 알게 된 날부터 30일 이내에 반품을 요청하실 수 있습니다.
-                                                                고객행복센터로 문의해 주시기 바랍니다.
-                                                                상품의 정확한 상태를 확인할 수 있도록 사진을 함께 보내주시면 더 빠른 상담이 가능합니다.
-                                                                
-                                                                <span>※ 배송 상품에 문제가 있는 것으로 확인되면 배송비는 판매자가 부담합니다.</span>
-                                                            </p>
-                                                        </li>
-                                                        <li class="guide-detail-item">
-                                                            <b class="guide-detail-title">02. 단순 변심, 주문 착오의 경우</b>
-                                                            <p class="guide-detail-text"><strong>신선 / 냉장 / 냉동 식품</strong>상품의 특성상 재판매가 불가하여 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품이 어려운 점 양해 부탁드립니다.
-                                                                상품에 따라 조금씩 맛이 다를 수 있으며, 개인의 기호에 따라 같은 상품도 다르게 느끼실 수 있습니다.
-                                                                
-                                                                <span>※ 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품의 경우 고객님께서 왕복배송비 6,000원(배송비를 낸 경우 3,000원)을 부담하셔야 합니다.</span>
-                                                            </p>
-                                                        </li>
-                                                        <li class="guide-detail-item">
-                                                            <b class="guide-detail-title">03. 교환·환불이 불가한 경우</b>
-                                                            <p class="guide-detail-text">다음에 해당하는 교환·환불 신청은 처리가 어려울 수 있으니 양해 부탁드립니다.
-                                                                
-                                                                <span class="dot">고객님의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우
-                                                                    (단, 상품의 내용을 확인하기 위해 포장 등을 훼손한 경우는 제외)</span>
-                                                                <span class="dot">고객님의 사용 또는 일부 소비로 상품의 가치가 감소한 경우</span>
-                                                                <span class="dot">시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</span>
-                                                                <span class="dot">복제가 가능한 상품의 포장이 훼손된 경우</span>
-                                                                <span class="dot">고객님의 주문에 따라 개별적으로 생산되는 상품의 제작이 이미 진행된 경우</span>
-                                                                <span class="dot">반품 신청 후 14일 내에 물품이 반환되지 않고 고객님과 연락이 되지 않는 경우</span>
-                                                            </p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="guide-item">
-                                                <div class="guide-top">
-                                                    <strong class="guide-title">주문 취소 안내</strong>
-                                                    <p class="guide-text">[마이너도나도>주문내역]에서 직접 취소하실 수 있습니다.</p>
-                                                    <button type="button" class="btn-more">
-                                                        <span>자세히 보기</span>
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_5233_20398)"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="rgb(50, 116, 63)"></path></g><defs><clipPath id="clip0_5233_20398"><rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect></clipPath></defs></svg>
-                                                    </button>
-                                                </div>
-                                                <div class="guide-bottom">
-                                                    <ul class="guide-detail-list">
-                                                        <li class="guide-detail-item">
-                                                            <b class="guide-detail-title">주문 취소 관련</b>
-                                                            <p class="guide-detail-text">- 주문취소는 [마이너도나도&gt;주문내역]에서 직접 하실 수 있습니다.
-                                                            - [배송중]부터는 배송이 시작되어 주문 취소가 불가하니, 반품 접수 부탁드립니다(상품에 따라 반품이 불가할 수 있습니다).
-                                                            - 주문취소 및 반품 접수와 관련하여 도움이 필요하신 경우 고객행복센터로 문의해 주시기 바랍니다.
-                                                            - 주문마감 시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.
-                                                            - 일부 예약상품은 판매 시 안내된 취소 마감 기한 내에만 취소할 수 있습니다.
-                                                            - 파트너사 판매상품의 경우, 파트너사의 정책에 따라 주문취소가 가능합니다.
-                                                            - 미성년자 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.</p>
-                                                        </li>
-                                                        <li class="guide-detail-item">
-                                                            <b class="guide-detail-title">결제 승인 취소 / 환불 관련</b>
-                                                            <p class="guide-detail-text">- 카드 환불은 카드사 정책에 따르며, 자세한 사항은 카드사에 문의해주세요.
-                                                            - 결제 취소 시, 사용하신 적립금과 쿠폰도 모두 복원됩니다.</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="guide-item">
-                                                <div class="guide-top">
-                                                    <strong class="guide-title">배송관련 안내</strong>
-                                                    <p class="guide-text">배송 과정 중 기상 악화 및 도로교통 상황에 따라 부득이하게 지연 배송이 발생될 수 있습니다.</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="product-review" class="detail-review">
-                                    <div class="detail-title-wrap">
-                                        <strong class="title">상품 후기</strong>
-                                    </div>
-                                    <div class="review-img-wrap">
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img popup-trigger" data-target="#popup1">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                        </button>
-                                        <button type="button" class="review-img more-btn-img popup-trigger" data-target="#popup2">
-                                            <span>
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                            </span>
-                                            <span class="more-btn">+더보기</span>
-                                        </button>
-                                    </div>
-                                    <div class="review-img-content">
-                                        <div class="review-top-bar">
-                                            <span>총 <span class="total">799</span>개</span>
-
-                                            <div class="sort-options">
-                                                <button class="sort-btn on">추천순</button>
-                                                <button class="sort-btn">최근등록순</button>
+                            <div class="product-description-section">
+                                <ul class="product-tab-menu">
+                                    <li class="tab-item">
+                                        <a class="tab-link on" href="#product-goods">
+                                            <span class="name">상품설명</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab-item">
+                                        <a class="tab-link" href="#product-detail">
+                                            <span class="name">상세정보</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab-item">
+                                        <a class="tab-link" href="#product-review">
+                                            <span class="name">후기</span>
+                                            <span>(<span class="count">797</span>)</span>
+                                        </a>
+                                    </li>
+                                    <li class="tab-item">
+                                        <a class="tab-link" href="#product-inquiry">
+                                            <span class="name">문의</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="product-tab-content">
+                                    <div id="product-goods" class="goods-wrap">
+                                        <div class="goods-intro">
+                                            <div class="pic">
+                                                <img src="https://img-cf.kurly.com/hdims/resize/%3E1010x/quality/90/src/shop/data/goodsview/20220726/gv40000392412_1.jpg">
                                             </div>
                                         </div>
-                                        <div class="review-wrap">
-                                            <ul class="notice-list">
-                                                <li class="notice-item">
-                                                    <span class="badge badge-gray">공지</span>
-                                                    <button class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                    </div>
+                                    <div id="product-detail" class="detail-wrap">
+                                        <div class="detail-notice-wrap">
+                                            <h3>상품고시정보</h3>
+                                            <ul class="ul-table">
+                                                <li class="ul-table-th">품목 또는 명칭</li>
+                                                <li class="ul-table-td">식감이 좋은 아삭 복숭아(딱복) 1.2kg</li>
+                                                <li class="ul-table-th">포장단위별 내용물의 용량(중량), 수량, 크기</li>
+                                                <li class="ul-table-td">1.2kg</li>
+                                                <li class="ul-table-th">생산자, 수입품의 경우 수입자를 함께 표기</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지</li>
+                                                <li class="ul-table-td">국산</li>
+                                                <li class="ul-table-th">제조연월일, 소비기한 또는 품질유지기한</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">농수산물 – ｢농수산물 품질관리법｣에 따른 유전자변형농수산물 표시, 지리적 표시</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">축산물 - ｢축산법｣에 따른 등급 표시(1++ 등급 국내산 쇠고기의 경우 ｢소ㆍ돼지 식육의 표시방법 및 부위 구분기준｣에 따라 근내지방도 정보를 포함하여 표시), ｢가축 및 축산물 이력관리에 관한 법률｣에 따른 이력관리대상축산물 유무</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">수입 농수축산물 – “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">상품구성</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">보관방법 또는 취급방법</li>
+                                                <li class="ul-table-td">냉장보관</li>
+                                                <li class="ul-table-th">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
+                                                <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
+                                                <li class="ul-table-th">소비자 상담 관련 전화번호</li>
+                                            </ul>
+                                        </div>
+                                        <div class="why-wrap">
+                                            <h3>WHY 너도나도</h3>
+                                            <ul class="why-list">
+                                                <li class="why-item icon-committee">
+                                                    <div class="pic">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <g id="-" transform="translate(-32.000000, -175.000000)">
+                                                                    <g id="ic/01_check" transform="translate(32.000000, 175.000000)">
+                                                                        <circle id="Oval" fill="#32743f" fill-rule="nonzero" cx="20" cy="20" r="20"/>
+                                                                        <rect id="Rectangle" stroke="#FFFFFF" x="11.2" y="9.6" width="17.6" height="20.8" rx="1"/>
+                                                                        <g id="Group-2" stroke-linecap="round" transform="translate(14.400000, 13.600000)" stroke="#FFFFFF">
+                                                                            <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
+                                                                            <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
+                                                                        </g>
+                                                                        <g id="Group" stroke-linecap="round" transform="translate(14.400000, 18.800000)" stroke="#FFFFFF">
+                                                                            <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
+                                                                            <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
+                                                                        </g>
+                                                                        <g id="Group-4" stroke-linecap="round" transform="translate(14.400000, 24.000000)" stroke="#FFFFFF">
+                                                                            <polyline id="Path-2" stroke-linejoin="round" points="0 0.930676112 1.23010478 2.4 3.2 0"/>
+                                                                            <path d="M5.6,1.2 L11.2,1.2" id="Line"/>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="why-title">깐깐한 상품위원회</p>
+                                                    <p class="why-dec">깐깐한 상품위원회<br>마음으로 매주 상품을 직접 먹어보고,<br>경험해보고 성분, 맛, 안정성 등 다각도의<br>기준을 통과한 상품만을 판매합니다.
+                                                        <span>(온라인 기준 / 자사몰, 직구 제외)</span>
+                                                    </p>
                                                 </li>
-                                                <li class="notice-item">
-                                                    <span class="badge badge-gray">공지</span>
-                                                    <button class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                                <li class="why-item icon-only">
+                                                    <div class="pic">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <g id="-" transform="translate(-32.000000, -307.000000)">
+                                                                    <g id="ic/02_only" transform="translate(32.000000, 307.000000)">
+                                                                        <g id="ic/kurlyonly" fill="#32743f" fill-rule="nonzero">
+                                                                            <circle id="Oval" cx="20" cy="20" r="20"/>
+                                                                        </g>
+                                                                        <rect id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round" x="9.6" y="11.2" width="20.8" height="3.2" rx="1"/>
+                                                                        <path d="M10.4,14.4 L29.6,14.4 L29.6,28 C29.6,28.4418278 29.2418278,28.8 28.8,28.8 L11.2,28.8 C10.7581722,28.8 10.4,28.4418278 10.4,28 L10.4,14.4 L10.4,14.4 Z" id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round"/>
+                                                                        <g id="Group-6" stroke-linecap="round" transform="translate(17.600000, 18.240000)" stroke="#FFFFFF">
+                                                                            <path d="M0.4,0.16 L0.4,6.16" id="Path-4"/>
+                                                                            <path d="M1.7,2.8 L4.7,6" id="Path-4"/>
+                                                                            <path d="M0.4,0.4 L4.4,3.51126984" id="Path-4" transform="translate(2.400000, 1.955635) scale(-1, 1) translate(-2.400000, -1.955635) "/>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="why-title">차별화된 너도나도 상품</p>
+                                                    <p class="why-dec">전국 각지와 해외의 훌륭한 생산자가<br>믿고 선택하는 파트너, 너도나도.<br>3천여 개가 넘는 너도나도 단독 브랜드, 스펙의<br>너도나도 상품을 믿고 만나보세요.
+                                                        <span>(온라인 기준 / 자사몰, 직구 제외)</span>
+                                                    </p>
                                                 </li>
-                                                <li class="notice-item">
-                                                    <span class="badge badge-gray">공지</span>
-                                                    <button class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                                <li class="why-item icon-coldchain">
+                                                    <div class="pic">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <g id="-" transform="translate(-32.000000, -611.000000)">
+                                                                    <g id="ic/04_price" transform="translate(32.000000, 611.000000)">
+                                                                        <circle id="Oval" fill="#32743f" fill-rule="nonzero" cx="20" cy="20" r="20"/>
+                                                                        <circle id="Oval" stroke="#FFFFFF" fill="#32743f" fill-rule="nonzero" cx="19.2" cy="18.4" r="10.4"/>
+                                                                        <g id="Group-5" transform="translate(12.800000, 15.200000)">
+                                                                            <polyline id="Path-3" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="1.6 0 4 7.2 6.4 0 8.8 7.2 11.2 0"/>
+                                                                            <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="0" y="2.4" width="2.4" height="1" rx="0.5"/>
+                                                                            <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="10.4" y="2.4" width="2.4" height="1" rx="0.5"/>
+                                                                        </g>
+                                                                        <path d="M24.8769552,27.6769553 L31.4224098,27.6769553 C31.7839052,27.6769553 32.0769552,27.8560414 32.0769552,28.0769553 L32.0769552,28.8769553 C32.0769552,29.0978692 31.7839052,29.2769553 31.4224098,29.2769553 L24.8769552,29.2769553" id="Rectangle" stroke="#FFFFFF" stroke-linejoin="round" transform="translate(28.476955, 28.476955) rotate(45.000000) translate(-28.476955, -28.476955) "/>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                    <p class="why-title">고객, 생산자를 위한 최선의 가격</p>
+                                                    <p class="why-dec">매주 대형 마트와 주요 온라인 마트의 가격<br>변동 상황을 확인해 신선식품은 품질을<br>타협하지 않는 선에서 최선의 가격으로,<br>가공식품은 언제나 합리적인 가격으로<br>정기 조정합니다.</p>
                                                 </li>
                                             </ul>
-                                            <ul class="review-list">
-                                                <li class="review-item">
-                                                    <div class="review-author">
-                                                        <span class="badge badge-primary">VIP</span>
-                                                        <span class="name">김**</span>
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <div class="review-title-wrap">
-                                                            <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
-                                                        </div>
-                                                        <div class="review-text-wrap">
-                                                            <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.
-                                                        </div>
-                                                        </p>
-                                                        <div class="review-content-footer">
-                                                            <span class="review-date">2025.07.26</span>
-                                                            <button type="button" class="btn-helpful">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                                                    <path d="M4.04837 12.9998H2.21935C1.54592 12.9998 1 12.4626 1 11.7999V7.59992C1 6.93718 1.54592 6.39993 2.21935 6.39993H4.04837M8.31608 5.19995V2.79998C8.31608 1.80588 7.4972 1 6.48706 1L4.04837 6.39993V12.9999H10.9255C11.5335 13.0066 12.0537 12.5715 12.1448 11.9799L12.9862 6.57993C13.0399 6.23185 12.9355 5.87812 12.7008 5.61245C12.466 5.34678 12.1246 5.19596 11.7668 5.19995H8.31608Z" stroke="#999999" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                </svg>
-                                                                <span class="text">도움돼요</span>
-                                                                <span class="count">1</span>
-                                                            </button>
-                                                        </div>
+                                        </div>
+                                        <div class="customer-guide-wrap">
+                                            <ul class="guide-list">
+                                                <li class="guide-item">
+                                                    <div class="guide-top">
+                                                        <strong class="guide-title">홈페이지 문의</strong>
+                                                        <p class="guide-text">[로그인 &gt; 마이너도나도 &gt; 1:1 문의] 고객센터 운영 시간에 순차적으로 답변해드리겠습니다.</p>
                                                     </div>
                                                 </li>
-                                                <li class="review-item">
-                                                    <div class="review-author">
-                                                        <span class="badge badge-member">멤버스</span>
-                                                        <span class="name">김**</span>
+                                                <li class="guide-item">
+                                                    <div class="guide-top">
+                                                        <strong class="guide-title">교환/환불 안내</strong>
+                                                        <p class="guide-text">교환 및 환불이 필요하신 경우 [마이너도나도 &gt; 주문내역]에서 직접 반품 접수하거나<br>고객행복센터로 문의해 주시기 바랍니다.</p>
+                                                        <button type="button" class="btn-more">
+                                                            <span>자세히 보기</span>
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_5233_20398)"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="rgb(50, 116, 63)"></path></g><defs><clipPath id="clip0_5233_20398"><rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect></clipPath></defs></svg>
+                                                        </button>
                                                     </div>
-                                                    <div class="review-content">
-                                                        <div class="review-title-wrap">
-                                                            <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
-                                                        </div>
-                                                        <div class="review-text-wrap">
-                                                            <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.
-                                                        </div>
-                                                        </p>
-                                                        <div class="review-photo-group">
-                                                            <button type="button" class="review-photo popup-trigger" data-target="#popup1">
-                                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                                            </button>
-                                                            <button type="button" class="review-photo popup-trigger" data-target="#popup1">
-                                                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                                                            </button>
-                                                        </div>
-                                                        <div class="review-content-footer">
-                                                            <span class="review-date">2025.07.26</span>
-                                                            <button type="button" class="btn-helpful">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                                                    <path d="M4.04837 12.9998H2.21935C1.54592 12.9998 1 12.4626 1 11.7999V7.59992C1 6.93718 1.54592 6.39993 2.21935 6.39993H4.04837M8.31608 5.19995V2.79998C8.31608 1.80588 7.4972 1 6.48706 1L4.04837 6.39993V12.9999H10.9255C11.5335 13.0066 12.0537 12.5715 12.1448 11.9799L12.9862 6.57993C13.0399 6.23185 12.9355 5.87812 12.7008 5.61245C12.466 5.34678 12.1246 5.19596 11.7668 5.19995H8.31608Z" stroke="#999999" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                </svg>
-                                                                <span class="text">도움돼요</span>
-                                                                <span class="count">1</span>
-                                                            </button>
-                                                        </div>
+                                                    <div class="guide-bottom">
+                                                        <ul class="guide-detail-list">
+                                                            <li class="guide-detail-item">
+                                                                <b class="guide-detail-title">01. 상품에 문제가 있는 경우</b>
+                                                                <p class="guide-detail-text">받으신 상품이 표시·광고 내용 또는 계약 내용과 다른 경우에는 상품을 받은 날부터 3개월 이내,
+                                                                    그 사실을 알게 된 날부터 30일 이내에 반품을 요청하실 수 있습니다.
+                                                                    고객행복센터로 문의해 주시기 바랍니다.
+                                                                    상품의 정확한 상태를 확인할 수 있도록 사진을 함께 보내주시면 더 빠른 상담이 가능합니다.
+
+                                                                    <span>※ 배송 상품에 문제가 있는 것으로 확인되면 배송비는 판매자가 부담합니다.</span>
+                                                                </p>
+                                                            </li>
+                                                            <li class="guide-detail-item">
+                                                                <b class="guide-detail-title">02. 단순 변심, 주문 착오의 경우</b>
+                                                                <p class="guide-detail-text"><strong>신선 / 냉장 / 냉동 식품</strong>상품의 특성상 재판매가 불가하여 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품이 어려운 점 양해 부탁드립니다.
+                                                                    상품에 따라 조금씩 맛이 다를 수 있으며, 개인의 기호에 따라 같은 상품도 다르게 느끼실 수 있습니다.
+
+                                                                    <span>※ 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품의 경우 고객님께서 왕복배송비 6,000원(배송비를 낸 경우 3,000원)을 부담하셔야 합니다.</span>
+                                                                </p>
+                                                            </li>
+                                                            <li class="guide-detail-item">
+                                                                <b class="guide-detail-title">03. 교환·환불이 불가한 경우</b>
+                                                                <p class="guide-detail-text">다음에 해당하는 교환·환불 신청은 처리가 어려울 수 있으니 양해 부탁드립니다.
+
+                                                                    <span class="dot">고객님의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우
+                                                                        (단, 상품의 내용을 확인하기 위해 포장 등을 훼손한 경우는 제외)</span>
+                                                                    <span class="dot">고객님의 사용 또는 일부 소비로 상품의 가치가 감소한 경우</span>
+                                                                    <span class="dot">시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</span>
+                                                                    <span class="dot">복제가 가능한 상품의 포장이 훼손된 경우</span>
+                                                                    <span class="dot">고객님의 주문에 따라 개별적으로 생산되는 상품의 제작이 이미 진행된 경우</span>
+                                                                    <span class="dot">반품 신청 후 14일 내에 물품이 반환되지 않고 고객님과 연락이 되지 않는 경우</span>
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="guide-item">
+                                                    <div class="guide-top">
+                                                        <strong class="guide-title">주문 취소 안내</strong>
+                                                        <p class="guide-text">[마이너도나도>주문내역]에서 직접 취소하실 수 있습니다.</p>
+                                                        <button type="button" class="btn-more">
+                                                            <span>자세히 보기</span>
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_5233_20398)"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="rgb(50, 116, 63)"></path></g><defs><clipPath id="clip0_5233_20398"><rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect></clipPath></defs></svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="guide-bottom">
+                                                        <ul class="guide-detail-list">
+                                                            <li class="guide-detail-item">
+                                                                <b class="guide-detail-title">주문 취소 관련</b>
+                                                                <p class="guide-detail-text">- 주문취소는 [마이너도나도&gt;주문내역]에서 직접 하실 수 있습니다.
+                                                                - [배송중]부터는 배송이 시작되어 주문 취소가 불가하니, 반품 접수 부탁드립니다(상품에 따라 반품이 불가할 수 있습니다).
+                                                                - 주문취소 및 반품 접수와 관련하여 도움이 필요하신 경우 고객행복센터로 문의해 주시기 바랍니다.
+                                                                - 주문마감 시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.
+                                                                - 일부 예약상품은 판매 시 안내된 취소 마감 기한 내에만 취소할 수 있습니다.
+                                                                - 파트너사 판매상품의 경우, 파트너사의 정책에 따라 주문취소가 가능합니다.
+                                                                - 미성년자 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.</p>
+                                                            </li>
+                                                            <li class="guide-detail-item">
+                                                                <b class="guide-detail-title">결제 승인 취소 / 환불 관련</b>
+                                                                <p class="guide-detail-text">- 카드 환불은 카드사 정책에 따르며, 자세한 사항은 카드사에 문의해주세요.
+                                                                - 결제 취소 시, 사용하신 적립금과 쿠폰도 모두 복원됩니다.</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="guide-item">
+                                                    <div class="guide-top">
+                                                        <strong class="guide-title">배송관련 안내</strong>
+                                                        <p class="guide-text">배송 과정 중 기상 악화 및 도로교통 상황에 따라 부득이하게 지연 배송이 발생될 수 있습니다.</p>
                                                     </div>
                                                 </li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div id="product-review" class="detail-review">
+                                        <div class="detail-title-wrap">
+                                            <strong class="title">상품 후기</strong>
+                                        </div>
+                                        <div class="review-img-wrap">
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img popup-trigger" data-target="#popup1">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                            </button>
+                                            <button type="button" class="review-img more-btn-img popup-trigger" data-target="#popup2">
+                                                <span>
+                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                </span>
+                                                <span class="more-btn">+더보기</span>
+                                            </button>
+                                        </div>
+                                        <div class="review-img-content">
+                                            <div class="review-top-bar">
+                                                <span>총 <span class="total">799</span>개</span>
+
+                                                <div class="sort-options">
+                                                    <button type="button" class="sort-btn on">추천순</button>
+                                                    <button type="button" class="sort-btn">최근등록순</button>
+                                                </div>
+                                            </div>
+                                            <div class="review-wrap">
+                                                <ul class="notice-list">
+                                                    <li class="notice-item">
+                                                        <span class="badge badge-gray">공지</span>
+                                                        <button type="button" class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                                    </li>
+                                                    <li class="notice-item">
+                                                        <span class="badge badge-gray">공지</span>
+                                                        <button type="button" class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                                    </li>
+                                                    <li class="notice-item">
+                                                        <span class="badge badge-gray">공지</span>
+                                                        <button type="button" class="notice-text">[25년 7월 4주] 베스트 후기 선정 안내</button>
+                                                    </li>
+                                                </ul>
+                                                <ul class="review-list">
+                                                    <li class="review-item">
+                                                        <div class="review-author">
+                                                            <span class="badge badge-primary">VIP</span>
+                                                            <span class="name">김**</span>
+                                                        </div>
+                                                        <div class="review-content">
+                                                            <div class="review-title-wrap">
+                                                                <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
+                                                            </div>
+                                                            <div class="review-text-wrap">
+                                                                <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.
+                                                            </div>
+                                                            </p>
+                                                            <div class="review-content-footer">
+                                                                <span class="review-date">2025.07.26</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="review-item">
+                                                        <div class="review-author">
+                                                            <span class="badge badge-member">멤버스</span>
+                                                            <span class="name">김**</span>
+                                                        </div>
+                                                        <div class="review-content">
+                                                            <div class="review-title-wrap">
+                                                                <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
+                                                            </div>
+                                                            <div class="review-text-wrap">
+                                                                <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.
+                                                            </div>
+                                                            </p>
+                                                            <div class="review-photo-group">
+                                                                <button type="button" class="review-photo popup-trigger" data-target="#popup1">
+                                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                                </button>
+                                                                <button type="button" class="review-photo popup-trigger" data-target="#popup1">
+                                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
+                                                                </button>
+                                                            </div>
+                                                            <div class="review-content-footer">
+                                                                <span class="review-date">2025.07.26</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="pagenation">
+                                                    <button type="button" class="prev" disabled></button>
+                                                    <button type="button" class="next"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="product-inquiry" class="detail-inquiry">
+                                        <div class="btn-wrap">
+                                            <button type="button" class="inquiry-btn btn-primary popup-trigger" data-target="#popup4">
+                                                <span>문의하기</span>
+                                            </button>
+                                        </div>
+                                        <div class="detail-title-wrap">
+                                            <strong class="title">상품 문의</strong>
+                                            <ul class="dec-list">
+                                                <li class="dec-item">상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</li>
+                                                <li class="dec-item">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이너도나도 내<a href="" class="">1:1 문의</a>에 남겨주세요.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="inquiry-wrap">
+                                            <table class="table-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="title">제목</th>
+                                                        <th class="author">작성자</th>
+                                                        <th class="created-date">작성일</th>
+                                                        <th class="status">답변상태</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="inquiry-item">
+                                                        <td class="inquiry-title">
+                                                            <button type="button" class="btn-title">복숭아 품종</button>
+                                                        </td>
+                                                        <td class="inquiry-writer">이*선</td>
+                                                        <td class="inquiry-date">2024.07.17</td>
+                                                        <td class="inquiry-status">답변완료</td>
+                                                    </tr>
+                                                    <tr class="answer-item hidden">
+                                                        <td colspan="4">
+                                                            <div class="answer-item-box">
+                                                                <div class="question-wrap">
+                                                                    <div class="icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                            <g fill="none" fill-rule="evenodd">
+                                                                                <g>
+                                                                                    <g>
+                                                                                        <g>
+                                                                                            <g transform="translate(-445 -876) translate(423 276) translate(2 316) translate(20 284)">
+                                                                                                <circle cx="12" cy="12" r="12" fill="#549c62"/>
+                                                                                                <path fill="#FFF" d="M11.946 7.5c2.456 0 4.446 1.99 4.446 4.446 0 .907-.271 1.75-.737 2.453l.845.843-1.258 1.258-.843-.845c-.703.466-1.546.737-2.453.737-2.455 0-4.446-1.99-4.446-4.446C7.5 9.491 9.49 7.5 11.946 7.5zm0 1.778c-1.473 0-2.668 1.195-2.668 2.668s1.195 2.668 2.668 2.668c.412 0 .802-.094 1.15-.26l-.369-.37 1.258-1.257.369.369c.166-.348.26-.738.26-1.15 0-1.473-1.195-2.668-2.668-2.668z"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="text">
+                                                                        <span>판매중인 복숭아 품종이 뭔지 알수있을까요?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="answer-wrap">
+                                                                    <div class="icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                            <g fill="none" fill-rule="evenodd">
+                                                                                <g>
+                                                                                    <g>
+                                                                                        <g>
+                                                                                            <g transform="translate(-445 -1918) translate(423 276) translate(2 1622) translate(20 20)">
+                                                                                                <circle cx="12" cy="12" r="12" fill="#32743f"/>
+                                                                                                <path fill="#FFF" fill-rule="nonzero" d="M9.76 15.708l.54-1.404h3.456l.552 1.404h2.148L13 7.5h-1.932L7.6 15.708h2.16zm3.324-3.132h-2.112l1.056-2.712 1.056 2.712z"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="text-wrap">
+                                                                        <p class="text">안녕하세요 고객님<br><br>현재 문의량이 많아 고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을 드리고자 하였음에도, 시간이 지난 현재 답변을 드리게되어 너무나도 죄송하단 말씀 드립니다.<br>
+                                                                            <br>해당 상품은 대월, 유명 등의 아삭한 품종으로 운영되고 있으며<br>페이지 내 안내된 바와 같이 모두 국내 농가 재배 상품임을 안내드립니다.<br><br>답변드린 내용을 통해 궁금하신 사항이 해결되셨길 바라며,<br>
+                                                                            추가적인 문의 사항이 있으시면 언제든 고객행복센터를 찾아주시기를 바랍니다.<br>늘 신선하고 최상의 상품을 통해 풍요로운 식탁이 될 수 있도록 너도나도가 함께하겠습니다.<br><br>
+                                                                            장마와 무더위로 인해 지치지 않도록 건강 조심하시고 늘 시원한 하루가 되셨으면 좋겠습니다.<br><br>
+                                                                            Better Life for All. 너도나도
+                                                                        </p>
+                                                                        <div class="date">2024.07.20</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="inquiry-item">
+                                                        <td class="inquiry-title">
+                                                            <button type="button" class="btn-title secret popup-trigger" data-target="#popup5">
+                                                                <div class="inquiry-secret">
+                                                                    <span>비밀글입니다.</span>
+                                                                    <span class="icon"></span>
+                                                                </div>
+                                                            </button>
+                                                        </td>
+                                                        <td class="inquiry-writer">이*환</td>
+                                                        <td class="inquiry-date">2022.07.31</td>
+                                                        <td class="inquiry-status">답변완료</td>
+                                                    </tr>
+                                                    <tr class="inquiry-item">
+                                                        <td class="inquiry-title">
+                                                            <button type="button" class="btn-title">복숭아 품종</button>
+                                                        </td>
+                                                        <td class="inquiry-writer">이*선</td>
+                                                        <td class="inquiry-date">2024.07.17</td>
+                                                        <td class="inquiry-status">답변완료</td>
+                                                    </tr>
+                                                    <tr class="answer-item hidden">
+                                                        <td colspan="4">
+                                                            <div class="answer-item-box">
+                                                                <div class="question-wrap">
+                                                                    <div class="icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                            <g fill="none" fill-rule="evenodd">
+                                                                                <g>
+                                                                                    <g>
+                                                                                        <g>
+                                                                                            <g transform="translate(-445 -876) translate(423 276) translate(2 316) translate(20 284)">
+                                                                                                <circle cx="12" cy="12" r="12" fill="#549c62"/>
+                                                                                                <path fill="#FFF" d="M11.946 7.5c2.456 0 4.446 1.99 4.446 4.446 0 .907-.271 1.75-.737 2.453l.845.843-1.258 1.258-.843-.845c-.703.466-1.546.737-2.453.737-2.455 0-4.446-1.99-4.446-4.446C7.5 9.491 9.49 7.5 11.946 7.5zm0 1.778c-1.473 0-2.668 1.195-2.668 2.668s1.195 2.668 2.668 2.668c.412 0 .802-.094 1.15-.26l-.369-.37 1.258-1.257.369.369c.166-.348.26-.738.26-1.15 0-1.473-1.195-2.668-2.668-2.668z"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="text">
+                                                                        <span>판매중인 복숭아 품종이 뭔지 알수있을까요?</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="answer-wrap">
+                                                                    <div class="icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                            <g fill="none" fill-rule="evenodd">
+                                                                                <g>
+                                                                                    <g>
+                                                                                        <g>
+                                                                                            <g transform="translate(-445 -1918) translate(423 276) translate(2 1622) translate(20 20)">
+                                                                                                <circle cx="12" cy="12" r="12" fill="#32743f"/>
+                                                                                                <path fill="#FFF" fill-rule="nonzero" d="M9.76 15.708l.54-1.404h3.456l.552 1.404h2.148L13 7.5h-1.932L7.6 15.708h2.16zm3.324-3.132h-2.112l1.056-2.712 1.056 2.712z"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="text-wrap">
+                                                                        <p class="text">안녕하세요 고객님<br><br>현재 문의량이 많아 고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을 드리고자 하였음에도, 시간이 지난 현재 답변을 드리게되어 너무나도 죄송하단 말씀 드립니다.<br>
+                                                                            <br>해당 상품은 대월, 유명 등의 아삭한 품종으로 운영되고 있으며<br>페이지 내 안내된 바와 같이 모두 국내 농가 재배 상품임을 안내드립니다.<br><br>답변드린 내용을 통해 궁금하신 사항이 해결되셨길 바라며,<br>
+                                                                            추가적인 문의 사항이 있으시면 언제든 고객행복센터를 찾아주시기를 바랍니다.<br>늘 신선하고 최상의 상품을 통해 풍요로운 식탁이 될 수 있도록 너도나도가 함께하겠습니다.<br><br>
+                                                                            장마와 무더위로 인해 지치지 않도록 건강 조심하시고 늘 시원한 하루가 되셨으면 좋겠습니다.<br><br>
+                                                                            Better Life for All. 너도나도
+                                                                        </p>
+                                                                        <div class="date">2024.07.20</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- 데이터 없을때 -->
+                                                    <tr class="table-item">
+                                                        <td class="no-data" colspan="4">게시글이 없습니다.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
                                             <div class="pagenation">
                                                 <button type="button" class="prev" disabled></button>
                                                 <button type="button" class="next"></button>
@@ -511,238 +663,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="product-inquiry" class="detail-inquiry">
-                                    <div class="btn-wrap">
-                                        <button type="button" class="inquiry-btn btn-primary popup-trigger" data-target="#popup4">
-                                            <span>문의하기</span>
-                                        </button>
-                                    </div>
-                                    <div class="detail-title-wrap">
-                                        <strong class="title">상품 문의</strong>
-                                        <ul class="dec-list">
-                                            <li class="dec-item">상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</li>
-                                            <li class="dec-item">배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이너도나도 내<a href="" class="">1:1 문의</a>에 남겨주세요.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="inquiry-wrap">
-                                        <table class="table-wrap">
-                                            <thead>
-                                                <tr>
-                                                    <th class="title">제목</th>
-                                                    <th class="author">작성자</th>
-                                                    <th class="created-date">작성일</th>
-                                                    <th class="status">답변상태</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="inquiry-item">
-                                                    <td class="inquiry-title">
-                                                        <button type="button" class="btn-title">복숭아 품종</button>
-                                                    </td>
-                                                    <td class="inquiry-writer">이*선</td>
-                                                    <td class="inquiry-date">2024.07.17</td>
-                                                    <td class="inquiry-status">답변완료</td>
-                                                </tr>
-                                                <tr class="answer-item hidden">
-                                                    <td colspan="4">
-                                                        <div class="answer-item-box">
-                                                            <div class="question-wrap">
-                                                                <div class="icon">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                                        <g fill="none" fill-rule="evenodd">
-                                                                            <g>
-                                                                                <g>
-                                                                                    <g>
-                                                                                        <g transform="translate(-445 -876) translate(423 276) translate(2 316) translate(20 284)">
-                                                                                            <circle cx="12" cy="12" r="12" fill="#549c62"/>
-                                                                                            <path fill="#FFF" d="M11.946 7.5c2.456 0 4.446 1.99 4.446 4.446 0 .907-.271 1.75-.737 2.453l.845.843-1.258 1.258-.843-.845c-.703.466-1.546.737-2.453.737-2.455 0-4.446-1.99-4.446-4.446C7.5 9.491 9.49 7.5 11.946 7.5zm0 1.778c-1.473 0-2.668 1.195-2.668 2.668s1.195 2.668 2.668 2.668c.412 0 .802-.094 1.15-.26l-.369-.37 1.258-1.257.369.369c.166-.348.26-.738.26-1.15 0-1.473-1.195-2.668-2.668-2.668z"/>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>판매중인 복숭아 품종이 뭔지 알수있을까요?</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-wrap">
-                                                                <div class="icon">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                                        <g fill="none" fill-rule="evenodd">
-                                                                            <g>
-                                                                                <g>
-                                                                                    <g>
-                                                                                        <g transform="translate(-445 -1918) translate(423 276) translate(2 1622) translate(20 20)">
-                                                                                            <circle cx="12" cy="12" r="12" fill="#32743f"/>
-                                                                                            <path fill="#FFF" fill-rule="nonzero" d="M9.76 15.708l.54-1.404h3.456l.552 1.404h2.148L13 7.5h-1.932L7.6 15.708h2.16zm3.324-3.132h-2.112l1.056-2.712 1.056 2.712z"/>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="text-wrap">
-                                                                    <p class="text">안녕하세요 고객님<br><br>현재 문의량이 많아 고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을 드리고자 하였음에도, 시간이 지난 현재 답변을 드리게되어 너무나도 죄송하단 말씀 드립니다.<br>
-                                                                        <br>해당 상품은 대월, 유명 등의 아삭한 품종으로 운영되고 있으며<br>페이지 내 안내된 바와 같이 모두 국내 농가 재배 상품임을 안내드립니다.<br><br>답변드린 내용을 통해 궁금하신 사항이 해결되셨길 바라며,<br>
-                                                                        추가적인 문의 사항이 있으시면 언제든 고객행복센터를 찾아주시기를 바랍니다.<br>늘 신선하고 최상의 상품을 통해 풍요로운 식탁이 될 수 있도록 너도나도가 함께하겠습니다.<br><br>
-                                                                        장마와 무더위로 인해 지치지 않도록 건강 조심하시고 늘 시원한 하루가 되셨으면 좋겠습니다.<br><br>
-                                                                        Better Life for All. 너도나도
-                                                                    </p>
-                                                                    <div class="date">2024.07.20</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td> 
-                                                </tr>
-                                                <tr class="inquiry-item">
-                                                    <td class="inquiry-title">
-                                                        <button type="button" class="btn-title secret popup-trigger" data-target="#popup5">
-                                                            <div class="inquiry-secret">
-                                                                <span>비밀글입니다.</span>
-                                                                <span class="icon"></span>
-                                                            </div>
-                                                        </button>
-                                                    </td>
-                                                    <td class="inquiry-writer">이*환</td>
-                                                    <td class="inquiry-date">2022.07.31</td>
-                                                    <td class="inquiry-status">답변완료</td>
-                                                </tr>
-                                                <tr class="inquiry-item">
-                                                    <td class="inquiry-title">
-                                                        <button type="button" class="btn-title">복숭아 품종</button>
-                                                    </td>
-                                                    <td class="inquiry-writer">이*선</td>
-                                                    <td class="inquiry-date">2024.07.17</td>
-                                                    <td class="inquiry-status">답변완료</td>
-                                                </tr>
-                                                <tr class="answer-item hidden">
-                                                    <td colspan="4">
-                                                        <div class="answer-item-box">
-                                                            <div class="question-wrap">
-                                                                <div class="icon">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                                        <g fill="none" fill-rule="evenodd">
-                                                                            <g>
-                                                                                <g>
-                                                                                    <g>
-                                                                                        <g transform="translate(-445 -876) translate(423 276) translate(2 316) translate(20 284)">
-                                                                                            <circle cx="12" cy="12" r="12" fill="#549c62"/>
-                                                                                            <path fill="#FFF" d="M11.946 7.5c2.456 0 4.446 1.99 4.446 4.446 0 .907-.271 1.75-.737 2.453l.845.843-1.258 1.258-.843-.845c-.703.466-1.546.737-2.453.737-2.455 0-4.446-1.99-4.446-4.446C7.5 9.491 9.49 7.5 11.946 7.5zm0 1.778c-1.473 0-2.668 1.195-2.668 2.668s1.195 2.668 2.668 2.668c.412 0 .802-.094 1.15-.26l-.369-.37 1.258-1.257.369.369c.166-.348.26-.738.26-1.15 0-1.473-1.195-2.668-2.668-2.668z"/>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <span>판매중인 복숭아 품종이 뭔지 알수있을까요?</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-wrap">
-                                                                <div class="icon">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                                        <g fill="none" fill-rule="evenodd">
-                                                                            <g>
-                                                                                <g>
-                                                                                    <g>
-                                                                                        <g transform="translate(-445 -1918) translate(423 276) translate(2 1622) translate(20 20)">
-                                                                                            <circle cx="12" cy="12" r="12" fill="#32743f"/>
-                                                                                            <path fill="#FFF" fill-rule="nonzero" d="M9.76 15.708l.54-1.404h3.456l.552 1.404h2.148L13 7.5h-1.932L7.6 15.708h2.16zm3.324-3.132h-2.112l1.056-2.712 1.056 2.712z"/>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </svg>
-                                                                </div>
-                                                                <div class="text-wrap">
-                                                                    <p class="text">안녕하세요 고객님<br><br>현재 문의량이 많아 고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을 드리고자 하였음에도, 시간이 지난 현재 답변을 드리게되어 너무나도 죄송하단 말씀 드립니다.<br>
-                                                                        <br>해당 상품은 대월, 유명 등의 아삭한 품종으로 운영되고 있으며<br>페이지 내 안내된 바와 같이 모두 국내 농가 재배 상품임을 안내드립니다.<br><br>답변드린 내용을 통해 궁금하신 사항이 해결되셨길 바라며,<br>
-                                                                        추가적인 문의 사항이 있으시면 언제든 고객행복센터를 찾아주시기를 바랍니다.<br>늘 신선하고 최상의 상품을 통해 풍요로운 식탁이 될 수 있도록 너도나도가 함께하겠습니다.<br><br>
-                                                                        장마와 무더위로 인해 지치지 않도록 건강 조심하시고 늘 시원한 하루가 되셨으면 좋겠습니다.<br><br>
-                                                                        Better Life for All. 너도나도
-                                                                    </p>
-                                                                    <div class="date">2024.07.20</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td> 
-                                                </tr>
-                                                <!-- 데이터 없을때 -->
-                                                <tr class="table-item">
-                                                    <td class="no-data" colspan="4">게시글이 없습니다.</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <div class="pagenation">
-                                            <button type="button" class="prev" disabled></button>
-                                            <button type="button" class="next"></button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="floating-purchase-bar hidden">
-                        <div class="floating-purchase-wrap">
-                            <button class="floating-btn">상품 선택</button>
-                            <div class="product-option-wrap">
-                                <div class="product-option-item">
-                                    <div class="option-wrap">
-                                        <p class="option-name">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
-                                    </div>
-                                    <div class="option-info">
-                                        <div class="product-quantity-box">
-                                            <button type="button" class="quantity-btn minus" disabled=""></button>
-                                            <div class="count">0</div>
-                                            <button type="button" class="quantity-btn plus"></button>
+                        <div class="floating-purchase-bar hidden">
+                            <div class="floating-purchase-wrap">
+                                <button type="button" class="floating-btn">상품 선택</button>
+                                <div class="product-option-wrap">
+                                    <div class="product-option-item">
+                                        <div class="option-wrap">
+                                            <p class="option-name">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
                                         </div>
-                                        <div class="option-price">
-                                            <span class="origin-price">15,900원</span>
-                                            <span class="final-price">14,310원</span>
+                                        <div class="option-info">
+                                            <div class="product-quantity-box">
+                                                <button type="button" class="quantity-btn minus" disabled=""></button>
+                                                <div class="count">0</div>
+                                                <button type="button" class="quantity-btn plus"></button>
+                                            </div>
+                                            <div class="option-price">
+                                                <span class="origin-price">15,900원</span>
+                                                <span class="final-price">14,310원</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="total-price-box">
-                                    <span class="total-label">총 상품금액 :</span>
-                                    <span class="total-amount">0</span>
-                                    <span class="total-unit">원</span>
-                                </div>
-                                <div class="product-btn-wrap">
-                                    <div class="product-action-buttons">
-                                        <button type="button" class="btn-wish">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                    <path d="M25.807 7.863a5.777 5.777 0 0 0-8.172 0L16 9.497l-1.635-1.634a5.779 5.779 0 1 0-8.173 8.172l1.634 1.634 7.466 7.467a1 1 0 0 0 1.415 0s0 0 0 0l7.466-7.467h0l1.634-1.634a5.777 5.777 0 0 0 0-8.172z" stroke="#32743f" stroke-width="1.6" fill="none" fill-rule="evenodd" stroke-linecap="round"/>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <button type="button" class="btn-alarm popup-trigger" data-target="#popup3">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                    <g stroke="rgb(50, 116, 63)" stroke-width="1.6" fill="none" fill-rule="evenodd">
-                                                        <path d="M12.666 23a3.333 3.333 0 1 0 6.666 0"/>
-                                                        <path d="M25.998 22.738H6l.013-.03c.076-.135.471-.704 1.186-1.709l.75-1.05v-6.635c0-4.485 3.438-8.14 7.741-8.308L16 5c4.446 0 8.05 3.722 8.05 8.314v6.634l1.707 2.411c.173.253.254.38.242.38z" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="btn-wrap">
-                                            <button type="button" class="btn-cart btn-primary">
-                                                <span>장바구니 담기</span>
+                                    <div class="total-price-box">
+                                        <span class="total-label">총 상품금액 :</span>
+                                        <span class="total-amount">0</span>
+                                        <span class="total-unit">원</span>
+                                    </div>
+                                    <div class="product-btn-wrap">
+                                        <div class="product-action-buttons">
+                                            <button type="button" class="btn-wish" name="action" value="like">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                        <path d="M25.807 7.863a5.777 5.777 0 0 0-8.172 0L16 9.497l-1.635-1.634a5.779 5.779 0 1 0-8.173 8.172l1.634 1.634 7.466 7.467a1 1 0 0 0 1.415 0s0 0 0 0l7.466-7.467h0l1.634-1.634a5.777 5.777 0 0 0 0-8.172z" stroke="#32743f" stroke-width="1.6" fill="none" fill-rule="evenodd" stroke-linecap="round"/>
+                                                    </svg>
+                                                </span>
                                             </button>
+                                            <div class="btn-wrap">
+                                                <button type="button" class="btn-cart btn-primary" name="action" value="add">
+                                                    <span>장바구니 담기</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -769,7 +737,7 @@
                                     </span>
                                     <div class="pop-preview-list">
                                         <div class="pop-preview-item">
-                                            <button class="btn-img on">
+                                            <button type="button" class="btn-img on">
                                                 <span>
                                                     <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
                                                 </span>
@@ -781,7 +749,7 @@
                                             </button>
                                         </div>
                                         <div class="pop-preview-item">
-                                            <button class="btn-img">
+                                            <button type="button" class="btn-img">
                                                 <span>
                                                     <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
                                                 </span>
@@ -1024,5 +992,10 @@
         </div>
     </div>
 </body>
-<script src="/js/together-product/detail.js"></script>
+<script th:inline="javascript">
+    const product = [[${product}]];
+</script>
+<script src="/js/main/header.js"></script>
+<script src="/js/together-product/detail/module/service.js"></script>
+<script src="/js/together-product/detail/detail.js"></script>
 </html>

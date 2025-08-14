@@ -15,6 +15,6 @@ public class AlarmVO extends Period {
     private String alarmSender;
     private String alarmContent;
     private String addressPostNumber;
-    private String alarm_date;
+    private String alarmDate;
     private Long memberId;
 }
