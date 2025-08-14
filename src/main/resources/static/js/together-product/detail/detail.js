@@ -13,6 +13,14 @@ const update = (newCount) => {
         el.textContent = newCount;
     });
 
+    // 🔹 hidden input value 업데이트
+    quantityBoxes.forEach((box) => {
+        const hiddenInput = box.querySelector('input[name="cartCount"]');
+        if (hiddenInput) {
+            hiddenInput.value = newCount;
+        }
+    });
+
     // 마이너스 버튼 상태 동기화
     quantityBoxes.forEach((box) => {
         const minus = box.querySelector(".quantity-btn.minus");
@@ -47,35 +55,6 @@ quantityBoxes.forEach((box) => {
 
 // 수량 카운트 - 초기화
 update(Number(quantityCounts[0].textContent));
-
-// 팝업
-const openButtons = document.querySelectorAll(".popup-trigger");
-const closeButtons = document.querySelectorAll(".popup-close");
-
-openButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        const targetSelector = btn.dataset.target;
-        const targetModal = document.querySelector(targetSelector);
-        const htmlScroll = document.querySelector("html");
-        if (targetModal) {
-            targetModal.style.display = "block";
-            htmlScroll.style.overflow = "hidden";
-        }
-    });
-});
-
-closeButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const targetModal = btn.closest(".popup-wrapper");
-        const htmlScroll = document.querySelector("html");
-        if (targetModal) {
-            targetModal.style.display = "none";
-            htmlScroll.style.overflow = "";
-        }
-    });
-});
 
 // 상품선택 플로팅바
 const floatingBar = document.querySelector(".floating-purchase-bar");
@@ -242,3 +221,17 @@ const totalSpan = document.querySelector(".review-top-bar .total");
 
 tabLinkSpan.textContent = reviewItems.length;
 totalSpan.textContent = reviewItems.length;
+
+//###################################  장바구니  ###################################
+const saveInCart = document.querySelector("button.btn-cart");
+saveInCart.addEventListener("click", async (e) => {
+    const cartCount = document.querySelector("div.count").innerText;
+    const cart = {
+        cartCount: cartCount,
+        productId: product.id
+    }
+    const result = await togetherProductService.save(cart);
+    if(result){
+        
+    }
+})

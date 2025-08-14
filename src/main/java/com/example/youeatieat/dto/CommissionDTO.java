@@ -1,4 +1,4 @@
-package com.example.youeatieat.DTO;
+package com.example.youeatieat.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

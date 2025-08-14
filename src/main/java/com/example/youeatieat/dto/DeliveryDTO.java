@@ -1,7 +1,6 @@
-package com.example.youeatieat.DTO;
+package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.Status;
-import com.example.youeatieat.enumeration.FaqCategory;
+import com.example.youeatieat.enumeration.DeliveryStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,11 +11,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class faqDTO {
+public class DeliveryDTO {
     private Long id;
-    private FaqCategory faq_category;
-    private String faq_title;
-    private String faq_content;
+    private DeliveryStatus deliveryStatus;
+    private int deliveryCount;
+    private Long productId;
+    private Long requestId;
     private String createdDatetime;
     private String updatedDatetime;
 }

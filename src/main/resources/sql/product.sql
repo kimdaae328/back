@@ -21,9 +21,9 @@ alter table tbl_product modify product_category enum('vegetables','fruits','fish
 
 select * from tbl_product;
 
-insert into app.tbl_product(
+insert into tbl_product(
 product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, member_id
 )
-values ('포도', '10000','1.5kg','fruits','img~~','img~~','3','1');
+values ('항정살', '5000','2.0g','butchers','img~~','img~~','6','1');
 
 drop table tbl_product;
