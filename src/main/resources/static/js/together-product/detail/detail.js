@@ -232,6 +232,6 @@ saveInCart.addEventListener("click", async (e) => {
     }
     const result = await togetherProductService.save(cart);
     if(result){
-        
+    //     장바구니에 추가 완료
     }
 })
