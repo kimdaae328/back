@@ -1,23 +1,21 @@
-package com.example.youeatieat.DTO;
+package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.Status;
-import com.example.youeatieat.enumeration.DeliveryStatus;
+import com.example.youeatieat.enumeration.CancelableStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class DeliveryDTO {
-    private Long id;
-    private DeliveryStatus deliveryStatus;
-    private int deliveryCount;
+public class groupDTO {
+    private Long groupIndexNumber;
     private Long productId;
-    private Long requestId;
+    private CancelableStatus groupCancelable;
     private String createdDatetime;
     private String updatedDatetime;
 }

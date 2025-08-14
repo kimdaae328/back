@@ -1,6 +1,5 @@
-package com.example.youeatieat.DTO;
+package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,11 +10,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class CartDTO {
+public class AlarmDTO {
     private Long id;
-    private Status cartStatus;
-    private int cartCount;
-    private Long productId;
+    private String alarmSender;
+    private String alarmContent;
+    private String addressPostNumber;
+    private String alarmDate;
     private Long memberId;
     private String createdDatetime;
     private String updatedDatetime;

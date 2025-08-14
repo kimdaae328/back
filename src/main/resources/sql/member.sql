@@ -30,6 +30,7 @@ insert into tbl_member (
     member_role,
     member_status
 ) values
+
 # ('test1@gmail.com', '1234', '홍길동', '1990-05-21', '010-1234-5678', 'you_i', 'male', 'buyer', 'active'),
 ('oz@gmail.com', '1234', '우즈', '1978-07-25', '010-1234-7777', 'you_i', 'female', 'buyer', 'active')
 # ('test4@gmail.com', '1234', '황또치', '2001-12-05', '010-5555-1234', 'you_i', 'female', 'seller', 'active'),
