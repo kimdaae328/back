@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/**")
+@RequestMapping("/admin/customer/**")
 public class AdminCustomerController {
 
 //    회원목록

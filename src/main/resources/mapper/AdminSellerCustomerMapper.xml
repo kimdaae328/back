@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminSellerMapper">
+    <select id="selectSellerAll">
+        select id, member_name, member_email,
+               member_phone, member_last_login_date , created_date, updated_date
+        from tbl_member
+        where member_status = 'active' and member_role = 'seller'
+        order by id desc
+        limit #{count} offset #{offset}
+    </select>
+
+    <select id="selectSellerCountAll">
+        select count(*) from tbl_member
+        where member_status = 'active' and member_role = 'seller'
+    </select>
+
+    <select id="selectDetailSeller">
+        select id, member_email, member_password, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date
+        from tbl_member
+        where id = #{id}
+    </select>
+</mapper>

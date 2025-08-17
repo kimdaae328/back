@@ -12,11 +12,11 @@ homeButton.addEventListener("click", (e) => {
     sideMenuButtons.forEach((homeByButton) => {
         homeByButton.classList.remove("current");
     });
-    
+
     payoutButton.classList.remove("current1");
     homeButton.classList.add("current1");
-    
-    
+
+
 
     sideSubLists.forEach((homeByList) => {
         homeByList.classList.remove("show");
@@ -31,7 +31,6 @@ homeButton.addEventListener("click", (e) => {
         homeByIcon.classList.add("mdi-chevron-right");
     });
 });
-// 홈 클릭 이벤트
 payoutButton.addEventListener("click", (e) => {
     e.preventDefault();
     sideMenuButtons.forEach((payoutButton) => {
@@ -166,6 +165,14 @@ tabNames.forEach((headerTabname) => {
                 subLink.classList.remove("active");
             }
         });
+
+        if (tabText === "전체") {
+            setList(showSellerList);
+        } else if (tabText === "일반 로그인") {
+            // setSellerList(showNonSubscribedList)
+        } else if(tabText === "카카오 로그인"){
+            // setSellerList(showSubscribedList);
+        }
     });
 });
 
@@ -210,60 +217,71 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
+
+
+// ########################### 회원목록 ###########################
+// 전체 회원
+const showList = async (page = 1) => {
+    const sellerCriteria = await sellerService.getSellerList(page, sellerLayout.showList);
+    sellerLayout.renderPagination(sellerCriteria.criteria);
+    sellerLayout.sellerCount(sellerCriteria.criteria);
+
+    // console.log(sellerCriteria)
+    return sellerCriteria;
+}
+
+const setList = (loader) => {
+    currentLoader = loader;
+    currentLoader(1); // 첫 페이지
+    sellerLayout.connectToPagination((page) => currentLoader(page));
+};
+
+setList(showList);
+
+// ########################### 회원상세 ###########################
 // 일반회원 상세 모달 창 열고 닫는 이벤트
+const customerTable = document.querySelector(".table-container tbody");
 const modal = document.querySelector(".member-modal");
-const actionButtons = document.querySelectorAll(".action-btn");
 const closeButtons = document.querySelectorAll(".close");
-const closeFooterButton = document.querySelector(".btn-close");
 
-actionButtons.forEach((actionButton) => {
-    actionButton.addEventListener("click", (e) => {
-        modal.style.display = "block";
+customerTable.addEventListener("click", async  (e, callback)=>{
+    modal.style.display = "block";
 
-        setTimeout(() => {
-            modal.classList.add("show");
-            modal.style.background = "rgba(0,0,0,0.5)";
-            document.body.classList.add("modal-open");
-        }, 100);
-    });
+    setTimeout(() => {
+        modal.classList.add("show");
+        modal.style.background = "rgba(0,0,0,0.5)";
+        document.body.classList.add("modal-open");
+    }, 100);
+
+    // 팝업 상세 내용
+    const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+    const customerDetail = await sellerService.getSellerDetail(currentCustomerId);
+
+    console.log(customerDetail)
+
+    sellerLayout.showDetail(customerDetail);
 });
 
-closeButtons.forEach((closeButton) => {
-    closeButton.addEventListener("click", (e) => {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
+// 모달 닫기
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".close") || e.target.closest(".btn-close")) {
+        closeModal();
+    }
 
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    });
-});
-
-modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
+        closeModal();
     }
 });
 
-closeFooterButton.addEventListener("click", (e) => {
+// 공통 닫기 함수
+function closeModal() {
     modal.classList.remove("show");
     document.body.classList.remove("modal-open");
-
     setTimeout(() => {
         modal.style.display = "none";
     }, 100);
-});
-// const submenus=document.querySelectorAll('.boot-link')
-
-// submenus.forEach(submenu=>{
-//     submenu.addEventListener('click',(e)=>{
-//         e.preventDefault();
-//         submenus.forEach(active=>active.classList.remove('active'));
-//         submenu.classList.add('active');
-//     })
-// })
+}
+//
+// fetch("/api/admin/sellers/list/1")
+//     .then(res => res.json())
+//     .then(data => console.log(data));
