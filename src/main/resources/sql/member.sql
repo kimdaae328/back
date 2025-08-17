@@ -11,6 +11,7 @@ create table tbl_member(
     member_gender enum('male','female', 'not') default 'not',
     member_role enum('buyer','seller','admin') not null ,
     member_status enum('active','inactive') default 'active' not null,
+    member_last_login_date datetime default null,
     created_date datetime default current_timestamp,
     updated_date datetime default current_timestamp
 );
@@ -42,5 +43,12 @@ insert into tbl_member (
 # ('admin@gmail.com', '1234', '관리자', '1980-01-01', '010-0000-0000', 'you_i', 'not', 'admin', 'active');
 # DELETE FROM tbl_member
 # WHERE id = 1;
+
+# alter table tbl_member add member_last_login_datetime datetime default null after member_status;
+# alter table tbl_member change member_last_login_datetime member_last_login_date datetime default null;
+
+UPDATE tbl_member
+SET member_last_login_date = '2025-05-16 21:11:02'
+WHERE id = 15;
 
 

@@ -24,4 +24,5 @@ public class MemberVO extends Period {
     private MemberGender memberGender;
     private MemberRole memberRole;
     private Status memberStatus;
+    private String memberLastLoginDate;
 }

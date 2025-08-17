@@ -65,7 +65,6 @@ sideMenuButtons.forEach((sideMenuButton) => {
         const targetId = sideMenuButton.getAttribute("aria-controls");
         // aria-controls와 같은 속성 가져올 땐 getAttribute();
         const targetSubList = document.getElementById(targetId);
-        console.log(targetSubList);
         const targetIcon = sideMenuButton.querySelector(".icon-wrapper i");
 
         if (targetSubList.classList.contains("show")) {
@@ -165,6 +164,15 @@ tabNames.forEach((headerTabname) => {
                 subLink.classList.remove("active");
             }
         });
+
+        if (tabText === "전체") {
+            setList(showList);
+        } else if (tabText === "일반 회원") {
+            // console.log(`탭 '${tabText}' 클릭됨`);
+            setList(showNonSubscribedList)
+        } else if(tabText === "구독 회원"){
+            setList(showSubscribedList);
+        }
     });
 });
 
@@ -209,64 +217,84 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
-// 일반회원 상세 모달 창 열고 닫는 이벤트
-const modal = document.querySelector(".member-modal");
-const actionButtons = document.querySelectorAll(".action-btn");
-const closeButtons = document.querySelectorAll(".close");
-const closeFooterButton = document.querySelector(".btn-close");
 
-actionButtons.forEach((actionButton) => {
-    actionButton.addEventListener("click", (e) => {
-        modal.style.display = "block";
-
-        setTimeout(() => {
-            modal.classList.add("show");
-            modal.style.background = "rgba(0,0,0,0.5)";
-            document.body.classList.add("modal-open");
-        }, 100);
-    });
-});
-
-closeButtons.forEach((closeButton) => {
-    closeButton.addEventListener("click", (e) => {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    });
-});
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    }
-});
-
-closeFooterButton.addEventListener("click", (e) => {
-    modal.classList.remove("show");
-    document.body.classList.remove("modal-open");
-
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 100);
-});
 
 
 // ########################### 회원목록 ###########################
+// 전체 회원
 const showList = async (page = 1) => {
-    const customersCriteria = await customerService.getCustomer(page, customerLayout.showList);
+    const customersCriteria = await customerService.getCustomerList(page, customerLayout.showList);
     customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
 
-    console.log(customersCriteria)
+    // console.log(customersCriteria)
     return customersCriteria;
 }
-showList(1);
-customerLayout.connectToPagination(showList);
 
+// 일반 회원
+const showNonSubscribedList = async (page = 1) => {
+    const customersCriteria = await customerService.getNonSubscribedCustomerList(page, customerLayout.showNonSubscribedList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
+
+// 구독 회원
+const showSubscribedList = async (page = 1) => {
+    const customersCriteria = await customerService.getSubscribedCustomerList(page, customerLayout.showSubscribedList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
+
+const setList = (loader) => {
+    currentLoader = loader;
+    currentLoader(1); // 첫 페이지
+    customerLayout.connectToPagination((page) => currentLoader(page));
+};
+
+setList(showList);
+
+// ########################### 회원상세 ###########################
+// 일반회원 상세 모달 창 열고 닫는 이벤트
+const customerTable = document.querySelector(".table-container tbody");
+const modal = document.querySelector(".member-modal");
+const closeButtons = document.querySelectorAll(".close");
+
+customerTable.addEventListener("click", async  (e, callback)=>{
+    modal.style.display = "block";
+
+    setTimeout(() => {
+        modal.classList.add("show");
+        modal.style.background = "rgba(0,0,0,0.5)";
+        document.body.classList.add("modal-open");
+    }, 100);
+
+    // 팝업 상세 내용
+    const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+    const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+
+    console.log(customerDetail)
+
+    customerLayout.showDetail(customerDetail);
+});
+
+// 모달 닫기
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".close") || e.target.closest(".btn-close")) {
+        closeModal();
+    }
+
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+// 공통 닫기 함수
+function closeModal() {
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 100);
+}

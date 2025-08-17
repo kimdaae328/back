@@ -202,8 +202,8 @@
                                 <div class="col col-auto">
                                     <ul class="tab-name-list list-unstyled list-inline">
                                         <!-- 클릭 한 부분은 active -->
-                                        <li class="tab-name active">일반 회원</li>
-                                        
+                                        <li class="tab-name active">전체</li>
+                                        <li class="tab-name">일반 회원</li>
                                         <li class="tab-name">구독 회원</li>
                                     </ul>
                                 </div>
@@ -497,17 +497,17 @@
                                         <a href="" class="page-item-link page-item-num">5</a>
                                     </li>
                                 </ul>
-                                <div class="pagination-desc">
-                                    <!-- 회원이 1페이지(10명 미만)일 때 -->
-                                    <div class="des text-ignore">
-                                        <span>
-                                            <span class="highlight">last</span>
-                                            of
-                                            1
-                                        </span>
-                                        results
-                                    </div>
-                                </div>
+<!--                                <div class="pagination-desc">-->
+<!--                                    &lt;!&ndash; 회원이 1페이지(10명 미만)일 때 &ndash;&gt;-->
+<!--                                    <div class="des text-ignore">-->
+<!--                                        <span>-->
+<!--                                            <span class="highlight">last</span>-->
+<!--                                            of-->
+<!--                                            1-->
+<!--                                        </span>-->
+<!--                                        results-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </nav>
                         </div>
                     </div>
@@ -516,7 +516,7 @@
                 <!-- 모달 창이 떠 있을 때 -->
                 <!-- <div class="modal fade member-modal show" style="display: block;" aria-modal="true" role="dialog"> -->
                 <!-- 모달 창이 뜨지 않을 때 -->
-                <div class="modal fade member-modal" style="display: none;" aria-hidden="true">
+                <div class="modal fade member-modal" style="display: none;">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -543,14 +543,14 @@
                                                             </div>
                                                             <div class="flex-right"></div>
                                                         </div>
-                                                        <div class="d-table w-100">
+                                                        <div class="d-table w-100 table-member-detail">
                                                             <!-- 테이블 왼쪽 -->
                                                             <div class="d-table-cell">
-                                                                <table class="info-table">
+                                                                <table class="info-table left-table">
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>이름</th>
-                                                                            <td>테스트01</td>
+                                                                            <td></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>핸드폰 번호</th>
@@ -569,7 +569,7 @@
                                                             </div>
                                                             <!-- 테이블 오른쪽 -->                                                        
                                                             <div class="d-table-cell">
-                                                                <table class="info-table">
+                                                                <table class="info-table right-table">
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>회원ID</th>
@@ -691,7 +691,7 @@
 <!--    const customers = adminCustomerCriteriaDTO.customers;-->
 <!--    const criteria = adminCustomerCriteriaDTO.criteria;-->
 <!--</script>-->
-<script src="/js/admin/customer/module/layout.js"></script>
 <script src="/js/admin/customer/module/service.js"></script>
+<script src="/js/admin/customer/module/layout.js"></script>
 <script src="/js/admin/customer/event.js"></script>
 </html>
