@@ -799,6 +799,7 @@ body #rebound {
 .page-content .table-layout .filter-section .row {
     margin-left: -2px;
     margin-right: -2px;
+    justify-content: space-between;
 }
 
 .col {

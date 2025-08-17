@@ -5,14 +5,14 @@
         select id, member_name, member_email,
                member_phone, member_last_login_date , created_date, updated_date
         from tbl_member
-        where member_status = 'active' and member_role = 'seller'
+        where member_status = 'active' and member_role = 'buyer'
         order by id desc
         limit #{count} offset #{offset}
     </select>
 
     <select id="selectCountAll">
         select count(*) from tbl_member
-        where member_status = 'active' and member_role = 'seller'
+        where member_status = 'active' and member_role = 'buyer'
     </select>
 
     <select id="selectDetailCustomer">
@@ -25,7 +25,7 @@
         select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date
         from tbl_member m
         left join view_subscription_sub_payment v on m.id = v.m_id and v.subscription_status = 'active'
-        where m.member_status = 'active' and m.member_role = 'seller' and v.m_id is null
+        where m.member_status = 'active' and m.member_role = 'buyer' and v.m_id is null
         order by m.id desc
         limit #{count} offset #{offset}
     </select>
@@ -34,14 +34,14 @@
         select count(*)
         from tbl_member m
         left join view_subscription_sub_payment v on m.id = v.m_id and v.subscription_status = 'active'
-        where m.member_status = 'active' and m.member_role = 'seller' and v.m_id is null
+        where m.member_status = 'active' and m.member_role = 'buyer' and v.m_id is null
     </select>
 
     <select id="selectSubscribedCustomerAll">
         select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date, v.m_id, v.s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id
         from tbl_member m
         join view_subscription_sub_payment v on m.id = v.m_id
-        where m.member_status = 'active' and m.member_role = 'seller' and v.subscription_status = 'active'
+        where m.member_status = 'active' and m.member_role = 'buyer' and v.subscription_status = 'active'
         order by m.id desc
         limit #{count} offset #{offset}
     </select>
@@ -50,6 +50,6 @@
         select count(*)
         from tbl_member m
         join view_subscription_sub_payment v on m.id = v.m_id
-        where m.member_status = 'active' and m.member_role = 'seller' and v.subscription_status = 'active'
+        where m.member_status = 'active' and m.member_role = 'buyer' and v.subscription_status = 'active'
     </select>
 </mapper>
