@@ -1,12 +1,8 @@
 const customerService = (() => {
-    const getCustomer = async (page, callback) => {
+    // 회원 목록
+    const getCustomerList = async (page, callback) => {
         const response = await fetch(`/api/admin/customers/list/${page}`);
         const customersCriteria = await response.json();
-
-        //확인
-        console.log(response);
-        console.log(customersCriteria);
-
 
         if(callback){
             setTimeout(() => {
@@ -26,5 +22,71 @@ const customerService = (() => {
         return customersCriteria;
     }
 
-    return {getCustomer: getCustomer}
+    // 회원 상세
+    const getCustomerDetail = async (id) => {
+        const response = await fetch(`/api/admin/customers/${id}`);
+
+        if (!response.ok) {
+            console.error("회원 상세 조회 실패", response.status);
+            return;
+        }
+
+        const data = await response.json();
+
+        return data;
+    };
+
+    // 회원 목록(일반회원)
+    const getNonSubscribedCustomerList = async (page, callback) => {
+        const response = await fetch(`/api/admin/customers/list/nonSubscribed/${page}`);
+        const customersCriteria = await response.json();
+
+        console.log(response)
+        console.log(customersCriteria)
+
+        if(callback){
+            setTimeout(() => {
+                callback(customersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("일반 회원 존재");
+        }else if(response.status === 404){
+            console.log("일반 회원 없음");
+        }else {
+            const error = await response.text();
+            console.log(error);
+        }
+
+        return customersCriteria;
+    };
+
+    // 회원 목록(구독회원)
+    const getSubscribedCustomerList = async (page, callback) => {
+        const response = await fetch(`/api/admin/customers/list/subscribed/${page}`);
+        const customersCriteria = await response.json();
+
+        console.log(response)
+        console.log(customersCriteria)
+
+        if(callback){
+            setTimeout(() => {
+                callback(customersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("구독 회원 존재");
+        }else if(response.status === 404){
+            console.log("구독 회원 없음");
+        }else {
+            const error = await response.text();
+            console.log(error);
+        }
+
+        return customersCriteria;
+    };
+
+    return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
 })();

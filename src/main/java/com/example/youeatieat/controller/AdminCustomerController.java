@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/customer/**")
+@RequestMapping("/admin/**")
 public class AdminCustomerController {
 
-    @GetMapping("list/{page}")
+//    회원목록
+    @GetMapping
     public String customerList(){
         return "/admin/customer/list";
     }
+
 }
 
