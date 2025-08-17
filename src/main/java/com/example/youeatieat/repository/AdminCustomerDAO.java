@@ -13,7 +13,7 @@ import java.util.List;
 public class AdminCustomerDAO {
     private final AdminCustomerMapper customerMapper;
 
-//    목록
+//    회원 목록(전쳬)
     public List<MemberDTO> findCustomerAll(Criteria criteria){
         return customerMapper.selectCustomerAll(criteria);
     }
@@ -21,6 +21,31 @@ public class AdminCustomerDAO {
 //    전체 개수 조회
     public int findCountAll(){
         return customerMapper.selectCountAll();
+    }
+
+//    회원 상세
+    public MemberDTO findCustomerById(Long id) {
+        return customerMapper.selectDetailCustomer(id);
+    }
+
+//    회원 목록(구독회원)
+    public List<MemberDTO> findNonSubscribedCustomerAll(Criteria criteria){
+        return customerMapper.selectNonSubscribedCustomerAll(criteria);
+    }
+
+//    전체 개수 조회(구독회원)
+    public int findNonSubscribedCountAll(){
+        return customerMapper.selectNonSubscribedCountAll();
+    }
+
+//    회원 목록(구독회원)
+    public List<MemberDTO> findSubscribedCustomerAll(Criteria criteria){
+        return customerMapper.selectSubscribedCustomerAll(criteria);
+    }
+
+//    전체 개수 조회(구독회원)
+    public int findSubscribedCountAll(){
+        return customerMapper.selectSubscribedCountAll();
     }
 
 }

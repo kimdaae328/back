@@ -14,24 +14,69 @@ import java.util.List;
 public class AdminCustomerServiceImpl implements AdminCustomerService {
     private final AdminCustomerDAO memberDAO;
 
+//    회원 목록(전쳬)
     @Override
     public AdminCustomerCriteriaDTO getList(int page) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
         Criteria criteria = new Criteria(page, memberDAO.findCountAll());
+
         List<MemberDTO> customers = memberDAO.findCustomerAll(criteria);
-//        customers.forEach((post) -> {
-//            post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDatetime()));
-//        });
 
         criteria.setHasMore(customers.size() > criteria.getRowCount());
 
-//        11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
             customers.remove(customers.size() - 1);
         }
 
         customerCriteriaDTO.setCustomers(customers);
         customerCriteriaDTO.setCriteria(criteria);
+
+        return customerCriteriaDTO;
+    }
+
+//    회원 상세
+    @Override
+    public MemberDTO getCustomerDetail(Long id) {
+        return memberDAO.findCustomerById(id);
+    }
+
+//    회원 목록(구독회원)
+    @Override
+    public AdminCustomerCriteriaDTO getNonSubscribedList(int page) {
+        AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
+        Criteria criteria = new Criteria(page, memberDAO.findNonSubscribedCountAll());
+
+        List<MemberDTO> customers = memberDAO.findNonSubscribedCustomerAll(criteria);
+
+        criteria.setHasMore(customers.size() > criteria.getRowCount());
+
+        if(criteria.isHasMore()){
+            customers.remove(customers.size() - 1);
+        }
+
+        customerCriteriaDTO.setCustomers(customers);
+        customerCriteriaDTO.setCriteria(criteria);
+
+        return customerCriteriaDTO;
+    }
+
+//    회원 목록(구독회원)
+    @Override
+    public AdminCustomerCriteriaDTO getSubscribedList(int page) {
+        AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
+        Criteria criteria = new Criteria(page, memberDAO.findSubscribedCountAll());
+
+        List<MemberDTO> customers = memberDAO.findSubscribedCustomerAll(criteria);
+
+        criteria.setHasMore(customers.size() > criteria.getRowCount());
+
+        if(criteria.isHasMore()){
+            customers.remove(customers.size() - 1);
+        }
+
+        customerCriteriaDTO.setCustomers(customers);
+        customerCriteriaDTO.setCriteria(criteria);
+
         return customerCriteriaDTO;
     }
 }
