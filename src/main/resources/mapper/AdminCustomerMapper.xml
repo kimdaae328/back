@@ -24,8 +24,12 @@
     <select id="selectNonSubscribedCustomerAll">
         select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date
         from tbl_member m
-        left join view_subscription_sub_payment v on m.id = v.m_id and v.subscription_status = 'active'
-        where m.member_status = 'active' and m.member_role = 'buyer' and v.m_id is null
+        join view_subscription_sub_payment v
+            on m.id = v.m_id
+        where m.member_status = 'active'
+            and m.member_role = 'buyer'
+            and (v.subscription_status is null
+                or subscription_payment_status != 'success')
         order by m.id desc
         limit #{count} offset #{offset}
     </select>
@@ -33,8 +37,12 @@
     <select id="selectNonSubscribedCountAll">
         select count(*)
         from tbl_member m
-        left join view_subscription_sub_payment v on m.id = v.m_id and v.subscription_status = 'active'
-        where m.member_status = 'active' and m.member_role = 'buyer' and v.m_id is null
+        join view_subscription_sub_payment v
+            on m.id = v.m_id
+        where m.member_status = 'active'
+            and m.member_role = 'buyer'
+            and (v.subscription_status is null
+                or subscription_payment_status != 'success')
     </select>
 
     <select id="selectSubscribedCustomerAll">

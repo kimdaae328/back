@@ -19,3 +19,21 @@ create table tbl_subscription_payment (
 select * from tbl_subscription_payment;
 
 drop table tbl_subscription_payment;
+
+insert into tbl_subscription_payment (
+    subscription_payment_price,
+    member_id,
+    subscription_id,
+    subscription_payment_date,
+    subscription_payment_status,
+    subscription_payment_method
+)
+select
+    floor(rand() * 20000) + 5000 as subscription_payment_price,  -- 5,000 ~ 25,000 랜덤 금액
+    m.id as member_id,
+    floor(rand() * 3) + 1 as subscription_id,                    -- 1~3 구독 상품 랜덤
+    now() as subscription_payment_date,
+    elt(floor(rand() * 3) + 1, 'success', 'failed', 'refunded') as subscription_payment_status,
+    elt(floor(rand() * 3) + 1, 'card', 'kakaopay', 'naverpay') as subscription_payment_method
+from tbl_member m
+where m.member_role = 'buyer';
