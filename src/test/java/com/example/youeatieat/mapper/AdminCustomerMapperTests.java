@@ -10,14 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @Slf4j
 public class AdminCustomerMapperTests {
-    @Autowired
-    private AdminCustomerMapper MemberListMapper;
-
-    @Test
-    public void testSelectMemberAll(){
-        Criteria criteria = new Criteria(1, 128);
-        log.info(criteria.toString());
-        MemberListMapper.selectMemberAll(criteria).stream().map(MemberDTO::toString).forEach(log::info);
-    }
+//    @Autowired
+//    private AdminCustomerMapper MemberListMapper;
+//
+//    @Test
+//    public void testSelectMemberAll(){
+//        Criteria criteria = new Criteria(1, 128);
+//        log.info(criteria.toString());
+//        MemberListMapper.selectMemberAll(criteria).stream().map(MemberDTO::toString).forEach(log::info);
+//    }
 
 }

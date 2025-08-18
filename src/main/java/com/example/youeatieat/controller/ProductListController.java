@@ -25,12 +25,12 @@ public class ProductListController {
 
 
     //   상품 목록으로 이동
-    @GetMapping("list")
-    public String list(Model model) {
-        List<ProductDTO> products = productListService.getList();
-        model.addAttribute("products", products);
-        return "/together-product/list";
-    }
+//    @GetMapping("list")
+//    public String list(Model model) {
+//        List<ProductDTO> products = productListService.getList();
+//        model.addAttribute("products", products);
+//        return "/together-product/list";
+//    }
 
 
 //    상품 상세로 이동

@@ -13,6 +13,6 @@ public class LikeDTO {
     private Long id;
     private Long productId;
     private Long memberId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
 }

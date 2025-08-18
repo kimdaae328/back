@@ -1,6 +1,8 @@
+
 const togetherProductService = (() => {
+    // 장바구니
     const save = async (cart) => {
-        const response = await fetch("/api/carts/save", {
+        const response = await fetch("/api/product/carts/save", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -10,5 +12,44 @@ const togetherProductService = (() => {
 
         return response.ok
     }
-    return {save: save};
+
+    // 찜하기
+    const like = async (likeProduct) => {
+        const response = await fetch("/api/product/like",{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(likeProduct)
+        });
+        return response.ok
+    }
+
+    //     찜 취소 하기
+    const unlike = async (unlikeProduct) => {
+        const response = await fetch("/api/product/unlike",{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(unlikeProduct)
+        });
+        return response.ok
+    }
+
+    // 찜 상태
+    const getLike = async (statusLike) => {
+        const response = await fetch(`/api/product/${productId}/like`, {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(statusLike)
+        });
+        console.log(response.ok)
+        return response.ok;
+    }
+
+    return {save, like, unlike, getLike};
+
 })();
