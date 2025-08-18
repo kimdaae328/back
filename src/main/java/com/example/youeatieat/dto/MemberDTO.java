@@ -27,6 +27,7 @@ public class MemberDTO {
     private MemberGender memberGender;
     private MemberRole memberRole;
     private Status memberStatus;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String memberLastLoginDate;
+    private String createdDate;
+    private String updatedDate;
 }

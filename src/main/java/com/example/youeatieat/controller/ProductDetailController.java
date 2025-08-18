@@ -1,20 +1,29 @@
 package com.example.youeatieat.controller;
 
-
-import com.example.youeatieat.mapper.ProductDetailMapper;
+import com.example.youeatieat.domain.CartVO;
+import com.example.youeatieat.dto.CartDTO;
+import com.example.youeatieat.mapper.CartMapper;
+import com.example.youeatieat.mapper.ProductMapper;
+import com.example.youeatieat.service.ProductDetailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Map;
+
+
+@RestController
+@RequestMapping("/api/carts/**")
 @RequiredArgsConstructor
-@RequestMapping("/together-product/**")
 public class ProductDetailController {
+    private final ProductDetailService productDetailService;
 
-//    private final ProductDetailMapper productDetailMapper;
+    //    장바구니 넣기
+    @PostMapping("save")
+    public ResponseEntity<?> insertCart(@RequestBody CartDTO cartDTO) {
+        productDetailService.addCart(cartDTO);
+        return ResponseEntity.ok().body(cartDTO);
+    }
 
-//    장바구니 추가
-    @GetMapping("detail")
-    public String detail(){ return "/together-product//detail";}
 }

@@ -4,6 +4,7 @@ import com.example.youeatieat.audit.Period;
 //import com.example.youeatieat.common.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.common.enumeration.Status;
+import com.example.youeatieat.enumeration.ProductCategory;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

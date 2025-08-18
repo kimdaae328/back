@@ -16,4 +16,6 @@ public class groupDTO {
     private Long groupIndexNumber;
     private Long productId;
     private CancelableStatus groupCancelable;
+    private String createdDatetime;
+    private String updatedDatetime;
 }

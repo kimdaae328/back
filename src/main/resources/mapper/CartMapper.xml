@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.CartMapper">
+    <insert id="insertCart">
+        insert into tbl_cart (cart_count, product_id, member_id)
+        values (#{cartCount}, #{productId}, #{memberId})
+    </insert>
+
+    <select id="selectById">
+        select id, product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, product_status
+        from tbl_product
+        where id = #{id}
+    </select>
+</mapper>

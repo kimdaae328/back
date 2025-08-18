@@ -1,6 +1,6 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.enumeration.FaqCategory;
+import com.example.youeatieat.common.enumeration.FaqCategory;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

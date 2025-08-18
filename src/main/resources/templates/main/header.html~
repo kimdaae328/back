@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>너도나도</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/fonts/pretendard/font.css">
+    
+</head>
+<body>
+    <div id="__next">
+        <div>
+            <div class="header">
+                <div class="login-nav">
+                    <!-- 로그인 안했을 때 -->
+                    <a href="" class="joinus">회원가입</a>
+                    <div class="bar"></div>
+                    <a href="" class="login">로그인</a>
+
+                    <!-- 로그인 했을 때 -->
+                     <!-- <div class="customer-service">
+                         <a href="" class="customer-name">너도나도 님
+                             <span class="customer-service-icon"></span>
+                         </a>
+                         <div class="member-menu customer-service-list">
+                             <div class="list-menu">주문 내역</div>
+                             <div class="list-menu">회원 정보 관리</div>
+                             <div class="list-menu">로그아웃</div>
+                         </div>
+                     </div> -->
+                    <div class="bar"></div>
+
+                    <div class="customer-service">
+                        <a href="" class="customer-service-url">고객센터
+                            <span class="customer-service-icon"></span>
+                        </a>
+                        <div class="menu customer-service-list">
+                            <div class="list-menu">공지사항</div>
+                            <div class="list-menu">자주하는 질문</div>
+                            <div class="list-menu">1:1 문의</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-top">
+                    <div class="logo">
+                        <a href="">
+                            <img src="/images/main/logo.png" class="logo-img">
+                        </a>
+                        <a href="" class="main-button-a">
+                            <button class="main-button">
+                                <img src="/images/main/name.png" class="button-img">
+                            </button>
+                        </a>
+                    </div>
+                    <div class="search-big">
+                        <div class="css-vdi47h search">
+                            <input placeholder="검색어를 입력해주세요" autocomplete="off" class="search-input">
+                            <button id="submit" class="search-button popup-trigger" data-target="#popup2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <path fill="none" d="M0 0h36v36H0z"/>
+                                        <g stroke="rgb(50, 116, 63)" stroke-linecap="round" stroke-width="1.7">
+                                            <path d="m26.081 26.081-4.12-4.12M16.467 23.334a6.867 6.867 0 1 0 0-13.734 6.867 6.867 0 0 0 0 13.734z"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="header-icon">
+                        <div class="icon-container">
+                            <div class="alarm-icon"></div>
+                            <div id="root" class="alarm-icon-wrap">
+                                <div class="alarm-icon-in">
+                                    <header class="alarm-icon-header">
+                                        <div class="alarm-icon-inner">
+                                            <h1 class="blind"></h1>
+                                            <div class="title_area">
+                                                <a href="" class="link_title">
+                                                    <h2 class="title">알림</h2>
+                                                </a>
+                                            </div>
+                                            <div ></div>
+                                        </div>
+                                    </header>
+                                    <main class="alarm-icon-content">
+                                        <div class="notice_content">
+                                            <div class="section_notice_preview" style="height: inherit;"></div>
+                                        </div>
+                                    </main>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="good-icon"></button>
+                        <div class="cart-icon">
+                            <button class="cart-icon-button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="header" class="header-nav-big">
+                <div class="header-nav">
+                    <div class="category">
+                        <span class="category-img">
+                            <svg class="category-img-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14">
+                                <path d="M0 0h16v1.7H0V0zm0 6.15h16v1.7H0v-1.7zm0 6.15h16V14H0v-1.7z" fill="rgb(50, 116, 63)" fill-rule="evenodd"/>
+                            </svg>
+                        </span>
+                        <span class="category-text">카테고리</span>
+                        <div class="category-list">
+                            <div class="category-list-inner">
+                                <ul class="category-ul">
+                                    <li class="category-li">
+                                        <div class="category-li-inner">
+                                            <img src="https://collection-image.kurly.com/site-category-groups/1/4IYbd0CEWkokpqiN00CAL9cDC2Q7nT101TDEn0tF.png" class="category-li-img">
+                                            <span class="category-li-text">채소</span>
+                                        </div>
+                                    </li>
+                                    <li class="category-li">
+                                        <div class="category-li-inner">
+                                            <img src="https://collection-image.kurly.com/site-category-groups/2/DNXCcUaXoXakDOdHiGhIMCNUeUjJioG9EyeQ7RRX.png" class="category-li-img">
+                                            <span class="category-li-text">과일·견과·쌀</span>
+                                        </div>
+                                    </li>
+                                    <li class="category-li">
+                                        <div class="category-li-inner">
+                                            <img src="https://collection-image.kurly.com/site-category-groups/3/fivaoZPBTeqaDswJUgr3k0xMV0von36Qb9qnn7ZZ.png" class="category-li-img">
+                                            <span class="category-li-text">수산·해산·건어물</span>
+                                        </div>
+                                    </li>
+                                    <li class="category-li">
+                                        <div class="category-li-inner">
+                                            <img src="https://collection-image.kurly.com/site-category-groups/4/jj6zZg2sY94aytlc2k1udIAmWWvmUignR9VYaMcm.png" class="category-li-img">
+                                            <span class="category-li-text">정육·가공육·달걀</span>
+                                        </div>
+                                    </li>
+                                    <li class="category-li">
+                                        <div class="category-li-inner">
+                                            <img src="https://collection-image.kurly.com/site-category-groups/230/y5jylUkFHNhzAJQ8IqLijPx9RSd474nOZf5dKa6e.png" class="category-li-img">
+                                            <span class="category-li-text">기타</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav-ul">
+                        <li class="nav-li">
+                            <span class="nav-li-text">신상품</span>
+                        </li>
+                        <li class="nav-li">
+                            <span class="nav-li-text">베스트</span>
+                        </li>
+                        <li class="nav-li">
+                            <span class="nav-li-text">알뜰쇼핑</span>
+                        </li>
+                        <li class="nav-li">
+                            <span class="nav-li-text">특가/혜택</span>
+                        </li>
+                    </ul>
+                    <div class="announce-button">
+                        <a href="">
+                            <div class="announce-button-in">
+                                <span class="announce-button-text">구독하기</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-wrapper" id="popup2">
+        <div class="popup-inner">
+            <div class="dim"></div>
+            <div class="popup-container">
+                <div class="popup-content">
+                    <div class="popup-message">
+                        <p>검색어를 입력해주세요.</p>
+                    </div>
+                    <div class="popup-footer">
+                        <button type="button" class="btn-default popup-close">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/main/header.js"></script>
+</html>

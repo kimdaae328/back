@@ -65,7 +65,6 @@ sideMenuButtons.forEach((sideMenuButton) => {
         const targetId = sideMenuButton.getAttribute("aria-controls");
         // aria-controls와 같은 속성 가져올 땐 getAttribute();
         const targetSubList = document.getElementById(targetId);
-        console.log(targetSubList);
         const targetIcon = sideMenuButton.querySelector(".icon-wrapper i");
 
         if (targetSubList.classList.contains("show")) {
@@ -165,6 +164,15 @@ tabNames.forEach((headerTabname) => {
                 subLink.classList.remove("active");
             }
         });
+
+        if (tabText === "전체") {
+            setList(showList);
+        } else if (tabText === "일반 회원") {
+            // console.log(`탭 '${tabText}' 클릭됨`);
+            setList(showNonSubscribedList)
+        } else if(tabText === "구독 회원"){
+            setList(showSubscribedList);
+        }
     });
 });
 
@@ -183,7 +191,7 @@ userMenuWrapper.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (
         // userMenuContent 안넣어주면 안에 걸 눌러도 리스트가 닫힌다.
         !userMenuWrapper.contains(e.target) &&
@@ -199,7 +207,7 @@ const pageItemNums = document.querySelectorAll(".page-item-num");
 
 pageItemNums.forEach((pageItemNum) => {
     pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         pageNums.forEach((pageNum) => {
             pageNum.classList.remove("active");
@@ -209,189 +217,84 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
-// 일반회원 상세 모달 창 열고 닫는 이벤트
-const modal = document.querySelector(".member-modal");
-const actionButtons = document.querySelectorAll(".action-btn");
-const closeButtons = document.querySelectorAll(".close");
-const closeFooterButton = document.querySelector(".btn-close");
 
-actionButtons.forEach((actionButton) => {
-    actionButton.addEventListener("click", (e) => {
-        modal.style.display = "block";
-
-        setTimeout(() => {
-            modal.classList.add("show");
-            modal.style.background = "rgba(0,0,0,0.5)";
-            document.body.classList.add("modal-open");
-        }, 100);
-    });
-});
-
-closeButtons.forEach((closeButton) => {
-    closeButton.addEventListener("click", (e) => {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    });
-});
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    }
-});
-
-closeFooterButton.addEventListener("click", (e) => {
-    modal.classList.remove("show");
-    document.body.classList.remove("modal-open");
-
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 100);
-});
 
 
 // ########################### 회원목록 ###########################
-document.addEventListener("DOMContentLoaded", () => {
-    const customerContainer = document.querySelector(".table-container tbody");
+// 전체 회원
+const showList = async (page = 1) => {
+    const customersCriteria = await customerService.getCustomerList(page, customerLayout.showList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
 
-    // 1페이지 데이터 불러오기 (필요하면 동적으로 page 값 변경 가능)
-    // fetch("/api/admin/customers/list/1")
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data); // 응답 구조 확인
-    //     });
-    fetch("/api/admin/customers/list/1")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("데이터 불러오기 실패");
-            }
-            return response.json();
-        })
-        .then(data => {
-            const customers = data.customers; // API에서 내려온 회원 목록
-            let text = "";
+    // console.log(customersCriteria)
+    return customersCriteria;
+}
 
-            customers.forEach((customer) => {
-                text += `
-                   <tr>
-                        <td class="td-name">
-                            <div class="member-name">${customer.memberName}
-                                <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-                            </div>
-                            <div class="member-id">${customer.id}</div>
-                        </td>
-                        <td class="td-amount text-center pr-4 font-weight-bold">${customer.memberName}
-                            <span class="amount-unit"> 님</span>
-                        </td>
-                        <td class="td-email">${customer.memberEmail}</td>
-                        <td class="td-phone">${customer.memberPhone}</td>
-                        <td class="td-start">${customer.createdDate}</td>
-                        <td class="td-recent">2025-07-29</td>
-                        <td class="td-action text-center">
-                            <div class="action-btn">
-                                <i class="mdi mdi-chevron-right"></i>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
+// 일반 회원
+const showNonSubscribedList = async (page = 1) => {
+    const customersCriteria = await customerService.getNonSubscribedCustomerList(page, customerLayout.showNonSubscribedList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
 
-            customerContainer.innerHTML = text;
-        })
-        .catch(error => {
-            console.error(error);
-            customerContainer.innerHTML = `<tr><td colspan="2">데이터가 없습니다.</td></tr>`;
-        });
+// 구독 회원
+const showSubscribedList = async (page = 1) => {
+    const customersCriteria = await customerService.getSubscribedCustomerList(page, customerLayout.showSubscribedList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
+
+const setList = (loader) => {
+    currentLoader = loader;
+    currentLoader(1); // 첫 페이지
+    customerLayout.connectToPagination((page) => currentLoader(page));
+};
+
+setList(showList);
+
+// ########################### 회원상세 ###########################
+// 일반회원 상세 모달 창 열고 닫는 이벤트
+const customerTable = document.querySelector(".table-container tbody");
+const modal = document.querySelector(".member-modal");
+const closeButtons = document.querySelectorAll(".close");
+
+customerTable.addEventListener("click", async  (e, callback)=>{
+    modal.style.display = "block";
+
+    setTimeout(() => {
+        modal.classList.add("show");
+        modal.style.background = "rgba(0,0,0,0.5)";
+        document.body.classList.add("modal-open");
+    }, 100);
+
+    // 팝업 상세 내용
+    const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+    const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+
+    console.log(customerDetail)
+
+    customerLayout.showDetail(customerDetail);
 });
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const customerContainer = document.querySelector(".table-container tbody");
-//     customerContainer.classList.add("adddd");
-//
-//     let text = ``;
-//     customers.forEach((member) => {
-//         text += `
-//            <tr>
-//                 <td>${member.id}</td>
-//                 <td>${member.memberName}</td>
-//             </tr>
-//        `;
-//     });
-//     customerContainer.innerHTML = text;
-// });
-// const customerContainer = document.querySelector(".table-container tbody");
-// customerContainer.classList.add("adddd");
-// let text = ``;
-// customers.forEach((member) => {
-//     text += `
-//        <tr>
-//             <td>${member.id}</td>
-//             <td>${member.memberName}</td>
-//         </tr>
-//    `;
-// });
-// fetch("/api/admin/customer/list/1") // 1페이지 데이터
-//     .then(res => res.json())
-//     .then(data => {
-//         const customers = data.customers; // MemberCriteriaDTO 안의 posts
-//         customers.forEach((member) => {
-//             text += `
-//                 <tr>
-//                     <td class="td-name">
-//                         <div class="member-name">${member.memberName}
-//                             <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-//                         </div>
-//                         <div class="member-id">TestId01</div>
-//                     </td>
-//                     <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-//                         <span class="amount-unit"> 님</span>
-//                     </td>
-//                     <td class="td-email">test01@gmail.com</td>
-//                     <td class="td-phone">010-1234-5678</td>
-//                     <td class="td-start">2025-06-12</td>
-//                     <td class="td-recent">2025-07-29</td>
-//                     <td class="td-action text-center">
-//                         <div class="action-btn">
-//                             <i class="mdi mdi-chevron-right"></i>
-//                         </div>
-//                     </td>
-//                 </tr>
-//             `;
-//         });
-//         customerContainer.innerHTML = text;
-//     });
-// customers.forEach((member) => {
-//    text += `
-//         <tr>
-//             <td class="td-name">
-//                 <div class="member-name">${member.memberName}
-//                     <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>
-//                 </div>
-//                 <div class="member-id">TestId01</div>
-//             </td>
-//             <td class="td-amount text-center pr-4 font-weight-bold">테스트01
-//                 <span class="amount-unit"> 님</span>
-//             </td>
-//             <td class="td-email">test01@gmail.com</td>
-//             <td class="td-phone">010-1234-5678</td>
-//             <td class="td-start">2025-06-12</td>
-//             <td class="td-recent">2025-07-29</td>
-//             <td class="td-action text-center">
-//                 <div class="action-btn">
-//                     <i class="mdi mdi-chevron-right"></i>
-//                 </div>
-//             </td>
-//         </tr>
-//    `;
-// });
+// 모달 닫기
+document.addEventListener("click", (e) => {
+    if (e.target.closest(".close") || e.target.closest(".btn-close")) {
+        closeModal();
+    }
 
-customerContainer.innerHTML = text;
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+// 공통 닫기 함수
+function closeModal() {
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 100);
+}

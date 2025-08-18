@@ -8,13 +8,10 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 
-@Getter @ToString(callSuper = true)
+@Getter @ToString
 @SuperBuilder
 @EqualsAndHashCode(of="id")
-public class groupIndexVO extends Period {
-//    id bigint unsigned auto_increment primary key,
-//    group_index_number bigint not null unique ,
-//    product_id bigint unsigned not null,
+public class groupIndexVO{
     private Long id;
     private Long groupIndexNumber;
     private Long productId;

@@ -1,4 +1,4 @@
-package com.example.youeatieat.enumeration;
+package com.example.youeatieat.common.enumeration;
 
 import java.util.Arrays;
 import java.util.Map;

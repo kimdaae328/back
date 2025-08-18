@@ -15,7 +15,7 @@ public class AlarmDTO {
     private String alarmSender;
     private String alarmContent;
     private String addressPostNumber;
-    private String alarm_date;
+    private String alarmDate;
     private Long memberId;
     private String createdDatetime;
     private String updatedDatetime;
