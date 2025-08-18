@@ -41,8 +41,7 @@ const customerService = (() => {
         const response = await fetch(`/api/admin/customers/list/nonSubscribed/${page}`);
         const customersCriteria = await response.json();
 
-        console.log(response)
-        console.log(customersCriteria)
+
 
         if(callback){
             setTimeout(() => {
@@ -52,6 +51,8 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("일반 회원 존재");
+            console.log(response)
+            console.log(customersCriteria)
         }else if(response.status === 404){
             console.log("일반 회원 없음");
         }else {
@@ -67,8 +68,8 @@ const customerService = (() => {
         const response = await fetch(`/api/admin/customers/list/subscribed/${page}`);
         const customersCriteria = await response.json();
 
-        console.log(response)
-        console.log(customersCriteria)
+        // console.log("구독" + response)
+        // console.log("구독" + customersCriteria)
 
         if(callback){
             setTimeout(() => {
@@ -78,6 +79,8 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("구독 회원 존재");
+            console.log(response)
+            console.log(customersCriteria)
         }else if(response.status === 404){
             console.log("구독 회원 없음");
         }else {

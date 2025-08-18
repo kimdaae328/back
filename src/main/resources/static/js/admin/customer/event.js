@@ -234,6 +234,7 @@ const showList = async (page = 1) => {
 // 일반 회원
 const showNonSubscribedList = async (page = 1) => {
     const customersCriteria = await customerService.getNonSubscribedCustomerList(page, customerLayout.showNonSubscribedList);
+    console.log("일반" + customersCriteria)
     customerLayout.renderPagination(customersCriteria.criteria);
     customerLayout.customerCount(customersCriteria.criteria);
     return customersCriteria;
