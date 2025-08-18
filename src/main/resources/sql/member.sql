@@ -16,6 +16,8 @@ create table tbl_member(
 );
 
 select * from tbl_member;
+delete from tbl_member where id=15;
+
 
 drop table tbl_member;
 

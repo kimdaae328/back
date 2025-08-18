@@ -1,12 +1,10 @@
-package com.example.youeatieat.DTO;
+package com.example.youeatieat.dto;
 
-import com.example.youeatieat.audit.Period;
 import com.example.youeatieat.enumeration.CancelableStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 

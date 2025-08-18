@@ -728,3 +728,18 @@ input[type=checkbox]{
     border: 0px none;
     cursor: pointer;
 }
+.addresscontainer{
+    padding-bottom: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+.adressbut{
+    height: 44px;
+    border-radius: 3px;
+    color: rgb(95, 0, 128);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(95, 0, 128);
+    width: 100%;
+}
