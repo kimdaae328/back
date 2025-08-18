@@ -15,5 +15,6 @@ create table tbl_like(
 
 select * from tbl_like;
 
+
 drop table tbl_like;
 

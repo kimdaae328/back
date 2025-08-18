@@ -179,26 +179,46 @@ toggleSubmitButton();
 // btn-wish 버튼
 const wishButtons = document.querySelectorAll(".btn-wish");
 
-wishButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        const isActive = button.classList.contains("on");
-
-        wishButtons.forEach((btn) => {
-            if (isActive) {
-                btn.classList.remove("on");
-            } else {
-                btn.classList.add("on");
-            }
-        });
-    });
+wishButtons.forEach(async (button) => {
+    const getlike = {
+        productId: product.id
+    }
+    const productId = button.dataset.productId;
+    const liked = await togetherProductService.getLike(getlike);
+    if (liked) button.classList.add("on");
+    else button.classList.remove("on");
 });
 
-// btn-helpful 버튼
-const helpfulButtons = document.querySelectorAll(".btn-helpful");
+// 페이지 로드 시 실행
+// const wishButton = document.querySelector(".btn-wish");
+// loadLikeStatus(wishButton.dataset.productId);
 
-helpfulButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        button.classList.toggle("on");
+wishButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+
+        const like = {
+            productId: product.id
+        }
+
+        const unlike = {
+            productId: product.id
+        }
+        const isActive = button.classList.contains("on");
+        let success = false;
+
+        if (isActive) {
+            // 이미 찜된 상태 -> 취소하기
+            success = await togetherProductService.unlike(unlike);
+            if (success) {
+                button.classList.remove("on");
+            }
+        } else {
+            // 찜하기
+            success = await togetherProductService.like(like);
+            if (success) {
+                button.classList.add("on");
+            }
+        }
     });
 });
 
@@ -223,15 +243,52 @@ tabLinkSpan.textContent = reviewItems.length;
 totalSpan.textContent = reviewItems.length;
 
 //###################################  장바구니  ###################################
-const saveInCart = document.querySelector("button.btn-cart");
-saveInCart.addEventListener("click", async (e) => {
-    const cartCount = document.querySelector("div.count").innerText;
-    const cart = {
-        cartCount: cartCount,
-        productId: product.id
-    }
-    const result = await togetherProductService.save(cart);
-    if(result){
-    //     장바구니에 추가 완료
-    }
+const saveInCarts = document.querySelectorAll("button.btn-cart");
+saveInCarts.forEach((saveInCart)=>{
+    saveInCart.addEventListener("click", async (e) => {
+        const cartCount = document.querySelector("div.count").innerText;
+        const text = document.querySelector(".add-cart-tap-p");
+        const addMessage = document.querySelector(".add-cart-tap-wrap");
+
+        const cart = {
+            cartCount: Number(cartCount),
+            productId: product.id
+        }
+
+        const result = await togetherProductService.save(cart);
+
+        if (result){
+            if(!(Number(cartCount) === 0)){
+                //     장바구니에 추가 완료
+                text.innerText = "장바구니에 상품을 담았어요!"
+                addMessage.style.display = "block";
+                void addMessage.offsetWidth;
+                addMessage.classList.add("show");
+
+                setTimeout(() => {
+                    addMessage.classList.remove("show");
+
+                    setTimeout(() => {
+                        addMessage.style.display = "none";
+                    }, 300);
+                }, 1500);
+            } else if (Number(cartCount) === 0) {
+                text.innerText = `장바구니에 상품을 담지 못했어요.\n수량을 확인해주세요.`
+                addMessage.style.display = "block";
+                void addMessage.offsetWidth;
+
+                addMessage.classList.add("show");
+
+                setTimeout(() => {
+                    addMessage.classList.remove("show");
+
+                    setTimeout(() => {
+                        addMessage.style.display = "none";
+                    }, 300);
+                }, 1500);
+            }
+        }
+})
+
+
 })
