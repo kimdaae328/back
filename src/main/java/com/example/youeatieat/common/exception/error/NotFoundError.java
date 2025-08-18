@@ -1,0 +1,12 @@
+package com.example.youeatieat.common.exception.error;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class NotFoundError {
+    @GetMapping
+    public String error() {
+        return"/main/body";
+    }
+}

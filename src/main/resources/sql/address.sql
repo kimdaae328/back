@@ -1,7 +1,7 @@
 use app;
 
 create table tbl_address(
-                             id bigint unsigned auto_increment primary key,
+                             id bigint unsigned primary key,
                              address varchar(255),
                              address_detail varchar(255),
                              address_post_number varchar(255),

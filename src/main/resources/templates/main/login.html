@@ -22,19 +22,19 @@
                         <span class="seller-inner">판매 로그인</span>
                     </button>
                 </div>
-                <form class="seller-login">
+                <form action="/main/login" method="post"  class="seller-login" th:object="${memberDTO}">
                     <div class="login-body">
                         <div>
                             <div class="fail-login"></div>
                             <div>
                             <div class="id-password-wrap">
                                 <div class="id-password">
-                                    <input type="text"  name="id" placeholder="이메일을 입력해주세요" class="login-id">
+                                    <input type="text"  name="id" placeholder="이메일을 입력해주세요" class="login-id" th:field="*{memberEmail}">
                                 </div>
                             </div>
                             <div class="id-password-wrap">
                                 <div class="id-password">
-                                    <input type="password" name="password" placeholder="비밀번호를 입력해주세요" class="login-password">
+                                    <input type="password" name="password" placeholder="비밀번호를 입력해주세요" class="login-password" th:field="*{memberPassword}">
                                 </div>
                             </div>  
                             </div>
