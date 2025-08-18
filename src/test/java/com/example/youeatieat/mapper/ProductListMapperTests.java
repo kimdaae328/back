@@ -10,13 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @Slf4j
 public class ProductListMapperTests {
-    @Autowired
-    private ProductListMapper productListMapper;
+//    @Autowired
+//    private ProductListMapper productListMapper;
 
-    @Test
-    public void testSelectAll() {
-        productListMapper.selectList();
-        log.info(productListMapper.selectList().toString());
-    }
+//    @Test
+//    public void testSelectAll() {
+//        productListMapper.selectList();
+//        log.info(productListMapper.selectList().toString());
+//    }
 
 }

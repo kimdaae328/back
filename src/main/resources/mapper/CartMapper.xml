@@ -5,10 +5,4 @@
         insert into tbl_cart (cart_count, product_id, member_id)
         values (#{cartCount}, #{productId}, #{memberId})
     </insert>
-
-    <select id="selectById">
-        select id, product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, product_status
-        from tbl_product
-        where id = #{id}
-    </select>
 </mapper>
