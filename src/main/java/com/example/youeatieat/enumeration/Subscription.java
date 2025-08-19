@@ -1,6 +1,5 @@
 package com.example.youeatieat.enumeration;
 
-import com.example.youeatieat.common.enumeration.Provider;
 
 import java.util.Arrays;
 import java.util.Map;

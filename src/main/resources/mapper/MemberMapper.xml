@@ -6,7 +6,7 @@
         values  (#{memberEmail},#{memberPassword},#{memberName},#{memberBirth},#{memberPhone},#{memberGender})
     </insert>
     <select id="selectMemberForLogin">
-        select id, member_email, member_password, created_date,updated_date
+        select id, member_email, member_name,member_phone,member_gender
         from tbl_member
         where member_email = #{memberEmail} and member_password = #{memberPassword} and member_status = 'active'
     </select>

@@ -1,6 +1,6 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.common.enumeration.Status;
+import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
