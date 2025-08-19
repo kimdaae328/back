@@ -1,4 +1,4 @@
-package com.example.youeatieat.common.enumeration;
+package com.example.youeatieat.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

@@ -33,8 +33,8 @@
                                         <input th:field="*{memberEmail}" placeholder="예: marketkurly" type="text" class="emailinputtext">
                                         <div class="emailat">@</div>
                                         <div class="emailchoose">
-                                            <button class="btn-text empty">선택하기</button>
-                                            <button class="btn-select">
+                                            <button type="button" class="btn-text empty">선택하기</button>
+                                            <button type="button" class="btn-select">
                                                 <img class="more-mail" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9ImljX2Fycm93X2Rvd25fNDgiPgo8cGF0aCBpZD0iU2hhcGUiIGQ9Ik0yNC4wNzc2IDI2LjczMDFMMjcuODI3NiAyMi4yMzAxQzI4LjIzNDcgMjEuNzQxNiAyNy44ODczIDIxIDI3LjI1MTQgMjFIMTkuNzUxNEMxOS4xMTU2IDIxIDE4Ljc2ODIgMjEuNzQxNiAxOS4xNzUzIDIyLjIzMDFMMjIuOTI1MyAyNi43MzAxQzIzLjIyNTEgMjcuMDkgMjMuNzc3OCAyNy4wOSAyNC4wNzc2IDI2LjczMDFaIiBmaWxsPSIjMzMzMzMzIi8+CjwvZz4KPC9zdmc+Cg==">
                                             </button>
                                             <div class="e-mail-form">
@@ -197,21 +197,21 @@
                             <div class="emailinputcontainer">
                                 <div class="gendercontainer">
                                     <label class="genderchoose">
-                                        <input type="radio" class="genderbutton" name="gender" value="MALE">
+                                        <input type="radio" class="genderbutton" th:field="*{memberGender}" value="male">
                                         <span class="gender-sapn">
                                             <div class="gender-div"></div>
                                         </span>
                                         <span class="gendertext">남자</span>
                                     </label>
                                     <label class="genderchoose">
-                                        <input type="radio" class="genderbutton" name="gender" value="FEMALE">
+                                        <input type="radio" class="genderbutton" th:field="*{memberGender}" value="female">
                                         <span class="gender-sapn">
                                             <div class="gender-div"></div>
                                         </span>
                                         <span class="gendertext">여자</span>
                                     </label>
                                     <label class="genderchoose">
-                                        <input type="radio" class="genderbutton" name="gender" value="NONE" checked>
+                                        <input type="radio" class="genderbutton" th:field="*{memberGender}" value="not" checked>
                                         <span class="gender-sapn span-active">
                                             <div class="gender-div div-active"></div>
                                         </span>

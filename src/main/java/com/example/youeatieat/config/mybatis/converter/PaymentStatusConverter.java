@@ -1,6 +1,6 @@
 package com.example.youeatieat.config.mybatis.converter;
 
-import com.example.youeatieat.common.enumeration.PaymentStatus;
+import com.example.youeatieat.enumeration.PaymentStatus;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

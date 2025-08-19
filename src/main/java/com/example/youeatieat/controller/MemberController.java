@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/main/**")
+@RequestMapping("/main")
 @RequiredArgsConstructor
 
 public class MemberController {
@@ -63,6 +63,7 @@ public class MemberController {
     public RedirectView login(MemberDTO memberDTO) {
         MemberDTO member =memberService.login(memberDTO).orElseThrow(LoginFailException::new);
         session.setAttribute("member",member);
+        log.info("{}",member);
         return new RedirectView("/mypage/cart");
     }
 }

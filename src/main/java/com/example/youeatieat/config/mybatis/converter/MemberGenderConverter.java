@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class MemberGenderConverter implements Converter<String, MemberGender> {
     @Override
     public MemberGender convert(String source) {
-        return null;
+        return MemberGender.getMemberGenderFromValue(source);
     }
 }
