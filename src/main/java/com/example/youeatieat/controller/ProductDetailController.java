@@ -21,6 +21,7 @@ public class ProductDetailController {
     @GetMapping("/like")
     public ResponseEntity<?> checkLike(@RequestParam LikeDTO likeDTO) {
         likeDTO.setMemberId(2L);
+        log.info("memberId: {}", likeDTO.getMemberId());
         boolean liked =  productDetailService.getLike(likeDTO);
         return ResponseEntity.ok(Map.of("liked", liked));
     }

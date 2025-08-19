@@ -37,19 +37,19 @@ const togetherProductService = (() => {
         return response.ok
     }
 
-    // 찜 상태
-    const getLike = async (statusLike) => {
-        const response = await fetch(`/api/product/${productId}/like`, {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(statusLike)
-        });
-        console.log(response.ok)
-        return response.ok;
-    }
+    // // 찜 상태
+    // const getLike = async (statusLike) => {
+    //     const response = await fetch(`/api/product/${productId}/like`, {
+    //         method:"POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(statusLike)
+    //     });
+    //     const result = await response.json();
+    //     return result;
+    // }
 
-    return {save, like, unlike, getLike};
+    return {save, like, unlike};
 
 })();

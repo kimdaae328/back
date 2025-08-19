@@ -179,36 +179,22 @@ toggleSubmitButton();
 // btn-wish 버튼
 const wishButtons = document.querySelectorAll(".btn-wish");
 
-wishButtons.forEach(async (button) => {
-    const getlike = {
-        productId: product.id
-    }
-    const productId = button.dataset.productId;
-    const liked = await togetherProductService.getLike(getlike);
-    if (liked) button.classList.add("on");
-    else button.classList.remove("on");
-});
-
-// 페이지 로드 시 실행
-// const wishButton = document.querySelector(".btn-wish");
-// loadLikeStatus(wishButton.dataset.productId);
-
 wishButtons.forEach((button) => {
     button.addEventListener("click", async () => {
 
         const like = {
-            productId: product.id
+            productId: product.id,
+            likeStatus: product.likeStatus
         }
 
-        const unlike = {
-            productId: product.id
-        }
         const isActive = button.classList.contains("on");
         let success = false;
 
+
+
         if (isActive) {
             // 이미 찜된 상태 -> 취소하기
-            success = await togetherProductService.unlike(unlike);
+            success = await togetherProductService.unlike(like);
             if (success) {
                 button.classList.remove("on");
             }
