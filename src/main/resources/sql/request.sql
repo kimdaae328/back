@@ -4,7 +4,7 @@ create table tbl_request(
     id bigint unsigned auto_increment primary key,
     request_amount int not null ,
     request_price int not null ,
-    request_status enum('done', 'cancel') default 'done'not null ,
+    request_status enum('done', 'cancel') default 'done' not null ,
     member_id bigint unsigned not null,
     group_index_number bigint not null,
     product_id bigint unsigned not null,
@@ -20,6 +20,7 @@ create table tbl_request(
 
 select * from tbl_request;
 
-drop table tbl_request;
-
-alter table tbl_request add updated_date datetime default current_timestamp;
+insert into tbl_request
+(request_amount, request_price, request_status, member_id, group_index_number, product_id, created_date, updated_date)
+values
+    (5, 30000, 'done', 117, 1, 7, now(), now()) -- FK (1,6) 참조
