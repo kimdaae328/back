@@ -22,6 +22,7 @@ public class ProductDTO {
     private String productInfoImageUrl;
     private Integer productMinNumber;
     private Status productStatus;
+    private boolean likeStatus;
     private Long memberId;
     private String createdDatetime;
     private String updatedDatetime;
