@@ -3,7 +3,6 @@ package com.example.youeatieat.controller;
 import com.example.youeatieat.common.exception.LoginFailException;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/member")
 @RequiredArgsConstructor
 
 public class MemberController {
@@ -29,16 +28,13 @@ public class MemberController {
     @GetMapping("signup")
     public String goToJoinForm(MemberDTO memberDTO, Model model) {
         model.addAttribute("memberDTO", memberDTO);
-        return "/main/signup";
+        return "/member/signup";
     }
 
     @PostMapping("signup")
     public RedirectView join (MemberDTO memberDTO) {
-        log.info("{}",memberDTO);
         memberService.join(memberDTO);
-
-//        생일 성별 남음.
-        return new RedirectView("/main/login");
+        return new RedirectView("/member/login");
     }
     @PostMapping("check-email")
     @ResponseBody
@@ -55,15 +51,16 @@ public class MemberController {
         return ResponseEntity.ok().body(result);
     }
     @GetMapping("login")
-    public String goToLoginForm(MemberDTO MemberDTO, Model model) {
-        model.addAttribute("memberDTO", MemberDTO);
-        return "/main/login";
+    public String goToLoginForm(MemberDTO memberDTO, Model model){
+        model.addAttribute("memberDTO", memberDTO);
+        return "/member/login";
     }
+
     @PostMapping("login")
-    public RedirectView login(MemberDTO memberDTO) {
-        MemberDTO member =memberService.login(memberDTO).orElseThrow(LoginFailException::new);
-        session.setAttribute("member",member);
-        log.info("{}",member);
-        return new RedirectView("/mypage/cart");
+    public RedirectView login(MemberDTO memberDTO){
+        MemberDTO member = memberService.login(memberDTO).orElseThrow(LoginFailException::new);
+        session.setAttribute("member", member);
+        return new RedirectView("/");
     }
 }
+

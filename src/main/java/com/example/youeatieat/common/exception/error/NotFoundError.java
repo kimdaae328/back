@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NotFoundError {
-    @GetMapping
+    @GetMapping("/error")
     public String error() {
         return"/main/body";
     }
