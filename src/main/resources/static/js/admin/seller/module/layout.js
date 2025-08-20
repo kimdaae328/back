@@ -13,11 +13,11 @@ const sellerLayout = (() => {
                 <span class="member-name">${seller.memberName}</span>
                 <span class="amount-unit"> 님</span>
             </td>
-            <td class="td-address">${seller.address} ${seller.addressDetail}</td>
+            <td class="td-address">${(seller.address || seller.addressDetail) ? `${seller.address ?? ""} ${seller.addressDetail ?? ""}` : "-"}</td>
             <td class="td-email">${seller.memberEmail}</td>
             <td class="td-phone">${seller.memberPhone}</td>
             <td class="td-start">${seller.createdDate}</td>
-            <td class="td-recent">${seller.memberLastLoginDate}</td>
+            <td class="td-recent">${seller.memberLastLoginDate ? seller.memberLastLoginDate : "-"}</td>
             <td class="td-action text-center">
                 <div class="action-btn">
                     <i class="mdi mdi-chevron-right"></i>
@@ -119,19 +119,27 @@ const sellerLayout = (() => {
     // 회원 상세
     const showDetail = (sellerDetail) => {
         const tableMemberDetail = document.querySelector(".modal-dialog");
-
-        // 구매내역 - layout
         let purchaseRows = "";
-        sellerDetail.purchase.forEach((purchase) => {
-            purchaseRows += `
+
+        // 판매 상세내역 - layout
+        if (!sellerDetail.purchase || sellerDetail.purchase.length === 0) {
+            purchaseRows = `
                 <tr>
-                    <td>${purchase.purchaseRequestProductName}</td>
-                    <td>${purchase.purchaseRequestQuantityKg}</td>
-                    <td>${purchase.purchaseRequestProposedPricePerKg}</td>
-                    <td>${purchase.purchaseRequestDateOfManufacture}</td>
+                    <td colspan="4" style="text-align:center; padding:26px 16px">구매 내역이 없습니다.</td>
                 </tr>
             `;
-        });
+        } else {
+            sellerDetail.purchase.forEach((purchase) => {
+                purchaseRows += `
+                    <tr>
+                        <td>${purchase.purchaseRequestProductName}</td>
+                        <td>${purchase.purchaseRequestQuantityKg}</td>
+                        <td>${purchase.purchaseRequestProposedPricePerKg}</td>
+                        <td>${purchase.purchaseRequestDateOfManufacture}</td>
+                    </tr>
+                `;
+            });
+        }
 
         // 회원 - layout
         tableMemberDetail.innerHTML= `
@@ -175,7 +183,7 @@ const sellerLayout = (() => {
                                                             </tr>
                                                             <tr>
                                                                 <th>출고지 주소</th>
-                                                                <td>${sellerDetail.address} ${sellerDetail.addressDetail}</td>
+                                                                <td>${(sellerDetail.address || sellerDetail.addressDetail) ? `${sellerDetail.address ?? ""} ${sellerDetail.addressDetail ?? ""}` : "-" }</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>나이</th>
@@ -198,7 +206,7 @@ const sellerLayout = (() => {
                                                             </tr>
                                                             <tr>
                                                                 <th>최근 접속일</th>
-                                                                <td>${sellerDetail.memberLastLoginDate}</td>
+                                                                <td>${sellerDetail.memberLastLoginDate ? sellerDetail.memberLastLoginDate : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>성별</th>
@@ -230,7 +238,7 @@ const sellerLayout = (() => {
                                                         <tr>
                                                             <td>${sellerDetail.paymentCalculate.totalOrders}</td>
                                                             <td>${sellerDetail.paymentCalculate.totalPrice}</td>
-                                                            <td>${sellerDetail.paymentCalculate.lastPaymentDate}</td>
+                                                            <td>${sellerDetail.paymentCalculate.lastPaymentDate ? sellerDetail.paymentCalculate.lastPaymentDate : "-"}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

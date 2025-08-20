@@ -33,6 +33,10 @@ const sellerService = (() => {
 
         const data = await response.json();
 
+        if (!data.purchase || data.purchase.length === 0) {
+            console.log("구매 내역이 없습니다.");
+        }
+
         return data;
     };
 
