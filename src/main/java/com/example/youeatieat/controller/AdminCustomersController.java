@@ -1,6 +1,7 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.dto.AdminCustomerCriteriaDTO;
+import com.example.youeatieat.dto.CustomerDetailWithPaymentDTO;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.AdminCustomerService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class AdminCustomersController {
 //    회원상세
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable("id") Long id) {
-        MemberDTO customerDetail = memberService.getCustomerDetail(id);
+        CustomerDetailWithPaymentDTO customerDetail = memberService.getCustomerDetail(id);
         if (customerDetail == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerDetail);
         }
