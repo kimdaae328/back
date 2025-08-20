@@ -36,5 +36,51 @@ const sellerService = (() => {
         return data;
     };
 
-    return {getSellerList, getSellerDetail}
+    // 회원 목록(일반)
+    const getSellerYoueatieatList = async (page, callback) => {
+        const response = await fetch(`/api/admin/sellers/list/youeatieat/${page}`);
+        const sellersCriteria = await response.json();
+
+        if(callback){
+            setTimeout(() => {
+                callback(sellersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("일반 회원 존재")
+        }else if(response.status === 404){
+            console.log("일반 회원 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return sellersCriteria;
+    }
+
+    // 회원 목록(카카오)
+    const getSellerKakaoList = async (page, callback) => {
+        const response = await fetch(`/api/admin/sellers/list/kakao/${page}`);
+        const sellersCriteria = await response.json();
+
+        if(callback){
+            setTimeout(() => {
+                callback(sellersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("카카오 회원 존재")
+        }else if(response.status === 404){
+            console.log("카카오 회원 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return sellersCriteria;
+    }
+
+    return {getSellerList, getSellerDetail, getSellerYoueatieatList, getSellerKakaoList}
 })();

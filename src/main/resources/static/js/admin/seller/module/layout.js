@@ -13,7 +13,7 @@ const sellerLayout = (() => {
                 <span class="member-name">${seller.memberName}</span>
                 <span class="amount-unit"> 님</span>
             </td>
-            <td class="td-address">@@시@@구</td>
+            <td class="td-address">${seller.address} ${seller.addressDetail}</td>
             <td class="td-email">${seller.memberEmail}</td>
             <td class="td-phone">${seller.memberPhone}</td>
             <td class="td-start">${seller.createdDate}</td>
@@ -38,6 +38,30 @@ const sellerLayout = (() => {
         sellerContainer.innerHTML = text;
     }
 
+    // 회원 목록(일반)
+    const showYoueatieatList = (sellersCriteria) => {
+        const sellerContainer = document.querySelector(".table-container tbody");
+
+        let text = "";
+        sellersCriteria.sellers.forEach((seller) => {
+            text += sellerRowTemplate(seller);
+        });
+
+        sellerContainer.innerHTML = text;
+    }
+
+    // 회원 목록(카카오)
+    const showKakaoList = (sellersCriteria) => {
+        const sellerContainer = document.querySelector(".table-container tbody");
+
+        let text = "";
+        sellersCriteria.sellers.forEach((seller) => {
+            text += sellerRowTemplate(seller);
+        });
+
+        sellerContainer.innerHTML = text;
+    }
+
     // 페이지네이션 - layout
     const pagination = document.querySelector(".rebound-pagination");
     const renderPagination = (criteria) => {
@@ -51,9 +75,6 @@ const sellerLayout = (() => {
                 </a>
             </li>
             `;
-
-            // console.log("--------------"+ i);
-            // console.log("--------------??"+ criteria.page);
         }
 
         pagination.innerHTML = html;
@@ -76,7 +97,7 @@ const sellerLayout = (() => {
     // 총 합계
     const sellerCountText = document.querySelector(".count-amount");
     const sellerCount = (criteria) => {
-        sellerCountText.textContent = criteria.count + 1;
+        sellerCountText.textContent = criteria.total;
     };
 
     // 나이 계산
@@ -85,10 +106,10 @@ const sellerLayout = (() => {
         const birthDate = new Date(birthDateString);
 
         let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        const dayDiff = today.getDate() - birthDate.getDate();
+        const month = today.getMonth() - birthDate.getMonth();
+        const day = today.getDate() - birthDate.getDate();
 
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        if (month < 0 || (month === 0 && day < 0)) {
             age--;
         }
 
@@ -98,6 +119,21 @@ const sellerLayout = (() => {
     // 회원 상세
     const showDetail = (sellerDetail) => {
         const tableMemberDetail = document.querySelector(".modal-dialog");
+
+        // 구매내역 - layout
+        let purchaseRows = "";
+        sellerDetail.purchase.forEach((purchase) => {
+            purchaseRows += `
+                <tr>
+                    <td>${purchase.purchaseRequestProductName}</td>
+                    <td>${purchase.purchaseRequestQuantityKg}</td>
+                    <td>${purchase.purchaseRequestProposedPricePerKg}</td>
+                    <td>${purchase.purchaseRequestDateOfManufacture}</td>
+                </tr>
+            `;
+        });
+
+        // 회원 - layout
         tableMemberDetail.innerHTML= `
             <div class="modal-content">
                 <div class="modal-header">
@@ -139,7 +175,7 @@ const sellerLayout = (() => {
                                                             </tr>
                                                             <tr>
                                                                 <th>출고지 주소</th>
-                                                                <td>@@시@@구</td>
+                                                                <td>${sellerDetail.address} ${sellerDetail.addressDetail}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>나이</th>
@@ -177,11 +213,7 @@ const sellerLayout = (() => {
                                         <div class="info-layout detail-info">
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
-                                                    <a href="" class="info-detail">
-                                                        <div class="title">판매내역
-                                                            <i class="mdi mdi-menu-left ml-2"></i>
-                                                        </div>
-                                                    </a>
+                                                    <div class="title">판매내역</div>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -191,14 +223,14 @@ const sellerLayout = (() => {
                                                         <tr>
                                                             <th>총 판매횟수</th>
                                                             <th>총 판매액</th>
-                                                            <th>상품 판매 종류</th>
+                                                            <th>최근 판매일</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>12</td>
-                                                            <td>250,000</td>
-                                                            <td>감자,양파,콩나물</td>
+                                                            <td>${sellerDetail.paymentCalculate.totalOrders}</td>
+                                                            <td>${sellerDetail.paymentCalculate.totalPrice}</td>
+                                                            <td>${sellerDetail.paymentCalculate.lastPaymentDate}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -208,11 +240,7 @@ const sellerLayout = (() => {
                                         <div class="info-layout detail-info">
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
-                                                    <a href="" class="info-detail">
-                                                        <div class="title">판매 상세내역
-                                                            <i class="mdi mdi-menu-left ml-2"></i>
-                                                        </div>
-                                                    </a>
+                                                    <div class="title">판매 상세내역</div>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -227,12 +255,7 @@ const sellerLayout = (() => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>감자</td>
-                                                            <td>10</td>
-                                                            <td>2000</td>
-                                                            <td>2025-08-01</td>
-                                                        </tr>
+                                                       ${purchaseRows} 
                                                     </tbody>
                                                 </table>
                                             </div>                             
@@ -250,5 +273,5 @@ const sellerLayout = (() => {
            `;
     }
 
-    return {showList, renderPagination, connectToPagination, sellerCount, showDetail};
+    return {showList, renderPagination, connectToPagination, sellerCount, showDetail, showKakaoList, showYoueatieatList};
 })();

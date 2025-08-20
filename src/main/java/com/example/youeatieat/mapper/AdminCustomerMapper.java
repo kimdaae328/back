@@ -22,7 +22,7 @@ public interface AdminCustomerMapper {
     CustomerDetailWithPaymentDTO selectDetailCustomer(Long id);
 
 //    결제 목록
-    List<PaymentItemDTO> selectPaymentsByMemberId(Long id);
+    List<PaymentItemDTO> selectPaymentsAll(Long id);
 
 //    결제 개수 조회
 //    public int selectPaymentCountAll(Long id);

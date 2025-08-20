@@ -1208,7 +1208,7 @@ button.btn .comp-icon {
     text-align: center;
 }
 
-.rebound-pagination-wrapper ul.rebound-pagination>li.page-item.active>a {
+.rebound-pagination-wrapper ul.rebound-pagination>li.page-item a.active {
     color: #507cf3;
     font-weight: 700;
 }
