@@ -14,10 +14,16 @@ public class AdminController {
 //        return "admin/main/main";
 //    }
 
-    //    회원목록
+//    회원목록
+//    @GetMapping
+//    public String adminPage(){
+//        return "admin/customer/list";
+//    }
+
+//    판매자목록
     @GetMapping
     public String adminPage(){
-        return "admin/customer/list";
+        return "admin/seller/list";
     }
 
 }
