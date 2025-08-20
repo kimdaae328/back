@@ -54,6 +54,7 @@
             and purchase_request_approval_status = 'approved'
             and purchase_request_status = 'active'
         order by id desc
+        limit 3
     </select>
 
     <select id="selectPurchaseCalculate">
