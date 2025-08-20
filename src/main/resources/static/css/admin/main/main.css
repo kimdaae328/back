@@ -261,12 +261,25 @@ address, dl, ol, ul {
     content: "\F0140";
 }
 #bootpay>#bootpay-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list>li>a {
+    position: relative;
     color: #56626a;
     display: block;
     font-size: 13px;
     font-weight: 500;
     padding: 8px 0 8px 24px;
     transition: all .2s;
+}
+
+#bootpay>#bootpay-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list>li>a:before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 1px;
+    background-color: #56626a;
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
 }
 
 .collapse:not(.show) {
@@ -306,9 +319,6 @@ address, dl, ol, ul {
 }
 .d-flex {
     display: flex !important;
-}
-.flex-grow-1 {
-    flex-grow: 1 !important;
 }
 
 #bootpay-header .header-menu-group {
@@ -765,23 +775,23 @@ button.btn {
     text-rendering: auto;
 }
 #sublist1 {
-    display: none;  
+    display: none;
 }
 #sublist1.show {
-    display: block; 
+    display: block;
 }
 .mdi-chevron-down:before {
     content: "\F0140";
 }
 
 #usermenubtn {
-        cursor: pointer;  /* 클릭할 수 있는 요소임을 나타냄 */
-        
-   
-    }
-    .dropdown-menu.show {
-        display: block;
-    }
+    cursor: pointer;  /* 클릭할 수 있는 요소임을 나타냄 */
+
+
+}
+.dropdown-menu.show {
+    display: block;
+}
 #usermenu{
     position: absolute;  top: 40px; left: 20px; will-change: transform;
 }
@@ -811,12 +821,12 @@ button.btn {
 }
 
 .dropdown-menu{
- bottom: auto;
-    right: auto;   
+    bottom: auto;
+    right: auto;
 }
 .tab-name:hover{
- cursor: pointer;
- 
+    cursor: pointer;
+
 }
 .user-menu{
     position: relative;
@@ -849,7 +859,7 @@ button.btn {
         flex: 0 0 100%;
         max-width: 100%;
     }
-    
+
 }
 @media (min-width: 992px) {
     .col-md-6 {
@@ -857,9 +867,9 @@ button.btn {
         max-width: 50%;
     }
 }.ana-access-index .info-box .info-card {
-    margin-bottom: -20px;
-    margin-top: -20px;
-}
+     margin-bottom: -20px;
+     margin-top: -20px;
+ }
 .ana-access-index .info-box .info-card .info-title {
     color: #afb7ba;
     font-size: 16px;
@@ -899,4 +909,12 @@ button.btn {
 }
 #bootpay>#bootpay-side #side-wrapper>.menu-wrapper>ul.menu-list>li a.current {
     background-color: #dce5fd;
+}
+
+.icon-wrapper i {
+    display: inline-block;
+}
+
+.icon-wrapper i.rotate {
+    transform: rotate(180deg); /* 아래 방향으로 회전 */
 }

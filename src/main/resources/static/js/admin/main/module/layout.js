@@ -25,51 +25,66 @@ const customerLayout = (() => {
         </tr>
     `;
 
+    const renderRows = (customersCriteria) => {
+        const tbody = document.querySelector(".table-container tbody");
+        if (!tbody) return;
+        let html = "";
+        customersCriteria.customers.forEach(customer=> html += customerRowTemplate(customer));
+        tbody.innerHTML = html;
+    };
+
+    const showList = (customer) => renderRows(customer);
+    const showNonSubscribedList = (customer) => renderRows(customer);
+    const showSubscribedList = (customer) => renderRows(customer);
+
+
     // 회원 목록(전체)
-    const showList = (customersCriteria) => {
-        const customerContainer = document.querySelector(".table-container tbody");
-
-        let text = "";
-        customersCriteria.customers.forEach((customer) => {
-            text += customerRowTemplate(customer);
-        });
-
-        customerContainer.innerHTML = text;
-    }
+    // const showList = (customersCriteria) => {
+    //     const customerContainer = document.querySelector(".table-container tbody");
+    //
+    //     let text = "";
+    //     customersCriteria.customers.forEach((customer) => {
+    //         text += customerRowTemplate(customer);
+    //     });
+    //
+    //     customerContainer.innerHTML = text;
+    // }
 
     // 회원 목록(일반회원)
-    const showNonSubscribedList = (customersCriteria) => {
-        const customerContainer = document.querySelector(".table-container tbody");
-
-        let text = "";
-        customersCriteria.customers.forEach((customer) => {
-            text += customerRowTemplate(customer);
-        });
-
-        customerContainer.innerHTML = text;
-    }
+    // const showNonSubscribedList = (customersCriteria) => {
+    //     const customerContainer = document.querySelector(".table-container tbody");
+    //
+    //     let text = "";
+    //     customersCriteria.customers.forEach((customer) => {
+    //         text += customerRowTemplate(customer);
+    //     });
+    //
+    //     customerContainer.innerHTML = text;
+    // }
 
     // 회원 목록(구독회원)
-    const showSubscribedList = (customersCriteria) => {
-        const customerContainer = document.querySelector(".table-container tbody");
-
-        let text = "";
-        customersCriteria.customers.forEach((customer) => {
-            text += customerRowTemplate(customer);
-        });
-
-        customerContainer.innerHTML = text;
-    }
+    // const showSubscribedList = (customersCriteria) => {
+    //     const customerContainer = document.querySelector(".table-container tbody");
+    //
+    //     let text = "";
+    //     customersCriteria.customers.forEach((customer) => {
+    //         text += customerRowTemplate(customer);
+    //     });
+    //
+    //     customerContainer.innerHTML = text;
+    // }
 
     // 페이지네이션 - layout
-    const pagination = document.querySelector(".rebound-pagination");
     const renderPagination = (criteria) => {
+        const pagination = document.querySelector(".rebound-pagination");
+        if (!pagination) return;
+
         let html = ``;
 
         for (let i = criteria.startPage; i <= criteria.endPage; i++) {
             html += `
             <li class="page-item page-num">
-                <a href="${i}" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
                     ${i}
                 </a>
             </li>
@@ -84,12 +99,17 @@ const customerLayout = (() => {
 
     // 페이지네이션 - event
     const connectToPagination = (navi) => {
+        const pagination = document.querySelector(".rebound-pagination");
+        if (!pagination) return;
+
         pagination.addEventListener("click", (e) => {
             // if(e.target.classList.contains(".page-item-link")) {
             e.preventDefault();
 
             const linkButton = e.target.closest(".page-item-link");
             const page = linkButton.dataset.page;
+            if (!linkButton) return;
+
             // const page = linkButton.getAttribute("href");
             navi(page);
             // }
@@ -99,6 +119,7 @@ const customerLayout = (() => {
     // 총 합계
     const customerCountText = document.querySelector(".count-amount");
     const customerCount = (criteria) => {
+        if (!customerCountText) return;
         customerCountText.textContent = criteria.total;
     };
 
@@ -108,10 +129,10 @@ const customerLayout = (() => {
         const birthDate = new Date(birthDateString);
 
         let age = today.getFullYear() - birthDate.getFullYear();
-        const month = today.getMonth() - birthDate.getMonth();
-        const day = today.getDate() - birthDate.getDate();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
 
-        if (month < 0 || (month === 0 && day < 0)) {
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
             age--;
         }
 
@@ -121,21 +142,6 @@ const customerLayout = (() => {
     // 회원 상세
     const showDetail = (customerDetail) => {
         const tableMemberDetail = document.querySelector(".modal-dialog");
-
-        // 구매내역 - layout
-        let paymentRows = "";
-        customerDetail.payments.forEach((payment) => {
-            paymentRows += `
-            <tr>
-                <td>${payment.id}</td>
-                <td>${payment.productName}</td>
-                <td>${payment.requestPrice}</td>
-                <td>${payment.paymentDate}</td>
-            </tr>
-        `;
-        });
-
-        // 회원 - layout
         tableMemberDetail.innerHTML= `
             <div class="modal-content">
                 <div class="modal-header">
@@ -215,9 +221,11 @@ const customerLayout = (() => {
                                         <div class="info-layout detail-info">
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
-                                                    <div class="title">결제내역
-                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                    </div>
+                                                    <a href="" class="info-detail">
+                                                        <div class="title">결제내역
+                                                            <i class="mdi mdi-menu-left ml-2"></i>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -232,9 +240,9 @@ const customerLayout = (() => {
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>${customerDetail.paymentCalculate.totalOrders}</td>
-                                                            <td>${customerDetail.paymentCalculate.totalPrice}</td>
-                                                            <td>${customerDetail.paymentCalculate.lastPaymentDate}</td>
+                                                            <td>12</td>
+                                                              <td>250,000</td>
+                                                            <td>2025-08-01</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -245,9 +253,11 @@ const customerLayout = (() => {
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
                                                     <!-- 작성 게시글 클릭 시 콘텐츠 관리 내 게시글 페이지로 이동 -->
-                                                    <div class="title">구매내역
-                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                    </div>
+                                                    <a href="" class="info-detail">
+                                                        <div class="title">구매내역
+                                                            <i class="mdi mdi-menu-left ml-2"></i>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -262,7 +272,24 @@ const customerLayout = (() => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        ${paymentRows}                                                                                                                               
+                                                        <tr>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td>0</td>
+                                                            <td>2025-08-01</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td>0</td>
+                                                            <td>2025-08-01</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td>0</td>
+                                                            <td>2025-08-01</td>
+                                                        </tr>                                                                                                                               
                                                     </tbody>
                                                 </table>
                                             </div>                             
