@@ -5,7 +5,7 @@ const sellerLayout = (() => {
             <td class="td-name">
                 <div class="member-name">
                     <span class="member-name">${seller.memberName}</span>
-                    <span class="badge-label badge text-danger ml-2">일반로그인</span>
+                    <span class="badge-label badge text-danger ml-2">${seller.memberProvider == "YOU_I" ? "일반 로그인" : "카카오 로그인"}</span>
                 </div>
                 <div class="member-id">${seller.id}</div>
             </td>

@@ -2,17 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.youeatieat.mapper.AdminSellerMapper">
     <select id="selectSellerAll">
-        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
+        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider as provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
         from view_member_provider_address
-        where member_status = 'active'
-          and member_role = 'seller'
+        where member_status = 'active' and member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                m_id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by m_id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectSellerCountAll">
         select count(*) from tbl_member
         where member_status = 'active' and member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectDetailSeller">
@@ -25,26 +36,50 @@
         select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
         from view_member_provider_address
         where member_status = 'active' and member_role = 'seller' and member_provider = 'you_i'
+        <if test="keyword != null">
+            and (
+            m_id like concat('%', #{keyword}, '%') or
+            member_name like concat('%', #{keyword}, '%')
+            )
+        </if>
         order by m_id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectYoueatieatCountAll">
         select count(*) from tbl_member
         where member_status = 'active' and member_role = 'seller' and member_provider = 'you_i'
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectKakaoSellerAll">
         select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
         from view_member_provider_address
         where member_status = 'active' and member_role = 'seller' and member_provider = 'kakao'
+        <if test="keyword != null">
+            and (
+            m_id like concat('%', #{keyword}, '%') or
+            member_name like concat('%', #{keyword}, '%')
+            )
+        </if>
         order by m_id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectKakaoCountAll">
         select count(*) from tbl_member
         where member_status = 'active' and member_role = 'seller' and member_provider = 'kakao'
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectPurchaseAll">
