@@ -56,7 +56,6 @@ public class KakaoController {
 
     @PostMapping("/signup")
     public RedirectView kakaoSignup(MemberDTO memberDTO){
-       log.info(memberDTO.toString());
        memberDTO.setProvider(Provider.KAKAO);
         memberService.joinKakao(memberDTO);
        Optional<MemberDTO> foundKakaoMember = memberService.getKakaoMember(memberDTO.getKakaoEmail());
