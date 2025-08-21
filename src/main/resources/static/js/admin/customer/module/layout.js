@@ -126,13 +126,13 @@ const customerLayout = (() => {
         let paymentRows = "";
         customerDetail.payments.forEach((payment) => {
             paymentRows += `
-            <tr>
-                <td>${payment.id}</td>
-                <td>${payment.productName}</td>
-                <td>${payment.requestPrice}</td>
-                <td>${payment.paymentDate}</td>
-            </tr>
-        `;
+                <tr>
+                    <td>${payment.id}</td>
+                    <td>${payment.productName}</td>
+                    <td>${payment.requestPrice}</td>
+                    <td>${payment.paymentDate}</td>
+                </tr>
+            `;
         });
 
         // 회원 - layout

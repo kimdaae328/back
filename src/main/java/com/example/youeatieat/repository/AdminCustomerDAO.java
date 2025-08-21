@@ -31,9 +31,9 @@ public class AdminCustomerDAO {
         return customerMapper.selectDetailCustomer(id);
     }
 
-//    결제 상세
+//    결제 목록
     public List<PaymentItemDTO> findPaymentItems(Long id){
-        return customerMapper.selectPaymentsByMemberId(id);
+        return customerMapper.selectPaymentsAll(id);
     }
 
 //    결제 개수 조회

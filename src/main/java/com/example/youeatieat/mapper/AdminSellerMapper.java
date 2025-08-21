@@ -1,6 +1,6 @@
 package com.example.youeatieat.mapper;
 
-import com.example.youeatieat.dto.MemberDTO;
+import com.example.youeatieat.dto.*;
 import com.example.youeatieat.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,5 +15,24 @@ public interface AdminSellerMapper {
     public int selectSellerCountAll();
 
 //    회원 상세
-    MemberDTO selectDetailSeller(Long id);
+    CustomerDetailWithPurchaseDTO selectDetailSeller(Long id);
+
+//    회원 목록(일반)
+    public List<MemberDTO> selectYoueatieatSellerAll(Criteria criteria);
+
+//    전체 개수 조회(일반)
+    public int selectYoueatieatCountAll();
+
+//    회원 목록(카카오)
+    public List<MemberDTO> selectKakaoSellerAll(Criteria criteria);
+
+//    전체 개수 조회(카카오)
+    public int selectKakaoCountAll();
+
+//    판매 목록
+    List<PurchaseRequestDTO> selectPurchaseAll(Long id);
+
+//    판매 내역 계산
+    PaymentCalculateDTO selectPurchaseCalculate(Long memberId);
+
 }

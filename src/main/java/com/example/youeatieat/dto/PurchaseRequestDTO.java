@@ -1,5 +1,6 @@
 package com.example.youeatieat.dto;
 
+import com.example.youeatieat.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ public class PurchaseRequestDTO {
     private Long id;
     private String purchaseRequestProductName;
     private String purchaseRequestDescription;
-//    private ProductCategory purchaseRequestCategory;
+    private ProductCategory purchaseRequestCategory;
     private int purchaseRequestQuantityKg;
     private int purchaseRequestProposedPricePerKg;
     private String purchaseRequestCountryOfOrigin;
@@ -24,6 +25,6 @@ public class PurchaseRequestDTO {
     private PurchaseRequestApproval purchaseRequestApprovalStatus;
     private Status purchaseRequestStatus;
     private Long memberId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
 }

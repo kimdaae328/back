@@ -14,7 +14,7 @@ public interface AdminCustomerService {
 //    //    회원 상세
 //    CustomerDetailWithPaymentDTO getCustomerDetail(Long id, int page);
 
-    //    회원 목록(일반회원)
+//    회원 목록(일반회원)
     public AdminCustomerCriteriaDTO getNonSubscribedList(int page);
 
 //    회원 목록(구독회원)

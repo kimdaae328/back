@@ -21,7 +21,7 @@
         where id = #{id}
     </select>
 
-    <select id="selectPaymentsByMemberId">
+    <select id="selectPaymentsAll">
         select
             rp.id,
             rp.payment_method,
@@ -40,6 +40,7 @@
         where rp.member_id = #{id}
             and rp.payment_status = 'success'
             order by id desc
+        limit 3
     </select>
 
 <!--    <select id="selectPaymentCountAll">-->

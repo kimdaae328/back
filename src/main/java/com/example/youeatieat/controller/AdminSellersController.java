@@ -1,6 +1,7 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.dto.AdminSellerCriteriaDTO;
+import com.example.youeatieat.dto.CustomerDetailWithPurchaseDTO;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.AdminSellerService;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,32 @@ public class AdminSellersController {
 //    회원상세
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable("id") Long id) {
-        MemberDTO sellerDetail = memberService.getSellerDetail(id);
+        CustomerDetailWithPurchaseDTO sellerDetail = memberService.getSellerDetail(id);
         if (sellerDetail == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerDetail);
         }
         return ResponseEntity.ok(sellerDetail);
+    }
+
+//    회원목록(일반)
+    @GetMapping("/list/youeatieat/{page}")
+    public ResponseEntity<?> youeatieatList(@PathVariable("page") int page) {
+        AdminSellerCriteriaDTO sellerCriteriaDTO = memberService.getSellerYoueatieatList(page);
+        if(sellerCriteriaDTO == null || sellerCriteriaDTO.getSellers().size() == 0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerCriteriaDTO);
+        }
+        return ResponseEntity.ok(sellerCriteriaDTO);
+    }
+
+
+    //    회원목록(카카오)
+    @GetMapping("/list/kakao/{page}")
+    public ResponseEntity<?> kakaoList(@PathVariable("page") int page) {
+        AdminSellerCriteriaDTO sellerCriteriaDTO = memberService.getSellerKakaoList(page);
+        if(sellerCriteriaDTO == null || sellerCriteriaDTO.getSellers().size() == 0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerCriteriaDTO);
+        }
+        return ResponseEntity.ok(sellerCriteriaDTO);
     }
 
 }
