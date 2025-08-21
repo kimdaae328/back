@@ -62,5 +62,10 @@ public class MemberController {
         session.setAttribute("member", member);
         return new RedirectView("/");
     }
+    @PostMapping("logout")
+    public RedirectView logout(MemberDTO memberDTO){
+        session.removeAttribute("member");
+        return new RedirectView("/member/login");
+    }
 }
 
