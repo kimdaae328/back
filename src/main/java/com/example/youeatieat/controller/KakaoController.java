@@ -35,14 +35,22 @@ public class KakaoController {
 //        거기서받아온토큰으로 DTO 리턴
         MemberDTO member = foundMember.orElseThrow(RuntimeException::new);
 //       멤버에담음
-
+//        log.info(member.toString());
+       //MemberDTO(id=null, memberEmail=null, memberPassword=null, memberName=null, memberBirth=null, memberPhone=null, kakaoEmail=joyssung1101@naver.com, address=null, addressDetail=null,
+// addressPostNumber=null, provider=KAKAO, memberGender=null, memberRole=null, memberStatus=null, memberLastLoginDate=null,
         Optional<MemberDTO> foundKakaoMember = memberService.getKakaoMember(member.getKakaoEmail());
-//        멤버의 카카오로이메일이 기존의 카카오이메일과 같은게있는지검사
-        if(foundKakaoMember.isEmpty()) {
+        log.info(foundKakaoMember.toString());
+//        여기서부터 카카오 이메일을 못받아옴 .
+//       Optional[MemberDTO(id=null, memberEmail=null, memberPassword=null, memberName=조영인, memberBirth=null, memberPhone=01025000000, kakaoEmail=null, address=null, addressDetail=null, addressPostNumber=null, provider=null, memberGender=null, memberRole=null, memberStatus=ACTIVE, memberLastLoginDate=null, createdDate=2025-08-21 14:58:36, updatedDate=2025-08-21 14:58:36, remember=false)]
+
+       if(foundKakaoMember.isEmpty()) {
             redirectAttributes.addFlashAttribute("kakaoEmail", member.getKakaoEmail());
             return new RedirectView("/kakao/signup");
         }
-        session.setAttribute("member", foundKakaoMember.get());
+        session.setAttribute("member", member);
+//       MemberDTO sessionMember = (MemberDTO) session.getAttribute("member");
+//       log.info("session member = {}", sessionMember);
+////       여기 카카오이메일이 널임
 
 //      세션을받아서 메인으로 이동해야합니다
         return new RedirectView("/");

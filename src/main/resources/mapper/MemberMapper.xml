@@ -15,7 +15,7 @@
         where member_email = #{memberEmail} and member_password = #{memberPassword} and member_status = 'active'
     </select>
     <select id="selectMemberByKakaoEmail">
-        select id, member_email, member_name, member_status,
+        select  member_email, member_name, member_status,member_phone,
                member_kakao_email , member_provider, created_date, updated_date
         from tbl_member
         where tbl_member.member_kakao_email = #{kakaoEmail}

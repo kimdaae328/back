@@ -18,13 +18,14 @@ create table tbl_member(
 );
 
 select * from tbl_member;
-delete from tbl_member where id=15;
+delete from tbl_member where id=55;
 
 drop table tbl_member;
 
 insert into tbl_member (
     member_email,
-                        member_kakao_email,
+
+    member_kakao_email,
     member_password,
     member_name,
     member_birth,

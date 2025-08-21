@@ -51,8 +51,11 @@ public class MemberMapperTests {
     @Test
     public void kakaoLoginTest(){
 //        memberMapper.selectMemberByKakaoEmail("test1234@kakao.com");
-//        memberDAO.findMemberByKakaoEmail("test1234@kakao.com");
-        memberServiceImpl.getKakaoMember("test1234@kakao.com");
+        Optional<MemberDTO> member = memberDAO.findMemberByKakaoEmail("joyssung1101@naver.com");
+        log.info(member.toString());
+//
+//        memberServiceImpl.getKakaoMember("joyssung1101@naver.com");
+//        log.info("kakaoLoginTest:{}",memberDTO.getMemberName());
 
 
     }

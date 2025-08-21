@@ -15,6 +15,8 @@ create table tbl_address(
 
 
 select * from tbl_address;
+DELETE FROM tbl_product WHERE member_id = 55;
+
 
 drop table tbl_address;
 
