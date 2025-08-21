@@ -1,11 +1,13 @@
 const customerLayout = (() => {
     // 회원 목록 테이블 - layout
-    const customerRowTemplate  = (customer) => `
+    const customerRowTemplate  = (customer) => {
+        console.log(customer);
+        return `
         <tr>
             <td class="td-name">
                 <div class="member-name-wrap">
                     <span class="member-name">${customer.memberName}</span>
-                    <span class="badge-label badge text-danger ml-2">일반회원</span>
+                    <span class="badge-label badge text-danger ml-2">${customer.subscriptionPaymentStatus == "success" ? "구독회원" : "일반회원"}</span>
                 </div>
                 <div class="member-id">${customer.id}</div>
             </td>
@@ -16,7 +18,7 @@ const customerLayout = (() => {
             <td class="td-email">${customer.memberEmail}</td>
             <td class="td-phone">${customer.memberPhone}</td>
             <td class="td-start">${customer.createdDate}</td>
-            <td class="td-recent">${customer.memberLastLoginDate}</td>
+            <td class="td-recent">${customer.memberLastLoginDate ? customer.memberLastLoginDate : "-"}</td>
             <td class="td-action text-center">
                 <div class="action-btn">
                     <i class="mdi mdi-chevron-right"></i>
@@ -24,6 +26,7 @@ const customerLayout = (() => {
             </td>
         </tr>
     `;
+    }
 
     // 회원 목록(전체)
     const showList = (customersCriteria) => {
@@ -77,6 +80,7 @@ const customerLayout = (() => {
 
             // console.log("--------------"+ i);
             // console.log("--------------??"+ criteria.page);
+            // console.log("확인한다다ㅏ앙ㅇ", criteria)
         }
 
         pagination.innerHTML = html;
@@ -124,16 +128,24 @@ const customerLayout = (() => {
 
         // 구매내역 - layout
         let paymentRows = "";
-        customerDetail.payments.forEach((payment) => {
-            paymentRows += `
+        if (!customerDetail.payments || customerDetail.payments.length === 0) {
+            paymentRows = `
                 <tr>
-                    <td>${payment.id}</td>
-                    <td>${payment.productName}</td>
-                    <td>${payment.requestPrice}</td>
-                    <td>${payment.paymentDate}</td>
+                    <td colspan="4" style="text-align:center; padding:26px 16px">결제 내역이 없습니다.</td>
                 </tr>
             `;
-        });
+        } else {
+            customerDetail.payments.forEach((payment) => {
+                paymentRows += `
+                    <tr>
+                        <td>${payment.id}</td>
+                        <td>${payment.productName}</td>
+                        <td>${payment.requestPrice}</td>
+                        <td>${payment.paymentDate}</td>
+                    </tr>
+                `;
+            });
+        }
 
         // 회원 - layout
         tableMemberDetail.innerHTML= `
@@ -200,7 +212,7 @@ const customerLayout = (() => {
                                                             </tr>
                                                             <tr>
                                                                 <th>최근 접속일</th>
-                                                                <td>${customerDetail.memberLastLoginDate}</td>
+                                                                <td>${customerDetail.memberLastLoginDate ? customerDetail.memberLastLoginDate : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>성별</th>
@@ -234,7 +246,7 @@ const customerLayout = (() => {
                                                         <tr>
                                                             <td>${customerDetail.paymentCalculate.totalOrders}</td>
                                                             <td>${customerDetail.paymentCalculate.totalPrice}</td>
-                                                            <td>${customerDetail.paymentCalculate.lastPaymentDate}</td>
+                                                            <td>${customerDetail.paymentCalculate.lastPaymentDate ? customerDetail.paymentCalculate.lastPaymentDate : "-"}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
