@@ -1,4 +1,6 @@
 
+let reviews = null;
+
 // 수량 카운트
 const quantityBoxes = document.querySelectorAll(".product-quantity-box");
 const quantityCounts = document.querySelectorAll(
@@ -36,6 +38,92 @@ const update = (newCount) => {
         el.textContent = total.toLocaleString();
     });
 };
+
+// 팝업
+const openButtons = document.querySelectorAll(".popup-trigger");
+const closeButtons = document.querySelectorAll(".popup-close");
+
+openButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const targetSelector = btn.dataset.target;
+        const targetModal = document.querySelector(targetSelector);
+        const htmlScroll = document.querySelector("html");
+        if (targetModal) {
+            targetModal.style.display = "block";
+            htmlScroll.style.overflow = "hidden";
+        }
+    });
+});
+
+closeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const targetModal = btn.closest(".popup-wrapper");
+        const htmlScroll = document.querySelector("html");
+        if (targetModal) {
+            targetModal.style.display = "none";
+            htmlScroll.style.overflow = "";
+        }
+    });
+});
+
+const reviewOpen = document.querySelector(".review-list")
+let reviewId = null;
+reviewOpen.addEventListener("click" ,async (e) => {
+    const btn = e.target;
+
+    const reviewItem  = btn.closest(".review-photo");
+    reviewId = reviewItem.dataset.reviewId;
+
+    const detailReview = await togetherProductService.getReviewDetail(reviewId);
+    for(var i = 0; i < reviews.length; i++){
+        if(reviews[i].id == detailReview.id){
+            break;
+        }
+    }
+    if (detailReview) {
+        layout.showPopupReview(detailReview, i, reviews.length);
+    } else {
+        alert("리뷰 상세 정보를 불러올 수 없습니다.");
+    }
+})
+
+const modalWrap = document.getElementById("modal-wrap");
+modalWrap.addEventListener("click", async (e) => {
+    const button = e.target.closest("button");
+    console.log(e.target);
+    if(!button){
+        return;
+    }
+    if(button.classList.contains("btn-close")){
+        document.getElementById("popup1").remove();
+    }else if(button.classList.contains("prev")){
+        let previousIndex = 0;
+        for(let i = 0; i < reviews.length; i++){
+            if(reviews[i].id == reviewId){
+                previousIndex = i - 1;
+                break;
+            }
+        }
+        reviewId = reviews[previousIndex].id;
+        document.getElementById("popup1").remove();
+        layout.showPopupReview(reviews[previousIndex], previousIndex, reviews.length);
+
+    }else if(button.classList.contains("next")){
+        let nextIndex = 0;
+        for(let i = 0; i < reviews.length; i++){
+            if(reviews[i].id == reviewId){
+                nextIndex = i + 1;
+                break;
+            }
+        }
+        reviewId = reviews[nextIndex].id;
+        document.getElementById("popup1").remove();
+        layout.showPopupReview(reviews[nextIndex], nextIndex, reviews.length);
+
+    }else if(e.target.classList.contains("list-icon")){
+        console.log("아이콘목록 사진")
+    }
+})
 
 // 버튼 이벤트 연결
 quantityBoxes.forEach((box) => {
@@ -111,16 +199,6 @@ inquiryButtons.forEach((button) => {
     });
 });
 
-// 추천순 버튼
-const sortBtns = document.querySelectorAll(".sort-btn");
-
-sortBtns.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        sortBtns.forEach((btn) => btn.classList.remove("on"));
-        e.currentTarget.classList.add("on");
-    });
-});
-
 // 스크롤감지 탭버튼 활성화
 const tabLinks = document.querySelectorAll(".tab-link");
 
@@ -178,31 +256,29 @@ toggleSubmitButton();
 
 // btn-wish 버튼
 const wishButtons = document.querySelectorAll(".btn-wish");
-
 wishButtons.forEach((button) => {
+    console.log(product.likeStatus)
+    button.classList.toggle("on", product.likeStatus);
     button.addEventListener("click", async () => {
-
         const like = {
             productId: product.id,
             likeStatus: product.likeStatus
-        }
-
+        };
         const isActive = button.classList.contains("on");
         let success = false;
-
-
-
         if (isActive) {
-            // 이미 찜된 상태 -> 취소하기
             success = await togetherProductService.unlike(like);
             if (success) {
                 button.classList.remove("on");
+                like.likeStatus = false;
+                console.log(like.likeStatus);
             }
         } else {
-            // 찜하기
             success = await togetherProductService.like(like);
             if (success) {
                 button.classList.add("on");
+                like.likeStatus = true;
+                console.log(like.likeStatus);
             }
         }
     });
@@ -223,10 +299,10 @@ reviewImgButtons.forEach((button) => {
 // 댓글 총개수
 const reviewItems = document.querySelectorAll(".review-list .review-item");
 const tabLinkSpan = document.querySelector(".tab-link .count");
-const totalSpan = document.querySelector(".review-top-bar .total");
+
 
 tabLinkSpan.textContent = reviewItems.length;
-totalSpan.textContent = reviewItems.length;
+
 
 //###################################  장바구니  ###################################
 const saveInCarts = document.querySelectorAll("button.btn-cart");
@@ -274,7 +350,169 @@ saveInCarts.forEach((saveInCart)=>{
                 }, 1500);
             }
         }
+    })
+})
+
+// 리뷰 목록
+const reviewPrevButton = document.querySelector(".review-wrap .prev");
+const reviewNextButton = document.querySelector(".review-wrap .next");
+
+const showList = async (productId, page) => {
+    const reviewsCriteria = await togetherProductService.getReview(productId, page, layout.showListReview);
+    reviews = reviewsCriteria.reviews;
+    return reviewsCriteria;
+
+}
+
+showList(productId, page = 1);
+
+const buttonEvent = async () => {
+    const reviewCriteria = await togetherProductService.getReview(productId, page, layout.showListReview);
+    let nowPage = reviewCriteria.criteria.page
+    let endPage = reviewCriteria.criteria.endPage;
+
+    if (endPage === nowPage) {
+        reviewNextButton.disabled = true;
+    }
+
+    reviewPrevButton.addEventListener("click",() => {
+        nowPage--;
+        if (nowPage === 1) {
+            reviewPrevButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            reviewPrevButton.disabled = false;
+        }
+        if (endPage >= nowPage) {
+            reviewNextButton.disabled = false;
+        }
+
+        showList(productId, page = nowPage);
+    });
+
+    reviewNextButton.addEventListener("click", () => {
+        nowPage++;
+        if (endPage <= nowPage){
+            reviewNextButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            reviewPrevButton.disabled = false;
+        }
+
+        showList(productId, page = nowPage);
+    });
+
+}
+
+buttonEvent();
+
+
+// 문의 목록
+const inquiryPrevButton = document.querySelector(".inquiry-wrap .prev");
+const inquiryNextButton = document.querySelector(".inquiry-wrap .next");
+
+const showInquiryList = async (productId, page) => {
+    const inquiriesCriteria = await togetherProductService.getInquiry(productId, page, layout.showListInquiry);
+    console.log(inquiriesCriteria)
+
+    return inquiriesCriteria;
+
+}
+
+showInquiryList(productId, page = 1);
+
+const inquiryButtonEvent = async () => {
+    const inquiriesCriteria = await togetherProductService.getInquiry(productId, page, layout.showListInquiry);
+    let nowPage = inquiriesCriteria.criteria.page
+    let endPage = inquiriesCriteria.criteria.endPage;
+
+    if (endPage === nowPage) {
+        inquiryNextButton.disabled = true;
+    }
+
+    inquiryPrevButton.addEventListener("click",() => {
+        nowPage--;
+        if (nowPage === 1) {
+            inquiryPrevButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            inquiryPrevButton.disabled = false;
+        }
+        if (endPage >= nowPage) {
+            inquiryNextButton.disabled = false;
+        }
+
+        showInquiryList(productId, page = nowPage);
+    });
+
+    inquiryNextButton.addEventListener("click", () => {
+        nowPage++;
+        if (endPage <= nowPage){
+            inquiryNextButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            inquiryPrevButton.disabled = false;
+        }
+
+        showInquiryList(productId, page = nowPage);
+    });
+
+}
+
+inquiryButtonEvent();
+
+// 문의 내용 보기
+const tableBody = document.querySelector(".table-wrap tbody");
+
+tableBody.addEventListener("click", async (e) => {
+    const btn = e.target;
+    if (!btn.classList.contains("btn-title")) return;
+
+    const inquiryItem = btn.closest(".inquiry-item");
+    const answerItem = inquiryItem.nextElementSibling;
+    const answerWrap = answerItem.querySelector(".answer-wrap");
+
+    if (answerItem.classList.contains("hidden")) {
+        const inquiryId = inquiryItem.dataset.inquiryId;
+        const answers = await togetherProductService.getAnswer(inquiryId);
+        console.log(answers);
+        layout.showAnswer(answerWrap, answers);
+        answerItem.classList.remove("hidden");
+    } else {
+        answerItem.classList.add("hidden");
+    }
+});
+
+
+// #######################문의하기 버튼######################
+submitBtn.addEventListener("click", async (e) => {
+    const title = document.querySelector(".form-content .title").value;
+    const content = document.querySelector(".content").value;
+    const productId = product.id;
+
+    const inquiry = {
+        productInquiryTitle: title,
+        productInquiryContent: content,
+        memberId: 2,
+        productId: productId
+    };
+
+    console.log(inquiry.productId, inquiry.productInquiryTitle, inquiry.productInquiryContent)
+
+    const result = await togetherProductService.inquiry(inquiry);
+
+    if (result) {
+        console.log("등록 완료", result);
+        alert("문의가 등록되었습니다!");
+    } else {
+        alert("등록 실패");
+    }
+
+    document.querySelector(".form-content .title").value = "";
+    document.querySelector(".content").value = "";
+
+    showInquiryList(productId, page = 1);
+
 })
 
 
-})

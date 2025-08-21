@@ -14,8 +14,7 @@ mails.forEach((mail) => {
         const selectedText = e.target.innerText;
 
         if (selectedText === "직접 입력") {
-            mailValue.outerHTML = `<input type="text" class="self" placeholder="직접 입력">`;
-
+            mailValue.outerHTML = `<input type="text" class="self" id="self" placeholder="직접 입력">`;
             mailValue = document.querySelector(".self");
             mailValue.focus();
         } else {
@@ -33,11 +32,7 @@ mails.forEach((mail) => {
 });
 
 // 열기
-chooseButton.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("dropdown__item")) {
-        mailForm.classList.toggle("active-domain");
-    }
-});
+
 
 // 휴대폰 인증번호 받기 버튼
 const phone = document.querySelector(".phone-input");
@@ -53,31 +48,7 @@ phone.addEventListener("keyup", (e) => {
 });
 
 // 이메일 형식 오류 메세지
-const mailError = document.querySelector(".mail-error");
 
-const printMailError = () => {
-    mailError.innerHTML = `<p class="error-message">이메일을 입력해주세요.</p>`;
-};
-
-// 비밀번호 형식 오류 메세지
-const passwordError = document.querySelector(".password-error");
-
-const printPasswordError = () => {
-    passwordError.innerHTML = `<p class="error-message">영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합</p>`;
-};
-
-// 비밀번호 최소 형식 오류 메세지
-
-const printPasswordMinError = () => {
-    passwordError.innerHTML = `<p class="error-message">최소 10자이상 입력</p>`;
-};
-
-// 비밀번호 확인 오류 메세지
-const passwordCheckError = document.querySelector(".password-error");
-
-const printPasswordCheckError = () => {
-    passwordCheckError.innerHTML = `<p class="error-message">동일한 비밀번호를 입력</p>`;
-};
 
 // 이름 오류 메세지
 const nameError = document.querySelector(".name-error");
@@ -228,20 +199,63 @@ const getAddressWindow = () => {
         }
     }).open();
 }
+
+
+
+
+
+
+
 const signupbutton = document.getElementById("signupbutton")
 signupbutton.addEventListener("click",(e)=>{
+    const birthList = document.querySelectorAll(".birthinput");
+    const birth = document.querySelector("input[name=memberBirth]")
+    let text = "";
 
-    const emailInput = document.querySelector(".emailinputtext");
-    const errorEmailDiv = document.querySelector(".mail-error");
-    const errorPasswordDiv = document.querySelector(".password-error");
-    const passwordInput =document.querySelector(".idinputbox")
+    birthList.forEach((birth)=>{
+        text+=birth.value+"-" ;
+    });
+    birth.value=text.substring(0,text.length-1);
+
+
     const errorNameDiv = document.querySelector(".name-error");
-    const nameInput =document.getElementById("nameinput")
+    const nameInput =document.getElementById("nameinput");
+    const phoneInput = document.querySelector(".phone-input");
+    const errorPhoneDiv = document.querySelector(".phone-error");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^[A-Za-z\d]{6,}$/;
+    const phoneRegex = /^01\d{8,9}$/;
+    const birthRegex = /^(19\d{2}|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
 
     let Error = false;
 
+    if (!emailRegex.test(emailInput.value)) {
+        Error = true;
+        alert("이메일 형식을 확인해주세요.")
+    }
+    if(!passwordRegex.test(passwordInput.value)){
+        Error=true;
+        alert("패스워드 형식을 확인해주세요.");
+    }
+    if(!phoneRegex.test(phoneInput.value)){
+        Error=true;
+        alert("휴대폰 번호를 정확하게 입력해주세요.");
+    }
+    if(!birthRegex.test(birth.value)){
+        Error=true;
+        alert("생년월일을 정확하게 입력해주세요.");
+    }
+
+
+
+
     if (!emailInput.value) {
         errorEmailDiv.style.display = "block";
+        Error = true;
+    }
+    if(!phoneInput.value){
+        errorPhoneDiv.style.display="block";
         Error = true;
     }
     if (!passwordInput.value) {
@@ -252,32 +266,20 @@ signupbutton.addEventListener("click",(e)=>{
         errorNameDiv.style.display = "block";
         Error = true;
     }
+
+
     if (Error) {
         e.preventDefault();
-        return;
     }
 
-    const birthList = document.querySelectorAll(".birthinput");
-    const birth = document.querySelector("input[name=memberBirth]")
-    let text = "";
 
-    birthList.forEach((birth)=>{
-        text+=birth.value+"-" ;
-    });
-    birth.value=text.substring(0,text.length-1);
 
-    console.log((birth.value))
 
 })
 const emailInput = document.querySelector(".emailinputtext");
+const arCheck = new Array(1).fill(false);
+const signupButton = document.getElementById("signupbutton")
 
-emailInput.addEventListener("blur", async () => {
-    const member = emailInput.value;
-    await memberService.checkEmail(
-        { memberEmail: member },
-        memberLayout.checkEmail
-    );
-});
 
 
 

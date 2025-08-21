@@ -15,8 +15,11 @@ public class ReviewDTO {
     private String reviewContent;
     private Status reviewStatus;
     private Long memberId;
+    private String memberName;
     private Long requestId;
     private Long productId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String reviewImageUrl;
+    private Status reviewImageStatus;
+    private String createdDate;
+    private String updatedDate;
 }

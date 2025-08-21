@@ -3,6 +3,7 @@ use app;
 create table tbl_member(
     id bigint unsigned auto_increment primary key,
     member_email varchar(255) unique,
+    member_kakao_email varchar(255),
     member_password varchar(255),
     member_name varchar(255),
     member_birth DATE,
@@ -17,5 +18,8 @@ create table tbl_member(
 );
 
 select * from tbl_member;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d2469626cda6797e6912b5bbaedf6517488e0112

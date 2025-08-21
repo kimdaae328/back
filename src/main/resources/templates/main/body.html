@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/css/main/body.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 
 </head>
 <body>
+    <header th:replace="~{/main/header.html :: header}"></header>
     <div id="__next" class="main">
         <div>
             <!-- main body 시작 -->
@@ -643,7 +646,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -689,7 +692,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="ranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -735,7 +738,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -781,7 +784,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -827,7 +830,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -873,7 +876,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -919,7 +922,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -965,7 +968,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -1011,7 +1014,7 @@
                                         <div class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
                                             <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                                 <div href="" class="ranking-product-thumbnail">
-                                                    <a href="" clasaranking-product-media">
+                                                    <a href="" class="aranking-product-media">
                                                         <div class="ranking-product-img">
                                                            <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -1864,6 +1867,8 @@
             </div>
         </div>
     </div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
+<script src="/js/main/header.js"></script>
 <script src="/js/main/body.js"></script>
 </html>

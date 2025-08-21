@@ -1,9 +1,7 @@
 package com.example.youeatieat.mapper;
 
-import com.example.youeatieat.domain.MemberVO;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.repository.MemberDAO;
-import com.example.youeatieat.service.MemberService;
 import com.example.youeatieat.service.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -49,5 +47,13 @@ public class MemberMapperTests {
         foundMember.ifPresent((member)->{
             log.info("member:{}",member);
         });
+    }
+    @Test
+    public void kakaoLoginTest(){
+//        memberMapper.selectMemberByKakaoEmail("test1234@kakao.com");
+//        memberDAO.findMemberByKakaoEmail("test1234@kakao.com");
+        memberServiceImpl.getKakaoMember("test1234@kakao.com");
+
+
     }
 }

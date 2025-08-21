@@ -10,7 +10,7 @@
         where product_id = #{productId}
           and member_id = #{memberId}
     </delete>
-    <select id="isLiked" resultType="boolean">
+    <select id="likeStatus" resultType="boolean">
         select count(*) > 0
         from tbl_like
         where product_id = #{productId}
