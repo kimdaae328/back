@@ -19,8 +19,3 @@ create table tbl_request(
 );
 
 select * from tbl_request;
-
-insert into tbl_request
-(request_amount, request_price, request_status, member_id, group_index_number, product_id, created_date, updated_date)
-values
-    (5, 30000, 'done', 117, 1, 7, now(), now()) -- FK (1,6) 참조

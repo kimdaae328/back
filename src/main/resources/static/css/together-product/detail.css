@@ -685,6 +685,7 @@ img {
 
 /* 버튼 */
 .btn-wish {
+    outline: none;
     display: block;
     padding: 0px 10px;
     text-align: center;
@@ -1336,16 +1337,6 @@ img {
     color: rgb(51, 51, 51);
 }
 
-.sort-options .sort-btn:first-child:after {
-    content: "";
-    position: absolute;
-    top: 4px;
-    height: 62.5%;
-    border-left: 1px solid rgb(153, 153, 153);
-    margin-left: 8px;
-    margin-right: 8px;
-}
-
 /* notice-list */
 .notice-item {
     display: flex;
@@ -1455,6 +1446,25 @@ img {
     width: 100%;
     padding-top: 19px;
     padding-right: 20px;
+}
+
+.null-review {
+    position: relative;
+    width: 100%;
+    padding-top: 119px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.null-message {
+    margin-top: 15px;
+    margin-bottom: 28px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgb(181, 181, 181);
 }
 
 .review-date {

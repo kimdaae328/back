@@ -11,4 +11,15 @@ create table tbl_group(
 
 select * from tbl_group;
 
+INSERT INTO tbl_group (group_index_number, product_id, group_cancelable)
+VALUES
+    (1, 1, 'able'),
+    (2, 2, 'able'),
+    (3, 3, 'unable'),
+    (4, 2, 'able'),
+    (5, 3, 'unable')
+ON DUPLICATE KEY UPDATE
+                     group_cancelable = VALUES(group_cancelable),
+                     updated_date = CURRENT_TIMESTAMP;
+
 drop table tbl_group;
