@@ -67,6 +67,18 @@ const togetherProductService = (() => {
             return data;
         };
 
+    //     리뷰 상세
+
+    const getReviewDetail = async (reviewId) => {
+        const response = await fetch(`/api/product/review/${reviewId}`);
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        console.log(data)
+        return data;
+    };
+
+
     // 문의하기
     const inquiry = async (ProductInquiry) => {
         const response = await fetch("/api/product/inquiry",{
@@ -84,7 +96,7 @@ const togetherProductService = (() => {
         return await response.json();
     };
 
-    // 리뷰 목록
+    // 문의 목록
 
     const getInquiry = async (productId, page, callback) => {
         const response = await fetch(`/api/product/${productId}/inquiry/${page}`);
@@ -106,6 +118,15 @@ const togetherProductService = (() => {
         return data;
     };
 
-    return {save, like, unlike, getReview, inquiry, getInquiry};
+    // 문의 답변
+    const getAnswer = async (inquiryId) => {
+        const response = await fetch(`/api/product/inquiry/${inquiryId}/answer`);
+        if (!response.ok) {
+            return []
+        }
+        return await response.json();
+    };
+
+    return {save, like, unlike, getReview, getReviewDetail, inquiry, getInquiry, getAnswer};
 
 })();

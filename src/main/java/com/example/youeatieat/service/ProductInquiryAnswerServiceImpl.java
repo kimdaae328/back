@@ -22,7 +22,7 @@ public class ProductInquiryAnswerServiceImpl implements ProductInquiryAnswerServ
     private ProductInquiryAnswerDAO productInquiryAnswerDAO;
 
     @Override
-    public Optional<ProductInquiryAnswerDTO> selectAnswerById(Long id) {
-        return productInquiryAnswerDAO.selectAnswerByProductId(id).stream().findFirst();
+    public List<ProductInquiryAnswerDTO> selectAnswerById(Long id) {
+        return productInquiryAnswerDAO.selectAnswerByProductId(id);
     }
 }

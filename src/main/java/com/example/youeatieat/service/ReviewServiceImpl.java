@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +41,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public int countReview(Long id) {
         return reviewDAO.countReview(id);
+    }
+
+    @Override
+    public Optional<ReviewDTO> selectReviewById(Long id) {
+        return reviewDAO.findByid(id);
     }
 }

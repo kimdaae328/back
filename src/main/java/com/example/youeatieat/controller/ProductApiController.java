@@ -1,5 +1,6 @@
 package com.example.youeatieat.controller;
 
+import com.example.youeatieat.common.exception.handler.NotFoundReviewException;
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.*;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -20,6 +22,7 @@ public class ProductApiController {
     private final LikeServiceImpl likeService;
     private final ReviewServiceImpl reviewService;
     private final ProductInquiryServiceImpl productInquiryService;
+    private final ProductInquiryAnswerServiceImpl productInquiryAnswerService;
 
     //    장바구니 넣기
     @PostMapping("carts/save")
@@ -62,6 +65,13 @@ public class ProductApiController {
 
     }
 
+//    리뷰 상세
+    @GetMapping("/review/{reviewId}")
+    public ResponseEntity<?> getReviewDetail(@PathVariable Long reviewId) {
+        Optional<ReviewDTO> review = reviewService.selectReviewById(reviewId);
+        return review.map(ResponseEntity::ok).orElseThrow(NotFoundReviewException::new);
+    }
+
 //    상품 문의하기
     @PostMapping("/inquiry")
     public ResponseEntity<?> inquiryProduct(@RequestBody ProductInquiryDTO productInquiryDTO) {
@@ -80,6 +90,13 @@ public class ProductApiController {
         }
         return ResponseEntity.ok(productInquiryCriteriaDTO);
 
+    }
+
+    //    문의 답변
+        @GetMapping("/inquiry/{inquiryId}/answer")
+        public ResponseEntity<?> getAnswerByInquiryId(@PathVariable Long inquiryId) {
+            List<ProductInquiryAnswerDTO> answer = productInquiryAnswerService.selectAnswerById(inquiryId);
+            return ResponseEntity.ok().body(answer);
     }
 
 }

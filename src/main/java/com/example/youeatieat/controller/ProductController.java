@@ -27,7 +27,6 @@ public class ProductController {
 
     private final ProductServiceImpl productServiceImpl;
     private final NoticeServiceImpl noticeServiceImpl;
-    private final ReviewServiceImpl reviewServiceImpl;
 
 
     //   상품 목록으로 이동

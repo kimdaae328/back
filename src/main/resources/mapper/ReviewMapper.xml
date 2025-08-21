@@ -13,4 +13,9 @@
         where review_status = 'active'
         and product_id = #{productId}
     </select>
+    <select id="selectReviewById">
+        select id, member_name, review_content, review_status, member_id, request_id, product_id, review_image_url, review_image_status, created_date, updated_date
+        from view_review_review_image
+        where id = #{id}
+    </select>
 </mapper>
