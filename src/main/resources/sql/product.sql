@@ -21,3 +21,9 @@ alter table tbl_product modify product_category enum('vegetables','fruits','fish
 
 select * from tbl_product;
 
+update tbl_product
+set
+    product_info_image_url = '/images/product-images/grape_info.jpg'
+where id = 2;
+
+

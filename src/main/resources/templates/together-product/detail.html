@@ -20,7 +20,7 @@
                             <div class="product-top">
                                 <div class="product-img-section">
                                     <div class="product-img">
-                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E720x%3E936/cropcenter/720x936/quality/85/src/product/image/2e98dcf1-3940-499a-9476-0e1cb1908074.jpg">
+                                        <img th:src="@{${product.productTitleImageUrl}}">
                                     </div>
                                 </div>
                                 <div class="product-info-section">
@@ -157,7 +157,7 @@
                                     <div id="product-goods" class="goods-wrap">
                                         <div class="goods-intro">
                                             <div class="pic">
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%3E1010x/quality/90/src/shop/data/goodsview/20220726/gv40000392412_1.jpg">
+                                                <img th:src="@{${product.productInfoImageUrl}}">
                                             </div>
                                         </div>
                                     </div>
@@ -165,10 +165,10 @@
                                         <div class="detail-notice-wrap">
                                             <h3>상품고시정보</h3>
                                             <ul class="ul-table">
-                                                <li class="ul-table-th">품목 또는 명칭</li>
-                                                <li class="ul-table-td">식감이 좋은 아삭 복숭아(딱복) 1.2kg</li>
+                                                <li class="ul-table-th"></li>
+                                                <li class="ul-table-td" th:text = "${product.productName}">식감이 좋은 아삭 복숭아(딱복) 1.2kg</li>
                                                 <li class="ul-table-th">포장단위별 내용물의 용량(중량), 수량, 크기</li>
-                                                <li class="ul-table-td">1.2kg</li>
+                                                <li class="ul-table-td" th:text = "${product.productQuantity}">1.2kg</li>
                                                 <li class="ul-table-th">생산자, 수입품의 경우 수입자를 함께 표기</li>
                                                 <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
                                                 <li class="ul-table-th">｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지</li>
@@ -183,11 +183,11 @@
                                                 <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
                                                 <li class="ul-table-th">상품구성</li>
                                                 <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                                <li class="ul-table-th">보관방법 또는 취급방법</li>
-                                                <li class="ul-table-td">냉장보관</li>
+                                                <li class="ul-table-th">구매 최소 수량</li>
+                                                <li class="ul-table-td" th:text = "${product.productMinNumber}"></li>
                                                 <li class="ul-table-th">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
                                                 <li class="ul-table-td">상품설명 및 상품이미지 참조</li>
-                                                <li class="ul-table-th">소비자 상담 관련 전화번호</li>
+                                                <li class="ul-table-th"></li>
                                             </ul>
                                         </div>
                                         <div class="why-wrap">
