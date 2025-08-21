@@ -7,22 +7,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Getter @Setter @ToString
 @EqualsAndHashCode(of="id")
-public class ReviewDTO {
+public class ReviewImageDTO {
     private Long id;
-    private String reviewContent;
-    private Status reviewStatus;
-    private Long memberId;
-    private String memberName;
-    private Long requestId;
-    private Long productId;
     private String reviewImageUrl;
+    private int reviewImageSortOrder;
+    private Long reviewId;
     private Status reviewImageStatus;
     private String createdDate;
     private String updatedDate;
-    private List<ReviewImageDTO> images;
 }

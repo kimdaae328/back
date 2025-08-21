@@ -4,6 +4,17 @@ const layout = (() => {
         let text = ``;
 
         reviewCriteria.reviews.forEach((review) => {
+            let imagesHtml = ``;
+            if (review.images && review.images.length > 0) {
+                review.images.forEach(images => {
+                    imagesHtml += `
+                        <button type="button" class="review-photo popup-trigger" 
+                                data-target="#popup1" data-review-id="${review.id}">
+                            <img src="${images.reviewImageUrl}" alt="리뷰 이미지">
+                        </button>
+                    `;
+                })
+            }
             text += `
                 <li class="review-item">
                     <div class="review-author">
@@ -18,12 +29,7 @@ const layout = (() => {
                         <p class="review-text">${review.reviewContent}</p>
                         </div>
                         <div class="review-photo-group">
-                            <button type="button" class="review-photo popup-trigger" data-target="#popup1"  data-review-id="${review.id}">
-                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                            </button>
-                            <button type="button" class="review-photo popup-trigger" data-target="#popup1" data-review-id="${review.id}">
-                                <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">
-                            </button>
+                            ${imagesHtml}
                         </div>
                         <div class="review-content-footer">
                             <span class="review-date">${review.createdDate}</span>

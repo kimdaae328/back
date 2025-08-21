@@ -10,4 +10,10 @@ create table tbl_review_image(
                              references tbl_review(id)
 );
 
+select * from tbl_review_image;
+
+insert into tbl_review_image (review_image_url, review_image_sort_order, review_id)
+values ('', '', '')
+
+
 drop table tbl_review_image;

@@ -1,6 +1,8 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.handler.NotFoundReviewException;
+import com.example.youeatieat.domain.ReviewImageVO;
+import com.example.youeatieat.domain.ReviewVO;
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.*;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,9 @@ public class ProductApiController {
     private final ReviewServiceImpl reviewService;
     private final ProductInquiryServiceImpl productInquiryService;
     private final ProductInquiryAnswerServiceImpl productInquiryAnswerService;
+    private final ReviewImageServiceImpl reviewImageService;
+    private final ReviewDTO reviewDTO;
+    private final ReviewImageDTO reviewImageDTO;
 
     //    장바구니 넣기
     @PostMapping("carts/save")
@@ -60,12 +65,24 @@ public class ProductApiController {
         if (reviewCriteriaDTO == null || reviewCriteriaDTO.getReviews().size() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(reviewCriteriaDTO);
         }
+
+        reviewCriteriaDTO.getReviews().forEach(review -> {
+            if (review.getId() == null) {
+                log.warn("Review ID is null for review: {}", review);
+            } else {
+                log.info("Review ID: {}", review.getId());
+                List<ReviewImageDTO> images = reviewImageService.getReviewImages(review.getId());
+                review.setImages(images);
+            }
+
+        });
+
         reviewCriteriaDTO.setTotalCount(count);
         return ResponseEntity.ok(reviewCriteriaDTO);
 
     }
 
-//    리뷰 상세
+    //    리뷰 상세
     @GetMapping("/review/{reviewId}")
     public ResponseEntity<?> getReviewDetail(@PathVariable Long reviewId) {
         Optional<ReviewDTO> review = reviewService.selectReviewById(reviewId);
@@ -88,6 +105,7 @@ public class ProductApiController {
         if (productInquiryCriteriaDTO == null || productInquiryCriteriaDTO.getProductInquiries().size() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productInquiryCriteriaDTO);
         }
+
         return ResponseEntity.ok(productInquiryCriteriaDTO);
 
     }

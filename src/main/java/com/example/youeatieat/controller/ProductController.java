@@ -4,8 +4,10 @@ import com.example.youeatieat.common.exception.NoProductException;
 import com.example.youeatieat.dto.NoticeDTO;
 import com.example.youeatieat.dto.ProductDTO;
 import com.example.youeatieat.dto.ReviewDTO;
+import com.example.youeatieat.dto.ReviewImageDTO;
 import com.example.youeatieat.service.NoticeServiceImpl;
 import com.example.youeatieat.service.ProductServiceImpl;
+import com.example.youeatieat.service.ReviewImageServiceImpl;
 import com.example.youeatieat.service.ReviewServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ public class ProductController {
 
     private final ProductServiceImpl productServiceImpl;
     private final NoticeServiceImpl noticeServiceImpl;
+    private final ReviewImageServiceImpl reviewImageServiceImpl;
 
 
     //   상품 목록으로 이동
@@ -49,6 +52,7 @@ public class ProductController {
         model.addAttribute("product", product);
         List<NoticeDTO> notices = noticeServiceImpl.findAll();
         model.addAttribute("notices", notices);
+
         return "/together-product/detail";
     }
 
