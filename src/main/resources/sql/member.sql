@@ -19,6 +19,10 @@ create table tbl_member(
 select * from tbl_member;
 delete from tbl_member where id=15;
 
+update tbl_member
+set member_name = '테스트'
+where id = 1;
+
 
 drop table tbl_member;
 

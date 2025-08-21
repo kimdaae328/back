@@ -20,6 +20,14 @@ create table tbl_request(
 
 select * from tbl_request;
 
+INSERT INTO tbl_request (request_amount, request_price, request_status, member_id, group_index_number, product_id)
+VALUES
+    (2, 50000, 'done', 1, 1, 1),
+    (1, 25000, 'done', 2, 1, 1),
+    (3, 75000, 'cancel', 3, 2, 2),
+    (1, 30000, 'done', 1, 2, 2),
+    (5, 125000, 'done', 2, 3, 3),
+    (2, 50000, 'cancel', 3, 3, 3);
+
 drop table tbl_request;
 
-alter table tbl_request add updated_date datetime default current_timestamp;

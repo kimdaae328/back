@@ -178,35 +178,35 @@ toggleSubmitButton();
 
 // btn-wish 버튼
 const wishButtons = document.querySelectorAll(".btn-wish");
-
 wishButtons.forEach((button) => {
+    console.log(product.likeStatus)
+    button.classList.toggle("on", product.likeStatus);
     button.addEventListener("click", async () => {
-
         const like = {
             productId: product.id,
             likeStatus: product.likeStatus
-        }
-
+        };
         const isActive = button.classList.contains("on");
         let success = false;
-
-
-
         if (isActive) {
-            // 이미 찜된 상태 -> 취소하기
             success = await togetherProductService.unlike(like);
             if (success) {
                 button.classList.remove("on");
+                like.likeStatus = false;
+                console.log(like.likeStatus);
             }
         } else {
-            // 찜하기
             success = await togetherProductService.like(like);
             if (success) {
                 button.classList.add("on");
+                like.likeStatus = true;
+                console.log(like.likeStatus);
             }
         }
     });
 });
+
+
 
 // 사진후기 미리보기 이미지
 const reviewImgButtons = document.querySelectorAll(
@@ -223,10 +223,10 @@ reviewImgButtons.forEach((button) => {
 // 댓글 총개수
 const reviewItems = document.querySelectorAll(".review-list .review-item");
 const tabLinkSpan = document.querySelector(".tab-link .count");
-const totalSpan = document.querySelector(".review-top-bar .total");
+
 
 tabLinkSpan.textContent = reviewItems.length;
-totalSpan.textContent = reviewItems.length;
+
 
 //###################################  장바구니  ###################################
 const saveInCarts = document.querySelectorAll("button.btn-cart");
@@ -274,7 +274,152 @@ saveInCarts.forEach((saveInCart)=>{
                 }, 1500);
             }
         }
+    })
+})
+
+// 리뷰 목록
+const reviewPrevButton = document.querySelector(".review-wrap .prev");
+const reviewNextButton = document.querySelector(".review-wrap .next");
+
+const showList = async (productId, page) => {
+    const reviewsCriteria = await togetherProductService.getReview(productId, page, layout.showListReview);
+    console.log(reviewsCriteria)
+
+    return reviewsCriteria;
+
+}
+
+showList(productId, page = 1);
+
+const buttonEvent = async () => {
+    const reviewCriteria = await togetherProductService.getReview(productId, page, layout.showListReview);
+    let nowPage = reviewCriteria.criteria.page
+    let endPage = reviewCriteria.criteria.endPage;
+
+    if (endPage === nowPage) {
+        reviewNextButton.disabled = true;
+    }
+
+    reviewPrevButton.addEventListener("click",() => {
+        nowPage--;
+        if (nowPage === 1) {
+            reviewPrevButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            reviewPrevButton.disabled = false;
+        }
+        if (endPage >= nowPage) {
+            reviewNextButton.disabled = false;
+        }
+
+        showList(productId, page = nowPage);
+    });
+
+    reviewNextButton.addEventListener("click", () => {
+        nowPage++;
+        if (endPage <= nowPage){
+            reviewNextButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            reviewPrevButton.disabled = false;
+        }
+
+        showList(productId, page = nowPage);
+    });
+
+}
+
+buttonEvent();
+
+
+// 문의 목록
+
+
+
+// 리뷰 목록
+const inquiryPrevButton = document.querySelector(".inquiry-wrap .prev");
+const inquiryNextButton = document.querySelector(".inquiry-wrap .next");
+
+const showInquiryList = async (productId, page) => {
+    const inquiriesCriteria = await togetherProductService.getInquiry(productId, page, layout.showListInquiry);
+    console.log(inquiriesCriteria)
+
+    return inquiriesCriteria;
+
+}
+
+showInquiryList(productId, page = 1);
+
+const inquiryButtonEvent = async () => {
+    const inquiriesCriteria = await togetherProductService.getInquiry(productId, page, layout.showListInquiry);
+    let nowPage = inquiriesCriteria.criteria.page
+    let endPage = inquiriesCriteria.criteria.endPage;
+
+    if (endPage === nowPage) {
+        inquiryNextButton.disabled = true;
+    }
+
+    inquiryPrevButton.addEventListener("click",() => {
+        nowPage--;
+        if (nowPage === 1) {
+            inquiryPrevButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            inquiryPrevButton.disabled = false;
+        }
+        if (endPage >= nowPage) {
+            inquiryNextButton.disabled = false;
+        }
+
+        showInquiryList(productId, page = nowPage);
+    });
+
+    inquiryNextButton.addEventListener("click", () => {
+        nowPage++;
+        if (endPage <= nowPage){
+            inquiryNextButton.disabled = true;
+        }
+        if (nowPage > 1) {
+            inquiryPrevButton.disabled = false;
+        }
+
+        showInquiryList(productId, page = nowPage);
+    });
+
+}
+
+inquiryButtonEvent();
+
+
+// #######################문의하기 버튼######################
+submitBtn.addEventListener("click", async (e) => {
+    const title = document.querySelector(".form-content .title").value;
+    const content = document.querySelector(".content").value;
+    const productId = product.id;
+
+    const inquiry = {
+        productInquiryTitle: title,
+        productInquiryContent: content,
+        memberId: 2,
+        productId: productId
+    };
+
+    console.log(inquiry.productId, inquiry.productInquiryTitle, inquiry.productInquiryContent)
+
+    const result = await togetherProductService.inquiry(inquiry);
+
+    if (result) {
+        console.log("등록 완료", result);
+        alert("문의가 등록되었습니다!");
+    } else {
+        alert("등록 실패");
+    }
+
+    document.querySelector(".form-content .title").value = "";
+    document.querySelector(".content").value = "";
+
+    showInquiryList(productId, page = 1);
+
 })
 
 
-})
