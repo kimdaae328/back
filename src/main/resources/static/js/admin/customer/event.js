@@ -238,6 +238,15 @@ const showList = async (page = 1, keyword) => {
     return customersCriteria;
 }
 
+let currentLoader = "";
+const setList = (loader) => {
+    currentLoader = loader;
+    currentLoader(1);
+    customerLayout.connectToPagination((page) => currentLoader(page));
+};
+
+setList(showList);
+
 // 일반 회원
 const showNonSubscribedList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getNonSubscribedCustomerList(page, keyword, customerLayout.showNonSubscribedList);
@@ -255,14 +264,7 @@ const showSubscribedList = async (page = 1, keyword) => {
     return customersCriteria;
 };
 
-let currentLoader = "";
-const setList = (loader) => {
-    currentLoader = loader;
-    currentLoader(1);
-    customerLayout.connectToPagination((page) => currentLoader(page));
-};
 
-setList(showList);
 
 // ########################### 회원상세 ###########################
 // 일반회원 상세 모달 창 열고 닫는 이벤트

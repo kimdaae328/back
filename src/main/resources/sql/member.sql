@@ -18,8 +18,3 @@ create table tbl_member(
 );
 
 select * from tbl_member;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d2469626cda6797e6912b5bbaedf6517488e0112

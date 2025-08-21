@@ -22,7 +22,7 @@ public class ProviderHandler implements TypeHandler<Provider> {
     @Override
     public Provider getResult(ResultSet rs, String columnName) throws SQLException {
         return switch (rs.getString(columnName)){
-            case "youeatieat" -> Provider.YOUEAT_IEAT;
+            case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
         };
@@ -31,7 +31,7 @@ public class ProviderHandler implements TypeHandler<Provider> {
     @Override
     public Provider getResult(ResultSet rs, int columnIndex) throws SQLException {
         return switch (rs.getString(columnIndex)){
-            case "youeatieat" -> Provider.YOUEAT_IEAT;
+            case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
         };
@@ -40,7 +40,7 @@ public class ProviderHandler implements TypeHandler<Provider> {
     @Override
     public Provider getResult(CallableStatement cs, int columnIndex) throws SQLException {
         return switch (cs.getString(columnIndex)){
-            case "youeatieat" -> Provider.YOUEAT_IEAT;
+            case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
         };

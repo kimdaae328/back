@@ -1,7 +1,6 @@
 const customerLayout = (() => {
     // 회원 목록 테이블 - layout
     const customerRowTemplate  = (customer) => {
-        console.log(customer);
         return `
         <tr>
             <td class="td-name">
@@ -77,10 +76,6 @@ const customerLayout = (() => {
                 </a>
             </li>
             `;
-
-            // console.log("--------------"+ i);
-            // console.log("--------------??"+ criteria.page);
-            // console.log("확인한다다ㅏ앙ㅇ", criteria)
         }
 
         pagination.innerHTML = html;

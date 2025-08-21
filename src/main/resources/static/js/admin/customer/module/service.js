@@ -1,24 +1,9 @@
 const customerService = (() => {
-    // // 검색
-    // const searchService = async (page,keyword) => {
-    //     const response = await fetch(`/api/admin/customers/list/${page}?keyword=${keyword}`);
-    //
-    //     if (response.ok) {
-    //         console.log("키워드 전달 문제없음둥둥", keyword)
-    //     } else {
-    //         console.log("키워드 전달 문제있음둥")
-    //     }
-    //
-    //     return response.json();
-    // }
-
-
     // 회원 목록
     const getCustomerList = async (page, keyword = "", callback) => {
         const response = await fetch(`/api/admin/customers/list/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
 
-        // console.log(customersCriteria)
         if(callback){
             setTimeout(() => {
                 callback(customersCriteria);
@@ -58,8 +43,6 @@ const customerService = (() => {
         const response = await fetch(`/api/admin/customers/list/nonSubscribed/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
 
-        console.log("여기다", customersCriteria)
-
         if(callback){
             setTimeout(() => {
                 callback(customersCriteria);
@@ -84,9 +67,6 @@ const customerService = (() => {
         const response = await fetch(`/api/admin/customers/list/subscribed/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
 
-        // console.log("구독" + response)
-        // console.log("구독" + customersCriteria)
-
         if(callback){
             setTimeout(() => {
                 callback(customersCriteria);
@@ -95,8 +75,6 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("구독 회원 존재");
-            console.log(response)
-            console.log(customersCriteria)
         }else if(response.status === 404){
             console.log("구독 회원 없음");
         }else {

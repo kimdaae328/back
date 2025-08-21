@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum Provider {
-    YOUEAT_IEAT("youeatieat"), KAKAO("kakao");
+    YOU_I("you_i"), KAKAO("kakao");
 
     private final String value;
     private static final Map<String, Provider> STATUS_MAP =

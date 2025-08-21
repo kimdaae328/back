@@ -32,7 +32,7 @@
     </select>
 
     <select id="selectDetailCustomer">
-        select id, member_email, member_password, member_name, member_birth, member_phone, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date
+        select id, member_email, member_name, member_birth, member_phone, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date
         from tbl_member
         where id = #{id}
     </select>
@@ -78,7 +78,7 @@
     </select>
 
     <select id="selectNonSubscribedCustomerAll">
-        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
+        select m.id, m.member_email, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
                v.m_id, s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id,
             ifnull(v.subscription_payment_status, 'failed') as "subscription_payment_status"
         from tbl_member m
@@ -116,7 +116,7 @@
     </select>
 
     <select id="selectSubscribedCustomerAll">
-        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
+        select m.id, m.member_email, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
             v.m_id, s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id,
             ifnull(v.subscription_payment_status, 'failed') as "subscription_payment_status"
         from tbl_member m
