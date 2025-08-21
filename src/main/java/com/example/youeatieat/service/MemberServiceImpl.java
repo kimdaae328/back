@@ -1,6 +1,6 @@
 package com.example.youeatieat.service;
 
-import com.example.youeatieat.common.exception.LoginFailException;
+import com.example.youeatieat.domain.MemberVO;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.repository.AddressDAO;
 import com.example.youeatieat.repository.MemberDAO;
@@ -23,9 +23,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void join(MemberDTO memberDTO) {
-
-        memberDAO.save(memberDTO);
-        log.info(memberDTO.toString());
+        MemberVO vo =toMemberVO (memberDTO);
+        memberDAO.save(vo);
+        memberDTO.setId(vo.getId());
         addressDAO.save(toAddressVO(memberDTO));
     }
 
@@ -38,4 +38,21 @@ public class MemberServiceImpl implements MemberService {
     public Optional<MemberDTO> login(MemberDTO memberDTO) {
         return memberDAO.findMemberByEmailAndMemberPassword(memberDTO);
     }
+
+    @Override
+    public Optional<MemberDTO> getKakaoMember(String kakaoEmail) {
+        return memberDAO.findMemberByKakaoEmail(kakaoEmail);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void joinKakao(MemberDTO memberDTO) {
+//        log.info(memberDTO.toString());
+        MemberVO vo =toMemberVO (memberDTO);
+        log.info(vo.toString());
+        memberDAO.kakaoSave(vo);
+        memberDTO.setId(vo.getId());
+        addressDAO.save(toAddressVO(memberDTO));
+    }
+
 }

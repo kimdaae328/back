@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/css/main/body.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 
 </head>
 <body>
+    <header th:replace="~{/main/header.html :: header}"></header>
     <div id="__next" class="main">
         <div>
             <!-- main body 시작 -->
@@ -1864,6 +1867,8 @@
             </div>
         </div>
     </div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
+<script src="/js/main/header.js"></script>
 <script src="/js/main/body.js"></script>
 </html>

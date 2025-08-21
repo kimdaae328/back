@@ -4,9 +4,6 @@ package com.example.youeatieat.service;
 import com.example.youeatieat.domain.AddressVO;
 import com.example.youeatieat.domain.MemberVO;
 import com.example.youeatieat.dto.MemberDTO;
-import com.example.youeatieat.repository.MemberDAO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,6 +16,10 @@ public interface MemberService {
     public boolean isExistMemberEmail(String memberEmail);
 
     public Optional<MemberDTO> login (MemberDTO memberDTO);
+
+    public Optional<MemberDTO> getKakaoMember(String kakaoEmail);
+
+    public void joinKakao(MemberDTO memberDTO);
 
     default AddressVO toAddressVO(MemberDTO memberDTO){
         return AddressVO.builder()
@@ -33,6 +34,8 @@ public interface MemberService {
         return MemberVO.builder()
                 .memberEmail(memberDTO.getMemberEmail())
                 .memberPassword(memberDTO.getMemberPassword())
+                .memberKakaoEmail(memberDTO.getKakaoEmail())
+                .provider(memberDTO.getProvider())
                 .memberName(memberDTO.getMemberName())
                 .memberPhone(memberDTO.getMemberPhone())
                 .memberBirth(memberDTO.getMemberBirth())

@@ -22,7 +22,7 @@
                         <span class="seller-inner">판매 로그인</span>
                     </button>
                 </div>
-                <form action="/main/login" method="post"  class="seller-login" th:object="${memberDTO}">
+                <form action="/member/login" method="post"  class="seller-login" th:object="${memberDTO}">
                     <div class="login-body">
                         <div>
                             <div class="fail-login"></div>
@@ -67,12 +67,9 @@
                         <div>
                             <div class="login-footer">
                                 <!-- <p class="easy-login">간편 로그인</p> -->
-                                <button type="button" class="joinus-kakao buyer-kakao">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="black">
-                                        <path d="M12 2C6.5 2 2 5.9 2 10.5c0 2.5 1.6 4.7 4.1 6.2L5 22l4.3-2.3c.8.1 1.6.2 2.7.2 5.5 0 10-3.9 10-8.5S17.5 2 12 2z"/>
-                                    </svg>
-
-                                    <p class="joinus-kakao-p">카카오로 계속하기</p>
+                                <button type="button" id="kakao-login" class="joinus-kakao buyer-kakao">
+                                    <img src="/images/main/kakao_login_medium_wide.png">
+<!--                                    <p class="joinus-kakao-p">카카오로 계속하기</p>-->
                                 </button>
                             </div>
                         </div>

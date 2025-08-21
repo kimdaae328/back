@@ -11,7 +11,7 @@
 <body>
     <div id="__next">
         <div>
-            <form action="/main/signup" method="post" th:object="${memberDTO}">
+            <form id="signupForm" action="/member/signup" method="post" th:object="${memberDTO}">
             <div class="signuppage" id="1234">
                 <div class="signuptext">회원가입</div>
                 <div class="signupinput">
@@ -30,7 +30,8 @@
                             <div class="emailinputcontainer">
                                 <div class="emailinput">
                                     <div class="emaillist">
-                                        <input th:field="*{memberEmail}" placeholder="예: marketkurly" type="text" class="emailinputtext">
+                                        <input  placeholder="예: marketkurly" type="text" class="emailinputtext">
+                                        <input  type="hidden" id="memberEmail" th:field="*{memberEmail}">
                                         <div class="emailat">@</div>
                                         <div class="emailchoose">
                                             <button type="button" class="btn-text empty">선택하기</button>
@@ -38,14 +39,14 @@
                                                 <img class="more-mail" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9ImljX2Fycm93X2Rvd25fNDgiPgo8cGF0aCBpZD0iU2hhcGUiIGQ9Ik0yNC4wNzc2IDI2LjczMDFMMjcuODI3NiAyMi4yMzAxQzI4LjIzNDcgMjEuNzQxNiAyNy44ODczIDIxIDI3LjI1MTQgMjFIMTkuNzUxNEMxOS4xMTU2IDIxIDE4Ljc2ODIgMjEuNzQxNiAxOS4xNzUzIDIyLjIzMDFMMjIuOTI1MyAyNi43MzAxQzIzLjIyNTEgMjcuMDkgMjMuNzc3OCAyNy4wOSAyNC4wNzc2IDI2LjczMDFaIiBmaWxsPSIjMzMzMzMzIi8+CjwvZz4KPC9zdmc+Cg==">
                                             </button>
                                             <div class="e-mail-form">
-                                                <button type="button" class="dropdown__item">naver.com</button>
-                                                <button type="button" class="dropdown__item">gmail.com</button>
-                                                <button type="button" class="dropdown__item">hanmail.net</button>
-                                                <button type="button" class="dropdown__item">kakao.com</button>
-                                                <button type="button" class="dropdown__item">daum.net</button>
-                                                <button type="button" class="dropdown__item">hotmail.com</button>
-                                                <button type="button" class="dropdown__item">yahoo.co.kr</button>
-                                                <button type="button" class="dropdown__item">직접 입력</button>
+                                                <button type="button" class="dropdown__item email">naver.com</button>
+                                                <button type="button" class="dropdown__item email">gmail.com</button>
+                                                <button type="button" class="dropdown__item email">hanmail.net</button>
+                                                <button type="button" class="dropdown__item email">kakao.com</button>
+                                                <button type="button" class="dropdown__item email">daum.net</button>
+                                                <button type="button" class="dropdown__item email">hotmail.com</button>
+                                                <button type="button" class="dropdown__item email">yahoo.co.kr</button>
+                                                <button type="button" class="dropdown__item" id="directInput">직접 입력</button>
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +70,7 @@
                             <div class="idinputcontainer">
                                 <div class="idinput">
                                     <div class="idinputlan">
-                                        <input th:field="*{memberPassword}" placeholder="비밀번호를 입력해주세요" type="password" class="idinputbox">
+                                        <input id="passwordinput"th:field="*{memberPassword}" placeholder="비밀번호를 입력해주세요" type="password" class="idinputbox">
                                     </div>
                                 </div>
                                 <div style="display: none" class="error password-error">
@@ -88,11 +89,11 @@
                             <div class="idinputcontainer">
                                 <div class="idinput">
                                     <div class="idinputlan">
-                                        <input placeholder="비밀번호를 한 번 더 입력해주세요" type="password" class="idinputbox">
+                                        <input id="passwordcheck" placeholder="비밀번호를 한 번 더 입력해주세요" type="password" class="idinputbox">
                                     </div>
                                 </div>
-                                <div class="error">
-                                    <!-- <p class="error-message">동일한 비밀번호를 입력</p> -->
+                                <div style="display: none" id="passworderror" class="error">
+                                     <p class="error-message">동일한 비밀번호를 입력해주세요</p>
                                 </div>
                             </div>
                             <div class="idspace"></div>
@@ -129,8 +130,8 @@
                                         <input th:field="*{memberPhone}" type="tel" placeholder="숫자만 입력해주세요." class="idinputbox phone-input">
                                     </div>
                                 </div>
-                                <div class="error phone-error">
-                                    <!-- <p class="error-message">휴대폰 번호를 입력해 주세요.</p> -->
+                                <div style="display: none" class="error phone-error">
+                                     <p class="error-message">휴대폰 번호를 입력해 주세요.</p>
                                 </div>
                             </div>
                             <div class="idspace">
@@ -344,7 +345,7 @@
     </div>
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/main/signup.js"></script>
-<script src="/js/main/module/layout.js"></script>
-<script src="/js/main/module/service.js"></script>
+<script src="/js/main/signup/event.js"></script>
+<script src="/js/main/signup/module/layout.js"></script>
+<script src="/js/main/signup/module/service.js"></script>
 </html>

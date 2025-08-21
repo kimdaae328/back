@@ -14,15 +14,25 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberDAO {
     private final MemberMapper memberMapper;
-    public void save(MemberDTO memberDTO) {
-        memberMapper.insertMember(memberDTO);
+    public void save(MemberVO memberVO) {
+        memberMapper.insertMember(memberVO);
     }
+
     public boolean isExistMemberEmail(String memberEmail){
         return memberMapper.existMemberEmail(memberEmail);
     }
 
     public Optional<MemberDTO> findMemberByEmailAndMemberPassword(MemberDTO memberDTO){
         return memberMapper.selectMemberForLogin(memberDTO);
+    }
+
+//    카카오
+//    기존 카카오 회원 정보 조회
+    public Optional<MemberDTO> findMemberByKakaoEmail(String kakaoEmail){
+        return memberMapper.selectMemberByKakaoEmail(kakaoEmail);
+}
+    public void kakaoSave(MemberVO memberVO) {
+        memberMapper.kakaoInsertMember(memberVO);
     }
 
 
