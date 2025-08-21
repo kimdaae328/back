@@ -7,7 +7,7 @@ const customerLayout = (() => {
             <td class="td-name">
                 <div class="member-name-wrap">
                     <span class="member-name">${customer.memberName}</span>
-                    <span class="badge-label badge text-danger ml-2">${customer.subscriptionPaymentStatus == "success" ? "구독회원" : "일반회원"}</span>
+                    <span class="badge-label badge text-danger ml-2">${customer.subscriptionPaymentStatus == "success" ? "구독 회원" : "일반 회원"}</span>
                 </div>
                 <div class="member-id">${customer.id}</div>
             </td>
