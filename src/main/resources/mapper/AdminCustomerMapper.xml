@@ -2,17 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.youeatieat.mapper.AdminCustomerMapper">
     <select id="selectCustomerAll">
-        select id, member_name, member_email,
-               member_phone, member_last_login_date , created_date, updated_date
-        from tbl_member
-        where member_status = 'active' and member_role = 'buyer'
-        order by id desc
-        limit #{count} offset #{offset}
+        select m.id, m.member_name, m.member_email,
+        m.member_phone, m.member_last_login_date, m.created_date, m.updated_date,
+        ifnull(sp.subscription_payment_status, 'failed') as "subscription_payment_status"
+        from tbl_member m
+        left join tbl_subscription_payment sp
+        on m.id = sp.member_id
+        where m.member_status = 'active' and m.member_role = 'buyer'
+            <if test="keyword != null">
+                and (
+                    m.id like concat('%', #{keyword}, '%') or
+                    m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
+        order by m.id desc
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectCountAll">
-        select count(*) from tbl_member
+        select count(*)
+        from tbl_member
         where member_status = 'active' and member_role = 'buyer'
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectDetailCustomer">
@@ -62,16 +78,24 @@
     </select>
 
     <select id="selectNonSubscribedCustomerAll">
-        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date
+        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
+               v.m_id, s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id,
+            ifnull(v.subscription_payment_status, 'failed') as "subscription_payment_status"
         from tbl_member m
             left join view_subscription_sub_payment v
                 on m.id = v.m_id
         where m.member_status = 'active'
           and m.member_role = 'buyer'
           and (v.subscription_status is null
-            or subscription_payment_status != 'success')
+            or v.subscription_payment_status != 'success')
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by m.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectNonSubscribedCountAll">
@@ -83,18 +107,32 @@
           and m.member_role = 'buyer'
           and (v.subscription_status is null
             or subscription_payment_status != 'success')
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectSubscribedCustomerAll">
-        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date, v.m_id, v.s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id
+        select m.id, m.member_email, m.member_password, m.member_name, m.member_birth, m.member_phone, m.member_provider, m.member_gender, m.member_role, m.member_status, m.member_last_login_date, m.created_date, m.updated_date,
+            v.m_id, s_id, v.subscription_start_date, v.subscription_end_date, v.subscription_status, v.p_id,
+            ifnull(v.subscription_payment_status, 'failed') as "subscription_payment_status"
         from tbl_member m
             left join view_subscription_sub_payment v
                 on m.id = v.m_id
         where m.member_status = 'active'
           and m.member_role = 'buyer'
-          and subscription_payment_status = 'success'
+          and v.subscription_payment_status = 'success'
+            <if test="keyword != null">
+                and (
+                m.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by m.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectSubscribedCountAll">
@@ -105,5 +143,11 @@
         where m.member_status = 'active'
           and m.member_role = 'buyer'
           and subscription_payment_status = 'success'
+            <if test="keyword != null">
+                and (
+                id like concat('%', #{keyword}, '%') or
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 </mapper>

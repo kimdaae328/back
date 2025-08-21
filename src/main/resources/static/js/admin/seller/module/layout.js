@@ -119,9 +119,9 @@ const sellerLayout = (() => {
     // 회원 상세
     const showDetail = (sellerDetail) => {
         const tableMemberDetail = document.querySelector(".modal-dialog");
-        let purchaseRows = "";
 
         // 판매 상세내역 - layout
+        let purchaseRows = "";
         if (!sellerDetail.purchase || sellerDetail.purchase.length === 0) {
             purchaseRows = `
                 <tr>

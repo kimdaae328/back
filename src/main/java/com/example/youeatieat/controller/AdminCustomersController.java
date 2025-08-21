@@ -7,10 +7,7 @@ import com.example.youeatieat.service.AdminCustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +17,8 @@ public class AdminCustomersController {
 
 //    회원목록
     @GetMapping("/list/{page}")
-    public ResponseEntity<?> list(@PathVariable("page") int page) {
-        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getList(page);
+    public ResponseEntity<?> list(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
         }
@@ -40,8 +37,8 @@ public class AdminCustomersController {
 
 //    회원목록(일반회원)
     @GetMapping("/list/nonSubscribed/{page}")
-    public ResponseEntity<?> nonSubscribedList(@PathVariable("page") int page) {
-        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getNonSubscribedList(page);
+    public ResponseEntity<?> nonSubscribedList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getNonSubscribedList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
         }
@@ -50,8 +47,8 @@ public class AdminCustomersController {
 
 //    회원목록(구독회원)
     @GetMapping("/list/subscribed/{page}")
-    public ResponseEntity<?> subscribedList(@PathVariable("page") int page) {
-        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getSubscribedList(page);
+    public ResponseEntity<?> subscribedList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getSubscribedList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
         }

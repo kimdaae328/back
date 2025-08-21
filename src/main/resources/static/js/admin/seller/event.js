@@ -301,7 +301,3 @@ function closeModal() {
         modal.style.display = "none";
     }, 100);
 }
-//
-// fetch("/api/admin/sellers/list/1")
-//     .then(res => res.json())
-//     .then(data => console.log(data));

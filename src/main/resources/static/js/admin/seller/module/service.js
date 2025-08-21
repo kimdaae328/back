@@ -1,7 +1,7 @@
 const sellerService = (() => {
     // 회원 목록
     const getSellerList = async (page, callback) => {
-        const response = await fetch(`/api/admin/sellers/list/${page}`);
+        const response = await fetch(`/api/admin/sellers/list/${page}/`);
         const sellersCriteria = await response.json();
 
         if(callback){
