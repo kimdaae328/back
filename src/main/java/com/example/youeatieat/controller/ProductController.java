@@ -1,8 +1,12 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.NoProductException;
+import com.example.youeatieat.dto.NoticeDTO;
 import com.example.youeatieat.dto.ProductDTO;
+import com.example.youeatieat.dto.ReviewDTO;
+import com.example.youeatieat.service.NoticeServiceImpl;
 import com.example.youeatieat.service.ProductServiceImpl;
+import com.example.youeatieat.service.ReviewServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,16 +22,17 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/together-product/**")
-public class ProductListController {
+public class ProductController {
 
 
-    private final ProductServiceImpl productListService;
+    private final ProductServiceImpl productServiceImpl;
+    private final NoticeServiceImpl noticeServiceImpl;
 
 
     //   상품 목록으로 이동
     @GetMapping("list")
     public String list(Model model) {
-        List<ProductDTO> products = productListService.getList();
+        List<ProductDTO> products = productServiceImpl.getList();
         model.addAttribute("products", products);
         return "/together-product/list";
     }
@@ -36,11 +41,14 @@ public class ProductListController {
 //    상품 상세로 이동
     @GetMapping("detail")
     public String detail(@RequestParam("id") Long id, Model model) {
-        ProductDTO product = productListService.goDetail(id).orElseThrow(NoProductException::new);
+        ProductDTO product = productServiceImpl.goDetail(id).orElseThrow(NoProductException::new);
         if (product.getId() == null) {
             return "redirect:/error";
         }
+//        상품 조회
         model.addAttribute("product", product);
+        List<NoticeDTO> notices = noticeServiceImpl.findAll();
+        model.addAttribute("notices", notices);
         return "/together-product/detail";
     }
 

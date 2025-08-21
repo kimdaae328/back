@@ -12,3 +12,4 @@ create table tbl_group_index(
 select * from tbl_group_index;
 
 drop table tbl_group_index;
+
