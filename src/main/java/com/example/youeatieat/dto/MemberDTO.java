@@ -20,6 +20,7 @@ public class MemberDTO {
     private String memberName;
     private String memberBirth;
     private String memberPhone;
+    private String kakaoEmail;
     private String address;
     private String addressDetail;
     private String addressPostNumber;
@@ -30,4 +31,5 @@ public class MemberDTO {
     private String memberLastLoginDate;
     private String createdDate;
     private String updatedDate;
+    private boolean remember;
 }

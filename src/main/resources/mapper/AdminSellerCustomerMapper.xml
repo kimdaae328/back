@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.youeatieat.mapper.AdminSellerMapper">
     <select id="selectSellerAll">
-        select id, member_name, member_email,
-               member_phone, member_last_login_date , created_date, updated_date
-        from tbl_member
-        where member_status = 'active' and member_role = 'seller'
-        order by id desc
+        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
+        from view_member_provider_address
+        where member_status = 'active'
+          and member_role = 'seller'
+        order by m_id desc
         limit #{count} offset #{offset}
     </select>
 
@@ -16,8 +16,55 @@
     </select>
 
     <select id="selectDetailSeller">
-        select id, member_email, member_password, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date
-        from tbl_member
-        where id = #{id}
+        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
+        from view_member_provider_address
+        where m_id = #{id}
+    </select>
+
+    <select id="selectYoueatieatSellerAll">
+        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
+        from view_member_provider_address
+        where member_status = 'active' and member_role = 'seller' and member_provider = 'you_i'
+        order by m_id desc
+        limit #{count} offset #{offset}
+    </select>
+
+    <select id="selectYoueatieatCountAll">
+        select count(*) from tbl_member
+        where member_status = 'active' and member_role = 'seller' and member_provider = 'you_i'
+    </select>
+
+    <select id="selectKakaoSellerAll">
+        select m_id as id, member_email, member_name, member_birth, member_phone, member_provider, member_gender, member_role, member_status, member_last_login_date, created_date, updated_date, a_id, address, address_detail, address_post_number, address_status
+        from view_member_provider_address
+        where member_status = 'active' and member_role = 'seller' and member_provider = 'kakao'
+        order by m_id desc
+        limit #{count} offset #{offset}
+    </select>
+
+    <select id="selectKakaoCountAll">
+        select count(*) from tbl_member
+        where member_status = 'active' and member_role = 'seller' and member_provider = 'kakao'
+    </select>
+
+    <select id="selectPurchaseAll">
+        select id, purchase_request_product_name, purchase_request_description, purchase_request_category, purchase_request_quantity_kg, purchase_request_proposed_price_per_kg, purchase_request_country_of_origin, purchase_request_date_of_manufacture, purchase_request_detail_img, purchase_request_approval_status, purchase_request_status, member_id, created_date, updated_date
+        from tbl_purchase_request
+        where member_id = #{id}
+            and purchase_request_approval_status = 'approved'
+            and purchase_request_status = 'active'
+        order by id desc
+        limit 3
+    </select>
+
+    <select id="selectPurchaseCalculate">
+        select
+            count(*) totalOrders,
+            sum(purchase_request_proposed_price_per_kg) totalPrice,
+            max(purchase_request_date_of_manufacture) lastPaymentDate
+        from tbl_purchase_request
+        where member_id = #{memberId}
+            and purchase_request_status = 'active'
+            and purchase_request_approval_status = 'approved'
     </select>
 </mapper>

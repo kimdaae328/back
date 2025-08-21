@@ -167,11 +167,11 @@ tabNames.forEach((headerTabname) => {
         });
 
         if (tabText === "전체") {
-            setList(showSellerList);
+            setList(showList);
         } else if (tabText === "일반 로그인") {
-            // setSellerList(showNonSubscribedList)
+            setList(showYoueatieatList);
         } else if(tabText === "카카오 로그인"){
-            // setSellerList(showSubscribedList);
+            setList(showKakaoList);
         }
     });
 });
@@ -237,6 +237,26 @@ const setList = (loader) => {
 };
 
 setList(showList);
+
+// 카카오회원
+const showKakaoList = async (page = 1) => {
+    const sellerCriteria = await sellerService.getSellerKakaoList(page, sellerLayout.showKakaoList);
+    sellerLayout.renderPagination(sellerCriteria.criteria);
+    sellerLayout.sellerCount(sellerCriteria.criteria);
+
+    // console.log(sellerCriteria)
+    return sellerCriteria;
+}
+
+// 일반회원
+const showYoueatieatList = async (page = 1) => {
+    const sellerCriteria = await sellerService.getSellerYoueatieatList(page, sellerLayout.showYoueatieatList);
+    sellerLayout.renderPagination(sellerCriteria.criteria);
+    sellerLayout.sellerCount(sellerCriteria.criteria);
+
+    // console.log(sellerCriteria)
+    return sellerCriteria;
+}
 
 // ########################### 회원상세 ###########################
 // 일반회원 상세 모달 창 열고 닫는 이벤트

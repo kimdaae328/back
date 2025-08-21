@@ -4,7 +4,7 @@ const closeButtons = document.querySelectorAll(".popup-close");
 
 openButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         const targetSelector = btn.dataset.target;
         const targetModal = document.querySelector(targetSelector);
         const htmlScroll = document.querySelector("html");
@@ -47,10 +47,14 @@ buyerButton.addEventListener("click", () => {
 });
 
 // 판매 로그인 누를 때
-
 sellerButton.addEventListener("click", () => {
     sellerButton.classList.add("login-choice-active");
     buyerButton.classList.remove("login-choice-active");
     sellerForm.style.display = "block";
     buyerForm.style.display = "none";
+});
+
+const kakaoLoginButton = document.getElementById("kakao-login");
+kakaoLoginButton.addEventListener("click", (e) => {
+    window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=bcbe3d461481de9236a2f79e83eb29fd&redirect_uri=http://localhost:10000/kakao/login&response_type=code";
 });

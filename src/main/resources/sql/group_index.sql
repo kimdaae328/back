@@ -11,12 +11,5 @@ create table tbl_group_index(
 
 select * from tbl_group_index;
 
-INSERT INTO tbl_group_index (group_index_number, product_id)
-VALUES
-    (1001, 1),
-    (1002, 2),
-    (1003, 3),
-    (1004, 1),
-    (1005, 2);
-
 drop table tbl_group_index;
+

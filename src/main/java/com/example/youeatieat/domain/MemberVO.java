@@ -20,6 +20,8 @@ public class MemberVO extends Period {
     private String memberName;
     private String memberBirth;
     private String memberPhone;
+    private String memberKakaoEmail;
+    private String memberProvider;
     private Provider provider;
     private MemberGender memberGender;
     private MemberRole memberRole;

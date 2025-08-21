@@ -18,12 +18,14 @@ public class Criteria {
     private boolean hasPreviousPage;
     private boolean hasMore;
     private int count;
+    private int total;
 
     public Criteria(int page, int total) {
         rowCount = 10;
         pageCount = 10;
         count = rowCount + 1;
         this.page = Math.max(1, page);
+        this.total = Math.max(0, total);
         endPage = (int)(Math.ceil(page / (double)pageCount) * pageCount);
         startPage = endPage - pageCount + 1;
         realEnd = (int)(Math.ceil(total / (double)rowCount));

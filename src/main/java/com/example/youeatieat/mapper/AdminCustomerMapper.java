@@ -1,8 +1,12 @@
 package com.example.youeatieat.mapper;
 
+import com.example.youeatieat.dto.CustomerDetailWithPaymentDTO;
 import com.example.youeatieat.dto.MemberDTO;
+import com.example.youeatieat.dto.PaymentCalculateDTO;
+import com.example.youeatieat.dto.PaymentItemDTO;
 import com.example.youeatieat.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,7 +19,16 @@ public interface AdminCustomerMapper {
     public int selectCountAll();
 
 //    회원 상세
-    MemberDTO selectDetailCustomer(Long id);
+    CustomerDetailWithPaymentDTO selectDetailCustomer(Long id);
+
+//    결제 목록
+    List<PaymentItemDTO> selectPaymentsAll(Long id);
+
+//    결제 개수 조회
+//    public int selectPaymentCountAll(Long id);
+
+//    결제 내역 계산
+    PaymentCalculateDTO selectPaymentCalculate(Long memberId);
 
 //    회원 목록(일반회원)
     public List<MemberDTO> selectNonSubscribedCustomerAll(Criteria criteria);
@@ -28,4 +41,5 @@ public interface AdminCustomerMapper {
 
 //    전체 개수 조회(구독회원)
     public int selectSubscribedCountAll();
+
 }

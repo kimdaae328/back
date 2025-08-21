@@ -14,9 +14,12 @@ public class RequestPaymentDTO {
     private Long id;
     private String paymentMethod;
     private String paymentDate;
-    private PaymentStatus paymentStatus;
+    private String paymentStatus;
     private Long memberId;
     private Long requestId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
+    private String productId;
+    private String productName;
+    private int requestPrice;
 }

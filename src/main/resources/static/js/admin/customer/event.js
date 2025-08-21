@@ -12,11 +12,9 @@ homeButton.addEventListener("click", (e) => {
     sideMenuButtons.forEach((homeByButton) => {
         homeByButton.classList.remove("current");
     });
-    
+
     payoutButton.classList.remove("current1");
     homeButton.classList.add("current1");
-    
-    
 
     sideSubLists.forEach((homeByList) => {
         homeByList.classList.remove("show");
@@ -38,8 +36,6 @@ payoutButton.addEventListener("click", (e) => {
     });
     homeButton.classList.remove("current1");
     payoutButton.classList.add("current1");
-    
-    
 
     sideSubLists.forEach((homeByList) => {
         homeByList.classList.remove("show");
@@ -73,11 +69,25 @@ sideMenuButtons.forEach((sideMenuButton) => {
             targetIcon.classList.add("mdi-chevron-right");
         } else {
             targetSubList.classList.add("show");
+
             targetIcon.classList.remove("mdi-chevron-right");
             targetIcon.classList.add("mdi-chevron-down");
         }
         payoutButton.classList.remove("current1");
         homeButton.classList.remove("current1");
+
+        const key = sideMenuButton.dataset.key || sideMenuButton.textContent.trim();
+
+        if (key === '회원목록') {
+            console.log("회원목록 클릭함");
+            // await loadCustomers(1); // JSON 받아서 renderCustomerTable로 렌더
+        } else if (key === '상품 목록') {
+            // await loadProducts(1);
+            console.log("상품 목록 클릭함");
+        } else {
+            // content.innerHTML = `<p>준비 중</p>`;
+            console.log("?????");
+        }
     });
 });
 
@@ -217,9 +227,6 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
-
-
-
 // ########################### 회원목록 ###########################
 // 전체 회원
 const showList = async (page = 1) => {
@@ -234,7 +241,7 @@ const showList = async (page = 1) => {
 // 일반 회원
 const showNonSubscribedList = async (page = 1) => {
     const customersCriteria = await customerService.getNonSubscribedCustomerList(page, customerLayout.showNonSubscribedList);
-    console.log("일반" + customersCriteria)
+    // console.log(customersCriteria)
     customerLayout.renderPagination(customersCriteria.criteria);
     customerLayout.customerCount(customersCriteria.criteria);
     return customersCriteria;
@@ -248,9 +255,10 @@ const showSubscribedList = async (page = 1) => {
     return customersCriteria;
 };
 
+let currentLoader
 const setList = (loader) => {
     currentLoader = loader;
-    currentLoader(1); // 첫 페이지
+    currentLoader(1);
     customerLayout.connectToPagination((page) => currentLoader(page));
 };
 
@@ -276,7 +284,6 @@ customerTable.addEventListener("click", async  (e, callback)=>{
     const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
 
     console.log(customerDetail)
-
     customerLayout.showDetail(customerDetail);
 });
 

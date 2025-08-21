@@ -16,4 +16,4 @@ from
     tbl_group g on r.group_index_number = g.group_index_number and r.product_id = g.product_id
     );
 
-select * from view_member_address;
+select * from view_request_group;

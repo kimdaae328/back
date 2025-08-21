@@ -86,12 +86,12 @@ const customerLayout = (() => {
     const connectToPagination = (navi) => {
         pagination.addEventListener("click", (e) => {
             // if(e.target.classList.contains(".page-item-link")) {
-                e.preventDefault();
+            e.preventDefault();
 
-                const linkButton = e.target.closest(".page-item-link");
-                const page = linkButton.dataset.page;
-                // const page = linkButton.getAttribute("href");
-                navi(page);
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
             // }
         });
     };
@@ -99,7 +99,7 @@ const customerLayout = (() => {
     // 총 합계
     const customerCountText = document.querySelector(".count-amount");
     const customerCount = (criteria) => {
-        customerCountText.textContent = criteria.count + 1;
+        customerCountText.textContent = criteria.total;
     };
 
     // 나이 계산
@@ -108,19 +108,34 @@ const customerLayout = (() => {
         const birthDate = new Date(birthDateString);
 
         let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        const dayDiff = today.getDate() - birthDate.getDate();
+        const month = today.getMonth() - birthDate.getMonth();
+        const day = today.getDate() - birthDate.getDate();
 
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        if (month < 0 || (month === 0 && day < 0)) {
             age--;
         }
 
         return age;
     };
-    
+
     // 회원 상세
     const showDetail = (customerDetail) => {
         const tableMemberDetail = document.querySelector(".modal-dialog");
+
+        // 구매내역 - layout
+        let paymentRows = "";
+        customerDetail.payments.forEach((payment) => {
+            paymentRows += `
+                <tr>
+                    <td>${payment.id}</td>
+                    <td>${payment.productName}</td>
+                    <td>${payment.requestPrice}</td>
+                    <td>${payment.paymentDate}</td>
+                </tr>
+            `;
+        });
+
+        // 회원 - layout
         tableMemberDetail.innerHTML= `
             <div class="modal-content">
                 <div class="modal-header">
@@ -200,11 +215,9 @@ const customerLayout = (() => {
                                         <div class="info-layout detail-info">
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
-                                                    <a href="" class="info-detail">
-                                                        <div class="title">결제내역
-                                                            <i class="mdi mdi-menu-left ml-2"></i>
-                                                        </div>
-                                                    </a>
+                                                    <div class="title">결제내역
+                                                        <i class="mdi mdi-menu-left ml-2"></i>
+                                                    </div>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -219,9 +232,9 @@ const customerLayout = (() => {
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>12</td>
-                                                              <td>250,000</td>
-                                                            <td>2025-08-01</td>
+                                                            <td>${customerDetail.paymentCalculate.totalOrders}</td>
+                                                            <td>${customerDetail.paymentCalculate.totalPrice}</td>
+                                                            <td>${customerDetail.paymentCalculate.lastPaymentDate}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -232,11 +245,9 @@ const customerLayout = (() => {
                                             <div class="info-title justify-content-between">
                                                 <div class="flex-left d-flex">
                                                     <!-- 작성 게시글 클릭 시 콘텐츠 관리 내 게시글 페이지로 이동 -->
-                                                    <a href="" class="info-detail">
-                                                        <div class="title">구매내역
-                                                            <i class="mdi mdi-menu-left ml-2"></i>
-                                                        </div>
-                                                    </a>
+                                                    <div class="title">구매내역
+                                                        <i class="mdi mdi-menu-left ml-2"></i>
+                                                    </div>
                                                 </div>
                                                 <div class="flex-right"></div>
                                             </div>
@@ -251,24 +262,7 @@ const customerLayout = (() => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td>0</td>
-                                                            <td>2025-08-01</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td>0</td>
-                                                            <td>2025-08-01</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td>0</td>
-                                                            <td>2025-08-01</td>
-                                                        </tr>                                                                                                                               
+                                                        ${paymentRows}                                                                                                                               
                                                     </tbody>
                                                 </table>
                                             </div>                             

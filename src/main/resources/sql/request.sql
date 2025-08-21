@@ -4,7 +4,7 @@ create table tbl_request(
     id bigint unsigned auto_increment primary key,
     request_amount int not null ,
     request_price int not null ,
-    request_status enum('done', 'cancel') default 'done'not null ,
+    request_status enum('done', 'cancel') default 'done' not null ,
     member_id bigint unsigned not null,
     group_index_number bigint not null,
     product_id bigint unsigned not null,
@@ -19,15 +19,3 @@ create table tbl_request(
 );
 
 select * from tbl_request;
-
-INSERT INTO tbl_request (request_amount, request_price, request_status, member_id, group_index_number, product_id)
-VALUES
-    (2, 50000, 'done', 1, 1, 1),
-    (1, 25000, 'done', 2, 1, 1),
-    (3, 75000, 'cancel', 3, 2, 2),
-    (1, 30000, 'done', 1, 2, 2),
-    (5, 125000, 'done', 2, 3, 3),
-    (2, 50000, 'cancel', 3, 3, 3);
-
-drop table tbl_request;
-

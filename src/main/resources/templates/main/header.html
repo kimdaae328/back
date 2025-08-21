@@ -16,21 +16,27 @@
             <div class="header">
                 <div class="login-nav">
                     <!-- 로그인 안했을 때 -->
-                    <a href="" class="joinus">회원가입</a>
-                    <div class="bar"></div>
-                    <a href="" class="login">로그인</a>
+<!--                    <a href="" class="joinus">회원가입</a>-->
+<!--                    <div class="bar"></div>-->
+<!--                    <a href="" class="login">로그인</a>-->
                     
                     <!-- 로그인 했을 때 -->
-                     <!-- <div class="customer-service">
-                         <a href="" class="customer-name">너도나도 님
-                             <span class="customer-service-icon"></span>
-                         </a>
+                      <div class="customer-service" >
+                          <th:block th:if="${session.member != null}">
+                             <a href="" class="customer-name" th:text="${session.member.memberName}">
+                                 <span class="customer-service-icon" ></span>
+                             </a>
+                          </th:block>
                          <div class="member-menu customer-service-list">
                              <div class="list-menu">주문 내역</div>
                              <div class="list-menu">회원 정보 관리</div>
-                             <div class="list-menu">로그아웃</div>
+                             <div class="list-menu">
+                                 <form action="/member/logout" method="post">
+                                     <button type="submit">로그아웃</button>
+                                 </form>
+                             </div>
                          </div>
-                     </div> -->
+                     </div>
                     <div class="bar"></div>
 
                     <div class="customer-service">

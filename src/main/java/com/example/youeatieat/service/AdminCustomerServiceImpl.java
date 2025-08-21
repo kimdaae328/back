@@ -1,13 +1,13 @@
 package com.example.youeatieat.service;
 
-import com.example.youeatieat.dto.AdminCustomerCriteriaDTO;
-import com.example.youeatieat.dto.MemberDTO;
+import com.example.youeatieat.dto.*;
 import com.example.youeatieat.repository.AdminCustomerDAO;
 import com.example.youeatieat.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,13 +34,29 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
         return customerCriteriaDTO;
     }
 
+//    @Override
+//    public CustomerDetailWithPaymentDTO getCustomerDetail(Long id) {
+//        // 기본적으로 page = 1로 설정
+//        return getCustomerDetail(id, 1);
+//    }
+
 //    회원 상세
     @Override
-    public MemberDTO getCustomerDetail(Long id) {
-        return memberDAO.findCustomerById(id);
+    public CustomerDetailWithPaymentDTO getCustomerDetail(Long id) {
+        CustomerDetailWithPaymentDTO dto = Optional.ofNullable(memberDAO.findCustomerById(id))
+                .orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
+
+        List<PaymentItemDTO> payments = memberDAO.findPaymentItems(id);
+        dto.setPayments(payments);
+
+        PaymentCalculateDTO paymentCalculate = memberDAO.findCountPaymentItemsAll(id);
+        dto.setPaymentCalculate(paymentCalculate);
+
+        return dto;
     }
 
-//    회원 목록(구독회원)
+
+//    회원 목록(일반회원)
     @Override
     public AdminCustomerCriteriaDTO getNonSubscribedList(int page) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
