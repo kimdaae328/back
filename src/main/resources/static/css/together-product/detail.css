@@ -327,6 +327,7 @@ img {
     width: 430px;
     border-radius:6px;
     overflow: hidden;
+    height: 550px;
 }
 
 .product-info-section {
@@ -2204,6 +2205,15 @@ img {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.pop-review-img {
+    display: block;
+    width: 360px;
+    height: 480px;
+    background-color: #eee;
     border-radius: 6px;
     overflow: hidden;
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class SubscriptionConverter implements Converter<String, Subscription> {
     @Override
     public Subscription convert(String source) {
-        return null;
+        return Subscription.getSubscriptionFromValue(source);
     }
 }

@@ -2,7 +2,7 @@
 const togetherProductService = (() => {
     // 장바구니
     const save = async (cart) => {
-        const response = await fetch("/api/product/carts/save", {
+        const response = await fetch("/api/carts/save", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -15,7 +15,7 @@ const togetherProductService = (() => {
 
     // 찜하기
     const like = async (likeProduct) => {
-        const response = await fetch("/api/product/like",{
+        const response = await fetch("/api/like/like",{
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +29,7 @@ const togetherProductService = (() => {
 
     //     찜 취소 하기
     const unlike = async (unlikeProduct) => {
-        const response = await fetch("/api/product/unlike",{
+        const response = await fetch("/api/like/unlike",{
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -42,7 +42,7 @@ const togetherProductService = (() => {
     // 리뷰 목록
 
         const getReview = async (productId, page, callback) => {
-            const response = await fetch(`/api/product/${productId}/reviews/${page}`);
+            const response = await fetch(`/api/review/${productId}/reviews/${page}`);
             const data = await response.json();
 
             if (callback) callback(data);
@@ -70,7 +70,7 @@ const togetherProductService = (() => {
     //     리뷰 상세
 
     const getReviewDetail = async (reviewId) => {
-        const response = await fetch(`/api/product/review/${reviewId}`);
+        const response = await fetch(`/api/review/${reviewId}`);
         if (!response.ok) return null;
 
         const data = await response.json();
@@ -81,7 +81,7 @@ const togetherProductService = (() => {
 
     // 문의하기
     const inquiry = async (ProductInquiry) => {
-        const response = await fetch("/api/product/inquiry",{
+        const response = await fetch("/api/inquiry/to",{
             method:"POST",
             headers: {
                 "Content-Type": "application/json"
@@ -99,7 +99,7 @@ const togetherProductService = (() => {
     // 문의 목록
 
     const getInquiry = async (productId, page, callback) => {
-        const response = await fetch(`/api/product/${productId}/inquiry/${page}`);
+        const response = await fetch(`/api/inquiry/${productId}/inquiry/${page}`);
         const data = await response.json();
 
         if (callback) callback(data);
@@ -120,7 +120,7 @@ const togetherProductService = (() => {
 
     // 문의 답변
     const getAnswer = async (inquiryId) => {
-        const response = await fetch(`/api/product/inquiry/${inquiryId}/answer`);
+        const response = await fetch(`/api/inquiry/${inquiryId}/answer`);
         if (!response.ok) {
             return []
         }
