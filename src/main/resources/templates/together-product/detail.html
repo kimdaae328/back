@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/together-product/detail.css">
     <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     <title>너도먹고나도먹고</title>
 </head>
@@ -20,7 +21,7 @@
                             <div class="product-top">
                                 <div class="product-img-section">
                                     <div class="product-img">
-                                        <img th:src="@{${product.productTitleImageUrl}}">
+                                        <img th:src="@{/api/product/image(filePath=${product.productTitleImageUrl})}">
                                     </div>
                                 </div>
                                 <div class="product-info-section">
@@ -132,32 +133,32 @@
                             <div class="product-description-section">
                                 <ul class="product-tab-menu">
                                     <li class="tab-item">
-                                        <a class="tab-link on" href="#product-goods">
+                                        <button type="button" class="tab-link on info-button" data-target="#product-goods">
                                             <span class="name">상품설명</span>
-                                        </a>
+                                        </button>
                                     </li>
                                     <li class="tab-item">
-                                        <a class="tab-link" href="#product-detail">
+                                        <button type="button" class="tab-link detail-info-button" data-target="#product-detail">
                                             <span class="name">상세정보</span>
-                                        </a>
+                                        </button>
                                     </li>
                                     <li class="tab-item">
-                                        <a class="tab-link" href="#product-review">
+                                        <button type="button" class="tab-link review-go-button" data-target="#product-review">
                                             <span class="name">후기</span>
                                             <span>(<span class="count">0</span>)</span>
-                                        </a>
+                                        </button>
                                     </li>
                                     <li class="tab-item">
-                                        <a class="tab-link" href="#product-inquiry">
+                                        <button type="button" class="tab-link inquiry-button" data-target="#product-inquiry">
                                             <span class="name">문의</span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                                 <div class="product-tab-content">
                                     <div id="product-goods" class="goods-wrap">
                                         <div class="goods-intro">
                                             <div class="pic">
-                                                <img th:src="@{${product.productInfoImageUrl}}">
+                                                <img th:src="@{/api/product/image(filePath=${product.productInfoImageUrl})}">
                                             </div>
                                         </div>
                                     </div>
@@ -820,6 +821,7 @@
             </div>
         </div>
     </div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
 <script th:inline="javascript">
     const product = [[${product}]];

@@ -1,6 +1,7 @@
 package com.example.youeatieat.dto;
 
 import com.example.youeatieat.enumeration.Status;
+import com.example.youeatieat.enumeration.Subscription;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +21,7 @@ public class ReviewDTO {
     private String memberName;
     private Long requestId;
     private Long productId;
-    private String reviewImageUrl;
-    private Status reviewImageStatus;
+    private Subscription subscriptionStatus;
     private String createdDate;
     private String updatedDate;
     private List<ReviewImageDTO> images;

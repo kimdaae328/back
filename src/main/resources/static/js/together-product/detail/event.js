@@ -1,4 +1,72 @@
 
+//  바로가기 네비게이션
+
+const infoButton = document.querySelector(".info-button");
+const detailInfoButton = document.querySelector(".detail-info-button");
+const reviewGoButton = document.querySelector(".review-go-button");
+const inquiryButton = document.querySelector(".inquiry-button");
+
+infoButton.addEventListener("click", (e) => {
+    const infoY = document.querySelector("#product-goods").getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+        top: infoY - 100,
+        behavior: "smooth"
+    });
+})
+
+detailInfoButton.addEventListener("click", (e) => {
+    const detailInfoY = document.querySelector("#product-detail").getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+        top: detailInfoY - 100,
+        behavior: "smooth"
+    });
+})
+
+reviewGoButton.addEventListener("click", (e) => {
+    const reviewGoY = document.querySelector("#product-review").getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+        top: reviewGoY - 100,
+        behavior: "smooth"
+    });
+})
+
+inquiryButton.addEventListener("click", (e) => {
+    const inquiryY = document.querySelector("#product-inquiry").getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+        top: inquiryY - 100,
+        behavior: "smooth"
+    });
+
+
+})
+
+// 스크롤감지 탭버튼 활성화
+const tabLinks = document.querySelectorAll(".tab-link");
+
+window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY + 100; // header 고려
+
+    // 이벤트 위임 느낌: 스크롤마다 현재 있는 탭 버튼 전부 새로 가져옴
+    document.querySelectorAll(".tab-link").forEach((link) => {
+        const targetId = link.dataset.target; // data-target 방식 추천
+        const section = document.querySelector(targetId);
+
+        if (!section) return;
+
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+
+        if (scrollY >= top && scrollY < bottom) {
+            document.querySelectorAll(".tab-link").forEach((el) => el.classList.remove("on"));
+            link.classList.add("on");
+        }
+    });
+});
+
+
+
+
 let reviews = null;
 
 // 수량 카운트
@@ -66,65 +134,6 @@ closeButtons.forEach((btn) => {
     });
 });
 
-const reviewOpen = document.querySelector(".review-list")
-let reviewId = null;
-reviewOpen.addEventListener("click" ,async (e) => {
-    const btn = e.target;
-
-    const reviewItem  = btn.closest(".review-photo");
-    reviewId = reviewItem.dataset.reviewId;
-
-    const detailReview = await togetherProductService.getReviewDetail(reviewId);
-    for(var i = 0; i < reviews.length; i++){
-        if(reviews[i].id == detailReview.id){
-            break;
-        }
-    }
-    if (detailReview) {
-        layout.showPopupReview(detailReview, i, reviews.length);
-    } else {
-        alert("리뷰 상세 정보를 불러올 수 없습니다.");
-    }
-})
-
-const modalWrap = document.getElementById("modal-wrap");
-modalWrap.addEventListener("click", async (e) => {
-    const button = e.target.closest("button");
-    console.log(e.target);
-    if(!button){
-        return;
-    }
-    if(button.classList.contains("btn-close")){
-        document.getElementById("popup1").remove();
-    }else if(button.classList.contains("prev")){
-        let previousIndex = 0;
-        for(let i = 0; i < reviews.length; i++){
-            if(reviews[i].id == reviewId){
-                previousIndex = i - 1;
-                break;
-            }
-        }
-        reviewId = reviews[previousIndex].id;
-        document.getElementById("popup1").remove();
-        layout.showPopupReview(reviews[previousIndex], previousIndex, reviews.length);
-
-    }else if(button.classList.contains("next")){
-        let nextIndex = 0;
-        for(let i = 0; i < reviews.length; i++){
-            if(reviews[i].id == reviewId){
-                nextIndex = i + 1;
-                break;
-            }
-        }
-        reviewId = reviews[nextIndex].id;
-        document.getElementById("popup1").remove();
-        layout.showPopupReview(reviews[nextIndex], nextIndex, reviews.length);
-
-    }else if(e.target.classList.contains("list-icon")){
-        console.log("아이콘목록 사진")
-    }
-})
-
 // 버튼 이벤트 연결
 quantityBoxes.forEach((box) => {
     const plusBtn = box.querySelector(".quantity-btn.plus");
@@ -166,62 +175,39 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// 탭 선택
-const tabButtons = document.querySelectorAll(".tab-link");
+// // 탭 선택
+// const tabButtons = document.querySelectorAll(".tab-link");
+//
+// tabButtons.forEach((button) => {
+//     button.addEventListener("click", (e) => {
+//         tabButtons.forEach((btn) => btn.classList.remove("on"));
+//         e.currentTarget.classList.add("on");
+//     });
+// });
+//
+// // 자세히보기 드롭다운
+// const moreBtns = document.querySelectorAll(".btn-more");
+//
+// moreBtns.forEach((button) => {
+//     button.addEventListener("click", (e) => {
+//         button.classList.toggle("on");
+//     });
+// });
+//
+// // 상품문의 드롭다운
+// const inquiryButtons = document.querySelectorAll(".btn-title");
+//
+// inquiryButtons.forEach((button) => {
+//     button.addEventListener("click", () => {
+//         if (button.classList.contains("secret")) return;
+//
+//         const tr = button.closest("tr");
+//         const answerTr = tr.nextElementSibling;
+//
+//         answerTr.classList.toggle("hidden");
+//     });
+// });
 
-tabButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        tabButtons.forEach((btn) => btn.classList.remove("on"));
-        e.currentTarget.classList.add("on");
-    });
-});
-
-// 자세히보기 드롭다운
-const moreBtns = document.querySelectorAll(".btn-more");
-
-moreBtns.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        button.classList.toggle("on");
-    });
-});
-
-// 상품문의 드롭다운
-const inquiryButtons = document.querySelectorAll(".btn-title");
-
-inquiryButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        if (button.classList.contains("secret")) return;
-
-        const tr = button.closest("tr");
-        const answerTr = tr.nextElementSibling;
-
-        answerTr.classList.toggle("hidden");
-    });
-});
-
-// 스크롤감지 탭버튼 활성화
-const tabLinks = document.querySelectorAll(".tab-link");
-
-window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY + 80;
-
-    tabLinks.forEach((link) => {
-        const targetId = link.getAttribute("href");
-        const section = document.querySelector(targetId);
-
-        if (!section) return;
-
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-
-        if (scrollY >= top && scrollY < bottom) {
-            document
-                .querySelectorAll(".tab-link")
-                .forEach((el) => el.classList.remove("on"));
-            link.classList.add("on");
-        }
-    });
-});
 
 // textarea 글자수 카운트
 const textarea = document.querySelector("textarea");
@@ -425,6 +411,7 @@ const inquiryButtonEvent = async () => {
     const inquiriesCriteria = await togetherProductService.getInquiry(productId, page, layout.showListInquiry);
     let nowPage = inquiriesCriteria.criteria.page
     let endPage = inquiriesCriteria.criteria.endPage;
+    console.log(inquiriesCriteria.criteria)
 
     if (endPage === nowPage) {
         inquiryNextButton.disabled = true;
@@ -460,6 +447,76 @@ const inquiryButtonEvent = async () => {
 }
 
 inquiryButtonEvent();
+
+// 리뷰 목록 사진 클릭 -> 상세 이벤트 위임
+
+const reviewOpen = document.querySelector(".review-list")
+let reviewId = null;
+reviewOpen.addEventListener("click" ,async (e) => {
+    const btn = e.target.closest(".review-photo");
+
+    reviewId = btn.dataset.reviewId;
+    console.log("클릭한 리뷰 ID:", reviewId);
+
+    const detailReview = await togetherProductService.getReviewDetail(reviewId);
+    for(var i = 0; i < reviews.length; i++){
+        if(reviews[i].id == detailReview.id){
+            break;
+        }
+    }
+    if (detailReview) {
+        layout.showPopupReview(detailReview, i, reviews.length);
+    } else {
+        alert("리뷰 상세 정보를 불러올 수 없습니다.");
+    }
+})
+
+// 리뷰 상세 버튼 클릭 -> 이벤트 위임
+
+const modalWrap = document.getElementById("modal-wrap");
+modalWrap.addEventListener("click", async (e) => {
+    const button = e.target.closest("button");
+    if(!button){
+        return;
+    }
+    if(button.classList.contains("btn-close")){
+        document.getElementById("popup1").remove();
+    }else if(button.classList.contains("prev")){
+        let previousIndex = 0;
+        for(let i = 0; i < reviews.length; i++){
+            if(reviews[i].id == reviewId){
+                previousIndex = i - 1;
+                break;
+            }
+        }
+
+        reviewId = reviews[previousIndex].id;
+        document.getElementById("popup1").remove();
+        layout.showPopupReview(reviews[previousIndex], previousIndex, reviews.length);
+
+    }else if(button.classList.contains("next")){
+        let nextIndex = 0;
+        for(let i = 0; i < reviews.length; i++){
+            if(reviews[i].id == reviewId){
+                nextIndex = i + 1;
+                break;
+            }
+        }
+        reviewId = reviews[nextIndex].id;
+        document.getElementById("popup1").remove();
+        layout.showPopupReview(reviews[nextIndex], nextIndex, reviews.length);
+
+    }else {
+        if (button) {
+            const image = button.querySelector("span").innerHTML;
+            const titleImage = modalWrap.querySelector(".pop-review-img");
+
+            titleImage.innerHTML = image;
+        }
+    }
+})
+
+
 
 // 문의 내용 보기
 const tableBody = document.querySelector(".table-wrap tbody");
@@ -514,5 +571,6 @@ submitBtn.addEventListener("click", async (e) => {
     showInquiryList(productId, page = 1);
 
 })
+
 
 

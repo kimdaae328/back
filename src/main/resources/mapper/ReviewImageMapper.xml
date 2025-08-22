@@ -5,7 +5,7 @@
         select id, review_image_url, review_image_sort_order, review_id, review_image_status
         from tbl_review_image
         where review_id = #{reviewId}
-        and review_image_status = 'active'
         order by review_image_sort_order
     </select>
+
 </mapper>

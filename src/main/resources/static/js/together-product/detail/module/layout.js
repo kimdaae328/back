@@ -2,23 +2,32 @@ const layout = (() => {
     const showListReview = (reviewCriteria) => {
         const reviewContainer = document.querySelector(".review-list");
         let text = ``;
-
         reviewCriteria.reviews.forEach((review) => {
+
+            // 리뷰 이미지
             let imagesHtml = ``;
             if (review.images && review.images.length > 0) {
                 review.images.forEach(images => {
                     imagesHtml += `
-                        <button type="button" class="review-photo popup-trigger" 
+                        <button type="button" class="review-photo popup-trigger"
                                 data-target="#popup1" data-review-id="${review.id}">
-                            <img src="${images.reviewImageUrl}" alt="리뷰 이미지">
+                            <img src="/api/product/image?filePath=${images.reviewImageUrl}">
                         </button>
                     `;
-                })
+                });
             }
+
+
+
+            // 구독 비구독
+            const badgeHtml = review.subscriptionStatus === 'ACTIVE'
+                ? `<span class="badge badge-member">VIP</span>`
+                : `<span class="badge badge-primary">멤버스</span>`;
+
             text += `
                 <li class="review-item">
                     <div class="review-author">
-                        <span class="badge badge-member">멤버스</span>
+                        ${badgeHtml}
                         <span class="name">${review.memberName}</span>
                     </div>
                     <div class="review-content">
@@ -65,6 +74,43 @@ const layout = (() => {
 
     const showPopupReview = (review, i, total) => {
         const modalWrap = document.getElementById("modal-wrap");
+
+        // 대표 이미지
+
+        let titleImage = ``;
+        const firstImage = review.images?.[0];
+        if (firstImage) {
+            titleImage = `<img src="/api/product/image?filePath=${firstImage.reviewImageUrl}">`;
+        }
+
+        // 리뷰 이미지들
+
+        let imagesHtml = ``;
+        if (review.images && review.images.length > 0) {
+            review.images.forEach(images => {
+                imagesHtml += `
+                    <div class="pop-preview-item" data-review-id="${review.id}">
+                        <button type="button" class="btn-img list-icon">
+                            <span>
+                                <img src="/api/product/image?filePath=${images.reviewImageUrl}">
+                            </span>
+                            <div class="select-img">
+                                <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 4.76471L5.5 9L14 1" stroke="#fff" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                `;
+
+            });
+        }
+
+        // 구독 비구독
+        const badgeHtml = review.subscriptionStatus === 'ACTIVE'
+            ? `<span class="badge badge-member">VIP</span>`
+            : `<span class="badge badge-primary">멤버스</span>`;
+
         let text = `
             <div class="popup-wrapper" id="popup1" style="display: block">
                 <div class="popup-inner">
@@ -84,38 +130,15 @@ const layout = (() => {
                                     <div class="pop-review-wrap">
                                         <div class="pop-review-img-wrap">
                                             <span class="pop-review-img">
-                                                <img src="https://img-cf.kurly.com/hdims/resize/%3E640x%3E640/quality/90/src/shop/data/review/20250724/b67068f4-6313-4eaa-8dca-42ee340712dc.jpg">
+                                                ${titleImage}
                                             </span>
                                             <div class="pop-preview-list">
-                                                <div class="pop-preview-item">
-                                                    <button type="button" class="btn-img on">
-                                                        <span>
-                                                            <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7 list-icon" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                                        </span>
-                                                        <div class="select-img">
-                                                            <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M1 4.76471L5.5 9L14 1" stroke="#fff" stroke-width="2"></path>
-                                                            </svg>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                                <div class="pop-preview-item">
-                                                    <button type="button" class="btn-img">
-                                                        <span>
-                                                            <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7 list-icon" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                                        </span>
-                                                        <div class="select-img hidden">
-                                                            <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M1 4.76471L5.5 9L14 1" stroke="#fff" stroke-width="2"></path>
-                                                            </svg>
-                                                        </div>
-                                                    </button>
-                                                </div>
+                                                ${imagesHtml}
                                             </div>
                                         </div>
                                         <div class="pop-review-content-wrap">
                                             <div class="review-author">
-                                                <span class="badge badge-member">멤버스</span>
+                                                ${badgeHtml}
                                                 <span class="name">${review.memberName}</span>
                                             </div>
                                             <div class="review-content">

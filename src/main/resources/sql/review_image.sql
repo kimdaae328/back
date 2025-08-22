@@ -13,7 +13,10 @@ create table tbl_review_image(
 select * from tbl_review_image;
 
 insert into tbl_review_image (review_image_url, review_image_sort_order, review_id)
-values ('', '', '')
+values ('/images/product-images/grape_review4.jpg', '3', '49');
 
+update tbl_review_image
+set review_image_url = '/images/product-images/grape_review4.jpeg'
+where id = 4;
 
 drop table tbl_review_image;

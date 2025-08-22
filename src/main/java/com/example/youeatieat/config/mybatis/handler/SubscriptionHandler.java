@@ -14,11 +14,16 @@ import java.sql.SQLException;
 public class SubscriptionHandler implements TypeHandler<Subscription> {
     @Override
     public void setParameter(PreparedStatement ps, int i, Subscription parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.getValue());
+        if (parameter == null) {
+            ps.setNull(i, jdbcType == null ? java.sql.Types.VARCHAR : jdbcType.TYPE_CODE);
+        } else {
+            ps.setString(i, parameter.getValue());
+        }
     }
 
     @Override
     public Subscription getResult(ResultSet rs, String columnName) throws SQLException {
+        if (rs.getString(columnName) == null) return null;
         return switch (rs.getString(columnName)){
             case "active" -> Subscription.ACTIVE;
             case "cancelled" -> Subscription.CANCELLED;
@@ -28,6 +33,7 @@ public class SubscriptionHandler implements TypeHandler<Subscription> {
 
     @Override
     public Subscription getResult(ResultSet rs, int columnIndex) throws SQLException {
+        if (rs.getString(columnIndex) == null) return null;
         return switch (rs.getString(columnIndex)){
             case "active" -> Subscription.ACTIVE;
             case "cancelled" -> Subscription.CANCELLED;
@@ -37,6 +43,7 @@ public class SubscriptionHandler implements TypeHandler<Subscription> {
 
     @Override
     public Subscription getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        if (cs.getString(columnIndex) == null) return null;
         return switch (cs.getString(columnIndex)){
             case "active" -> Subscription.ACTIVE;
             case "cancelled" -> Subscription.CANCELLED;

@@ -3,6 +3,7 @@ package com.example.youeatieat.service;
 import com.example.youeatieat.dto.ReviewCriteriaDTO;
 import com.example.youeatieat.dto.ReviewDTO;
 import com.example.youeatieat.repository.ReviewDAO;
+import com.example.youeatieat.repository.ReviewImageDAO;
 import com.example.youeatieat.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private final ReviewDAO reviewDAO;
+    @Autowired
+    private final ReviewImageDAO reviewImageDAO;
 
     @Override
     public ReviewCriteriaDTO getReview(int page,Long id) {
@@ -30,6 +33,10 @@ public class ReviewServiceImpl implements ReviewService {
         if(criteria.isHasMore()){
             reviews.remove(reviews.size() - 1);
         }
+
+        reviews.forEach(reviewDTO -> {
+            reviewDTO.setImages(reviewImageDAO.findImagesByReviewId(reviewDTO.getId()));
+        });
 
         reviewCriteriaDTO.setReviews(reviews);
         reviewCriteriaDTO.setCriteria(criteria);

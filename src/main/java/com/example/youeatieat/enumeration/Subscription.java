@@ -11,9 +11,9 @@ public enum Subscription {
     ACTIVE("active"), CANCELLED("cancelled");
 
     private final String value;
-    private static final Map<String, Provider> STATUS_MAP =
-            Arrays.stream(Provider.values())
-                    .collect(Collectors.toMap(Provider::getValue, Function.identity()));
+    private static final Map<String, Subscription> STATUS_MAP =
+            Arrays.stream(Subscription.values())
+                    .collect(Collectors.toMap(Subscription::getValue, Function.identity()));
 
     Subscription(String value) {
         this.value = value;
@@ -23,7 +23,7 @@ public enum Subscription {
         return value;
     }
 
-    public static Provider getSubscriptionFromValue(String value) {
+    public static Subscription getSubscriptionFromValue(String value) {
         return Optional.ofNullable(STATUS_MAP.get(value)).orElseThrow(IllegalArgumentException::new);
     }
 }
