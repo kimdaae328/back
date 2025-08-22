@@ -20,11 +20,11 @@ public class MemberDTO {
     private String memberName;
     private String memberBirth;
     private String memberPhone;
-    private String kakaoEmail;
+    private String memberKakaoEmail;
     private String address;
     private String addressDetail;
     private String addressPostNumber;
-    private Provider provider;
+    private Provider memberProvider;
     private MemberGender memberGender;
     private MemberRole memberRole;
     private Status memberStatus;

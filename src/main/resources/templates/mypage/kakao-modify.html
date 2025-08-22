@@ -84,17 +84,18 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="modify">
                         <div class="modify-header">
                             <h2 class="modify-tilte">개인 정보 수정</h2>
                         </div>
                         <div class="modify-body">
-                            <form action="">
+                            <form action="/mypage/kakao-modify" method="post">
                                 <div class="eMail">
                                     <div class="eMail-title">이메일</div>
                                     <div class="eMail-input-wrap">
                                         <!-- value에 회원 아이디 적기 -->
-                                        <input type="text" name="kakaoEmail" class="eMail-input" >
+                                        <input type="text" name="kakaoEmail" class="eMail-input" th:value="${session.member.memberKakaoEmail}" readonly>
                                     </div>
                                 </div>
                                 <div class="eMail">
@@ -109,21 +110,21 @@
                                     <div class="eMail-title">성별</div>
                                     <div class="genderchoose-div">
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="memberGender" value="MALE">
+                                            <input type="radio" class="genderbutton" name="memberGender" value="MALE"  th:checked="${session.member.memberGender == 'male'}">
                                             <span class="gender-sapn">
                                                 <div class="gender-div"></div>
                                             </span>
                                             <span class="gendertext">남자</span>
                                         </label>
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="memberGender" value="FEMALE">
+                                            <input type="radio" class="genderbutton" name="memberGender" value="FEMALE" th:checked="${session.member.memberGender == 'female'}">
                                             <span class="gender-sapn">
                                                 <div class="gender-div"></div>
                                             </span>
                                             <span class="gendertext">여자</span>
                                         </label>
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="memberGender" value="NONE" checked>
+                                            <input type="radio" class="genderbutton" name="memberGender" value="NOT" th:checked="${session.member.memberGender == 'not'}">
                                             <span class="gender-sapn span-active">
                                                 <div class="gender-div div-active"></div>
                                             </span>
@@ -171,6 +172,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="scroll-to-top">
                        <button type="button" class="scroll-top-btn"></button>
                </div>
