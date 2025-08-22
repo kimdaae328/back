@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MypageService {
-    public MemberDTO kakaoMemberUpdate(MemberDTO memberDTO);
+    public void kakaoMemberUpdate(MemberDTO memberDTO);
+    public void memberUpdate(MemberDTO memberDTO);
+
 
 
 }

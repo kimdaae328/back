@@ -2,7 +2,9 @@ package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.LoginFailException;
 import com.example.youeatieat.dto.MemberDTO;
+import com.example.youeatieat.service.KakaoService;
 import com.example.youeatieat.service.MemberService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ import java.util.Map;
 public class MemberController {
     private final MemberService memberService;
     private final HttpSession session;
+    private final KakaoService kakaoService;
 
     @GetMapping("signup")
     public String goToJoinForm(MemberDTO memberDTO, Model model) {
@@ -62,10 +65,15 @@ public class MemberController {
         session.setAttribute("member", member);
         return new RedirectView("/");
     }
-    @PostMapping("logout")
-    public RedirectView logout(MemberDTO memberDTO){
-        session.removeAttribute("member");
+    @GetMapping("logout")
+    public RedirectView logout(String token, HttpServletResponse response){
+        if(token == null){
+            session.invalidate();
+        }else{
+            kakaoService.logout(token);
+        }
         return new RedirectView("/member/login");
     }
 }
+
 

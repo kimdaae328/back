@@ -3,11 +3,11 @@ package com.example.youeatieat.controller;
 import com.example.youeatieat.common.exception.handler.NotFoundReviewException;
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +23,15 @@ public class ProductApiController {
     private final ReviewServiceImpl reviewService;
     private final ProductInquiryServiceImpl productInquiryService;
     private final ProductInquiryAnswerServiceImpl productInquiryAnswerService;
+    private final HttpSession session;
 
     //    장바구니 넣기
     @PostMapping("carts/save")
     public ResponseEntity<?> insertCart(@RequestBody CartDTO cartDTO) {
         int cartCount = cartDTO.getCartCount();
         if (!(cartCount == 0)) {
+            cartDTO.setMemberId(Long.valueOf(session.getId()));
+            log.info(cartDTO.toString());
             cartService.addCart(cartDTO);
         }
 

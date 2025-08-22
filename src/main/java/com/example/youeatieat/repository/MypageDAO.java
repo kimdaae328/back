@@ -14,4 +14,7 @@ public class MypageDAO {
     public void kakaoMemberUpdate(MemberDTO memberDTO){
         mypageMapper.updateKakaoMember(memberDTO);
     }
+    public void memberUpdate(MemberDTO memberDTO){
+        mypageMapper.updateMember(memberDTO);
+    }
 }

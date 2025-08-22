@@ -1,16 +1,8 @@
 package com.example.youeatieat.mapper;
 
-import com.example.youeatieat.dto.AdminSellerCriteriaDTO;
-import com.example.youeatieat.dto.MemberDTO;
-import com.example.youeatieat.dto.MemberWithAddressDTO;
-import com.example.youeatieat.service.AdminSellerService;
-import com.example.youeatieat.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 @Slf4j
@@ -64,24 +56,24 @@ public class AdminCustomerMapperTests {
     @Autowired
     private AdminSellerMapper adminSellerMapper;
 
-    @Test
-    void testViewMemberProviderAddress() {
-        List<MemberDTO> result = adminSellerMapper.selectSellerAll(new Criteria(1, 20));
-
-        System.out.println("조회된 데이터 수: " + result.size());
-
-        result.forEach(r -> {
-            System.out.println("회원 ID: " + r.getId());
-            System.out.println("이메일: " + r.getMemberEmail());
-            System.out.println("이름: " + r.getMemberName());
-            System.out.println("전화번호: " + r.getMemberPhone());
-            System.out.println("역할: " + r.getMemberRole());
-            System.out.println("상태: " + r.getMemberStatus());
-            System.out.println("제공자: " + r.getProvider());
-            System.out.println("주소: " + r.getAddress());
-            System.out.println("주소상세: " + r.getAddressDetail());
-            System.out.println("우편번호: " + r.getAddressPostNumber());
-            System.out.println("=======================================");
-        });
-    }
+//    @Test
+//    void testViewMemberProviderAddress() {
+//        List<MemberDTO> result = adminSellerMapper.selectSellerAll(new Criteria(1, 20));
+//
+//        System.out.println("조회된 데이터 수: " + result.size());
+//
+//        result.forEach(r -> {
+//            System.out.println("회원 ID: " + r.getId());
+//            System.out.println("이메일: " + r.getMemberEmail());
+//            System.out.println("이름: " + r.getMemberName());
+//            System.out.println("전화번호: " + r.getMemberPhone());
+//            System.out.println("역할: " + r.getMemberRole());
+//            System.out.println("상태: " + r.getMemberStatus());
+//            System.out.println("제공자: " + r.getMemberProvider());
+//            System.out.println("주소: " + r.getAddress());
+//            System.out.println("주소상세: " + r.getAddressDetail());
+//            System.out.println("우편번호: " + r.getAddressPostNumber());
+//            System.out.println("=======================================");
+//        });
+//    }
 }

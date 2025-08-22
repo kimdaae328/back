@@ -35,23 +35,6 @@ public class MyPageController {
     public String GoToCheck(){
         return "/mypage/check";
     }
-    @GetMapping("check/kakao")
-    public String kakaoReLogin(){
-//        String token = kakaoService.getKakaoAccessToken(code);
-//        Optional<MemberDTO> foundMember = kakaoService.getKakaoInfo(token);
-//        log.info("#####################"+token);
-//        MemberDTO member = foundMember.orElseThrow(RuntimeException::new);
-//        MemberDTO sessionMember = (MemberDTO) session.getAttribute("member");
-//
-//        if(sessionMember.getMemberKakaoEmail().equals(member.getMemberKakaoEmail())){
-//            return new RedirectView("/mypage/modify");
-//        }
-//        else {
-//            return new RedirectView("/mypage/check");
-//        }
-        return "/mypage/kakao-modify";
-
-    }
     @GetMapping("order")
     public String GoToOrder(){
         return "/mypage/order";
@@ -64,18 +47,34 @@ public class MyPageController {
     public String GoToOrderDetail() {
         return "/mypage/order-detail";
     }
-    @GetMapping("kakao-modify")
-    public String GoToKakaoModify() {
-        return "/mypage/kakao-modify";
+
+    @GetMapping("modify")
+    public String GoToModify() {
+        MemberDTO member = (MemberDTO) session.getAttribute("member");
+        if(member.getMemberKakaoEmail()==null){
+            return "/mypage/modify";
+        }
+        else {
+            return "/mypage/kakao-modify";
+        }
+    }
+    @GetMapping("subcribe")
+    public String GoToSubcribe() {
+        return "/mypage/subcribe";
     }
     @PostMapping("kakao-modify")
     public String UpdateKakaoMember(MemberDTO memberDTO) {
         MemberDTO sessionMember = (MemberDTO) session.getAttribute("member");
         sessionMember.setMemberName(memberDTO.getMemberName());
         mypageService.kakaoMemberUpdate(sessionMember);
-        session.setAttribute("member", sessionMember);
-
-        log.info(sessionMember.toString());
+        return "redirect:/";
+    }
+    @PostMapping("modify")
+    public String UpdateMember(MemberDTO memberDTO) {
+        MemberDTO sessionMember = (MemberDTO) session.getAttribute("member");
+        sessionMember.setMemberEmail(memberDTO.getMemberEmail());
+        sessionMember.setMemberName(memberDTO.getMemberName());
+        mypageService.memberUpdate(sessionMember);
         return "redirect:/";
     }
 }

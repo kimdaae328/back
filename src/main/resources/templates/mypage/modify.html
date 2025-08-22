@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
     <link rel="shortcut icon" href="" type="image/x-icon">
-    <link rel="stylesheet" href="/css/mypage/like-list.css">
+    <link rel="stylesheet" href="/css/mypage/modify.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     
@@ -47,7 +47,7 @@
                                     </button>
                                     </form>
                                     <form action="/mypage/modify" method="get">
-                                    <button class="menu-link">
+                                    <button class="active menu-link">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" fill="none"></rect>
                                             <path d="M6 5C6 3.89543 6.89543 3 8 3H25C26.1046 3 27 3.89543 27 5V21C27 23.7614 24.7614 26 22 26H8C6.89543 26 6 25.1046 6 24V5Z" fill="#fff" stroke="rgb(50, 116, 63)" stroke-width="1.5"></path>
@@ -72,7 +72,7 @@
                                     </button>
                                     </form>
                                     <form action="/mypage/like-list" method="get">
-                                    <button class="active menu-link">
+                                    <button class="menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.333313)"></rect>
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M25.4195 5.98883C22.8677 3.33706 18.7321 3.33706 16.1817 5.98883L14.3328 7.90876L12.4852 5.98883C9.93345 3.33706 5.79786 3.33706 3.24608 5.98883C0.695724 8.63911 0.695724 12.9368 3.24608 15.5885L5.09362 17.5085L13.6709 25.0822C14.049 25.4161 14.6166 25.4161 14.9947 25.0822L23.5719 17.5085L25.4195 15.5885C27.9713 12.9368 27.9713 8.63911 25.4195 5.98883Z" fill="#fff" stroke="rgb(50, 116, 63)" stroke-width="1.5" stroke-linecap="round"></path>
@@ -95,95 +95,72 @@
                             </div>
                         </div>
                     </div>
-                    <div class="like-list-wrap">
-                        <div class="like-list-header">
-                            <h2 class="list-title">찜한 상품</h2>
-                            <span>찜한 상품은 최대 200개까지 저장됩니다.</span>
+
+                    <div class="modify">
+                        <div class="modify-header">
+                            <h2 class="modify-tilte">개인 정보 수정</h2>
                         </div>
-                        <div class="like-list">
-                            <div class="like-list-total">
-                                <div class="like-total">전체 <Strong>2</Strong>개</div>
-                                <div style="overflow: visible; width: 0px;;;">
-                                    <div class="like-list-inner">
-                                        <div class="list-inner">
-                                            <!-- 재고있는 상품 -->
-                                            <div class="available">
-                                                <a href="" class="like-a">
-                                                    <span>
-                                                        <span>
-                                                            <img src=" https://img-cf.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/shop/data/goods/1657690526981l0.jpg">
-                                                        </span>
-                                                    </span>
-                                                </a>
-                                                <div class="product-info">
-                                                    <div>
-                                                        <div class="info-title">
-                                                            <a href="" style="display: block;">[테디] 100% 땅콩버터 454g 2종</a>
-                                                        </div>
-                                                        <div class="info-price">14,800 원</div>
-                                                    </div>
-                                                    <div class="like-buttons">
-                                                        <button class="remove">
-                                                            <span>삭제</span>
-                                                        </button>
-                                                        <button class="add popup-trigger" data-target="#popup2">
-                                                            <span class="add-button">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
-                                                                    <g fill="none" fill-rule="evenodd">
-                                                                        <path d="M36 36H0V0h36z"/>
-                                                                        <g transform="translate(5.164 6.547)" stroke="rgb(50,116,63)" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.7">
-                                                                            <path d="m25.68 3.66-2.72 11.57H7.37L4.66 3.66z"/>
-                                                                            <circle cx="20.52" cy="20.78" r="2.14"/>
-                                                                            <circle cx="9.81" cy="20.78" r="2.14"/>
-                                                                            <path d="M0 0h3.8l1.76 7.5"/>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-                                                                담기
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                        <div class="modify-body">
+                            <form action="/mypage/modify" method="post">
+                                <div class="eMail">
+                                    <div class="eMail-title">이메일</div>
+                                    <div class="eMail-input-wrap">
+                                        <!-- value에 회원 아이디 적기 -->
+                                        <input type="text" name="memberEmail" class="eMail-input" id="emailinputtext" th:value="${session.member.memberEmail}">
+                                    </div>
+                                </div>
+                                <div style="display: none" id="check-email">
+                                    <p class="error-message">중복된 이메일입니다.</p>
+                                </div>
+                                <div class="eMail">
+                                    <div class="eMail-title">이름</div>
+                                    <div class="eMail-input-wrap">
+                                        <!-- value에 회원 이름 적기 -->
+                                        <input type="text" name="memberName" class="eMail-input" th:value="${session.member.memberName}">
+                                    </div>
+                                    <div class="name-error"></div>
+                                </div>
+                                <div class="brith-wrap">
+                                    <div class="idtext" style="width: 66px;">
+                                    <label class="eMail-title">생년월일</label>
+                                    </div>
+                                    <div class="birthcontainer">
+                                        <div class="birthlan">
+                                            <div class="birthinputcontainer">
+                                                <input type="text" placeholder="YYYY"  th:value="${#strings.substring(session.member.memberBirth, 0, 4)}"  class="birthinput" readonly>
                                             </div>
-                                            <!-- 재고 없는 상품 -->
-                                            <div class="unusable">
-                                                <a href="" class="like-una">
-                                                    <span>
-                                                        <span>
-                                                            <img src=" https://img-cf.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/shop/data/goods/1657690526981l0.jpg">
-                                                        </span>
-                                                    </span>
-                                                    <span class="unusable-span"></span>
-                                                </a>
-                                                <div class="product-info">
-                                                    <div>
-                                                        <div class="info-unuse-title">
-                                                            <a href="" style="display: block;">(구매불가) [테디] 100% 땅콩버터 454g 2종</a>
-                                                        </div>
-                                                        <div class="info-unuse"></div>
-                                                    </div>
-                                                    <div class="like-buttons">
-                                                        <button class="remove">
-                                                            <span>삭제</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <span class="birthline">
+                                        </span>
+                                        <div class="birthlan">
+                                            <div class="birthinputcontainer">
+                                                <input type="text" placeholder="MM" th:value="${#strings.substring(session.member.memberBirth, 5, 7)}" class="birthinput" readonly>
+                                            </div>
+                                        </div>
+                                        <span class="birthline"></span>
+                                        <div class="birthlan">
+                                            <div class="birthinputcontainer">
+                                                <input type="text" placeholder="DD"  th:value="${#strings.substring(session.member.memberBirth, 8, 10)}"  class="birthinput" readonly>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="like-null">
-                            <div class="like-icon">
-                                <svg width="68" height="68" viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M57.025 14.975c-5.3-5.3-13.889-5.3-19.186 0L34 18.812l-3.837-3.837c-5.3-5.3-13.89-5.3-19.19 0-5.296 5.297-5.296 13.886 0 19.186l3.838 3.837 18.482 18.485a1 1 0 0 0 1.414 0s0 0 0 0l18.482-18.485h0l3.837-3.837c5.3-5.3 5.3-13.89 0-19.186z" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round" fill="none" fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <strong class="null-text">찜한 상품이 없습니다.</strong>
+                                <div class="error brith-error">
+                                    <!-- <p class="error-message">생년월일이 미래로 입력 되었습니다.</p> -->
+                                </div>
+                                <div class="modify-footer">
+                                    <button type="button" class="withdrawal">
+                                        <span class="withdrawal-span">탈퇴하기</span>
+                                    </button>
+                                    <button type="submit" id="update-btn" class="modify-button">
+                                        <span class="modify-button-span">회원정보수정</span>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
                 <div class="scroll-to-top">
                        <button type="button" class="scroll-top-btn"></button>
                </div>
@@ -238,81 +215,8 @@
            </button>
        </div>
    </div>
-<div class="popup-wrapper" id="popup2">
-        <div class="popup-inner">
-            <div class="dim"></div>
-            <div class="popup-container popup-product">
-                <div class="popup-content">
-                    <div class="popup-header">
-                        <div class="popup-img">
-                            <img src="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg" decoding="async" data-nimg="fill" class="css-0" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;" sizes="100vw" srcset="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 640w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 750w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 828w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1080w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1200w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1920w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 2048w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 3840w">
-                        </div>
-                        <div class="popup-title-wrap">
-                            <p class="popup-title">[샐러드판다] 그린랩 샌드위치 3종</p>
-                        </div>
-                    </div>
-                    <ul class="popup-product-list">
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="total-price-box">
-                        <p class="total-label">합계</p>
-                        <div class="total-price">
-                            <span class="total-amount">0</span>
-                            <span class="total-unit">원</span>
-                        </div>
-                    </div>
-                    <div class="popup-footer">
-                        <div class="popup-button-box">
-                            <!-- 팝업 닫기 : popup-close 클래스 있을시 -->
-                            <button type="button" class="btn-outline popup-close">취소</button>
-                            <button type="button" class="btn-primary popup-close">장바구니</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
-<script src="/js/mypage/like-list.js"></script>
+<script src="/js/mypage/modify/event.js"></script>
+<script src="/js/mypage/modify/module/layout.js"></script>
+<script src="/js/mypage/modify/module/service.js"></script>
 </html>

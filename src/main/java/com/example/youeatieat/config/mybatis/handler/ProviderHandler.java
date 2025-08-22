@@ -1,6 +1,5 @@
 package com.example.youeatieat.config.mybatis.handler;
 
-
 import com.example.youeatieat.enumeration.Provider;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
@@ -16,12 +15,18 @@ public class ProviderHandler implements TypeHandler<Provider> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, Provider parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.getValue());
+        if (parameter == null) {
+            ps.setNull(i, jdbcType == null ? java.sql.Types.VARCHAR : jdbcType.TYPE_CODE);
+        } else {
+            ps.setString(i, parameter.getValue());
+        }
     }
 
     @Override
     public Provider getResult(ResultSet rs, String columnName) throws SQLException {
-        return switch (rs.getString(columnName)){
+        String value = rs.getString(columnName);
+        if (value == null) return null;
+        return switch (value) {
             case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
@@ -30,7 +35,9 @@ public class ProviderHandler implements TypeHandler<Provider> {
 
     @Override
     public Provider getResult(ResultSet rs, int columnIndex) throws SQLException {
-        return switch (rs.getString(columnIndex)){
+        String value = rs.getString(columnIndex);
+        if (value == null) return null;
+        return switch (value) {
             case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
@@ -39,11 +46,12 @@ public class ProviderHandler implements TypeHandler<Provider> {
 
     @Override
     public Provider getResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return switch (cs.getString(columnIndex)){
+        String value = cs.getString(columnIndex);
+        if (value == null) return null;
+        return switch (value) {
             case "you_i" -> Provider.YOU_I;
             case "kakao" -> Provider.KAKAO;
             default -> null;
         };
     }
 }
-

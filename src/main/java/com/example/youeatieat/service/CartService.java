@@ -11,8 +11,7 @@ public interface CartService {
         return CartVO.builder()
                 .cartCount(cartDTO.getCartCount())
                 .productId(cartDTO.getProductId())
-                .memberId(2L) // 로그인한 사용자 ID
-//                .memberId(cartDTO.getMemberId())
+                .memberId(cartDTO.getMemberId())
                 .build();
     }
 }

@@ -10,13 +10,13 @@
         values (#{memberKakaoEmail},#{memberName},#{memberBirth},#{memberPhone},#{memberGender},#{memberProvider})
     </insert>
     <select id="selectMemberForLogin">
-        select id, member_email, member_name, created_date,updated_date
+        select id, member_email, member_name, created_date,updated_date,member_birth,member_gender
         from tbl_member
         where member_email = #{memberEmail} and member_password = #{memberPassword} and member_status = 'active'
     </select>
     <select id="selectMemberByKakaoEmail">
         select  member_email, member_name, member_status,member_phone,member_birth,
-               member_kakao_email ,member_gender, member_provider, created_date, updated_date
+               member_kakao_email ,member_gender,member_provider,  created_date, updated_date
         from tbl_member
         where tbl_member.member_kakao_email = #{memberKakaoEmail}
     </select>

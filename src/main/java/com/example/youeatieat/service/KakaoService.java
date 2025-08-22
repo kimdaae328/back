@@ -102,5 +102,26 @@ public class KakaoService {
         return Optional.ofNullable(memberDTO);
     }
 
-//    이곳에서
+    public void logout(String token){
+        String requestURI = "https://kapi.kakao.com/v1/user/logout";
+
+        try {
+            URL url = new URL(requestURI);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+
+            if(connection.getResponseCode() == 200) {
+                log.info("로그아웃 성공");
+            }
+
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
