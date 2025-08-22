@@ -19,5 +19,4 @@ create table tbl_review(
 
 select * from tbl_review;
 
-
 drop table tbl_review;
