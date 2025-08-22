@@ -1,7 +1,7 @@
 const customerService = (() => {
     // 회원 목록
-    const getCustomerList = async (page, callback) => {
-        const response = await fetch(`/api/admin/customers/list/${page}`);
+    const getCustomerList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/customers/list/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
 
         if(callback){
@@ -12,8 +12,10 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("게시글 존재")
+            // console.log("키워드 전달 문제없음둥둥", keyword)
         }else if(response.status === 404){
             console.log("게시글 없음")
+            // console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
             console.log(error);
@@ -37,11 +39,9 @@ const customerService = (() => {
     };
 
     // 회원 목록(일반회원)
-    const getNonSubscribedCustomerList = async (page, callback) => {
-        const response = await fetch(`/api/admin/customers/list/nonSubscribed/${page}`);
+    const getNonSubscribedCustomerList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/customers/list/nonSubscribed/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
-
-
 
         if(callback){
             setTimeout(() => {
@@ -51,8 +51,7 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("일반 회원 존재");
-            console.log(response)
-            console.log(customersCriteria)
+            console.log("키워드존재", keyword)
         }else if(response.status === 404){
             console.log("일반 회원 없음");
         }else {
@@ -64,12 +63,9 @@ const customerService = (() => {
     };
 
     // 회원 목록(구독회원)
-    const getSubscribedCustomerList = async (page, callback) => {
-        const response = await fetch(`/api/admin/customers/list/subscribed/${page}`);
+    const getSubscribedCustomerList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/customers/list/subscribed/${page}?keyword=${keyword ?? ""}`);
         const customersCriteria = await response.json();
-
-        // console.log("구독" + response)
-        // console.log("구독" + customersCriteria)
 
         if(callback){
             setTimeout(() => {
@@ -79,8 +75,6 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("구독 회원 존재");
-            console.log(response)
-            console.log(customersCriteria)
         }else if(response.status === 404){
             console.log("구독 회원 없음");
         }else {
@@ -90,6 +84,7 @@ const customerService = (() => {
 
         return customersCriteria;
     };
+
 
     return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
 })();

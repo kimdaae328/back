@@ -23,13 +23,14 @@
                                         <div class="lottie-text" style="min-width: 76px; width: 81px; height: 28px; margin-top: 3px;">
                                             <span class="hello-text">반가워요!</span>
                                         </div>
-                                        <div class="user-name">너도나도 님</div>
+                                        <div class="user-name" th:text="${session.member.memberName}+'님'"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="often">
                                 <div class="often-text">자주찾는 메뉴</div>
                                 <div class="menu-wrap">
+                                    <form action="/mypage/order" method="get">
                                     <button class="active menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.666687)" fill="none"></rect>
@@ -44,6 +45,8 @@
                                         </svg>
                                         <div class="menu-list">주문 내역</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/check" method="get">
                                     <button class="menu-link">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" fill="none"></rect>
@@ -54,6 +57,8 @@
                                         </svg>
                                         <div class="menu-list">회원 정보 관리</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/cart" method="get">
                                     <button class="menu-link">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" fill="none"></rect>
@@ -65,6 +70,8 @@
                                         </svg>
                                         <div class="menu-list">장바구니</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/like-list" method="get">
                                     <button class="menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.333313)"></rect>
@@ -72,6 +79,7 @@
                                         </svg>
                                         <div class="menu-list">찜한 상품</div>
                                     </button>
+                                    </form>
                                     <button class="menu-link">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" style="enable-background:new 0 0 256 256; width: 29px;" version="1.1" viewBox="0 0 256 256" xml:space="preserve">
                                             <g>

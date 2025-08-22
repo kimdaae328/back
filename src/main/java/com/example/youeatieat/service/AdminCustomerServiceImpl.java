@@ -16,11 +16,11 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
 
 //    회원 목록(전쳬)
     @Override
-    public AdminCustomerCriteriaDTO getList(int page) {
+    public AdminCustomerCriteriaDTO getList(int page, String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findCountAll());
+        Criteria criteria = new Criteria(page, memberDAO.findCountAll(keyword));
 
-        List<MemberDTO> customers = memberDAO.findCustomerAll(criteria);
+        List<MemberDTO> customers = memberDAO.findCustomerAll(criteria, keyword);
 
         criteria.setHasMore(customers.size() > criteria.getRowCount());
 
@@ -58,11 +58,11 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
 
 //    회원 목록(일반회원)
     @Override
-    public AdminCustomerCriteriaDTO getNonSubscribedList(int page) {
+    public AdminCustomerCriteriaDTO getNonSubscribedList(int page, String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findNonSubscribedCountAll());
+        Criteria criteria = new Criteria(page, memberDAO.findNonSubscribedCountAll(keyword));
 
-        List<MemberDTO> customers = memberDAO.findNonSubscribedCustomerAll(criteria);
+        List<MemberDTO> customers = memberDAO.findNonSubscribedCustomerAll(criteria, keyword);
 
         criteria.setHasMore(customers.size() > criteria.getRowCount());
 
@@ -78,11 +78,11 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
 
 //    회원 목록(구독회원)
     @Override
-    public AdminCustomerCriteriaDTO getSubscribedList(int page) {
+    public AdminCustomerCriteriaDTO getSubscribedList(int page, String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = new AdminCustomerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findSubscribedCountAll());
+        Criteria criteria = new Criteria(page, memberDAO.findSubscribedCountAll(keyword));
 
-        List<MemberDTO> customers = memberDAO.findSubscribedCustomerAll(criteria);
+        List<MemberDTO> customers = memberDAO.findSubscribedCustomerAll(criteria, keyword);
 
         criteria.setHasMore(customers.size() > criteria.getRowCount());
 

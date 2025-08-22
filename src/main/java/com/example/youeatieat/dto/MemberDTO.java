@@ -1,9 +1,6 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.enumeration.MemberGender;
-import com.example.youeatieat.enumeration.MemberRole;
-import com.example.youeatieat.enumeration.Provider;
-import com.example.youeatieat.enumeration.Status;
+import com.example.youeatieat.enumeration.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,16 +17,17 @@ public class MemberDTO {
     private String memberName;
     private String memberBirth;
     private String memberPhone;
-    private String kakaoEmail;
+    private String memberKakaoEmail;
     private String address;
     private String addressDetail;
     private String addressPostNumber;
-    private Provider provider;
+    private Provider memberProvider;
     private MemberGender memberGender;
     private MemberRole memberRole;
     private Status memberStatus;
     private String memberLastLoginDate;
     private String createdDate;
     private String updatedDate;
+    private PaymentStatus subscriptionPaymentStatus;
     private boolean remember;
 }

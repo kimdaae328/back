@@ -1,8 +1,10 @@
 const sellerService = (() => {
     // 회원 목록
-    const getSellerList = async (page, callback) => {
-        const response = await fetch(`/api/admin/sellers/list/${page}`);
+    const getSellerList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/${page}?keyword=${keyword ?? ""}`);
         const sellersCriteria = await response.json();
+
+        console.log("회원목록",sellersCriteria)
 
         if(callback){
             setTimeout(() => {
@@ -40,9 +42,9 @@ const sellerService = (() => {
         return data;
     };
 
-    // 회원 목록(일반)
-    const getSellerYoueatieatList = async (page, callback) => {
-        const response = await fetch(`/api/admin/sellers/list/youeatieat/${page}`);
+    // 회원 목록(일반 로그인)
+    const getSellerYoueatieatList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/youeatieat/${page}?keyword=${keyword ?? ""}`);
         const sellersCriteria = await response.json();
 
         if(callback){
@@ -63,10 +65,12 @@ const sellerService = (() => {
         return sellersCriteria;
     }
 
-    // 회원 목록(카카오)
-    const getSellerKakaoList = async (page, callback) => {
-        const response = await fetch(`/api/admin/sellers/list/kakao/${page}`);
+    // 회원 목록(카카오 로그인)
+    const getSellerKakaoList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/kakao/${page}?keyword=${keyword ?? ""}`);
         const sellersCriteria = await response.json();
+
+        console.log("카카오목록",sellersCriteria)
 
         if(callback){
             setTimeout(() => {

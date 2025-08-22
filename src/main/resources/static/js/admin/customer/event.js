@@ -229,33 +229,16 @@ pageItemNums.forEach((pageItemNum) => {
 
 // ########################### 회원목록 ###########################
 // 전체 회원
-const showList = async (page = 1) => {
-    const customersCriteria = await customerService.getCustomerList(page, customerLayout.showList);
+const showList = async (page = 1, keyword) => {
+    const customersCriteria = await customerService.getCustomerList(page, keyword, customerLayout.showList);
     customerLayout.renderPagination(customersCriteria.criteria);
     customerLayout.customerCount(customersCriteria.criteria);
 
-    // console.log(customersCriteria)
+    // console.log("여기----------", customersCriteria)
     return customersCriteria;
 }
 
-// 일반 회원
-const showNonSubscribedList = async (page = 1) => {
-    const customersCriteria = await customerService.getNonSubscribedCustomerList(page, customerLayout.showNonSubscribedList);
-    // console.log(customersCriteria)
-    customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
-    return customersCriteria;
-};
-
-// 구독 회원
-const showSubscribedList = async (page = 1) => {
-    const customersCriteria = await customerService.getSubscribedCustomerList(page, customerLayout.showSubscribedList);
-    customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
-    return customersCriteria;
-};
-
-let currentLoader
+let currentLoader = "";
 const setList = (loader) => {
     currentLoader = loader;
     currentLoader(1);
@@ -263,6 +246,25 @@ const setList = (loader) => {
 };
 
 setList(showList);
+
+// 일반 회원
+const showNonSubscribedList = async (page = 1, keyword) => {
+    const customersCriteria = await customerService.getNonSubscribedCustomerList(page, keyword, customerLayout.showNonSubscribedList);
+    // console.log(customersCriteria)
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
+
+// 구독 회원
+const showSubscribedList = async (page = 1, keyword) => {
+    const customersCriteria = await customerService.getSubscribedCustomerList(page, keyword, customerLayout.showSubscribedList);
+    customerLayout.renderPagination(customersCriteria.criteria);
+    customerLayout.customerCount(customersCriteria.criteria);
+    return customersCriteria;
+};
+
+
 
 // ########################### 회원상세 ###########################
 // 일반회원 상세 모달 창 열고 닫는 이벤트
@@ -283,7 +285,7 @@ customerTable.addEventListener("click", async  (e, callback)=>{
     const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
     const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
 
-    console.log(customerDetail)
+    // console.log(customerDetail)
     customerLayout.showDetail(customerDetail);
 });
 
@@ -306,3 +308,32 @@ function closeModal() {
         modal.style.display = "none";
     }, 100);
 }
+
+// 검색
+const searchInput = document.querySelector(".input-search");
+const searchButton = document.querySelector(".btn-search");
+
+let keyword ="";
+
+searchInput.addEventListener("keyup", async (e)=> {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        keyword = e.target.value.trim();
+
+        const result = await currentLoader(1,keyword);
+        customerLayout.renderPagination(result.criteria);
+        customerLayout.customerCount(result.criteria);
+    }
+});
+
+searchButton.addEventListener("click", async() => {
+    keyword = searchInput.value.trim();
+    // console.log(keyword)
+
+    const result = await currentLoader(1,keyword);
+    customerLayout.renderPagination(result.criteria);
+    customerLayout.customerCount(result.criteria);
+});
+
+
+

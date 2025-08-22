@@ -221,8 +221,8 @@ pageItemNums.forEach((pageItemNum) => {
 
 // ########################### 회원목록 ###########################
 // 전체 회원
-const showList = async (page = 1) => {
-    const sellerCriteria = await sellerService.getSellerList(page, sellerLayout.showList);
+const showList = async (page = 1, keyword) => {
+    const sellerCriteria = await sellerService.getSellerList(page, keyword, sellerLayout.showList);
     sellerLayout.renderPagination(sellerCriteria.criteria);
     sellerLayout.sellerCount(sellerCriteria.criteria);
 
@@ -230,6 +230,7 @@ const showList = async (page = 1) => {
     return sellerCriteria;
 }
 
+let currentLoader = "";
 const setList = (loader) => {
     currentLoader = loader;
     currentLoader(1); // 첫 페이지
@@ -239,21 +240,19 @@ const setList = (loader) => {
 setList(showList);
 
 // 카카오회원
-const showKakaoList = async (page = 1) => {
-    const sellerCriteria = await sellerService.getSellerKakaoList(page, sellerLayout.showKakaoList);
+const showKakaoList = async (page = 1, keyword) => {
+    const sellerCriteria = await sellerService.getSellerKakaoList(page, keyword, sellerLayout.showKakaoList);
     sellerLayout.renderPagination(sellerCriteria.criteria);
     sellerLayout.sellerCount(sellerCriteria.criteria);
-
     // console.log(sellerCriteria)
     return sellerCriteria;
 }
 
 // 일반회원
-const showYoueatieatList = async (page = 1) => {
-    const sellerCriteria = await sellerService.getSellerYoueatieatList(page, sellerLayout.showYoueatieatList);
+const showYoueatieatList = async (page = 1, keyword) => {
+    const sellerCriteria = await sellerService.getSellerYoueatieatList(page, keyword, sellerLayout.showYoueatieatList);
     sellerLayout.renderPagination(sellerCriteria.criteria);
     sellerLayout.sellerCount(sellerCriteria.criteria);
-
     // console.log(sellerCriteria)
     return sellerCriteria;
 }
@@ -277,8 +276,7 @@ customerTable.addEventListener("click", async  (e, callback)=>{
     const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
     const customerDetail = await sellerService.getSellerDetail(currentCustomerId);
 
-    console.log(customerDetail)
-
+    // console.log(customerDetail)
     sellerLayout.showDetail(customerDetail);
 });
 
@@ -301,7 +299,29 @@ function closeModal() {
         modal.style.display = "none";
     }, 100);
 }
-//
-// fetch("/api/admin/sellers/list/1")
-//     .then(res => res.json())
-//     .then(data => console.log(data));
+
+// 검색
+const searchInput = document.querySelector(".input-search");
+const searchButton = document.querySelector(".btn-search");
+
+let keyword ="";
+
+searchInput.addEventListener("keyup", async (e)=> {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        keyword = e.target.value.trim();
+
+        const result = await currentLoader(1,keyword);
+        sellerLayout.renderPagination(result.criteria);
+        sellerLayout.sellerCount(result.criteria);
+    }
+});
+
+searchButton.addEventListener("click", async() => {
+    keyword = searchInput.value.trim();
+    // console.log(keyword)
+
+    const result = await currentLoader(1,keyword);
+    sellerLayout.renderPagination(result.criteria);
+    sellerLayout.sellerCount(result.criteria);
+});

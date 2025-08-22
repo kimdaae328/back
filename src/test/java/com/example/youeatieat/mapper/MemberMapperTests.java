@@ -2,7 +2,9 @@ package com.example.youeatieat.mapper;
 
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.repository.MemberDAO;
+import com.example.youeatieat.service.MemberService;
 import com.example.youeatieat.service.MemberServiceImpl;
+import com.example.youeatieat.service.MypageService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class MemberMapperTests {
     private MemberDTO memberDTO;
     @Autowired
     MemberServiceImpl memberServiceImpl;
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MypageService mypageService;
+
 //    (#{memberEmail},#{memberPassword},#{memberName},#{memberBirth},#{memberPhone},#{memberGender})
     @Test
    public void testInsertMember() {
@@ -50,9 +57,13 @@ public class MemberMapperTests {
     }
     @Test
     public void kakaoLoginTest(){
-//        memberMapper.selectMemberByKakaoEmail("test1234@kakao.com");
-//        memberDAO.findMemberByKakaoEmail("test1234@kakao.com");
-        memberServiceImpl.getKakaoMember("test1234@kakao.com");
+        Optional<MemberDTO> member= memberService.getKakaoMember("joyssung1101@naver.com");
+        member.get().setMemberName("업데이트");
+        mypageService.kakaoMemberUpdate(member.get());
+        log.info(member.toString());
+//
+//        memberServiceImpl.getKakaoMember("joyssung1101@naver.com");
+//        log.info("kakaoLoginTest:{}",memberDTO.getMemberName());
 
 
     }

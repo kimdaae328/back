@@ -12,5 +12,6 @@ import java.util.List;
 @Getter @Setter @ToString
 public class AdminSellerCriteriaDTO {
     private List<MemberDTO> sellers;
+    private String keyword;
     private Criteria criteria;
 }

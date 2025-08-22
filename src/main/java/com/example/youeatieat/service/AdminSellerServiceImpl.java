@@ -16,11 +16,11 @@ public class AdminSellerServiceImpl implements AdminSellerService {
 
 //    회원 목록(전쳬)
     @Override
-    public AdminSellerCriteriaDTO getSellerList(int page) {
+    public AdminSellerCriteriaDTO getSellerList(int page, String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = new AdminSellerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findSellerCountAll());
+        Criteria criteria = new Criteria(page, memberDAO.findSellerCountAll(keyword));
 
-        List<MemberDTO> sellers = memberDAO.findSellerAll(criteria);
+        List<MemberDTO> sellers = memberDAO.findSellerAll(criteria, keyword);
 
         criteria.setHasMore(sellers.size() > criteria.getRowCount());
 
@@ -51,11 +51,11 @@ public class AdminSellerServiceImpl implements AdminSellerService {
 
 //    회원 목록(일반)
     @Override
-    public AdminSellerCriteriaDTO getSellerYoueatieatList(int page) {
+    public AdminSellerCriteriaDTO getSellerYoueatieatList(int page, String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = new AdminSellerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findYoueatieatSellerCount());
+        Criteria criteria = new Criteria(page, memberDAO.findYoueatieatSellerCount(keyword));
 
-        List<MemberDTO> sellers = memberDAO.findYoueatieatSellerAll(criteria);
+        List<MemberDTO> sellers = memberDAO.findYoueatieatSellerAll(criteria, keyword);
 
         criteria.setHasMore(sellers.size() > criteria.getRowCount());
 
@@ -71,11 +71,11 @@ public class AdminSellerServiceImpl implements AdminSellerService {
 
 //    회원 목록(카카오)
     @Override
-    public AdminSellerCriteriaDTO getSellerKakaoList(int page) {
+    public AdminSellerCriteriaDTO getSellerKakaoList(int page, String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = new AdminSellerCriteriaDTO();
-        Criteria criteria = new Criteria(page, memberDAO.findKakaoSellerCount());
+        Criteria criteria = new Criteria(page, memberDAO.findKakaoSellerCount(keyword));
 
-        List<MemberDTO> sellers = memberDAO.findKakaoSellerAll(criteria);
+        List<MemberDTO> sellers = memberDAO.findKakaoSellerAll(criteria, keyword);
 
         criteria.setHasMore(sellers.size() > criteria.getRowCount());
 

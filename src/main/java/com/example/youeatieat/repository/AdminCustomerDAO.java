@@ -17,13 +17,13 @@ public class AdminCustomerDAO {
     private final AdminCustomerMapper customerMapper;
 
 //    회원 목록(전쳬)
-    public List<MemberDTO> findCustomerAll(Criteria criteria){
-        return customerMapper.selectCustomerAll(criteria);
+    public List<MemberDTO> findCustomerAll(Criteria criteria, String keyword) {
+        return customerMapper.selectCustomerAll(criteria, keyword);
     }
 
 //    전체 개수 조회
-    public int findCountAll(){
-        return customerMapper.selectCountAll();
+    public int findCountAll(String keyword){
+        return customerMapper.selectCountAll(keyword);
     }
 
 //    회원 상세
@@ -47,23 +47,23 @@ public class AdminCustomerDAO {
     };
 
 //    회원 목록(일반회원)
-    public List<MemberDTO> findNonSubscribedCustomerAll(Criteria criteria){
-        return customerMapper.selectNonSubscribedCustomerAll(criteria);
+    public List<MemberDTO> findNonSubscribedCustomerAll(Criteria criteria, String keyword){
+        return customerMapper.selectNonSubscribedCustomerAll(criteria, keyword);
     }
 
 //    전체 개수 조회(일반회원)
-    public int findNonSubscribedCountAll(){
-        return customerMapper.selectNonSubscribedCountAll();
+    public int findNonSubscribedCountAll(String keyword){
+        return customerMapper.selectNonSubscribedCountAll(keyword);
     }
 
 //    회원 목록(구독회원)
-    public List<MemberDTO> findSubscribedCustomerAll(Criteria criteria){
-        return customerMapper.selectSubscribedCustomerAll(criteria);
+    public List<MemberDTO> findSubscribedCustomerAll(Criteria criteria, String keyword){
+        return customerMapper.selectSubscribedCustomerAll(criteria, keyword);
     }
 
 //    전체 개수 조회(구독회원)
-    public int findSubscribedCountAll(){
-        return customerMapper.selectSubscribedCountAll();
+    public int findSubscribedCountAll(String keyword){
+        return customerMapper.selectSubscribedCountAll(keyword);
     }
 
 }
