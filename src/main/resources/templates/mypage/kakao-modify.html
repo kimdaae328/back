@@ -23,13 +23,14 @@
                                         <div class="lottie-text" style="min-width: 76px; width: 81px; height: 28px; margin-top: 3px;">
                                             <span class="hello-text">반가워요!</span>
                                         </div>
-                                        <div class="user-name">너도나도 님</div>
+                                        <div class="user-name" th:text="${session.member.memberName}+'님'"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="often">
                                 <div class="often-text">자주찾는 메뉴</div>
                                 <div class="menu-wrap">
+                                    <form action="/mypage/order-detail" method="get">
                                     <button class=" menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.666687)" fill="none"></rect>
@@ -44,6 +45,8 @@
                                         </svg>
                                         <div class="menu-list">주문 내역</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/check" method="get">
                                     <button class="active menu-link">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" fill="none"></rect>
@@ -54,6 +57,8 @@
                                         </svg>
                                         <div class="menu-list">회원 정보 관리</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/review-list" method="get">
                                     <button class="menu-link">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" fill="none"></rect>
@@ -65,6 +70,8 @@
                                         </svg>
                                         <div class="menu-list">상품 후기</div>
                                     </button>
+                                    </form>
+                                    <form action="/mypage/like-list" method="get">
                                     <button class="menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.333313)"></rect>
@@ -72,28 +79,30 @@
                                         </svg>
                                         <div class="menu-list">찜한 상품</div>
                                     </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="modify">
                         <div class="modify-header">
                             <h2 class="modify-tilte">개인 정보 수정</h2>
                         </div>
                         <div class="modify-body">
-                            <form action="">
+                            <form action="/mypage/kakao-modify" method="post">
                                 <div class="eMail">
                                     <div class="eMail-title">이메일</div>
                                     <div class="eMail-input-wrap">
                                         <!-- value에 회원 아이디 적기 -->
-                                        <input type="text" class="eMail-input" value="youeatieat@gmail.com" readonly>
+                                        <input type="text" name="kakaoEmail" class="eMail-input" th:value="${session.member.memberKakaoEmail}" readonly>
                                     </div>
                                 </div>
                                 <div class="eMail">
                                     <div class="eMail-title">이름</div>
                                     <div class="eMail-input-wrap">
                                         <!-- value에 회원 이름 적기 -->
-                                        <input type="text" class="eMail-input" value="너도나도">
+                                        <input type="text" name="memberName" class="eMail-input" th:value="${session.member.memberName}">
                                     </div>
                                     <div class="name-error"></div>
                                 </div>
@@ -101,21 +110,21 @@
                                     <div class="eMail-title">성별</div>
                                     <div class="genderchoose-div">
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="gender" value="MALE">
+                                            <input type="radio" class="genderbutton" name="memberGender" value="MALE"  th:checked="${session.member.memberGender == 'male'}">
                                             <span class="gender-sapn">
                                                 <div class="gender-div"></div>
                                             </span>
                                             <span class="gendertext">남자</span>
                                         </label>
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="gender" value="FEMALE">
+                                            <input type="radio" class="genderbutton" name="memberGender" value="FEMALE" th:checked="${session.member.memberGender == 'female'}">
                                             <span class="gender-sapn">
                                                 <div class="gender-div"></div>
                                             </span>
                                             <span class="gendertext">여자</span>
                                         </label>
                                         <label class="genderchoose">
-                                            <input type="radio" class="genderbutton" name="gender" value="NONE" checked>
+                                            <input type="radio" class="genderbutton" name="memberGender" value="NOT" th:checked="${session.member.memberGender == 'not'}">
                                             <span class="gender-sapn span-active">
                                                 <div class="gender-div div-active"></div>
                                             </span>
@@ -130,20 +139,20 @@
                                     <div class="birthcontainer">
                                         <div class="birthlan">
                                             <div class="birthinputcontainer">
-                                                <input type="text" placeholder="YYYY" class="birthinput">
+                                                <input type="text" placeholder="YYYY"  th:value="${#strings.substring(session.member.memberBirth, 0, 4)}"  class="birthinput">
                                             </div>
                                         </div>
                                         <span class="birthline">
                                         </span>
                                         <div class="birthlan">
                                             <div class="birthinputcontainer">
-                                                <input type="text" placeholder="MM" class="birthinput">
+                                                <input type="text" placeholder="MM" th:value="${#strings.substring(session.member.memberBirth, 5, 7)}" class="birthinput">
                                             </div>
                                         </div>
                                         <span class="birthline"></span>
                                         <div class="birthlan">
                                             <div class="birthinputcontainer">
-                                                <input type="text" placeholder="DD" class="birthinput">
+                                                <input type="text" placeholder="DD"  th:value="${#strings.substring(session.member.memberBirth, 8, 10)}"  class="birthinput">
                                             </div>
                                         </div>
                                     </div>
@@ -163,6 +172,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="scroll-to-top">
                        <button type="button" class="scroll-top-btn"></button>
                </div>

@@ -10,6 +10,8 @@
     
 </head>
 <body>
+<!--<header th:replace="~{/main/header.html :: header}"></header>-->
+<!--<footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>-->
 <header>
     <div id="__next">
         <div>
@@ -28,8 +30,12 @@
                              </a>
                           </th:block>
                          <div class="member-menu customer-service-list">
-                             <div class="list-menu">주문 내역</div>
-                             <div class="list-menu">회원 정보 관리</div>
+                             <form action="/mypage/order" method="get">
+                             <button class="list-menu">주문 내역</button>
+                             </form>
+                             <form action="/mypage/check" method="get">
+                             <button class="list-menu">회원 정보 관리</button>
+                             </form>
                              <div class="list-menu">
                                  <form action="/member/logout" method="post">
                                      <button type="submit">로그아웃</button>
@@ -44,9 +50,15 @@
                             <span class="customer-service-icon"></span>
                         </a>
                         <div class="menu customer-service-list">
-                            <div class="list-menu">공지사항</div>
-                            <div class="list-menu">자주하는 질문</div>
-                            <div class="list-menu">1:1 문의</div>
+                            <form action="/customerservice/notice" method="get">
+                            <button class="list-menu">공지사항</button>
+                            </form>
+                            <form action="/customerservice/faq" method="get">
+                            <button class="list-menu">자주하는 질문</button>
+                            </form>
+                            <form action="/customerservice/inquiry" method="get">
+                            <button class="list-menu">1:1 문의</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -100,10 +112,14 @@
                                 </div>
                             </div>
                         </div>
+                        <form action="/mypage/like-list" method="get">
                         <button class="good-icon"></button>
+                        </form>
+                        <form action="/mypage/cart" method="get">
                         <div class="cart-icon">
                             <button class="cart-icon-button"></button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

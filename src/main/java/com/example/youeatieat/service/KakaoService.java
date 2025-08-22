@@ -88,8 +88,8 @@ public class KakaoService {
                 JsonElement profile = kakaoAccount.getAsJsonObject().get("profile");
 
                 memberDTO = new MemberDTO();
-                memberDTO.setKakaoEmail(kakaoAccount.getAsJsonObject().get("email").getAsString());
-                memberDTO.setProvider(Provider.KAKAO);
+                memberDTO.setMemberKakaoEmail(kakaoAccount.getAsJsonObject().get("email").getAsString());
+                memberDTO.setMemberProvider(Provider.KAKAO);
                 bufferedReader.close();
             }
 

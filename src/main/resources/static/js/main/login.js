@@ -4,7 +4,7 @@ const closeButtons = document.querySelectorAll(".popup-close");
 
 openButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const targetSelector = btn.dataset.target;
         const targetModal = document.querySelector(targetSelector);
         const htmlScroll = document.querySelector("html");
