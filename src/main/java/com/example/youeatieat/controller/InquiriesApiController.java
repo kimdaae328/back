@@ -1,10 +1,8 @@
 package com.example.youeatieat.controller;
 
-import com.example.youeatieat.dto.CartDTO;
 import com.example.youeatieat.dto.ProductInquiryAnswerDTO;
 import com.example.youeatieat.dto.ProductInquiryCriteriaDTO;
 import com.example.youeatieat.dto.ProductInquiryDTO;
-import com.example.youeatieat.service.CartServiceImpl;
 import com.example.youeatieat.service.ProductInquiryAnswerServiceImpl;
 import com.example.youeatieat.service.ProductInquiryServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +22,8 @@ public class InquiriesApiController {
     //    상품 문의하기
     @PostMapping("/to")
     public ResponseEntity<?> inquiryProduct(@RequestBody ProductInquiryDTO productInquiryDTO) {
-        productInquiryDTO.setMemberId(2L);
+        productInquiryDTO.setMemberId(32L);
         productInquiryService.toInquire(productInquiryDTO);
-
         return ResponseEntity.ok().body(productInquiryDTO);
     }
 

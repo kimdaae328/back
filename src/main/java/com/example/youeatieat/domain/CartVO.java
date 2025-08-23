@@ -17,4 +17,6 @@ public class CartVO extends Period {
     private int cartCount;
     private Long productId;
     private Long memberId;
+    private String productName;
+    private int productPrice;
 }

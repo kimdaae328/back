@@ -5,4 +5,17 @@
         insert into tbl_cart (cart_count, product_id, member_id)
         values (#{cartCount}, #{productId}, #{memberId})
     </insert>
+    <select id="selectCartByMemberId">
+        select c.id as id,
+               c.cart_status ,
+               c.cart_count ,
+               c.product_id ,
+               c.member_id ,
+               c.created_date ,
+               c.updated_date ,
+               p.product_name ,
+               p.product_price
+        from tbl_cart c join tbl_member m on c.member_id = m.id join tbl_product p on c.product_id =p.id
+        where c.member_id=#{memberId}
+    </select>
 </mapper>

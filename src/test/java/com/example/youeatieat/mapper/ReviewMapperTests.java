@@ -25,17 +25,17 @@ public class ReviewMapperTests {
 
         log.info("조회된 리뷰 개수 = {}", reviews.size());
 
-        for (ReviewDTO dto : reviews) {
-            log.info("id={}, member={}, content={}, reviewStatus={}, imageUrl={}, imageStatus={}, created={}, updated={}",
-                    dto.getId(),
-                    dto.getMemberName() != null ? dto.getMemberName() : "",
-                    dto.getReviewContent() != null ? dto.getReviewContent() : "",
-                    dto.getReviewStatus() != null ? dto.getReviewStatus() : "",
-                    dto.getReviewImageUrl() != null ? dto.getReviewImageUrl() : "",
-                    dto.getReviewImageStatus() != null ? dto.getReviewImageStatus() : "",
-                    dto.getCreatedDate() != null ? dto.getCreatedDate() : "",
-                    dto.getUpdatedDate() != null ? dto.getUpdatedDate() : ""
-            );
-        }
+//        for (ReviewDTO dto : reviews) {
+//            log.info("id={}, member={}, content={}, reviewStatus={}, imageUrl={}, imageStatus={}, created={}, updated={}",
+//                    dto.getId(),
+//                    dto.getMemberName() != null ? dto.getMemberName() : "",
+//                    dto.getReviewContent() != null ? dto.getReviewContent() : "",
+//                    dto.getReviewStatus() != null ? dto.getReviewStatus() : "",
+//                    dto.getReviewImageUrl() != null ? dto.getReviewImageUrl() : "",
+//                    dto.getReviewImageStatus() != null ? dto.getReviewImageStatus() : "",
+//                    dto.getCreatedDate() != null ? dto.getCreatedDate() : "",
+//                    dto.getUpdatedDate() != null ? dto.getUpdatedDate() : ""
+//            );
+//        }
     }
 }

@@ -20,7 +20,7 @@ public class ProductApiController {
 //   이미지
     @GetMapping("image")
     public byte[] display(String filePath) throws IOException {
-        return FileCopyUtils.copyToByteArray(new File("C:/gb_0900_icm/you-eat-i-eat/you-eat-i-eat/src/main/resources/static" + filePath));
+        return FileCopyUtils.copyToByteArray(new File("C:" + filePath));
 
     }
 
