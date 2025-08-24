@@ -305,7 +305,6 @@ const showUnansweredList = async (page = 1) => {
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
     inquiryLayout.totalCount(inquiryCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
 }
 
@@ -315,7 +314,6 @@ const showAnsweredList = async (page = 1) => {
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
     inquiryLayout.totalCount(inquiryCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
 }
 
@@ -325,7 +323,6 @@ const showSellerInquiryList = async (page = 1) => {
     sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
     sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
 }
 
@@ -335,7 +332,6 @@ const showSellerUnansweredList = async (page = 1) => {
     sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
     sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
 }
 
