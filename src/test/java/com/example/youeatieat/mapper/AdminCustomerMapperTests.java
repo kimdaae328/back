@@ -61,27 +61,27 @@ public class AdminCustomerMapperTests {
 //    }
 
 //    view로 바꾸고 확인
-    @Autowired
-    private AdminSellerMapper adminSellerMapper;
-
-    @Test
-    void testViewMemberProviderAddress() {
-        List<MemberDTO> result = adminSellerMapper.selectSellerAll(new Criteria(1, 20));
-
-        System.out.println("조회된 데이터 수: " + result.size());
-
-        result.forEach(r -> {
-            System.out.println("회원 ID: " + r.getId());
-            System.out.println("이메일: " + r.getMemberEmail());
-            System.out.println("이름: " + r.getMemberName());
-            System.out.println("전화번호: " + r.getMemberPhone());
-            System.out.println("역할: " + r.getMemberRole());
-            System.out.println("상태: " + r.getMemberStatus());
-            System.out.println("제공자: " + r.getProvider());
-            System.out.println("주소: " + r.getAddress());
-            System.out.println("주소상세: " + r.getAddressDetail());
-            System.out.println("우편번호: " + r.getAddressPostNumber());
-            System.out.println("=======================================");
-        });
-    }
+//    @Autowired
+//    private AdminSellerMapper adminSellerMapper;
+//
+//    @Test
+//    void testViewMemberProviderAddress() {
+//        List<MemberDTO> result = adminSellerMapper.selectSellerAll(new Criteria(1, 20));
+//
+//        System.out.println("조회된 데이터 수: " + result.size());
+//
+//        result.forEach(r -> {
+//            System.out.println("회원 ID: " + r.getId());
+//            System.out.println("이메일: " + r.getMemberEmail());
+//            System.out.println("이름: " + r.getMemberName());
+//            System.out.println("전화번호: " + r.getMemberPhone());
+//            System.out.println("역할: " + r.getMemberRole());
+//            System.out.println("상태: " + r.getMemberStatus());
+//            System.out.println("제공자: " + r.getProvider());
+//            System.out.println("주소: " + r.getAddress());
+//            System.out.println("주소상세: " + r.getAddressDetail());
+//            System.out.println("우편번호: " + r.getAddressPostNumber());
+//            System.out.println("=======================================");
+//        });
+//    }
 }
