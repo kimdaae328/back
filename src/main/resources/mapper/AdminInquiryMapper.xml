@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminInquiryMapper">
+    <select id="selectInquiryAll">
+        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
+               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
+        from tbl_inquiry i
+            left join tbl_inquiry_answer ia
+                on ia.inquiry_id = i.id
+            join tbl_member m
+                on m.id = i.member_id
+        order by id desc
+        limit #{count} offset #{offset}
+    </select>
+
+    <select id="selectInquiryCountAll">
+        select count(*)
+        from tbl_inquiry
+    </select>
+
+    <select id="selectInquiryDetail">
+        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
+               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
+        from tbl_inquiry i
+             left join tbl_inquiry_answer ia
+                       on ia.inquiry_id = i.id
+             join tbl_member m
+                  on m.id = i.member_id
+        where i.id = #{inquiryId}
+    </select>
+
+<!--    <update id="updateInquiryAnswer">-->
+<!--        update tbl_inquiry_answer-->
+<!--        set inquiry_answer_content = #{answerContent},-->
+<!--            updated_date = NOW()-->
+<!--        where inquiry_id = #{inquiryId}-->
+<!--    </update>-->
+
+    <insert id="insertInquiryAnswer">
+        insert into tbl_inquiry_answer (inquiry_id, inquiry_answer_content)
+        values (#{inquiryId}, #{inquiryAnswerContent})
+    </insert>
+</mapper>

@@ -5,6 +5,8 @@ const sideSubLists = document.querySelectorAll(".menu-sub-list");
 const sideSubLinks = document.querySelectorAll(".rebound-link");
 const tabNames = document.querySelectorAll(".tab-name");
 const icons = document.querySelectorAll(".icon-wrapper i");
+const contentArea = document.querySelector("#content-area");
+const answerButton = document.querySelector("#btn-answer");
 
 // 홈 클릭 이벤트
 homeButton.addEventListener("click", (e) => {
@@ -29,6 +31,7 @@ homeButton.addEventListener("click", (e) => {
         homeByIcon.classList.add("mdi-chevron-right");
     });
 });
+
 payoutButton.addEventListener("click", (e) => {
     e.preventDefault();
     sideMenuButtons.forEach((payoutButton) => {
@@ -76,23 +79,20 @@ sideMenuButtons.forEach((sideMenuButton) => {
         payoutButton.classList.remove("current1");
         homeButton.classList.remove("current1");
 
-        const key = sideMenuButton.dataset.key || sideMenuButton.textContent.trim();
+        const menuText = sideMenuButton.textContent.trim();
 
-        if (key === '회원목록') {
-            console.log("회원목록 클릭함");
-            // await loadCustomers(1); // JSON 받아서 renderCustomerTable로 렌더
-        } else if (key === '상품 목록') {
-            // await loadProducts(1);
-            console.log("상품 목록 클릭함");
-        } else {
-            // content.innerHTML = `<p>준비 중</p>`;
-            console.log("?????");
-        }
+        // if (menuText === '회원 관리') {
+        //     console.log("회원 관리 클릭함");
+        // } else if (menuText === '회원 문의 목록') {
+        //     console.log("회원 문의 목록");
+        // } else {
+        //     console.log("?????");
+        // }
     });
 });
 
 sideSubLinks.forEach((sideSubLink) => {
-    sideSubLink.addEventListener("click", (e) => {
+    sideSubLink.addEventListener("click", async (e) => {
         e.preventDefault();
 
         // 모든 서브 링크 active 초기화
@@ -138,50 +138,20 @@ sideSubLinks.forEach((sideSubLink) => {
                 tabNameCheck.classList.add("active");
             }
         });
-    });
-});
 
-// 상단 tab-name 누르면 사이드 바 따라가는 이벤트
-tabNames.forEach((headerTabname) => {
-    headerTabname.addEventListener("click", (e) => {
-        e.preventDefault();
+        // const subMenuText = sideSubLink.querySelector("span").textContent.trim();
+        const subMenuText = sideSubLink.textContent.replace("-", "").trim();
 
-        const tabText = headerTabname.textContent.trim();
-
-        // 상단 탭 active 초기화
-        tabNames.forEach((headerTab) => headerTab.classList.remove("active"));
-        headerTabname.classList.add("active");
-
-        // 사이드 링크 active 초기화 + 같은 텍스트만 active
-        sideSubLinks.forEach((subLink) => {
-            const linkText = subLink.textContent.trim().replace("-", "").trim();
-            if (linkText === tabText) {
-                subLink.classList.add("active");
-
-                // 메뉴도 열고 current 붙이기
-                const parentSubLink = subLink.parentElement.parentElement;
-                const parentSubBtton = document.querySelector(
-                    `.menu-btn[aria-controls="${parentSubLink.id}"]`
-                );
-                parentSubBtton.classList.add("current");
-                parentSubLink.classList.add("show");
-
-                const checkSubIcon =
-                    parentSubBtton.querySelector(".icon-wrapper i");
-                checkSubIcon.classList.remove("mdi-chevron-right");
-                checkSubIcon.classList.add("mdi-chevron-down");
-            } else {
-                subLink.classList.remove("active");
-            }
-        });
-
-        if (tabText === "전체") {
-            setList(showList);
-        } else if (tabText === "일반 회원") {
-            // console.log(`탭 '${tabText}' 클릭됨`);
-            setList(showNonSubscribedList)
-        } else if(tabText === "구독 회원"){
-            setList(showSubscribedList);
+        if (subMenuText === '회원 목록') {
+            console.log("회원 목록 클릭함");
+            customerLayout.contentLayout();
+            await setList(showList);
+        } else if (subMenuText === '회원 문의 목록') {
+            inquiryLayout.contentLayout();
+            await setList(showInquiryList);
+            console.log("회원 문의 목록");
+        } else {
+            console.log("?????");
         }
     });
 });
@@ -245,7 +215,6 @@ const setList = (loader) => {
     customerLayout.connectToPagination((page) => currentLoader(page));
 };
 
-setList(showList);
 
 // 일반 회원
 const showNonSubscribedList = async (page = 1, keyword) => {
@@ -268,72 +237,211 @@ const showSubscribedList = async (page = 1, keyword) => {
 
 // ########################### 회원상세 ###########################
 // 일반회원 상세 모달 창 열고 닫는 이벤트
-const customerTable = document.querySelector(".table-container tbody");
-const modal = document.querySelector(".member-modal");
-const closeButtons = document.querySelectorAll(".close");
+// const customerTable = document.querySelector(".table-container tbody");
+// const modal = document.querySelector(".member-modal");
+// const closeButtons = document.querySelectorAll(".close");
 
-customerTable.addEventListener("click", async  (e, callback)=>{
-    modal.style.display = "block";
+// if(modal){
+//     console.log("adasdad")
+//     customerTable.addEventListener("click", async  (e, callback)=>{
+//         console.log("sdasd")
+//         modal.style.display = "block";
+//
+//         setTimeout(() => {
+//             modal.classList.add("show");
+//             modal.style.background = "rgba(0,0,0,0.5)";
+//             document.body.classList.add("modal-open");
+//         }, 100);
+//
+//         // 팝업 상세 내용
+//         const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+//         const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+//
+//         console.log("회원상세",customerDetail)
+//         customerLayout.showDetail(customerDetail);
+//     });
+// }
 
-    setTimeout(() => {
-        modal.classList.add("show");
-        modal.style.background = "rgba(0,0,0,0.5)";
-        document.body.classList.add("modal-open");
-    }, 100);
 
-    // 팝업 상세 내용
-    const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
-    const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+// ########################### 문의 목록 ###########################
+const showInquiryList = async (page = 1) => {
+    const inquiryCriteria = await inquiryService.getInquiryList(page, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.customerCount(inquiryCriteria.criteria);
 
-    // console.log(customerDetail)
-    customerLayout.showDetail(customerDetail);
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+
+// ########################### 이벤트 ###########################
+// 모달 닫기
+// document.addEventListener("click", (e) => {
+//     if (e.target.closest(".close") || e.target.closest(".btn-close")) {
+//         closeModal();
+//     }
+//
+//     if (e.target === modal) {
+//         closeModal();
+//     }
+// });
+//
+// // 공통 닫기 함수
+// function closeModal() {
+//     modal.classList.remove("show");
+//     document.body.classList.remove("modal-open");
+//     setTimeout(() => {
+//         modal.style.display = "none";
+//     }, 100);
+// }
+
+// 검색
+let keyword ="";
+
+contentArea.addEventListener("keyup", async (e) => {
+    const input = e.target.closest('.input-search');
+    if (!input) return;
+
+    if (e.key === "Enter") {
+        e.preventDefault();
+        keyword = e.target.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        customerLayout.renderPagination(result.criteria);
+        customerLayout.customerCount(result.criteria);
+    }
+});
+
+contentArea.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".btn-search");
+    if (!btn) return;
+
+    const inputBox = btn.closest(".input-group");
+    const input = inputBox.querySelector(".input-search");
+    keyword = input.value.trim();
+
+    const result = await currentLoader(1, keyword);
+    customerLayout.renderPagination(result.criteria);
+    customerLayout.customerCount(result.criteria);
+});
+
+
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+
+    // 상단 tab-name 누르면 사이드 바 따라가는 이벤트
+    if(target.classList.contains("tab-name")){
+        const tabs = contentArea.querySelectorAll(".tab-name");
+        const headerTabname = e.target.closest(".tab-name");
+
+        e.preventDefault();
+
+        tabs.forEach((tab) => {
+            tab.classList.toggle("active", tab === headerTabname);
+        });
+
+        if (!headerTabname) return;
+        const tabText = headerTabname.textContent.trim();
+
+        if (tabText === "전체") {
+            setList(showList);
+        } else if (tabText === "일반 회원") {
+            setList(showNonSubscribedList)
+        } else if(tabText === "구독 회원"){
+            setList(showSubscribedList);
+        }
+
+    // 모달
+    } else if(target.classList.contains("action-btn")) {
+        const modal = document.querySelector(".modal");
+        if (!modal) return;
+
+        modal.style.display = "block";
+
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+        const row = target.closest("tr");
+        if (!row) return;
+
+        // 회원 상세 팝업
+        if (target.closest(".member-action-btn")) {
+            const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+            if (!currentCustomerId) return;
+
+            const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+
+            console.log("회원상세",customerDetail)
+            customerLayout.showDetail(customerDetail);
+
+            return;
+
+        } else if (target.closest(".inquiry-action-btn")) {
+            const inquiryId = row.dataset.inquiryId;
+            if (!inquiryId) return;
+
+            console.log(inquiryId)
+
+            const inquiryDetail = await inquiryService.getInquiryDetail(inquiryId);
+
+            console.log("문의상세", inquiryDetail);
+            inquiryLayout.showDetail(inquiryDetail);
+
+            return;
+        }
+
+    // 문의 답변하기
+    } else if(target.classList.contains("btn-answer")) {
+        console.log("버튼 눌렸나요")
+        const modal = target.closest(".modal-dialog")
+        const form = modal.querySelector("#answerForm");
+        const inquiryAnswerContent = modal.querySelector(".answer-textarea").value.trim();
+        const inquiryId = form.dataset.inquiryId
+        if (!inquiryAnswerContent) return;
+
+        // console.log(inquiryAnswerContent)
+        // console.log(inquiryId)
+
+        const result = await inquiryService.writeAnswer(inquiryId, inquiryAnswerContent);
+
+        if (result) {
+            console.log("문의 답변 등록 완료", result);
+            alert("문의 답변이 등록되었습니다.");
+            inquiryLayout.showDetail(result);
+
+            const inquiriesCriteria = await inquiryService.getInquiryList(
+                inquiryService.getCurrentPage()
+            );
+            inquiryLayout.showList(inquiriesCriteria);
+        } else {
+            alert("문의 답변 등록 실패");
+        }
+    }
 });
 
 // 모달 닫기
 document.addEventListener("click", (e) => {
+    const modal = document.querySelector(".modal.show");
+
     if (e.target.closest(".close") || e.target.closest(".btn-close")) {
-        closeModal();
+        console.log("닫기버튼")
+        closeModal(modal);
     }
 
-    if (e.target === modal) {
-        closeModal();
+    if (modal && e.target === modal) {
+        closeModal(modal);
     }
 });
 
 // 공통 닫기 함수
-function closeModal() {
+function closeModal(modal) {
     modal.classList.remove("show");
     document.body.classList.remove("modal-open");
     setTimeout(() => {
         modal.style.display = "none";
     }, 100);
 }
-
-// 검색
-const searchInput = document.querySelector(".input-search");
-const searchButton = document.querySelector(".btn-search");
-
-let keyword ="";
-
-searchInput.addEventListener("keyup", async (e)=> {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        keyword = e.target.value.trim();
-
-        const result = await currentLoader(1,keyword);
-        customerLayout.renderPagination(result.criteria);
-        customerLayout.customerCount(result.criteria);
-    }
-});
-
-searchButton.addEventListener("click", async() => {
-    keyword = searchInput.value.trim();
-    // console.log(keyword)
-
-    const result = await currentLoader(1,keyword);
-    customerLayout.renderPagination(result.criteria);
-    customerLayout.customerCount(result.criteria);
-});
-
-
 
