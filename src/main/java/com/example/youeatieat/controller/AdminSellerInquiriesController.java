@@ -4,6 +4,7 @@ import com.example.youeatieat.dto.AdminInquiryCriteriaDTO;
 import com.example.youeatieat.dto.InquiryAnswerDTO;
 import com.example.youeatieat.dto.InquiryWithAnswerDTO;
 import com.example.youeatieat.service.AdminInquiryService;
+import com.example.youeatieat.service.AdminSellerInquiryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/admin/inquiries")
-public class AdminInquiriesController {
-    private final AdminInquiryService inquiriesService;
+@RequestMapping("/api/admin/seller/inquiries")
+public class AdminSellerInquiriesController {
+    private final AdminSellerInquiryService inquiriesService;
 
 //    문의 목록(전체)
     @GetMapping("list/{page}")

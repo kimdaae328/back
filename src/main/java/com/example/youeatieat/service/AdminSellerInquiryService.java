@@ -4,7 +4,7 @@ import com.example.youeatieat.dto.AdminInquiryCriteriaDTO;
 import com.example.youeatieat.dto.InquiryAnswerDTO;
 import com.example.youeatieat.dto.InquiryWithAnswerDTO;
 
-public interface AdminInquiryService {
+public interface AdminSellerInquiryService {
 //    문의 목록(전체)
     public AdminInquiryCriteriaDTO getInquiryList(int page);
 

@@ -91,6 +91,7 @@ sideMenuButtons.forEach((sideMenuButton) => {
     });
 });
 
+let currentPageType = "";
 sideSubLinks.forEach((sideSubLink) => {
     sideSubLink.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -147,9 +148,33 @@ sideSubLinks.forEach((sideSubLink) => {
             customerLayout.contentLayout();
             await setList(showList);
         } else if (subMenuText === '회원 문의 목록') {
+            currentPageType = "buyer";
+
             inquiryLayout.contentLayout();
+
+            // 미답변 총 합계
+            const unanswerCount = await inquiryService.getUnansweredList(1);
+            inquiryLayout.anUnansweredCount(unanswerCount.criteria);
+
+            // 답변완료 총 합계
+            const answerCount = await inquiryService.getAnsweredList(1);
+            inquiryLayout.answeredCount(answerCount.criteria);
+
             await setList(showInquiryList);
-            console.log("회원 문의 목록");
+        } else if (subMenuText === '판매자 문의목록') {
+            currentPageType = "seller";
+
+            sellerInquiryLayout.contentLayout();
+
+            // 미답변 총 합계
+            const unanswerCount = await sellerInquiryService.getUnansweredList(1);
+            sellerInquiryLayout.anUnansweredCount(unanswerCount.criteria);
+
+            // 답변완료 총 합계
+            const answerCount = await sellerInquiryService.getAnsweredList(1);
+            sellerInquiryLayout.answeredCount(answerCount.criteria);
+
+            await setList(showSellerInquiryList);
         } else {
             console.log("?????");
         }
@@ -202,7 +227,7 @@ pageItemNums.forEach((pageItemNum) => {
 const showList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getCustomerList(page, keyword, customerLayout.showList);
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
 
     // console.log("여기----------", customersCriteria)
     return customersCriteria;
@@ -221,7 +246,7 @@ const showNonSubscribedList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getNonSubscribedCustomerList(page, keyword, customerLayout.showNonSubscribedList);
     // console.log(customersCriteria)
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
     return customersCriteria;
 };
 
@@ -229,7 +254,7 @@ const showNonSubscribedList = async (page = 1, keyword) => {
 const showSubscribedList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getSubscribedCustomerList(page, keyword, customerLayout.showSubscribedList);
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
     return customersCriteria;
 };
 
@@ -264,15 +289,65 @@ const showSubscribedList = async (page = 1, keyword) => {
 
 
 // ########################### 문의 목록 ###########################
+// 문의 목록(전체)
 const showInquiryList = async (page = 1) => {
     const inquiryCriteria = await inquiryService.getInquiryList(page, inquiryLayout.showList);
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
-    inquiryLayout.customerCount(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
 
     // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
 }
 
+// 문의 목록(미답변)
+const showUnansweredList = async (page = 1) => {
+    const inquiryCriteria = await inquiryService.getUnansweredList(page, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 문의 목록(답변완료)
+const showAnsweredList = async (page = 1) => {
+    const inquiryCriteria = await inquiryService.getAnsweredList(page, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(전체)
+const showSellerInquiryList = async (page = 1) => {
+    const inquiryCriteria = await sellerInquiryService.getInquiryList(page, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(미답변)
+const showSellerUnansweredList = async (page = 1) => {
+    const inquiryCriteria = await sellerInquiryService.getUnansweredList(page, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(답변완료)
+const showSellerAnsweredList = async (page = 1) => {
+    const inquiryCriteria = await sellerInquiryService.getAnsweredList(page, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
 
 // ########################### 이벤트 ###########################
 // 모달 닫기
@@ -308,7 +383,7 @@ contentArea.addEventListener("keyup", async (e) => {
 
         const result = await currentLoader(1, keyword);
         customerLayout.renderPagination(result.criteria);
-        customerLayout.customerCount(result.criteria);
+        customerLayout.totalCount(result.criteria);
     }
 });
 
@@ -322,9 +397,8 @@ contentArea.addEventListener("click", async (e) => {
 
     const result = await currentLoader(1, keyword);
     customerLayout.renderPagination(result.criteria);
-    customerLayout.customerCount(result.criteria);
+    customerLayout.totalCount(result.criteria);
 });
-
 
 contentArea.addEventListener("click", async (e) => {
     const target = e.target;
@@ -392,18 +466,15 @@ contentArea.addEventListener("click", async (e) => {
 
             return;
         }
+    }
 
     // 문의 답변하기
-    } else if(target.classList.contains("btn-answer")) {
-        console.log("버튼 눌렸나요")
+    if(target.classList.contains("btn-answer")) {
         const modal = target.closest(".modal-dialog")
         const form = modal.querySelector("#answerForm");
         const inquiryAnswerContent = modal.querySelector(".answer-textarea").value.trim();
         const inquiryId = form.dataset.inquiryId
         if (!inquiryAnswerContent) return;
-
-        // console.log(inquiryAnswerContent)
-        // console.log(inquiryId)
 
         const result = await inquiryService.writeAnswer(inquiryId, inquiryAnswerContent);
 
@@ -420,7 +491,41 @@ contentArea.addEventListener("click", async (e) => {
             alert("문의 답변 등록 실패");
         }
     }
+
+    // 답변 상태 드롭박스
+    if(target.classList.contains("boot-pop-checkbox-filter-btn")) {
+        const btPopMenuContext = document.querySelector(".bt-pop-menu-context");
+        btPopMenuContext.classList.toggle("show");
+    }
+
+    // 답변 상태 체크박스
+    if(target.closest("#filter-apply")) {
+        const answered   = document.querySelector("#check-box1")?.checked;
+        const unanswered = document.querySelector("#check-box2")?.checked;
+
+        if (currentPageType === "buyer") {
+            if (answered && !unanswered) {
+                await setList(showAnsweredList);
+            } else if (!answered && unanswered) {
+                await setList(showUnansweredList);
+            } else {
+                await setList(showInquiryList);
+            }
+        } else if (currentPageType === "seller") {
+            if (answered && !unanswered) {
+                await setList(showSellerAnsweredList);
+            } else if (!answered && unanswered) {
+                await setList(showSellerUnansweredList);
+            } else {
+                await setList(showSellerInquiryList);
+            }
+        }
+        document.querySelector(".bt-pop-menu-context").classList.remove("show");
+    }
+
 });
+
+
 
 // 모달 닫기
 document.addEventListener("click", (e) => {
@@ -444,4 +549,5 @@ function closeModal(modal) {
         modal.style.display = "none";
     }, 100);
 }
+
 

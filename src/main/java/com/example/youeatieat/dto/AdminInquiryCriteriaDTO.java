@@ -11,6 +11,6 @@ import java.util.List;
 @Component
 @Getter @Setter @ToString
 public class AdminInquiryCriteriaDTO {
-    private List<InquiryDetailWithAnswerDTO> inquiries;
+    private List<InquiryWithAnswerDTO> inquiries;
     private Criteria criteria;
 }
