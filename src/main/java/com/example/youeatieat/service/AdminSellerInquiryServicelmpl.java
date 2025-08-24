@@ -1,7 +1,10 @@
 package com.example.youeatieat.service;
 
-import com.example.youeatieat.dto.*;
+import com.example.youeatieat.dto.AdminInquiryCriteriaDTO;
+import com.example.youeatieat.dto.InquiryAnswerDTO;
+import com.example.youeatieat.dto.InquiryWithAnswerDTO;
 import com.example.youeatieat.repository.AdminInquiryDAO;
+import com.example.youeatieat.repository.AdminSellerInquiryDAO;
 import com.example.youeatieat.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,8 +14,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AdminInquiryServicelmpl implements AdminInquiryService {
-    private final AdminInquiryDAO adminInquiryDAO;
+public class AdminSellerInquiryServicelmpl implements AdminSellerInquiryService {
+    private final AdminSellerInquiryDAO adminInquiryDAO;
 
 //    문의 목록(전체)
     @Override

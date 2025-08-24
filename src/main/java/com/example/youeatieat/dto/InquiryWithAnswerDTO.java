@@ -22,7 +22,8 @@ public class InquiryWithAnswerDTO {
     private String inquiryCreatedDate;
     private String inquiryUpdatedDate;
     private String memberName;
-    private String inquiryId;
+    private Long inquiryId;
+    private String inquiryAnswerContent;
     private String answerCreatedDate;
     private String answerUpdatedDate;
 }

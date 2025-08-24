@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface AdminInquiryMapper {
+public interface AdminSellerInquiryMapper {
 //    문의 목록(전체)
     public List<InquiryWithAnswerDTO> selectInquiryAll(Criteria criteria);
 
