@@ -1,3 +1,4 @@
+// 회원목록
 const customerLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
@@ -1149,4 +1150,308 @@ const sellerInquiryLayout = (() => {
     }
 
     return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, answeredCount, anUnansweredCount};
+})();
+
+// 매입 승인 목록
+const purchaseLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+        contentArea.innerHTML = `
+            <div class="page-header">
+                <div class="page-title">매입 승인 목록</div>
+                <div class="page-subtitle"></div>
+            </div>
+            <div class="page-body">
+                <div class="receipt-index">
+                    <div class="pill-row row">
+                        <div class="col col-md-6 col-lg-4 col-xl-3">
+                            <div class="pill-box">
+                                <div class="pill-title">
+                                    <span class="badge-label text-primary">
+                                        <i class="mdi mdi-check-all"></i>
+                                    </span>
+                                    <span>승인완료</span>
+                                </div>
+                                <div class="pill-value">
+                                    <span id="purchase-amount" class="span-amount">0</span>
+                                    <span class="amount-unit">건</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="table-layout white-panel">
+                        <div class="filter-section">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="count">총
+                                        <span class="count-amount">0</span>건
+                                    </span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-status mr-2"></div>
+                                </div>
+                                <div class="col text-right">                           
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control flex-grow-1" placeholder="판매자명">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-search">
+                                                    <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="fill-table-layout">
+                            <div class="fill-table-layout">
+                                <table id="purchases-table" class="table grey-header-table w-100 text-center purchases-table">
+                                    <colgroup>
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                    </colgroup>                           
+                                <thead>
+                                    <tr>
+                                        <th class="td-name">판매자명</th>
+                                        <th>판매자 아이디</th>
+                                        <th class="td-status">판매상품</th>
+                                        <th class="td-user">kg당 단가</th>
+                                        <th class="td-at">매입 신청일</th>
+                                        <th>상세보기</th>
+                                        <th class="td-action">승인하기</th>                     
+                                    </tr>
+                                </thead>
+                                <tbody>
+<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
+                                </tbody>
+                            </table>
+                            </div>
+                            <nav class="rebound-pagination-wrapper mt-5 mb-4">
+                                <ul class="pagination rebound-pagination">
+    <!--                            여기 페이지 a버튼 들어와야함-->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id ="modal" class="modal fade receipt-modal" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-lg">
+<!--                모달 들어옴-->
+                </div>
+            </div>
+        `;
+    }
+
+    // 매입 목록(전체)
+    const showList = (purchasesCriteria) => {
+        const purchasesContainer = document.querySelector("#purchases-table tbody");
+        if (!purchasesContainer) return;
+
+        let text = "";
+        purchasesCriteria.purchases.forEach((purchase) => {
+            text += `
+            <tr class="purchase-row" data-inquiry-id="${purchase.id}">
+                <td>${purchase.memberName}</td>
+                <td>${purchase.memberId}</td>
+                <td>${purchase.purchaseRequestProductName}</td>
+                <td>${purchase.purchaseRequestProposedPricePerKg}</td>
+                <td>${purchase.createdDate}</td>
+                <td class="td-action text-center">
+                    <div class="action-btn member-action-btn">
+                        <i class="mdi mdi-chevron-right"></i>
+                    </div>
+                </td>
+                <td>
+                    <div class="action-btn member-action-btn">
+                        <i class="mdi mdi-chevron-right"></i>
+                    </div>
+                </td>
+            </tr>`;
+        });
+
+        purchasesContainer.innerHTML = text;
+    };
+
+    // 페이지네이션 - layout
+    const renderPagination = (criteria) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        let html = ``;
+
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? "active" : ""}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+
+        pagination.innerHTML = html;
+    };
+
+    // 페이지네이션 - event
+    const connectToPagination = (navi) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        pagination.addEventListener("click", (e) => {
+            // if(e.target.classList.contains(".page-item-link")) {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
+            // }
+        });
+    };
+
+    // 총 합계
+    const totalCount = (criteria) => {
+        const countText = document.querySelector("#content-area .count-amount");
+        if (!countText) return;
+
+        countText.textContent = criteria.total;
+    };
+
+    // 승인완료 총 합계
+    const purchaseCount = (criteria) => {
+        const countText = document.querySelector("#purchase-amount");
+        if (!countText) return;
+
+        countText.textContent = criteria.total;
+    };
+
+    // 문의 상세
+    const showDetail = (inquiryDetail) => {
+        const tableDetail = document.querySelector(".modal-dialog");
+
+        // 문의 - layout
+        tableDetail.innerHTML= `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        문의내역
+                        <span class="badge-label text-danger font-weight-bold ml-2">${inquiryDetail.inquiryAnswerContent ? "답변완료": "미답변"}</span>
+                    </div>
+                    <button id="close" class="close">
+                        <i class="mdi mdi-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="divider"></div>
+                    <div class="tab-view">
+                        <div class="tab-view-header"></div>
+                        <div class="tab-view-body">
+                            <div style="display: block;">
+                                <div class="tab-inner tab-detail">
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">문의정보</div>
+                                            </div>
+                                            <div class="flex-right"></div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>문의번호</th>
+                                                            <td>${inquiryDetail.id}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>문의시간</th>
+                                                            <td>${inquiryDetail.inquiryUpdatedDate ? inquiryDetail.inquiryUpdatedDate : "-"}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>문의 유형</th>
+                                                            <td>${inquiryDetail.inquiryCategory ? inquiryDetail.inquiryCategory : "-"}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>구매자 이름</th>
+                                                            <td>${inquiryDetail.memberName}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">문의내용</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table" style="height:100px">
+                                                    <tbody>
+                                                        <th>문의내용</th>
+                                                        <td>${inquiryDetail.inquiryContent ? inquiryDetail.inquiryContent : "-"}</td>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">답변하기</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table" style="height:100px">
+                                                    <tbody>
+                                                        <th>답변내용</th>
+                                                        <td>${inquiryDetail.inquiryAnswerContent ?
+            inquiryDetail.inquiryAnswerContent :
+            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
+                                                                <input class="inquiry-id-input" type="hidden" name="" value="${inquiryDetail.id}">
+                                                                <textarea class="answer-textarea"
+                                                                    name=""
+                                                                    rows=""
+                                                                    style="resize:none; border:none; padding:0; outline:none;"
+                                                                    placeholder="답변을 입력하세요"></textarea>
+                                                            </form>`}
+                                                        </td>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    ${inquiryDetail.inquiryId ? "": `<button id="btn-answer" class="btn-close btn btn-outline-filter btn-answer">답변하기</button>`}
+                </div>
+            </div>
+        `;
+    }
+
+    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, purchaseCount};
 })();

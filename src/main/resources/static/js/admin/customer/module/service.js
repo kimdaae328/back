@@ -335,3 +335,51 @@ const sellerInquiryService = (() => {
 
     return {getInquiryList, getUnansweredList, getInquiryDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
+
+const purchaseService = (() => {
+    // 매입 목록
+    const getPurchaseService = async (page, callback) => {
+        const response = await fetch(`/api/admin/purchases/list/${page}`);
+        const purchasesCriteria = await response.json();
+
+        if(callback){
+            setTimeout(() => {
+                callback(purchasesCriteria);
+            }, 1000)
+        }
+
+        console.log(purchasesCriteria)
+
+        if(response.ok) {
+            console.log("문의글 존재")
+        }else if(response.status === 404){
+            console.log("게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return purchasesCriteria;
+    }
+
+    // 현재페이지
+    const getCurrentPage = () => currentPage;
+
+    // 문의 상세
+    const getInquiryDetail = async (inquiryId) => {
+        const response = await fetch(`/api/admin/seller/inquiries/${inquiryId}`);
+
+        if (!response.ok) {
+            console.error("문의 상세 조회 실패", response.status);
+            return;
+        }
+
+        console.log(response)
+
+        const data = await response.json();
+
+        return data;
+    };
+
+    return {getPurchaseService, getInquiryDetail, getCurrentPage}
+})();

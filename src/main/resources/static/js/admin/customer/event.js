@@ -175,6 +175,14 @@ sideSubLinks.forEach((sideSubLink) => {
             sellerInquiryLayout.answeredCount(answerCount.criteria);
 
             await setList(showSellerInquiryList);
+        } else if (subMenuText === '매입 승인 목록') {
+            purchaseLayout.contentLayout();
+
+            // 승인완료 총 합계
+            const purchasesCount = await purchaseService.getPurchaseService(1);
+            purchaseLayout.purchaseCount(purchasesCount.criteria);
+            
+            await setList(showSellerPurchaseList);
         } else {
             console.log("?????");
         }
@@ -343,6 +351,15 @@ const showSellerAnsweredList = async (page = 1) => {
 
     // console.log("여기----------", customersCriteria)
     return inquiryCriteria;
+}
+
+// 매입 승인 목록
+const showSellerPurchaseList = async (page = 1) => {
+    const purchaseCriteria = await purchaseService.getPurchaseService(page, purchaseLayout.showList);
+    purchaseLayout.renderPagination(purchaseCriteria.criteria);
+    purchaseLayout.totalCount(purchaseCriteria.criteria);
+
+    return purchaseCriteria;
 }
 
 // ########################### 이벤트 ###########################

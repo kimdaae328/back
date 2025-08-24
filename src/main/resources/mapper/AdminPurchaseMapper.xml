@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.youeatieat.mapper.AdminInquiryMapper">
-    <select id="selectInquiryAll">
-        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
-               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
-        from tbl_inquiry i
-            left join tbl_inquiry_answer ia
-                on ia.inquiry_id = i.id
+<mapper namespace="com.example.youeatieat.mapper.AdminPurchaseMapper">
+    <select id="selectPurchaseAll">
+        select pr.id, pr.purchase_request_product_name, pr.purchase_request_description, pr.purchase_request_category, pr.purchase_request_quantity_kg, pr.purchase_request_proposed_price_per_kg, pr.purchase_request_country_of_origin, pr.purchase_request_date_of_manufacture, pr.purchase_request_detail_img, pr.purchase_request_approval_status, pr.purchase_request_status, pr.member_id, pr.created_date, pr.updated_date,
+               m.member_name
+        from tbl_purchase_request pr
             join tbl_member m
-                on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+                on m.id = pr.member_id
+        where m.member_status = 'active' and m.member_role = 'seller'
         order by m.id desc
         limit #{count} offset #{offset}
     </select>
 
-    <select id="selectInquiryCountAll">
+    <select id="selectPurchaseCountAll">
         select count(*)
-        from tbl_inquiry i
-             left join tbl_inquiry_answer ia
-                       on ia.inquiry_id = i.id
+        from tbl_purchase_request pr
              join tbl_member m
-                  on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+                  on m.id = pr.member_id
+        where m.member_status = 'active' and m.member_role = 'seller'
     </select>
 
     <select id="selectInquiryDetail">
@@ -55,7 +51,7 @@
                        on ia.inquiry_id = i.id
              join tbl_member m
                   on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+        where m.member_status = 'active' and m.member_role = 'seller'
             and ia.inquiry_answer_content is null
         order by i.id desc
         limit #{count} offset #{offset}
@@ -68,7 +64,7 @@
                    on ia.inquiry_id = i.id
              join tbl_member m
                   on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+        where m.member_status = 'active' and m.member_role = 'seller'
             and ia.inquiry_answer_content is null
     </select>
 
@@ -80,7 +76,7 @@
                            on ia.inquiry_id = i.id
                  join tbl_member m
                       on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+        where m.member_status = 'active' and m.member_role = 'seller'
             and ia.inquiry_answer_content is not null
         order by i.id desc
         limit #{count} offset #{offset}
@@ -93,7 +89,7 @@
                    on ia.inquiry_id = i.id
              join tbl_member m
                   on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'buyer'
+        where m.member_status = 'active' and m.member_role = 'seller'
           and ia.inquiry_answer_content is not null
     </select>
 </mapper>
