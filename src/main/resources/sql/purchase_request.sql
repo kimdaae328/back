@@ -23,4 +23,8 @@ alter table tbl_product modify product_category enum('vegetables','fruits','fish
 
 select * from tbl_purchase_request;
 
-drop table tbl_purchase_request;
+update tbl_purchase_request
+set purchase_request_approval_status = 'pending'
+where id = 91;
+
+

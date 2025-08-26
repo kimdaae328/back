@@ -1,3 +1,4 @@
+// 회원목록(구매자)
 const customerLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
@@ -36,7 +37,7 @@ const customerLayout = (() => {
                                         <div class="input-group">
                                             <input class="form-control flex-grow-1 input-search" type="text" placeholder="이름/ID" value="">
                                             <div class="input-group-append">
-                                                <button class="btn btn-search">
+                                                <button id="btn-customer-search" class="btn btn-search">
                                                     <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
                                                         <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
@@ -386,6 +387,379 @@ const customerLayout = (() => {
     return {contentLayout, showList, showNonSubscribedList, showSubscribedList, renderPagination, connectToPagination, totalCount, showDetail};
 })();
 
+// 회원목록(판매자)
+const sellerLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+        contentArea.innerHTML = `
+            <div class="page-header">
+                <div class="page-title">회원 관리</div>
+                <div class="page-subtitle"></div>
+            </div>
+            <div class="page-body">
+                <div class="tab-box">
+                    <div class="tab-row white-panel">
+                        <div class="row">
+                            <div class="col col-auto">
+                                <ul class="tab-name-list list-unstyled list-inline">
+                                    <!-- 클릭 한 부분은 active -->
+                                    <li class="tab-name active">전체</li>
+                                    <li class="tab-name">일반 회원</li>
+                                    <li class="tab-name">구독 회원</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="table-layout white-panel">
+                        <div class="filter-section">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="count">총
+                                        <span class="count-amount">n</span>명
+                                    </span>
+                                </div>
+                                <!-- PG 선택, 결제방식선택, 결제상태선택 버튼 -->
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-search ml-1">
+                                        <div class="input-group">
+                                            <input class="form-control flex-grow-1 input-search" type="text" placeholder="이름/ID" value="">
+                                            <div class="input-group-append">
+                                                <button id="btn-customer-search" class="btn btn-search">
+                                                    <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
+                                                        <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fill-table-layout">
+                           <div class="fill-table-layout">
+                                <table id="member-table" class="table grey-header-table w-100 member-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="td-name">회원번호</th>
+                                            <th class="td-amount pr-4">이름</th>
+                                            <th class="td-email">이메일</th>
+                                            <th class="td-phone">핸드폰 번호</th>
+                                            <th class="td-start">가입일</th>
+                                            <th class="td-recent">최근 접속일</th>
+                                            <th class="td-action">상세</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+    <!--                        여기 테이블 들어와야함                    -->
+                                    </tbody>
+                               </table>
+                           </div>
+                           <nav class="rebound-pagination-wrapper mt-5 mb-4">
+                                <ul class="pagination rebound-pagination">
+    <!--                            여기 페이지 a버튼 들어와야함-->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade member-modal" style="display: none;">
+                <div class="modal-dialog modal-lg">
+<!--                    모달 내용 들어와야함-->
+                </div>
+            </div>
+        `;
+    }
+
+    // 회원 목록 테이블 - layout
+    const sellerRowTemplate  = (seller) => `
+        <tr>
+            <td class="td-name">
+                <div class="member-name">
+                    <span class="member-name">${seller.memberName}</span>
+                    <span class="badge-label badge text-danger ml-2">${seller.memberProvider == "YOU_I" ? "일반 로그인" : "카카오 로그인"}</span>
+                </div>
+                <div class="member-id">${seller.id}</div>
+            </td>
+            <td class="td-amount text-center pr-4 font-weight-bold">
+                <span class="member-name">${seller.memberName}</span>
+                <span class="amount-unit"> 님</span>
+            </td>
+            <td class="td-address">${(seller.address || seller.addressDetail) ? `${seller.address ?? ""} ${seller.addressDetail ?? ""}` : "-"}</td>
+            <td class="td-email">${seller.memberEmail}</td>
+            <td class="td-phone">${seller.memberPhone}</td>
+            <td class="td-start">${seller.createdDate}</td>
+            <td class="td-recent">${seller.memberLastLoginDate ? seller.memberLastLoginDate : "-"}</td>
+            <td class="td-action text-center">
+                <div class="action-btn">
+                    <i class="mdi mdi-chevron-right"></i>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // 회원 목록(전체)
+    const showList = (sellersCriteria) => {
+        const sellerContainer = document.querySelector(".table-container tbody");
+
+        let text = "";
+        sellersCriteria.sellers.forEach((seller) => {
+            text += sellerRowTemplate(seller);
+        });
+
+        sellerContainer.innerHTML = text;
+    }
+
+    // 회원 목록(일반)
+    const showYoueatieatList = (sellersCriteria) => {
+        const sellerContainer = document.querySelector(".table-container tbody");
+
+        let text = "";
+        sellersCriteria.sellers.forEach((seller) => {
+            text += sellerRowTemplate(seller);
+        });
+
+        sellerContainer.innerHTML = text;
+    }
+
+    // 회원 목록(카카오)
+    const showKakaoList = (sellersCriteria) => {
+        const sellerContainer = document.querySelector(".table-container tbody");
+
+        let text = "";
+        sellersCriteria.sellers.forEach((seller) => {
+            text += sellerRowTemplate(seller);
+        });
+
+        sellerContainer.innerHTML = text;
+    }
+
+    // 페이지네이션 - layout
+    const pagination = document.querySelector(".rebound-pagination");
+    const renderPagination = (criteria) => {
+        let html = ``;
+
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="${i}" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+
+        pagination.innerHTML = html;
+    };
+
+    // 페이지네이션 - event
+    const connectToPagination = (navi) => {
+        pagination.addEventListener("click", (e) => {
+            // if(e.target.classList.contains(".page-item-link")) {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
+            // }
+        });
+    };
+
+    // 총 합계
+    const sellerCountText = document.querySelector(".count-amount");
+    const sellerCount = (criteria) => {
+        sellerCountText.textContent = criteria.total;
+    };
+
+    // 나이 계산
+    const calculateAge = (birthDateString) => {
+        const today = new Date();
+        const birthDate = new Date(birthDateString);
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const month = today.getMonth() - birthDate.getMonth();
+        const day = today.getDate() - birthDate.getDate();
+
+        if (month < 0 || (month === 0 && day < 0)) {
+            age--;
+        }
+
+        return age;
+    };
+
+    // 회원 상세
+    const showDetail = (sellerDetail) => {
+        const tableMemberDetail = document.querySelector(".modal-dialog");
+
+        // 판매 상세내역 - layout
+        let purchaseRows = "";
+        if (!sellerDetail.purchase || sellerDetail.purchase.length === 0) {
+            purchaseRows = `
+                <tr>
+                    <td colspan="4" style="text-align:center; padding:26px 16px">구매 내역이 없습니다.</td>
+                </tr>
+            `;
+        } else {
+            sellerDetail.purchase.forEach((purchase) => {
+                purchaseRows += `
+                    <tr>
+                        <td>${purchase.purchaseRequestProductName}</td>
+                        <td>${purchase.purchaseRequestQuantityKg}</td>
+                        <td>${purchase.purchaseRequestProposedPricePerKg}</td>
+                        <td>${purchase.purchaseRequestDateOfManufacture}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // 회원 - layout
+        tableMemberDetail.innerHTML= `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        (${sellerDetail.id}) ${sellerDetail.memberName}
+                        <span class="badge-label text-danger font-weight-bold ml-2">일반로그인</span>
+                    </div>
+                    <button class="close">
+                        <i class="mdi mdi-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="divider">
+                        <div class="tab-view">
+                            <div class="tab-view-header"></div>
+                            <div class="tab-view-body">
+                                <div>
+                                    <div class="tab-inner tab-detail">
+                                        <!-- 판매자 상세정보 -->
+                                        <div class="info-layout detail-info">
+                                            <div class="info-title justify-content-between">
+                                                <div class="flex-left d-flex">
+                                                    <div class="title">판매자 상세정보</div>
+                                                </div>
+                                                <div class="flex-right"></div>
+                                            </div>
+                                            <div class="d-table w-100 table-member-detail">
+                                                <!-- 테이블 왼쪽 -->
+                                                <div class="d-table-cell">
+                                                    <table class="info-table left-table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>이름</th>
+                                                                <td>${sellerDetail.memberName}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>핸드폰 번호</th>
+                                                                <td>${sellerDetail.memberPhone}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>출고지 주소</th>
+                                                                <td>${(sellerDetail.address || sellerDetail.addressDetail) ? `${sellerDetail.address ?? ""} ${sellerDetail.addressDetail ?? ""}` : "-" }</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>나이</th>
+                                                                <td>${calculateAge(sellerDetail.memberBirth)}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- 테이블 오른쪽 -->                                                        
+                                                <div class="d-table-cell">
+                                                    <table class="info-table right-table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>회원ID</th>
+                                                                <td>${sellerDetail.id}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>이메일</th>
+                                                                <td>${sellerDetail.memberEmail}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>최근 접속일</th>
+                                                                <td>${sellerDetail.memberLastLoginDate ? sellerDetail.memberLastLoginDate : "-"}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>성별</th>
+                                                                <td>${sellerDetail.memberGender === "MALE" ? "남성" : sellerDetail.memberGender === "FEMALE" ? "여성" : ""}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-layout detail-info">
+                                            <div class="info-title justify-content-between">
+                                                <div class="flex-left d-flex">
+                                                    <div class="title">판매내역</div>
+                                                </div>
+                                                <div class="flex-right"></div>
+                                            </div>
+                                            <div class="d-table w-100">
+                                                <table class="info-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>총 판매횟수</th>
+                                                            <th>총 판매액</th>
+                                                            <th>최근 판매일</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${sellerDetail.paymentCalculate.totalOrders}</td>
+                                                            <td>${sellerDetail.paymentCalculate.totalPrice}</td>
+                                                            <td>${sellerDetail.paymentCalculate.lastPaymentDate ? sellerDetail.paymentCalculate.lastPaymentDate : "-"}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>                             
+                                        </div>
+                                        <!-- 판매 상세내역 -->
+                                        <div class="info-layout detail-info">
+                                            <div class="info-title justify-content-between">
+                                                <div class="flex-left d-flex">
+                                                    <div class="title">판매 상세내역</div>
+                                                </div>
+                                                <div class="flex-right"></div>
+                                            </div>
+                                            <div class="d-table w-100">
+                                                <table class="info-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>물품</th>
+                                                            <th>중량(kg)</th>
+                                                            <th>kg당가격</th>
+                                                            <th>판매일</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       ${purchaseRows} 
+                                                    </tbody>
+                                                </table>
+                                            </div>                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-close btn btn-outline-filter">닫기</button>
+                </div>
+            </div>
+           `;
+    }
+
+    return {contentLayout, showList, renderPagination, connectToPagination, sellerCount, showDetail, showKakaoList, showYoueatieatList};
+})();
+
 // 구매자 문의
 const inquiryLayout = (() => {
     const contentLayout = () => {
@@ -445,8 +819,7 @@ const inquiryLayout = (() => {
                                                 </button>
                                                 <div class="bt-pop-menu">
                                                 <!-- 해당아래로 show지워야함주석 -->
-                                                    <div id="pop-menu-bt1" class= "bt-pop-menu-back"></div>
-                                                    <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
+                                                    <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 40px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
                                                         <ul class="list-wrapper list-unstyled">
                                                             <li class="text-center font-weight-bold">발급상태
                                                             </li>
@@ -537,45 +910,6 @@ const inquiryLayout = (() => {
             </div>
         `;
     }
-
-    // 문의 카운트 박스
-    // const showCountBox = (answeredTotal = 0, unansweredTotal = 0) => {
-    //     const countContainer = document.querySelector(".receipt-index");
-    //     if(!countContainer) return;
-    //
-    //     countContainer.innerHTML = `
-    //         <div class="pill-row row">
-    //             <div class="col col-md-6 col-lg-4 col-xl-3">
-    //                 <div class="pill-box">
-    //                     <div class="pill-title">
-    //                         <span class="badge-label text-primary">
-    //                             <i class="mdi mdi-check-all"></i>
-    //                         </span>
-    //                         <span>답변완료</span>
-    //                     </div>
-    //                     <div class="pill-value">
-    //                         <span id="answered-amount" class="span-amount">${answeredTotal}</span>
-    //                         <span class="amount-unit">건</span>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //             <div class="col col-md-6 col-lg-4 col-xl-3">
-    //                 <div class="pill-box cancel-box">
-    //                     <div class="pill-title">
-    //                         <span class="badge-label text-danger">
-    //                             <i class="mdi mdi-clock-alert-outline"></i>
-    //                         </span>
-    //                         <span>미답변</span>
-    //                     </div>
-    //                     <div class="pill-value">
-    //                         <span id="unanswered-amount" class="span-amount">${unansweredTotal}</span>
-    //                         <span class="amount-unit">건</span>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     `
-    // }
 
     // 문의 목록(전체)
     const showList = (inquiriesCriteria) => {
@@ -848,7 +1182,7 @@ const sellerInquiryLayout = (() => {
                                                 <div class="bt-pop-menu">
                                                 <!-- 해당아래로 show지워야함주석 -->
                                                     <div id="pop-menu-bt1" class= "bt-pop-menu-back"></div>
-                                                    <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
+                                                    <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 40px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
                                                         <ul class="list-wrapper list-unstyled">
                                                             <li class="text-center font-weight-bold">발급상태
                                                             </li>
@@ -1150,3 +1484,394 @@ const sellerInquiryLayout = (() => {
 
     return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, answeredCount, anUnansweredCount};
 })();
+
+// 매입 승인 목록
+const purchaseLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+        contentArea.innerHTML = `
+            <div class="page-header">
+                <div class="page-title">매입 승인 목록</div>
+                <div class="page-subtitle"></div>
+            </div>
+            <div class="page-body">
+                <div class="receipt-index">
+                    <div class="pill-row row">
+                        <div class="col col-md-6 col-lg-4 col-xl-3">
+                            <div class="pill-box">
+                                <div class="pill-title">
+                                    <span class="badge-label text-primary">
+                                        <i class="mdi mdi-check-all"></i>
+                                    </span>
+                                    <span>승인완료</span>
+                                </div>
+                                <div class="pill-value">
+                                    <span id="purchase-amount" class="span-amount">0</span>
+                                    <span class="amount-unit">건</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="table-layout white-panel">
+                        <div class="filter-section">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="count">총
+                                        <span class="count-amount">0</span>건
+                                    </span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-status mr-2"></div>
+                                </div>
+                                <div class="col text-right">                           
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control flex-grow-1 input-search" placeholder="판매자명">
+                                            <div class="input-group-append">
+                                                <button id="btn-purchase-search" class="btn btn-search">
+                                                    <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="fill-table-layout">
+                            <div class="fill-table-layout">
+                                <table id="purchases-table" class="table grey-header-table w-100 text-center purchases-table">
+                                    <colgroup>
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                        <col style="width:14%">
+                                    </colgroup>                           
+                                <thead>
+                                    <tr>
+                                        <th class="td-name">판매자명</th>
+                                        <th>판매자 아이디</th>
+                                        <th class="td-status">판매상품</th>
+                                        <th class="td-user">kg당 단가</th>
+                                        <th class="td-at">매입 신청일</th>
+                                        <th>승인 상태</th>
+                                        <th class="td-action">승인하기</th>  
+                                        <th>상세보기</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
+                                </tbody>
+                            </table>
+                            </div>
+                            <nav class="rebound-pagination-wrapper mt-5 mb-4">
+                                <ul class="pagination rebound-pagination">
+    <!--                            여기 페이지 a버튼 들어와야함-->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id ="modal" class="modal fade receipt-modal" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-lg">
+<!--                모달 들어옴-->
+                </div>
+            </div>
+        `;
+    }
+
+    // 매입 목록(전체)
+    const showList = (purchasesCriteria) => {
+        const purchasesContainer = document.querySelector("#purchases-table tbody");
+        if (!purchasesContainer) return;
+
+        let text = "";
+        const statusText = {
+            PENDING: "대기",
+            APPROVED: "승인",
+            REJECTED: "거절"
+        };
+
+
+        purchasesCriteria.purchases.forEach((purchase) => {
+            const status = purchase.purchaseRequestApprovalStatus;
+            const displayStatus = statusText[status]
+
+            text += `
+            <tr class="purchase-row" data-purchase-id="${purchase.id}">
+                <td>${purchase.memberName}</td>
+                <td>${purchase.memberId}</td>
+                <td>${purchase.purchaseRequestProductName}</td>
+                <td>${purchase.purchaseRequestProposedPricePerKg}</td>
+                <td>${purchase.createdDate}</td>
+                <td>${displayStatus}</td>
+                <td class="td-pop-menu text-center">
+                    <div class="bt-pop-menu">
+                        <button type="button" class="pop-btn approval-action-btn">
+                            <i class="mdi mdi-chevron-right"></i>
+                        </button>
+                        <div id="pop-menu-bt3" class="bt-pop-menu-context exists" style="top: 40px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
+                        <ul class="list-wrapper list-unstyled">
+                            <li class="text-center font-weight-bold">승인상태</li>
+                            <li class="list-item">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="radio-box3" class="radio-status">
+                                            <input type="radio" name="status-${purchase.id}" id="radio-box3" data-status="approved"> 승인하기</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-item">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="radio-box4" class="radio-status">
+                                            <input type="radio" name="status-${purchase.id}" id="radio-box4" data-status="rejected"> 승인거절</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-item mt-2">
+                                <button class="btn btn-outline-primary btn-sm apply-status-btn">확인</button>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </td>
+                <td class="td-action text-center">
+                    <button type="button" class="action-btn purchase-action-btn">
+                        <i class="mdi mdi-chevron-right"></i>
+                    </button>
+                </td>
+            </tr>`;
+        });
+
+        purchasesContainer.innerHTML = text;
+    };
+
+    // 페이지네이션 - layout
+    const renderPagination = (criteria) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        let html = ``;
+
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? "active" : ""}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+
+        pagination.innerHTML = html;
+    };
+
+    // 페이지네이션 - event
+    const connectToPagination = (navi) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        pagination.addEventListener("click", (e) => {
+            // if(e.target.classList.contains(".page-item-link")) {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
+            // }
+        });
+    };
+
+    // 총 합계
+    const totalCount = (criteria) => {
+        const countText = document.querySelector("#content-area .count-amount");
+        if (!countText) return;
+
+        countText.textContent = criteria.total;
+    };
+
+    // 문의 상세
+    const showDetail = (purchaseDetail) => {
+        const tableDetail = document.querySelector(".modal-dialog");
+        const statusText = {
+            PENDING: "대기",
+            APPROVED: "승인",
+            REJECTED: "거절"
+        };
+        const status = purchaseDetail.purchaseRequestApprovalStatus;
+        const displayStatus = statusText[status]
+
+        // 문의 - layout
+        tableDetail.innerHTML= `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        상품상세
+                        <span class="badge-label text-danger font-weight-bold ml-2">${displayStatus}</span>
+                    </div>
+                    <button id="close" class="close">
+                        <i class="mdi mdi-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="divider"></div>
+                    <div class="tab-view">
+                        <div class="tab-view-header"></div>
+                        <div class="tab-view-body">
+                            <div style="display: block;">
+                                <div class="tab-inner tab-detail">
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">상품정보</div>
+                                            </div>
+                                            <div class="flex-right"></div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>판매자 아이디</th>
+                                                            <td>${purchaseDetail.id}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>판매자명</th>
+                                                            <td>${purchaseDetail.memberName}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>kg당 단가</th>
+                                                            <td>${purchaseDetail.purchaseRequestProposedPricePerKg}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>매입 신청일</th>
+                                                            <td>${purchaseDetail.updatedDate}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">상품 상세정보</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table" style="height:100px">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>상품명</th>
+                                                            <td>${purchaseDetail.purchaseRequestProductName}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>중량</th>
+                                                            <td>${purchaseDetail.purchaseRequestQuantityKg}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>원산지</th>
+                                                            <td>${purchaseDetail.purchaseRequestCountryOfOrigin}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>보관방법 또는 취급방법</th>
+                                                            <td>-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>카테고리</th>
+                                                            <td>${purchaseDetail.purchaseRequestCategory}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-table-cell">
+                                                <table class="info-table" style="height:100px">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>kg당 단가</th>
+                                                            <td>${purchaseDetail.purchaseRequestProposedPricePerKg}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>생산자</th>
+                                                            <td>${purchaseDetail.purchaseRequestProductName}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>제조연월일</th>
+                                                            <td>${purchaseDetail.purchaseRequestDateOfManufacture}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>소비자 안전을 위한 주의사항</th>
+                                                            <td>-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>기타</th>
+                                                            <td>-</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail};
+})();
+
+const bannerLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+        contentArea.innerHTML = `
+            <div class="page-header">
+                <div class="page-title">메인 배너 등록</div>
+                <div class="page-subtitle">실시간 메인 배너 등록</div>
+            </div>
+            <div class="page-body temp-page">
+                <div class="pg-box">
+                    <div class="title">
+                        메인페이지 배너등록
+                    </div>
+                    <!-- 아래 Li수만큼 Img -->
+                    <div class="dropdown">
+                        <label>
+                            <input type="file" id="banner-file" style="display: none;">
+                            <div class="add-btn">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <a>사진등록</a>
+                        </label>
+                    </div>
+                    <div class="boot-tip tip primary">
+                        <ul class="pg-list list-unstyled">
+                        </ul>
+                        <a href="#" class="register-link">등록</a>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+
+    return {contentLayout}
+})

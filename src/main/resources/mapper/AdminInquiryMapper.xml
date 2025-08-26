@@ -16,7 +16,12 @@
 
     <select id="selectInquiryCountAll">
         select count(*)
-        from tbl_inquiry
+        from tbl_inquiry i
+             left join tbl_inquiry_answer ia
+                       on ia.inquiry_id = i.id
+             join tbl_member m
+                  on m.id = i.member_id
+        where m.member_status = 'active' and m.member_role = 'buyer'
     </select>
 
     <select id="selectInquiryDetail">
@@ -61,7 +66,10 @@
         from tbl_inquiry i
              left join tbl_inquiry_answer ia
                    on ia.inquiry_id = i.id
-        where ia.inquiry_answer_content is null
+             join tbl_member m
+                  on m.id = i.member_id
+        where m.member_status = 'active' and m.member_role = 'buyer'
+            and ia.inquiry_answer_content is null
     </select>
 
     <select id="selectAnsweredAll">
@@ -83,6 +91,9 @@
         from tbl_inquiry i
              left join tbl_inquiry_answer ia
                    on ia.inquiry_id = i.id
-        where ia.inquiry_answer_content is not null
+             join tbl_member m
+                  on m.id = i.member_id
+        where m.member_status = 'active' and m.member_role = 'buyer'
+          and ia.inquiry_answer_content is not null
     </select>
 </mapper>
