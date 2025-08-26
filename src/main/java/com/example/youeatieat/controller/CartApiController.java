@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/carts/**")
 @RequiredArgsConstructor
@@ -25,12 +27,30 @@ public class CartApiController {
     public ResponseEntity<?> insertCart(@RequestBody CartDTO cartDTO) {
         int cartCount = cartDTO.getCartCount();
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-        Long memberId = memberDTO.getId();
-        cartDTO.setMemberId(memberId);
-        if (!(cartCount== 0)) {
-            cartService.addCart(cartDTO);
+        cartDTO.setMemberId(memberDTO.getId());
+        List<CartDTO> carts = cartService.getDuplicateProduct(cartDTO.getMemberId(),cartDTO.getProductId());
+        if(!carts.isEmpty()){
+            Long id = carts.get(0).getId();
+            cartService.updateDuplicateProduct(id, cartDTO.getCartCount());
+        }else {
+            if (!(cartCount== 0)) {
+                cartService.addCart(cartDTO);
+            }
         }
-
         return ResponseEntity.ok().body(cartDTO);
+    }
+    @PostMapping("like/save")
+    public ResponseEntity<?> likeProduct(@RequestBody CartDTO cartDTO) {
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        cartDTO.setMemberId(memberDTO.getId());
+        List<CartDTO> carts = cartService.getDuplicateProduct(cartDTO.getMemberId(),cartDTO.getProductId());
+        if(!carts.isEmpty()){
+            Long id = carts.get(0).getId();
+            cartService.updateDuplicateProduct(id, 1);
+        }else {
+                cartService.addCart(cartDTO);
+            }
+
+        return ResponseEntity.ok(cartDTO);
     }
 }

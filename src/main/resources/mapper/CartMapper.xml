@@ -14,8 +14,28 @@
                c.created_date ,
                c.updated_date ,
                p.product_name ,
-               p.product_price
+               p.product_price,
+               p.product_title_image_url
         from tbl_cart c join tbl_member m on c.member_id = m.id join tbl_product p on c.product_id =p.id
         where c.member_id=#{memberId}
     </select>
+    <update id="updateCartCount">
+            update tbl_cart
+            set cart_count = #{cartCount}
+            where id=#{cartId}
+    </update>
+    <update id="updateDuplicateProduct">
+        update tbl_cart
+        set cart_count = cart_count+#{cartCount}
+        where id=#{cartId}
+    </update>
+    <select id="selectDuplicateProduct">
+        select id,cart_count
+        from tbl_cart
+        where member_id=#{memberId} and product_id = #{productId}
+    </select>
+    <delete id="deleteCartByCartId">
+        delete from tbl_cart
+        where id=#{cartId}
+    </delete>
 </mapper>

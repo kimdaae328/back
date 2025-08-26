@@ -17,7 +17,6 @@ const memberService = (() => {
                 // 로그 출력
                 console.log("사용 불가");
             }else {
-            console.log("ddd")
             }
             const result = await response.json();
             console.log(result)

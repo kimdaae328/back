@@ -30,7 +30,7 @@
                             <div class="often">
                                 <div class="often-text">자주찾는 메뉴</div>
                                 <div class="menu-wrap">
-                                    <form action="/mypage/order" method="get">
+                                    <form action="/request/list/1" method="get">
                                     <button class=" menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.666687)" fill="none"></rect>
@@ -71,7 +71,7 @@
                                         <div class="menu-list">상품 후기</div>
                                     </button>
                                     </form>
-                                    <form action="/mypage/like-list" method="get">
+                                    <form action="/like/like-list" method="get">
                                     <button class="active menu-link">
                                         <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect width="28" height="28" transform="translate(0.333313)"></rect>
@@ -101,79 +101,90 @@
                             <span>찜한 상품은 최대 200개까지 저장됩니다.</span>
                         </div>
                         <div class="like-list">
-                            <div class="like-list-total">
-                                <div class="like-total">전체 <Strong>2</Strong>개</div>
-                                <div style="overflow: visible; width: 0px;;;">
-                                    <div class="like-list-inner">
-                                        <div class="list-inner">
-                                            <!-- 재고있는 상품 -->
-                                            <div class="available">
-                                                <a href="" class="like-a">
-                                                    <span>
-                                                        <span>
-                                                            <img src=" https://img-cf.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/shop/data/goods/1657690526981l0.jpg">
-                                                        </span>
-                                                    </span>
-                                                </a>
-                                                <div class="product-info">
-                                                    <div>
-                                                        <div class="info-title">
-                                                            <a href="" style="display: block;">[테디] 100% 땅콩버터 454g 2종</a>
-                                                        </div>
-                                                        <div class="info-price">14,800 원</div>
-                                                    </div>
-                                                    <div class="like-buttons">
-                                                        <button class="remove">
-                                                            <span>삭제</span>
-                                                        </button>
-                                                        <button class="add popup-trigger" data-target="#popup2">
-                                                            <span class="add-button">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
-                                                                    <g fill="none" fill-rule="evenodd">
-                                                                        <path d="M36 36H0V0h36z"/>
-                                                                        <g transform="translate(5.164 6.547)" stroke="rgb(50,116,63)" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.7">
-                                                                            <path d="m25.68 3.66-2.72 11.57H7.37L4.66 3.66z"/>
-                                                                            <circle cx="20.52" cy="20.78" r="2.14"/>
-                                                                            <circle cx="9.81" cy="20.78" r="2.14"/>
-                                                                            <path d="M0 0h3.8l1.76 7.5"/>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-                                                                담기
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 재고 없는 상품 -->
-                                            <div class="unusable">
-                                                <a href="" class="like-una">
-                                                    <span>
-                                                        <span>
-                                                            <img src=" https://img-cf.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/shop/data/goods/1657690526981l0.jpg">
-                                                        </span>
-                                                    </span>
-                                                    <span class="unusable-span"></span>
-                                                </a>
-                                                <div class="product-info">
-                                                    <div>
-                                                        <div class="info-unuse-title">
-                                                            <a href="" style="display: block;">(구매불가) [테디] 100% 땅콩버터 454g 2종</a>
-                                                        </div>
-                                                        <div class="info-unuse"></div>
-                                                    </div>
-                                                    <div class="like-buttons">
-                                                        <button class="remove">
-                                                            <span>삭제</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                <div  class="like-list-total">
+                                    <div class="like-total" >전체 <Strong th:text="${likes.size()}"></Strong>개</div>
+
+                                    <div  id="like-container"></div>
+<!--                                    <div style="overflow: visible; width: 0px;;;">-->
+<!--                                        <div class="like-list-inner">-->
+<!--                                            <div class="list-inner">-->
+<!--                                                <div th:if="${likeList.size() > 0}">-->
+<!--                                                &lt;!&ndash; 재고있는 상품 &ndash;&gt;-->
+<!--                                                <div th:each="item, i : ${likeList}" class="available">-->
+<!--                                                    <input type="hidden" class="cart-id" th:value="${item.id}">-->
+<!--                                                    <a href="" class="like-a">-->
+<!--                                                    <span>-->
+<!--                                                        <span>-->
+<!--                                                            <img th:src="@{${item.productTitleImageUrl}}">-->
+<!--                                                        </span>-->
+<!--                                                    </span>-->
+<!--                                                    </a>-->
+<!--                                                    <div class="product-info">-->
+<!--                                                        <div>-->
+<!--                                                            <div class="info-title">-->
+<!--                                                                <a th:href="@{/together-product/detail(id=${item.productId})}" style="display: block;">-->
+<!--                                                                    <p th:text="${item.productName}"></p>-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="info-price" th:text="${item.productPrice} + '원'"></div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="like-buttons">-->
+<!--                                                            <button class="remove">-->
+<!--                                                                <span>삭제</span>-->
+<!--                                                            </button>-->
+<!--                                                            <button class="add popup-trigger" data-target="#popup2">-->
+<!--                                                            <span class="add-button">-->
+<!--                                                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">-->
+<!--                                                                    <g fill="none" fill-rule="evenodd">-->
+<!--                                                                        <path d="M36 36H0V0h36z"/>-->
+<!--                                                                        <g transform="translate(5.164 6.547)" stroke="rgb(50,116,63)" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.7">-->
+<!--                                                                            <path d="m25.68 3.66-2.72 11.57H7.37L4.66 3.66z"/>-->
+<!--                                                                            <circle cx="20.52" cy="20.78" r="2.14"/>-->
+<!--                                                                            <circle cx="9.81" cy="20.78" r="2.14"/>-->
+<!--                                                                            <path d="M0 0h3.8l1.76 7.5"/>-->
+<!--                                                                        </g>-->
+<!--                                                                    </g>-->
+<!--                                                                </svg>-->
+<!--                                                                담기-->
+<!--                                                            </span>-->
+<!--                                                            </button>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; 재고 없는 상품 &ndash;&gt;-->
+<!--                                            <div th:if="${likeList.size() == 0}">-->
+<!--                                            <div style="display: none" class="unusable">-->
+<!--                                                <a href="" class="like-una">-->
+<!--                                                    <span>-->
+<!--                                                        <span>-->
+<!--                                                            <img src=" https://img-cf.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/shop/data/goods/1657690526981l0.jpg">-->
+<!--                                                        </span>-->
+<!--                                                    </span>-->
+<!--                                                    <span class="unusable-span"></span>-->
+<!--                                                </a>-->
+<!--                                                <div class="product-info">-->
+<!--                                                    <div>-->
+<!--                                                        <div class="info-unuse-title">-->
+<!--                                                            <a href="" style="display: block;">(구매불가) [테디] 100% 땅콩버터 454g 2종</a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="info-unuse"></div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="like-buttons">-->
+<!--                                                        <button class="remove">-->
+<!--                                                            <span>삭제</span>-->
+<!--                                                        </button>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
-                            </div>
                         </div>
+                    <div th:if="${likes.size() == 0}">
                         <div class="like-null">
                             <div class="like-icon">
                                 <svg width="68" height="68" viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
@@ -182,6 +193,7 @@
                             </div>
                             <strong class="null-text">찜한 상품이 없습니다.</strong>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <div class="scroll-to-top">
@@ -241,7 +253,7 @@
 <div class="popup-wrapper" id="popup2">
         <div class="popup-inner">
             <div class="dim"></div>
-            <div class="popup-container popup-product">
+            <div class="popup-container popup-product" >
                 <div class="popup-content">
                     <div class="popup-header">
                         <div class="popup-img">
@@ -314,5 +326,9 @@
         </div>
     </div>
 </body>
-<script src="/js/mypage/like-list.js"></script>
+<script src="/js/mypage/like/module/service.js"></script>
+<script src="/js/mypage/like/module/layout.js"></script>
+<script src="/js/mypage/like/event.js"></script>
+
+
 </html>

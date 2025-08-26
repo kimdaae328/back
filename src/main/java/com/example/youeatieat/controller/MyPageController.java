@@ -23,22 +23,13 @@ public class MyPageController {
     private final MypageDAO mypageDAO;
     private final MypageService mypageService;
 
-    @GetMapping("cart")
-    public String GoToCart(){
-        return "/mypage/cart";
-    }
-    @GetMapping("like-list")
-    public String GoToLike(){
-        return "/mypage/like-list";
-    }
+
+
     @GetMapping("check")
     public String GoToCheck(){
         return "/mypage/check";
     }
-    @GetMapping("order")
-    public String GoToOrder(){
-        return "/mypage/order";
-    }
+
     @GetMapping("review-list")
     public String GoToReview(){
         return "/mypage/review-list";

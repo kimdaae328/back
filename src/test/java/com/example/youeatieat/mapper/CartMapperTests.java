@@ -1,6 +1,6 @@
 package com.example.youeatieat.mapper;
 
-import com.example.youeatieat.domain.CartVO;
+import com.example.youeatieat.dto.CartDTO;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.CartService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class CartMapperTests {
     @Test
     void CartMapperTest(){
        Long memberId  = 32L;
-        List<CartVO> List  = cartMapper.selectCartByMemberId(memberId);
+        List<CartDTO> List  = cartService.getCartListByMemberId(memberId);
         log.info(List.toString());
     }
 }
