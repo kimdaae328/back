@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminBannerMapper">
+    <select id="selectBanner">
+        select b.id, b.banner_status, b.banner_order, b.created_date, b.updated_date, bf.banner_id, bf.file_id, f.file_path, f.file_name, f.file_original_name, f.file_size
+        from tbl_banner b
+        join tbl_banner_file bf on b.id = bf.banner_id
+        join tbl_file f on f.id = bf.file_id
+    </select>
+</mapper>

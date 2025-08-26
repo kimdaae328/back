@@ -621,51 +621,43 @@ function closeModal(modal) {
 }
 
 // 배너
-contentArea.addEventListener("change", (e) => {
+let formData = null;
+contentArea.addEventListener("change", async (e) => {
     const target = e.target;
 
     if(target.classList.contains("banner-file")){
-        if (!target.matches(".banner-file, #banner-file")) return;
+        formData = new FormData();
+        formData.append("file", target.files[0]);
+        formData.append("name", target.files[0].name);
 
         const bannerContainer = document.querySelector("ul.pg-list");
-        // const [file] = e.target.files;
-        const files = Array.from(target.files || []);
-        console.log(e.target.files)
+        const [file] = e.target.files;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", (e) => {
+            let text = `
+            <li class="pg-list-item show">
+                <div class="pg-logo-wrapper">
+                    <button type="button" class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <img src="${e.target.result}" class="pg-logo">
+                </div>
+            </li>
+        `;
 
-        files.forEach((file) => {
-            const reader = new FileReader();
-            reader.addEventListener("load", (e) => {
-                const html = `
-                    <li class="pg-list-item show">
-                        <div class="pg-logo-wrapper">
-                            <button type="button" class="delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <img src="${e.target.result}" class="pg-logo" />
-                        </div>
-                    </li>
-                  `;
-                bannerContainer.insertAdjacentHTML("beforeend", html);
-            });
-            reader.readAsDataURL(file);
+            bannerContainer.innerHTML += text;
         });
-        // const reader = new FileReader();
-        // reader.readAsDataURL(file);
-        // reader.addEventListener("load", (e) => {
-        //     let text = `
-        //     <li class="pg-list-item show">
-        //         <div class="pg-logo-wrapper">
-        //             <button type="button" class="delete-btn">
-        //                 <i class="fas fa-trash"></i>
-        //             </button>
-        //             <img src="${e.target.result}" class="pg-logo">
-        //         </div>
-        //     </li>
-        // `;
-        // });
     }
 
+});
 
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+    if (target.classList.contains("register-link")) {
+        e.preventDefault();
+        await bannerService.uploadService(formData);
+    }
 });
 
 // bannerContainer.addEventListener('click',(e)=>{

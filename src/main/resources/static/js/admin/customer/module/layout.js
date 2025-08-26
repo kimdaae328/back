@@ -1854,24 +1854,27 @@ const bannerLayout = (() => {
                     <div class="title">
                         메인페이지 배너등록
                     </div>
-                    <!-- 아래 Li수만큼 Img -->
-                    <div class="dropdown">
-                        <label>
-                            <input type="file" id="banner-file" class="banner-file" style="display: none;" multiple >
-                            <div class="add-btn">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <a>사진등록</a>
-                        </label>
-                    </div>
-                    <div class="boot-tip tip primary">
-                        <ul class="pg-list list-unstyled">
-                        </ul>
-                        <a href="#" class="register-link">등록</a>
-                    </div>
+                    <form action="/api/admin/banners" method="post" enctype="multipart/form-data">
+                        <!-- 아래 Li수만큼 Img -->
+                        <div class="dropdown">
+                            <label>
+                                <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
+                                <div class="add-btn">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <a>사진등록</a>
+                            </label>
+                        </div>
+                        <div class="boot-tip tip primary">
+                            <ul class="pg-list list-unstyled">
+                            </ul>
+                            <a href="#" class="register-link">등록</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         `
+
     }
 
     return {contentLayout}
