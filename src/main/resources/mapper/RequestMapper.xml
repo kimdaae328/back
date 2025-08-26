@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.RequestMapper">
+    <insert id="insertRequest">
+        insert into tbl_request
+        (request_amount, request_price, request_status, member_id, group_index_number, product_id)
+        values
+            (#{requestAmount}, #{requestPrice}, #{requestStatus}, #{memberId}, #{groupIndexNumber}, #{productId})
+    </insert>
+
+    <sql id="search">
+        <if test="search.keyword != null">
+            and p.post_title like concat('%', #{search.keyword}, '%')
+        </if>
+    </sql>
+    <select id="selectAll">
+        select distinct m.member_name, p.id, p.post_title, p.post_content,
+        p.post_read_count, p.post_status, p.member_id, p.created_datetime, p.updated_datetime
+        from tbl_request r join tbl_group g
+        on r.group_index_number = g.group_index_number and r.product_id=g.product_id
+        join tbl_member m on r.member_id= m.id
+        join tbl_product p on r.product_id = p.id
+        <include refid="search"></include>
+        order by r.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+    <select id="selectCountAll">
+        select count(*)
+        from tbl_request r
+        join tbl_group g
+        on r.group_index_number = g.group_index_number
+        and r.product_id = g.product_id
+        join tbl_member m
+        on r.member_id = m.id
+        join tbl_product p
+        on r.product_id = p.id
+        <include refid="search"></include>
+    </select>
+</mapper>

@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MypageMapper {
 //    카카오멤버 정보수정
     public void updateKakaoMember(MemberDTO memberDTO);
+    public void updateMember(MemberDTO memberDTO);
 }

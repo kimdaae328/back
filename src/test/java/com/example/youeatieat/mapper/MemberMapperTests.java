@@ -28,15 +28,19 @@ public class MemberMapperTests {
     @Autowired
     MypageService mypageService;
 
+
 //    (#{memberEmail},#{memberPassword},#{memberName},#{memberBirth},#{memberPhone},#{memberGender})
     @Test
    public void testInsertMember() {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberEmail("test1234");
-        memberDTO.setMemberPassword("12345");
-        memberDTO.setMemberName("test");
-        memberDTO.setMemberPhone("123456789");
-        memberServiceImpl.join(memberDTO);
+        memberDTO.setMemberEmail("test");
+        memberDTO.setMemberPassword("1234");
+        Optional<MemberDTO> optionalMember = memberMapper.selectMemberForLogin(memberDTO);
+        MemberDTO member = optionalMember.get();
+        log.info(member.toString());
+        member.setMemberName("수정좀");
+        mypageService.memberUpdate(member);
+        log.info(member.toString());
 
 
     }

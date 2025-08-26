@@ -50,18 +50,20 @@
                         </div>
                         <div>
                             <div class="refrigeration-product-wrap">
-                                <div class="refrigeration-product">
+                                <div th:if="${cartList.size() > 0}">
+                                <div th:each="item, i : ${cartList}" class="refrigeration-product">
+                                    <input type="hidden" class="cart-id" th:value="${item.id}">
                                     <div class="product-header">
                                         <div class="product-select">
                                             <div class="product-button">
-                                                <label for="product-label-1" class="product-label">
-                                                    <input type="checkbox" name="" id="product-label-1" class="product-input">
+                                                <label th:for="'product-label-' + ${i}" class="product-label">
+                                                    <input type="checkbox" name="" th:id="'product-label-' + ${i}" class="product-input">
                                                     <div class="product-div"></div>
                                                 </label>
                                             </div>
                                             <div class="product-name">
-                                                <a href="">
-                                                        <p>[연세우유 x 마켓컬리] 전용목장우유 1.8L</p>
+                                                <a th:href="@{/together-product/detail(id=${item.productId})}">
+                                                        <p th:text="${item.productName}"></p>
                                                 </a>
                                             </div>
                                         </div>
@@ -74,61 +76,12 @@
                                     <div class="product-info">
                                         <div class="info-img">
                                             <a href="">
-                                                <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/6225ab1a-3cb0-4b44-917b-8804d6f79ca5.jpg">
+                                                <img th:src="@{${item.productTitleImageUrl}}">
                                             </a>
                                         </div>
                                         <div class="product-info-price">
                                             <div class="price">
-                                                <p>4,980원</p>
-                                            </div>
-                                            <div class="number">
-                                                <button type="button" class="m-button">
-                                                    <svg width="13.333" height="20" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M0 0H16V2H0V0Z" fill="#bcc4cc"></path>
-                                                    </svg>
-                                                </button>
-                                                <p class="count">
-                                                    1
-                                                </p>
-                                                <button type="button" class="p-button">
-                                                    <svg width="13.333" height="13.333" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M9 0H7V7H0V9H7V16H9V9H16V7H9V0Z" fill="#bcc4cc"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="refrigeration-product">
-                                    <div class="product-header">
-                                        <div class="product-select">
-                                            <div class="product-button">
-                                                <label for="product-label-2" class="product-label">
-                                                    <input type="checkbox" name="" id="product-label-2" class="product-input">
-                                                    <div class="product-div"></div>
-                                                </label>
-                                            </div>
-                                            <div class="product-name">
-                                                <a href="">
-                                                        <p>[연세우유 x 마켓컬리] 전용목장우유 1.8L</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <button class="product-remove">
-                                            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="info-img">
-                                            <a href="">
-                                                <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/6225ab1a-3cb0-4b44-917b-8804d6f79ca5.jpg">
-                                            </a>
-                                        </div>
-                                        <div class="product-info-price">
-                                            <div class="price">
-                                                <p>4,980원</p>
+                                                <p th:text="${item.productPrice} + '원'"></p>
                                             </div>
                                             <div class="number">
                                                 <button class="m-button">
@@ -136,8 +89,7 @@
                                                         <path d="M0 0H16V2H0V0Z" fill="#bcc4cc"></path>
                                                     </svg>
                                                 </button>
-                                                <p class="count">
-                                                    1
+                                                <p class="count" th:text="${item.cartCount}">
                                                 </p>
                                                 <button class="p-button">
                                                     <svg width="13.333" height="13.333" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -148,16 +100,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
                             <!-- 장바구니에 아무것도 없을 때 -->
-                            <div class="cart-null">
+                            <div th:if="${cartList.size() == 0}" class="cart-null">
                                 <svg width="56" height="56" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11 21.5C16.799 21.5 21.5 16.799 21.5 11C21.5 5.20101 16.799 0.5 11 0.5C5.20101 0.5 0.5 5.20101 0.5 11C0.5 16.799 5.20101 21.5 11 21.5ZM11.9199 5.2002H9.91992V12.8002H11.9199V5.2002ZM11.9199 16.7998H9.91992V14.7998H11.9199V16.7998Z" fill="#cbd1d7"></path>
                                 </svg>
                                 <p class="null-text">장바구니에 담긴 상품이 없습니다</p>
                             </div>
                         </div>
-                        <div class="delivery-no">
+                        <div style="display: none" class="delivery-no">
                             <div class="delivery-no-header">
                                 <div class="no-header-inner">
                                     <div class="no-header-title">
@@ -225,7 +178,7 @@
                                         <span class="amount-label">주문금액</span>
                                     </div>
                                     <div class="amount-text">
-                                        <span class="count order-price">0</span>
+                                        <span class="count order-price" id="total-price" th:text="${totalPrice}"></span>
                                         <span class="unit">원</span>
                                     </div>
                                 </div>
@@ -243,13 +196,13 @@
                                         <span class="amount-label">최종 결제금액</span>
                                     </div>
                                     <div class="amount-text">
-                                        <span class="count final">0</span>
+                                        <span class="count final final-price"  th:text="${totalPrice} + 2500">0</span>
                                         <span class="unit">원</span>
                                     </div>
                                 </div>
                             </div>
                             <button type="button" class="btn-primary btn-payment">
-                                <span class="count final-price">0</span>
+                                <span class="count final-price" th:text="${totalPrice} + 2500"></span>
                                 <span class="unit">원 결제하기</span>
                                 <!-- 장바구니에 아무것도 없을 때 -->
                                  <!-- <span>상품을 담아주세요</span> -->
@@ -261,5 +214,6 @@
         </div>
     </div>
 </body>
-<script src="/js/mypage/cart.js"></script>
+<script src="/js/mypage/cart/event.js"></script>
+<script src="/js/mypage/cart/module/service.js"></script>
 </html>

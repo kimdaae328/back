@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fonts/pretendard/font.css">
+    <link rel="stylesheet" href="/css/together-product/list.css">
+    <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
+    <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
+    <title>너도먹고나도먹고</title>
+</head>
+<body>
+    <div class="sub">
+        <div>
+            <header th:replace="~{/main/header.html :: header}"></header>
+            <div class="layout-wrapper">
+                <div class="menu-section">
+                    <h3 class="menu-title" th:text="${mainCategoryName}">채소</h3>
+                    <ul class="menu-list" >
+                        <li class="menu-item all">
+                            <button type="button" class="menu-btn">전체보기</button>
+                        </li>
+                        <li class="menu-item" th:each="sub : ${product.subCategories}">
+                            <button type="button"
+                                    class="menu-btn"
+                                    th:data-id="${sub.subCategoryId}"
+                                    th:text="${sub.subCategoryName}">
+                                소분류 이름
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="container">
+                    <div class="product-section">
+                        <div class="filter-sidebar">
+                            <div class="filter-title">
+                                <h2>필터</h2>
+                                <button type="button" class="btn-reset">
+                                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 3.96303C12.504 2.16973 10.4086 1 8.04 1C4.15192 1 1 4.15192 1 8.04C1 11.9281 4.15192 15.08 8.04 15.08C11.9281 15.08 15.08 11.9281 15.08 8.04" stroke="#ddd" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="round"></path><path d="M14.4933 1L14.4933 4.52H10.9733" stroke="#ddd" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="round"></path></svg>
+                                    <span>초기화</span>
+                                </button>
+                            </div>
+                            <div class="filter-category-section">
+                                <!-- 드롭다운 : class up 추가시  -->
+                                <div class="filter-category-list">
+                                    <button type="button" class="dropdown-btn">
+                                        <div class="title">카테고리</div>
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999" xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"><path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <ul class="filter-list">
+                                            <li class="filter-item">
+                                                <span class="btn-check-box">
+                                                    <label for="chk3">
+                                                        <input type="checkbox" name="" id="chk3">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
+                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                        <span class="title">간편식·밀키트·샐러드</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                            <li class="filter-item">
+                                                <span class="btn-check-box">
+                                                    <label for="chk4">
+                                                        <input type="checkbox" name="" id="chk4">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
+                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                        <span class="title">면·양념·오일</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="filter-category-list">
+                                    <button type="button" class="dropdown-btn">
+                                        <div class="title">가격</div>
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999" xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"><path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <ul class="filter-list">
+                                            <li class="filter-item">
+                                                <span class="btn-radio-box">
+                                                    <label for="rdo1">
+                                                        <input type="radio" name="radio" id="rdo1">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
+                                                            <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
+                                                        </svg>
+                                                        <span class="title">4,900원 미만</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                            <li class="filter-item">
+                                                <span class="btn-radio-box">
+                                                    <label for="rdo2">
+                                                        <input type="radio" name="radio" id="rdo2">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
+                                                            <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
+                                                        </svg>
+                                                        <span class="title">4,900원 ~ 9,900원</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-main">
+                            <div class="product-filter-bar">
+                                <span class="result-count">총 <span class="count">24</span>건</span>
+                                <ul class="product-sort-options">
+                                    <li class="product-sort-item">
+                                        <button type="button" class="sort-button">신상품순</button>
+                                    </li>
+                                    <li class="product-sort-item">
+                                        <button type="button" class="sort-button">낮은 가격순</button>
+                                    </li>
+                                    <li class="product-sort-item">
+                                        <button type="button" class="sort-button">높은 가격순</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="active-filter-container">
+                                <!-- 이곳에 태그가 들어옴 -->
+                            </div>
+                            <div class="product-list" >
+<!--                                이곳에 상품 카드 들어옴-->
+                            </div>
+<!--                            페이지네이션-->
+                            <div class="pagenation">
+                                <button type="button" class="pagenation-btn first">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
+                                </button>
+                                <button type="button" class="pagenation-btn prev">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
+                                </button>
+
+                                <div class="pagenation-number">
+                                    <!-- 있는만큼 페이지 목록 나옴 -->
+                                </div>
+
+                                <button type="button" class="pagenation-btn next">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
+                                </button>
+                                <button type="button" class="pagenation-btn last">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-to-top">
+                    <button type="button" class="scroll-top-btn"></button>
+                </div>
+                <div class="recently-viewed-section">
+                    <div class="recently-viewed">
+                        <button type="button" class="prev">
+                            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 11L9 7L13 11" stroke="#666" stroke-width="1.3"></path></svg>
+                        </button>
+                        <span class="title">최근 본 상품</span>
+                        <div class="recently-viewed-scroll">
+                            <ul class="recently-viewed-list">
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                                <li class="product-image">
+                                    <a href="">
+                                        <img src="https://product-image.kurly.com/hdims/resize/%5E%3E120x%3E156/cropcenter/120x156/quality/85/src/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="button" class="next">
+                            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 7L9 11L5 7" stroke="#666" stroke-width="1.3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-wrap"></div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
+</body>
+
+<script src="/js/main/header.js"></script>
+<script src="/js/together-product/list/module/service.js"></script>
+<script src="/js/together-product/list/module/layout.js"></script>
+<script src="/js/together-product/list/event.js"></script>
+</html>

@@ -34,6 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
             reviews.remove(reviews.size() - 1);
         }
 
+//        리뷰 사진 여러개 가져오기
         reviews.forEach(reviewDTO -> {
             reviewDTO.setImages(reviewImageDAO.findImagesByReviewId(reviewDTO.getId()));
         });

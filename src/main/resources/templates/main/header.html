@@ -17,12 +17,14 @@
         <div>
             <div class="header">
                 <div class="login-nav">
-                    <!-- 로그인 안했을 때 -->
-<!--                    <a href="" class="joinus">회원가입</a>-->
-<!--                    <div class="bar"></div>-->
-<!--                    <a href="" class="login">로그인</a>-->
-                    
-                    <!-- 로그인 했을 때 -->
+<!--                     로그인 안했을 때-->
+                    <th:block th:if="${session.member == null}">
+                    <a href="member/signup" class="joinus">회원가입</a>
+                    <div class="bar"></div>
+                    <a href="member/login" class="login">로그인</a>
+                    </th:block>
+
+<!--                     로그인 했을 때-->
                       <div class="customer-service" >
                           <th:block th:if="${session.member != null}">
                              <a href="" class="customer-name" th:text="${session.member.memberName}">
@@ -30,14 +32,14 @@
                              </a>
                           </th:block>
                          <div class="member-menu customer-service-list">
-                             <form action="/mypage/order" method="get">
+                             <form action="/request/list/1" method="get">
                              <button class="list-menu">주문 내역</button>
                              </form>
-                             <form action="/mypage/check" method="get">
+                             <form action="/mypage/modify" method="get">
                              <button class="list-menu">회원 정보 관리</button>
                              </form>
                              <div class="list-menu">
-                                 <form action="/member/logout" method="post">
+                                 <form action="/member/logout" method="get">
                                      <button type="submit">로그아웃</button>
                                  </form>
                              </div>
@@ -112,10 +114,10 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="/mypage/like-list" method="get">
+                        <form action="/like/like-list" method="get">
                         <button class="good-icon"></button>
                         </form>
-                        <form action="/mypage/cart" method="get">
+                        <form action="/cart/cart" method="get">
                         <div class="cart-icon">
                             <button class="cart-icon-button"></button>
                         </div>
@@ -171,7 +173,7 @@
                     </div>
                     <ul class="nav-ul">
                         <li class="nav-li">
-                            <span class="nav-li-text">신상품</span>
+                            <a href="together-product/list" class="nav-li-text">신상품</a>
                         </li>
                         <li class="nav-li">
                             <span class="nav-li-text">베스트</span>

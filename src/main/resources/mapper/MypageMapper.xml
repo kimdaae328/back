@@ -10,4 +10,13 @@
         where
             member_kakao_email = #{memberKakaoEmail}
     </update>
+    <update id="updateMember">
+        update tbl_member
+        set
+            member_name = #{memberName},
+            member_email = #{memberEmail},
+            updated_date = now()
+        where
+            id = #{id}
+    </update>
 </mapper>

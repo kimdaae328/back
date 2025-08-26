@@ -5,38 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/together-product/list.css">
+    <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     <title>너도먹고나도먹고</title>
 </head>
 <body>
     <div class="sub">
         <div>
+            <header th:replace="~{/main/header.html :: header}"></header>
             <div class="layout-wrapper">
                 <div class="menu-section">
-                    <h3 class="menu-title">채소</h3>
-                    <ul class="menu-list">
-                        <li class="menu-item all">
-                            <button type="button" class="menu-btn">전체보기</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">더퍼플셀렉션 채소</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">친환경 채소</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">고구마·감자·당근 채소</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">시금치·쌈채소·나물 채소</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">브로콜리·파프리카·양배추 채소</button>
-                        </li>
-                        <li class="menu-item">
-                            <button type="button" class="menu-btn">양파·대파·마늘·배추 채소</button>
-                        </li>
-                    </ul>
+                    <h3 class="menu-title">신상품</h3>
                 </div>
                 <div class="container">
                     <div class="product-section">
@@ -48,34 +28,6 @@
                                     <span>초기화</span>
                                 </button>
                             </div>
-                            <div class="filter-group">
-                                <ul class="filter-list">
-                                    <li class="filter-item">
-                                        <span class="btn-check-box">
-                                            <label for="chk1">
-                                                <input type="checkbox" name="" id="chk1">
-                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                    <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                                <span class="title text-primary">컬리온리</span>
-                                                <span class="number">35</span>
-                                            </label>
-                                        </span>
-                                    </li>
-                                    <li class="filter-item">
-                                        <span class="btn-check-box">
-                                            <label for="chk2">
-                                                <input type="checkbox" name="" id="chk2">
-                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                    <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                                <span class="title text-primary">리빙페스타</span>
-                                                <span class="number">35</span>
-                                            </label>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="filter-category-section">
                                 <!-- 드롭다운 : class up 추가시  -->
                                 <div class="filter-category-list">
@@ -86,32 +38,8 @@
                                     </button>
                                     <div class="dropdown-content">
                                         <ul class="filter-list">
-                                            <li class="filter-item">
-                                                <span class="btn-check-box">
-                                                    <label for="chk3">
-                                                        <input type="checkbox" name="" id="chk3">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                        <span class="title">간편식·밀키트·샐러드</span>
-                                                        <span class="number">35</span>
-                                                    </label>
-                                                </span>
-                                            </li>
-                                            <li class="filter-item">
-                                                <span class="btn-check-box">
-                                                    <label for="chk4">
-                                                        <input type="checkbox" name="" id="chk4">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                        <span class="title">면·양념·오일</span>
-                                                        <span class="number">35</span>
-                                                    </label>
-                                                </span>
-                                            </li>
+<!--                                            이곳에 카테고리 체크박스 들어옴-->
                                         </ul>
-                                        <button type="button" class="more-btn">카테고리 더보기 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999" xmlns="http://www.w3.org/2000/svg" class="css-jbgpyq e1frj59j0"><path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path></svg></button>
                                     </div>
                                 </div>
                                 <div class="filter-category-list">
@@ -125,12 +53,12 @@
                                             <li class="filter-item">
                                                 <span class="btn-radio-box">
                                                     <label for="rdo1">
-                                                        <input type="radio" name="radio" id="rdo1">
+                                                        <input type="radio" name="radio" id="rdo1" value="RANGE_1">
                                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
                                                             <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
                                                         </svg>
-                                                        <span class="title">4,900원 미만</span>
+                                                        <span class="title">1,000원 미만</span>
                                                         <span class="number">35</span>
                                                     </label>
                                                 </span>
@@ -138,109 +66,51 @@
                                             <li class="filter-item">
                                                 <span class="btn-radio-box">
                                                     <label for="rdo2">
-                                                        <input type="radio" name="radio" id="rdo2">
+                                                        <input type="radio" name="radio" id="rdo2" value="RANGE_2">
                                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
                                                             <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
                                                         </svg>
-                                                        <span class="title">4,900원 ~ 9,900원</span>
-                                                        <span class="number">35</span>
-                                                    </label>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="filter-category-list">
-                                    <button type="button" class="dropdown-btn">
-                                        <div class="title">브랜드</div>
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999" xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"><path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
-                                        </svg>
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <ul class="category-sort-options">
-                                            <li class="category-sort-item">
-                                                <!-- 색상변경 : on 클래스 추가시 -->
-                                                <button type="button" class="category-sort-btn on">가나다순</button>
-                                            </li>
-                                            <li class="category-sort-item">
-                                                <button type="button" class="category-sort-btn">상품 많은순</button>
-                                            </li>
-                                        </ul>
-                                        <ul class="initial-filter">
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button wide on">전체</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㄱ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㄴ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㄷ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㄹ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅁ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅂ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅅ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅇ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅈ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅊ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅋ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅌ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅍ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button">ㅎ</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button wide">A-Z</button>
-                                            </li>
-                                            <li class="initial-item">
-                                                <button type="button" class="initial-button wide">ETC</button>
-                                            </li>
-                                        </ul>
-                                        <ul class="filter-list">
-                                            <li class="filter-item">
-                                                <span class="btn-check-box">
-                                                    <label for="chk5">
-                                                        <input type="checkbox" name="" id="chk5">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                        <span class="title">골드로니</span>
+                                                        <span class="title">1,000원 ~ 2,000원</span>
                                                         <span class="number">35</span>
                                                     </label>
                                                 </span>
                                             </li>
                                             <li class="filter-item">
-                                                <span class="btn-check-box">
-                                                    <label for="chk6">
-                                                        <input type="checkbox" name="" id="chk6">
-                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
-                                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <span class="btn-radio-box">
+                                                    <label for="rdo3">
+                                                        <input type="radio" name="radio" id="rdo3" value="RANGE_3">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
+                                                            <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
                                                         </svg>
-                                                        <span class="title">광주요</span>
+                                                        <span class="title">2,000원 ~ 3,000원</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                            <li class="filter-item">
+                                                <span class="btn-radio-box">
+                                                    <label for="rdo4">
+                                                        <input type="radio" name="radio" id="rdo4" value="RANGE_4">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
+                                                            <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
+                                                        </svg>
+                                                        <span class="title">3,000원 ~ 4,000원</span>
+                                                        <span class="number">35</span>
+                                                    </label>
+                                                </span>
+                                            </li>
+                                            <li class="filter-item">
+                                                <span class="btn-radio-box">
+                                                    <label for="rdo5">
+                                                        <input type="radio" name="radio" id="rdo5" value="RANGE_5">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z" fill="#fff" stroke="#ddd"></path>
+                                                            <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="#fff"></path>
+                                                        </svg>
+                                                        <span class="title">5,000원 이상</span>
                                                         <span class="number">35</span>
                                                     </label>
                                                 </span>
@@ -255,21 +125,7 @@
                                 <span class="result-count">총 <span class="count">24</span>건</span>
                                 <ul class="product-sort-options">
                                     <li class="product-sort-item">
-                                        <button type="button" class="sort-button">추천순</button>
-                                        <div class="tooltip-icon">
-                                            <svg width="14" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.9932 0.700195C8.73506 0.700195 10.3116 1.40557 11.4528 2.54565C12.5943 3.68594 13.3002 5.26111 13.3002 7.0002C13.3002 8.73928 12.5943 10.3145 11.4528 11.4547C10.3116 12.5948 8.73506 13.3002 6.9932 13.3002C5.25512 13.3002 3.68233 12.595 2.54387 11.4554C1.40457 10.315 0.700195 8.73952 0.700195 7.0002C0.700195 5.26087 1.40457 3.68541 2.54387 2.54497C3.68233 1.40537 5.25512 0.700195 6.9932 0.700195Z" stroke="#ccc" stroke-width="1.4"></path><path d="M4.5 5.21081H5.77027C5.81351 4.55135 6.26216 4.12973 6.95946 4.12973C7.64054 4.12973 8.09459 4.53514 8.09459 5.0973C8.09459 5.58784 7.90383 5.86944 7.35576 6.22524L7.1973 6.32432C6.45135 6.76216 6.13784 7.24865 6.18649 8.05946L6.19189 8.42703H7.44595V8.11892C7.44595 7.58378 7.64595 7.30811 8.35405 6.89189C9.08919 6.45405 9.5 5.87568 9.5 5.04865C9.5 3.85405 8.51081 3 7.02973 3C5.42432 3 4.54324 3.92973 4.5 5.21081ZM6.87838 11.0054C6.33784 11.0054 5.98108 10.6649 5.98108 10.1459C5.98108 9.62162 6.33784 9.28108 6.87838 9.28108C7.42973 9.28108 7.77568 9.62162 7.77568 10.1459C7.77568 10.6649 7.42973 11.0054 6.87838 11.0054Z" fill="#ccc"></path>
-                                            </svg>
-                                            <div class="tooltip-text">소비자 인기도 (판매량, 판매금액, 조회수 등), 상품 출시일, 수요 적합성, 상품 운영상 필요 등을 종합적으로 고려한 순서입니다.</div>
-                                        </div>
-                                    </li>
-                                    <li class="product-sort-item">
                                         <button type="button" class="sort-button">신상품순</button>
-                                    </li>
-                                    <li class="product-sort-item">
-                                        <button type="button" class="sort-button">판매량순</button>
-                                    </li>
-                                    <li class="product-sort-item">
-                                        <button type="button" class="sort-button">혜택순</button>
                                     </li>
                                     <li class="product-sort-item">
                                         <button type="button" class="sort-button">낮은 가격순</button>
@@ -283,59 +139,9 @@
                                 <!-- 이곳에 태그가 들어옴 -->
                             </div>
                             <div class="product-list" >
-                                <div class="product-card" th:each="product : ${products}">
-                                    <div class="product-thumbnail">
-                                        <a th:href="@{/together-product/detail(id=${product.id})}" class="product-media">
-                                            <div class="product-img" style="background-color: #eee">
-                                                <img alt="" src="">
-                                            </div>
-                                        </a>
-                                        <div class="product-btn">
-                                            <!-- 팝업 열기 : popup-trigger 있을 시 -->
-                                            <button type="button" class="popup-trigger" data-target="#popup1">
-                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z" stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path></svg>
-                                                담기
-                                            </button>
-                                        </div>
-                                        <a th:href="@{/together-product/detail(id=${product.id})}" class="product-info">
-                                            <div class="product-badge">
-                                                <span class="">너도나도 배송</span>
-                                            </div>
-                                            <span class="product-name" th:text = "${product.productName}"></span>
-                                            <div class="product-discount">
-                                                <span class="discount-rate" th:text = "${product.productMinNumber}" style="margin-right: 0;"></span>
-                                                <span class="discount-rate">개 부터~</span>
-                                                <span class="sales-price">
-                                                    <span class="price-number" th:text = "${product.productPrice}">5,050</span>
-                                                    <span class="won">원</span>
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+<!--                                이곳에 상품 카드 들어옴-->
                             </div>
-                            <!-- 데이터 없을때 -->
-                            <div class="no-data">
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_2061_60391)">
-                                        <path d="M24 47C36.7025 47 47 36.7025 47 24C47 11.2975 36.7025 1 24 1C11.2975 1 1 11.2975 1 24C1 36.7025 11.2975 47 24 47Z" stroke="#e2e2e2" stroke-width="2"></path>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 13C25.1046 13 26 13.8954 26 15V26C26 27.1046 25.1046 28 24 28C22.8954 28 22 27.1046 22 26V15C22 13.8954 22.8954 13 24 13ZM24 31C25.1046 31 26 31.8954 26 33C26 34.1046 25.1046 35 24 35C22.8954 35 22 34.1046 22 33C22 31.8954 22.8954 31 24 31Z" fill="#e2e2e2"></path>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_2061_60391">
-                                            <rect width="48" height="48" fill="white"></rect>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <p class="no-data-message">선택하신 필터와 일치하는 상품이 없습니다.</p>
-                                <button type="button" class="btn-circle btn-primary btn-reset">
-                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.78 3.96303C12.504 2.16973 10.4086 1 8.04 1C4.15192 1 1 4.15192 1 8.04C1 11.9281 4.15192 15.08 8.04 15.08C11.9281 15.08 15.08 11.9281 15.08 8.04" stroke="#fff" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="round"></path>
-                                        <path d="M14.4933 1L14.4933 4.52H10.9733" stroke="#fff" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="round"></path>
-                                    </svg>
-                                    <span class="btn-name">필터 초기화</span>
-                                </button>
-                            </div>
+<!--                            페이지네이션-->
                             <div class="pagenation">
                                 <button type="button" class="pagenation-btn first">
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=">
@@ -343,15 +149,11 @@
                                 <button type="button" class="pagenation-btn prev">
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC">
                                 </button>
+
                                 <div class="pagenation-number">
-                                    <button type="button" class="pagenation-btn on">1</button>
-                                    <button type="button" class="pagenation-btn">2</button>
-                                    <button type="button" class="pagenation-btn">3</button>
-                                    <button type="button" class="pagenation-btn">4</button>
-                                    <button type="button" class="pagenation-btn">5</button>
-                                    <button type="button" class="pagenation-btn">6</button>
-                                    <button type="button" class="pagenation-btn">7</button>
+                                    <!-- 있는만큼 페이지 목록 나옴 -->
                                 </div>
+
                                 <button type="button" class="pagenation-btn next">
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==">
                                 </button>
@@ -416,86 +218,12 @@
             </div>
         </div>
     </div>
-
-    <div class="popup-wrapper" id="popup1">
-        <div class="popup-inner">
-            <div class="dim"></div>
-            <div class="popup-container popup-product">
-                <div class="popup-content">
-                    <div class="popup-header">
-                        <div class="popup-img">
-                            <img src="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg" decoding="async" data-nimg="fill" class="css-0" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;" sizes="100vw" srcset="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 640w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 750w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 828w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1080w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1200w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1920w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 2048w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 3840w">
-                        </div>
-                        <div class="popup-title-wrap">
-                            <p class="popup-title">[샐러드판다] 그린랩 샌드위치 3종</p>
-                        </div>
-                    </div>
-                    <ul class="popup-product-list">
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="popup-product-item">
-                            <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                            <div class="product-price-box">
-                                <div class="product-price-box">
-                                    <span class="product-price">5,050원</span>
-                                    <span class="product-original-price">6,000원</span>
-                                </div>
-                                <div class="product-quantity-box">
-                                    <button type="button" class="quantity-btn minus"></button>
-                                    <div class="count">0</div>
-                                    <button type="button" class="quantity-btn plus"></button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="total-price-box">
-                        <p class="total-label">합계</p>
-                        <div class="total-price">
-                            <span class="total-amount">0</span>
-                            <span class="total-unit">원</span>
-                        </div>
-                    </div>
-                    <div class="popup-footer">
-                        <div class="popup-button-box">
-                            <!-- 팝업 닫기 : popup-close 클래스 있을시 -->
-                            <button type="button" class="btn-outline popup-close">취소</button>
-                            <button type="button" class="btn-primary popup-close">장바구니</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="modal-wrap"></div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
-<script th:inline="javascript">
-    const products = productDTO.
-</script>
+
+<script src="/js/main/header.js"></script>
+<script src="/js/together-product/list/module/service.js"></script>
+<script src="/js/together-product/list/module/layout.js"></script>
 <script src="/js/together-product/list/event.js"></script>
-<!--<script src="/js/together-product/list/module/layout.js"></script>-->
 </html>

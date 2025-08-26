@@ -14,8 +14,11 @@ import org.springframework.stereotype.Component;
 public class CartDTO {
     private Long id;
     private Status cartStatus;
+    private String productName;
+    private String productTitleImageUrl;
     private int cartCount;
     private Long productId;
+    private int productPrice;
     private Long memberId;
     private String createdDatetime;
     private String updatedDatetime;

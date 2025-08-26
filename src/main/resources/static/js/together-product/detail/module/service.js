@@ -127,6 +127,6 @@ const togetherProductService = (() => {
         return await response.json();
     };
 
-    return {save, like, unlike, getReview, getReviewDetail, inquiry, getInquiry, getAnswer};
+    return {save:save, like:like, unlike:unlike, getReview:getReview, getReviewDetail:getReviewDetail, inquiry:inquiry, getInquiry:getInquiry, getAnswer:getAnswer};
 
 })();
