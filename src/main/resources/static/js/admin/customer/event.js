@@ -625,26 +625,47 @@ contentArea.addEventListener("change", (e) => {
     const target = e.target;
 
     if(target.classList.contains("banner-file")){
-        const bannerContainer = document.querySelector("ul.pg-list");
-        const [file] = e.target.files;
-        console.log(e.target.files)
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.addEventListener("load", (e) => {
-            let text = `
-            <li class="pg-list-item show">
-                <div class="pg-logo-wrapper">
-                    <button type="button" class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    <img src="${e.target.result}" class="pg-logo" ">
-                </div>
-            </li>
-        `;
+        if (!target.matches(".banner-file, #banner-file")) return;
 
-            bannerContainer.innerHTML += text;
+        const bannerContainer = document.querySelector("ul.pg-list");
+        // const [file] = e.target.files;
+        const files = Array.from(target.files || []);
+        console.log(e.target.files)
+
+        files.forEach((file) => {
+            const reader = new FileReader();
+            reader.addEventListener("load", (e) => {
+                const html = `
+                    <li class="pg-list-item show">
+                        <div class="pg-logo-wrapper">
+                            <button type="button" class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <img src="${e.target.result}" class="pg-logo" />
+                        </div>
+                    </li>
+                  `;
+                bannerContainer.insertAdjacentHTML("beforeend", html);
+            });
+            reader.readAsDataURL(file);
         });
+        // const reader = new FileReader();
+        // reader.readAsDataURL(file);
+        // reader.addEventListener("load", (e) => {
+        //     let text = `
+        //     <li class="pg-list-item show">
+        //         <div class="pg-logo-wrapper">
+        //             <button type="button" class="delete-btn">
+        //                 <i class="fas fa-trash"></i>
+        //             </button>
+        //             <img src="${e.target.result}" class="pg-logo">
+        //         </div>
+        //     </li>
+        // `;
+        // });
     }
+
+
 });
 
 // bannerContainer.addEventListener('click',(e)=>{
