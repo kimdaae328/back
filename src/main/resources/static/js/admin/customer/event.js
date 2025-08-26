@@ -291,8 +291,8 @@ const showSubscribedList = async (page = 1, keyword) => {
 
 // ########################### 문의 목록 ###########################
 // 문의 목록(전체)
-const showInquiryList = async (page = 1) => {
-    const inquiryCriteria = await inquiryService.getInquiryList(page, inquiryLayout.showList);
+const showInquiryList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getInquiryList(page, keyword, inquiryLayout.showList);
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
     inquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -301,8 +301,8 @@ const showInquiryList = async (page = 1) => {
 }
 
 // 문의 목록(미답변)
-const showUnansweredList = async (page = 1) => {
-    const inquiryCriteria = await inquiryService.getUnansweredList(page, inquiryLayout.showList);
+const showUnansweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getUnansweredList(page, keyword, inquiryLayout.showList);
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
     inquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -310,8 +310,8 @@ const showUnansweredList = async (page = 1) => {
 }
 
 // 문의 목록(답변완료)
-const showAnsweredList = async (page = 1) => {
-    const inquiryCriteria = await inquiryService.getAnsweredList(page, inquiryLayout.showList);
+const showAnsweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getAnsweredList(page, keyword, inquiryLayout.showList);
     inquiryLayout.renderPagination(inquiryCriteria.criteria);
     inquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -378,6 +378,13 @@ contentArea.addEventListener("keyup", async (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
             keyword = e.target.value.trim();
+
+            // 회원 문의목록 검색
+            if(currentPageType === "buyer-inquiry"){
+                const result = await currentLoader(1, keyword);
+                inquiryLayout.renderPagination(result.criteria);
+                inquiryLayout.totalCount(result.criteria);
+            }
 
             // 판매자 문의목록 검색
             if(currentPageType === "seller-inquiry"){

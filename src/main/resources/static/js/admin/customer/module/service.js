@@ -186,8 +186,8 @@ const sellerService = (() => {
 const inquiryService = (() => {
     // 문의 목록
     let currentPage = 1;
-    const getInquiryList = async (page, callback) => {
-        const response = await fetch(`/api/admin/inquiries/list/${page}`);
+    const getInquiryList = async (page, keyword= "", callback) => {
+        const response = await fetch(`/api/admin/inquiries/list/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
@@ -215,8 +215,8 @@ const inquiryService = (() => {
     }
 
     // 문의 목록(미답변)
-    const getUnansweredList = async (page, callback) => {
-        const response = await fetch(`/api/admin/inquiries/list/unanswered/${page}`);
+    const getUnansweredList = async (page, keyword= "", callback) => {
+        const response = await fetch(`/api/admin/inquiries/list/unanswered/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
@@ -241,8 +241,8 @@ const inquiryService = (() => {
     }
 
     // 문의 목록(답변완료)
-    const getAnsweredList = async (page, callback) => {
-        const response = await fetch(`/api/admin/inquiries/list/answered/${page}`);
+    const getAnsweredList = async (page, keyword= "", callback) => {
+        const response = await fetch(`/api/admin/inquiries/list/answered/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
