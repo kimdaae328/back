@@ -2,6 +2,7 @@ package com.example.youeatieat.service;
 
 import com.example.youeatieat.dto.BannerDTO;
 import com.example.youeatieat.dto.BannerFileDTO;
+import com.example.youeatieat.dto.BannerWithFileDTO;
 import com.example.youeatieat.dto.FileDTO;
 import com.example.youeatieat.repository.AdminBannerDAO;
 import com.example.youeatieat.repository.AdminBannerFileDAO;
@@ -9,6 +10,7 @@ import com.example.youeatieat.repository.AdminFileDAO;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -25,11 +27,13 @@ public class AdminBannerServicelmpl implements AdminBannerService {
     private final AdminBannerFileDAO bannerFileDAO;
 
     @Override
-    public void upload(BannerDTO bannerDTO, List<MultipartFile> files) {
+    @Transactional
+    public void uploadBannerFiles(BannerDTO bannerDTO, List<MultipartFile> files) {
         String todayPath = getPath();
         String rootPath = "C:/file/" + todayPath;
 
-//        bannerDAO.save(bannerDTO);
+        bannerDAO.uploadBanner(bannerDTO);
+        Long bannerId = bannerDTO.getId();
 
         files.forEach(file -> {
             if(file.getOriginalFilename().equals("")){
@@ -39,7 +43,6 @@ public class AdminBannerServicelmpl implements AdminBannerService {
             UUID uuid = UUID.randomUUID();
 
             FileDTO fileDTO = new FileDTO();
-            BannerFileDTO bannerFileDTO = new BannerFileDTO();
 
             fileDTO.setFileName(uuid.toString() + "_" + file.getOriginalFilename());
             fileDTO.setFileOriginalName(file.getOriginalFilename());
@@ -48,7 +51,13 @@ public class AdminBannerServicelmpl implements AdminBannerService {
 //            fileDTO.setFileContentType(file.getContentType());
 
             fileDAO.save(fileDTO);
+            Long fileId = fileDTO.getId();
 
+//            bannerFileDAO.save(toBannerFileVO(bannerFileDTO));
+
+            BannerFileDTO bannerFileDTO = new BannerFileDTO();
+            bannerFileDTO.setBannerId(bannerId);
+            bannerFileDTO.setFileId(fileId);
             bannerFileDAO.save(toBannerFileVO(bannerFileDTO));
 
             File directory = new File(rootPath);
@@ -68,8 +77,8 @@ public class AdminBannerServicelmpl implements AdminBannerService {
     }
 
     @Override
-    public List<BannerFileDTO> getBannerFiles() {
-        List<BannerFileDTO> banners = bannerDAO.findBannerAll();
+    public List<BannerWithFileDTO> getBannerFiles() {
+        List<BannerWithFileDTO> banners = bannerDAO.findBannerAll();
         return banners;
     }
 }

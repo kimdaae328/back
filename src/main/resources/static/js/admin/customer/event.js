@@ -206,6 +206,8 @@ sideSubLinks.forEach((sideSubLink) => {
             currentPageType = "banner";
 
             bannerLayout.contentLayout();
+            await setList(showBannerList);
+            addBanner();
 
         } else {
             console.log("?????");
@@ -350,6 +352,16 @@ const showSellerPurchaseList = async (page = 1, keyword) => {
     purchaseLayout.totalCount(purchaseCriteria.criteria);
 
     return purchaseCriteria;
+}
+
+// 배너 목록
+const showBannerList = async () => {
+    const bannerList = await bannerService.getList();
+    bannerLayout.showList(bannerList);
+    // bannerLayout.renderPagination(bannerCriteria.criteria);
+    // bannerLayout.totalCount(bannerCriteria.criteria);
+
+    return bannerList;
 }
 
 // 검색
@@ -499,7 +511,6 @@ contentArea.addEventListener("click", async (e) => {
 
     // 매입 요청 승인 버튼 토글
     if (target.classList.contains("approval-action-btn")) {
-        console.log("버튼 잘눌림")
         const btMenu = target.closest(".bt-pop-menu");
         const btPopMenuContext = btMenu.querySelector(".bt-pop-menu-context");
         btPopMenuContext.classList.toggle("show");
@@ -621,47 +632,49 @@ function closeModal(modal) {
 }
 
 // 배너
-let formData = null;
-contentArea.addEventListener("change", async (e) => {
-    const target = e.target;
+function addBanner() {
+    let formData = null;
+    contentArea.addEventListener("change", async (e) => {
+        const target = e.target;
 
-    if(target.classList.contains("banner-file")){
-        const status = document.querySelector('#banner-status').value;
-        
-        formData = new FormData();
-        formData.append("file", target.files[0]);
-        formData.append("name", target.files[0].name);
-        formData.append('bannerStatus', status);
+        if(target.classList.contains("banner-file")){
+            const status = document.querySelector('#banner-status').value;
 
-        const bannerContainer = document.querySelector("ul.pg-list");
-        const [file] = e.target.files;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.addEventListener("load", (e) => {
-            let text = `
-            <li class="pg-list-item show">
-                <div class="pg-logo-wrapper">
-                    <button type="button" class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    <img src="${e.target.result}" class="pg-logo">
-                </div>
-            </li>
-        `;
+            formData = new FormData();
+            formData.append("file", target.files[0]);
+            formData.append("name", target.files[0].name);
+            formData.append('bannerStatus', status);
 
-            bannerContainer.innerHTML += text;
-        });
-    }
+            const bannerContainer = document.querySelector("ul.pg-list");
+            const [file] = e.target.files;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.addEventListener("load", (e) => {
+                let text = `
+                <li class="pg-list-item show">
+                    <div class="pg-logo-wrapper">
+                        <button type="button" class="delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <img src="${e.target.result}" class="pg-logo">
+                    </div>
+                </li>
+            `;
 
-});
+                bannerContainer.innerHTML += text;
+            });
+        }
 
-contentArea.addEventListener("click", async (e) => {
+    });
+
+    contentArea.addEventListener("click", async (e) => {
     const target = e.target;
     if (target.classList.contains("register-link")) {
         e.preventDefault();
         await bannerService.uploadService(formData);
     }
 });
+}
 
 // bannerContainer.addEventListener('click',(e)=>{
 //     if(e.target.classList.contains("delete-btn")){

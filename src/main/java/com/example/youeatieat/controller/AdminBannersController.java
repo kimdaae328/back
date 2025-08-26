@@ -1,10 +1,13 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.dto.BannerDTO;
+import com.example.youeatieat.dto.BannerFileDTO;
+import com.example.youeatieat.dto.BannerWithFileDTO;
 import com.example.youeatieat.dto.FileDTO;
 import com.example.youeatieat.service.AdminBannerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +36,17 @@ public class AdminBannersController {
             }
         });
 ////        List<FileDTO> result = bannerService.saveFile(files);
-        bannerService.upload(bannerDTO, files);
+        bannerService.uploadBannerFiles(bannerDTO, files);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<?> list(){
+        List<BannerWithFileDTO> bannerWithFileDTO = bannerService.getBannerFiles();
+        if(bannerWithFileDTO == null || bannerWithFileDTO.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bannerWithFileDTO);
+        }
+        return ResponseEntity.ok(bannerWithFileDTO);
     }
 
 }

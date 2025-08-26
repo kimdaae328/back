@@ -524,5 +524,23 @@ const bannerService = (() => {
         }
     }
 
-    return {uploadService}
+    const getList = async () => {
+        const response = await fetch('/api/admin/banners');
+        const bannerList = await response.json();
+
+        console.log(bannerList)
+
+        if(response.ok) {
+            console.log("매입상세글 존재")
+        }else if(response.status === 404){
+            console.log("매입상세글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return bannerList;
+    };
+
+    return {uploadService, getList}
 })();

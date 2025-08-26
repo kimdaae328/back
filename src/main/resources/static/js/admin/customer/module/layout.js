@@ -1599,7 +1599,6 @@ const purchaseLayout = (() => {
             REJECTED: "거절"
         };
 
-
         purchasesCriteria.purchases.forEach((purchase) => {
             const status = purchase.purchaseRequestApprovalStatus;
             const displayStatus = statusText[status]
@@ -1878,7 +1877,7 @@ const bannerLayout = (() => {
                         </form>
                     </div>
                     
-                    <table class="table grey-header-table w-100" style="margin-top: 50px;">
+                    <table id="banner-table" class="table grey-header-table w-100" style="margin-top: 50px;">
                         <colgroup>
                             <col style="width:15%">
                             <col style="width:15%">
@@ -1898,24 +1897,38 @@ const bannerLayout = (() => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>
-                                    <button>수정</button>
-                                    <button>삭제</button>   
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         `
-
     }
 
-    return {contentLayout}
+    // 배너 목록
+    const showList = (bannerList) => {
+        const bannersContainer = document.querySelector("#banner-table tbody");
+        if (!bannersContainer) return;
+
+        let text = "";
+        bannerList.forEach((banner) => {
+            text += `
+                <tr>
+                    <td>${banner.id}</td>
+                    <td>${banner.bannerStatus}</td>
+                    <td>${banner.filePath}</td>
+                    <td>${banner.fileOriginalName}</td>
+                    <td>${banner.updatedDate}</td>
+                    <td>
+                        <button>수정</button>
+                        <button>삭제</button>   
+                    </td>
+                </tr>
+            `;
+        });
+
+        bannersContainer.innerHTML = text;
+    };
+
+    return {contentLayout, showList}
 })();
