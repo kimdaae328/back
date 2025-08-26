@@ -14,5 +14,3 @@ create table tbl_inquiry_answer(
 
 select * from tbl_inquiry_answer;
 
-drop table tbl_inquiry_answer;
-

@@ -5,6 +5,8 @@ const sideSubLists = document.querySelectorAll(".menu-sub-list");
 const sideSubLinks = document.querySelectorAll(".rebound-link");
 const tabNames = document.querySelectorAll(".tab-name");
 const icons = document.querySelectorAll(".icon-wrapper i");
+const contentArea = document.querySelector("#content-area");
+const answerButton = document.querySelector("#btn-answer");
 
 // 홈 클릭 이벤트
 homeButton.addEventListener("click", (e) => {
@@ -29,6 +31,7 @@ homeButton.addEventListener("click", (e) => {
         homeByIcon.classList.add("mdi-chevron-right");
     });
 });
+
 payoutButton.addEventListener("click", (e) => {
     e.preventDefault();
     sideMenuButtons.forEach((payoutButton) => {
@@ -76,23 +79,21 @@ sideMenuButtons.forEach((sideMenuButton) => {
         payoutButton.classList.remove("current1");
         homeButton.classList.remove("current1");
 
-        const key = sideMenuButton.dataset.key || sideMenuButton.textContent.trim();
+        const menuText = sideMenuButton.textContent.trim();
 
-        if (key === '회원목록') {
-            console.log("회원목록 클릭함");
-            // await loadCustomers(1); // JSON 받아서 renderCustomerTable로 렌더
-        } else if (key === '상품 목록') {
-            // await loadProducts(1);
-            console.log("상품 목록 클릭함");
-        } else {
-            // content.innerHTML = `<p>준비 중</p>`;
-            console.log("?????");
-        }
+        // if (menuText === '회원 관리') {
+        //     console.log("회원 관리 클릭함");
+        // } else if (menuText === '회원 문의 목록') {
+        //     console.log("회원 문의 목록");
+        // } else {
+        //     console.log("?????");
+        // }
     });
 });
 
+let currentPageType = "";
 sideSubLinks.forEach((sideSubLink) => {
-    sideSubLink.addEventListener("click", (e) => {
+    sideSubLink.addEventListener("click", async (e) => {
         e.preventDefault();
 
         // 모든 서브 링크 active 초기화
@@ -138,50 +139,76 @@ sideSubLinks.forEach((sideSubLink) => {
                 tabNameCheck.classList.add("active");
             }
         });
-    });
-});
 
-// 상단 tab-name 누르면 사이드 바 따라가는 이벤트
-tabNames.forEach((headerTabname) => {
-    headerTabname.addEventListener("click", (e) => {
-        e.preventDefault();
+        // const subMenuText = sideSubLink.querySelector("span").textContent.trim();
+        const subMenuText = sideSubLink.textContent.replace("-", "").trim();
 
-        const tabText = headerTabname.textContent.trim();
+        if (subMenuText === '회원 목록') {
 
-        // 상단 탭 active 초기화
-        tabNames.forEach((headerTab) => headerTab.classList.remove("active"));
-        headerTabname.classList.add("active");
+            currentPageType = "buyer-list";
 
-        // 사이드 링크 active 초기화 + 같은 텍스트만 active
-        sideSubLinks.forEach((subLink) => {
-            const linkText = subLink.textContent.trim().replace("-", "").trim();
-            if (linkText === tabText) {
-                subLink.classList.add("active");
+            console.log("회원 목록 클릭함");
+            customerLayout.contentLayout();
+            await setList(showList);
 
-                // 메뉴도 열고 current 붙이기
-                const parentSubLink = subLink.parentElement.parentElement;
-                const parentSubBtton = document.querySelector(
-                    `.menu-btn[aria-controls="${parentSubLink.id}"]`
-                );
-                parentSubBtton.classList.add("current");
-                parentSubLink.classList.add("show");
+        } else if (subMenuText === '판매자 목록') {
 
-                const checkSubIcon =
-                    parentSubBtton.querySelector(".icon-wrapper i");
-                checkSubIcon.classList.remove("mdi-chevron-right");
-                checkSubIcon.classList.add("mdi-chevron-down");
-            } else {
-                subLink.classList.remove("active");
-            }
-        });
+            currentPageType = "seller-list";
 
-        if (tabText === "전체") {
-            setList(showList);
-        } else if (tabText === "일반 회원") {
-            // console.log(`탭 '${tabText}' 클릭됨`);
-            setList(showNonSubscribedList)
-        } else if(tabText === "구독 회원"){
-            setList(showSubscribedList);
+            sellerLayout.contentLayout()
+
+        } else if (subMenuText === '회원 문의 목록') {
+
+            currentPageType = "buyer-inquiry";
+
+            inquiryLayout.contentLayout();
+
+            // 미답변 총 합계
+            const unanswerCount = await inquiryService.getUnansweredList(1);
+            inquiryLayout.anUnansweredCount(unanswerCount.criteria);
+
+            // 답변완료 총 합계
+            const answerCount = await inquiryService.getAnsweredList(1);
+            inquiryLayout.answeredCount(answerCount.criteria);
+
+            await setList(showInquiryList);
+
+        } else if (subMenuText === '판매자 문의목록') {
+
+            currentPageType = "seller-inquiry";
+
+            sellerInquiryLayout.contentLayout();
+
+            // 미답변 총 합계
+            const unanswerCount = await sellerInquiryService.getUnansweredList(1);
+            sellerInquiryLayout.anUnansweredCount(unanswerCount.criteria);
+
+            // 답변완료 총 합계
+            const answerCount = await sellerInquiryService.getAnsweredList(1);
+            sellerInquiryLayout.answeredCount(answerCount.criteria);
+
+            await setList(showSellerInquiryList);
+
+        } else if (subMenuText === '매입 승인 목록') {
+
+            currentPageType = "purchase-list";
+
+            purchaseLayout.contentLayout();
+
+            // 승인완료 총 합계
+            const approvedCount = await purchaseService.getApprovedCountAll();
+            document.querySelector("#purchase-amount").textContent = approvedCount;
+
+            await setList(showSellerPurchaseList);
+
+        } else if (subMenuText === '배너 등록') {
+
+            currentPageType = "banner";
+
+            bannerLayout.contentLayout();
+
+        } else {
+            console.log("?????");
         }
     });
 });
@@ -227,14 +254,12 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
-// ########################### 회원목록 ###########################
 // 전체 회원
 const showList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getCustomerList(page, keyword, customerLayout.showList);
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return customersCriteria;
 }
 
@@ -245,14 +270,12 @@ const setList = (loader) => {
     customerLayout.connectToPagination((page) => currentLoader(page));
 };
 
-setList(showList);
-
 // 일반 회원
 const showNonSubscribedList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getNonSubscribedCustomerList(page, keyword, customerLayout.showNonSubscribedList);
     // console.log(customersCriteria)
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
     return customersCriteria;
 };
 
@@ -260,48 +283,336 @@ const showNonSubscribedList = async (page = 1, keyword) => {
 const showSubscribedList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getSubscribedCustomerList(page, keyword, customerLayout.showSubscribedList);
     customerLayout.renderPagination(customersCriteria.criteria);
-    customerLayout.customerCount(customersCriteria.criteria);
+    customerLayout.totalCount(customersCriteria.criteria);
     return customersCriteria;
 };
 
+// 문의 목록(전체)
+const showInquiryList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getInquiryList(page, keyword, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 문의 목록(미답변)
+const showUnansweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getUnansweredList(page, keyword, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    return inquiryCriteria;
+}
+
+// 문의 목록(답변완료)
+const showAnsweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await inquiryService.getAnsweredList(page, keyword, inquiryLayout.showList);
+    inquiryLayout.renderPagination(inquiryCriteria.criteria);
+    inquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(전체)
+const showSellerInquiryList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getInquiryList(page, keyword, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(미답변)
+const showSellerUnansweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getUnansweredList(page, keyword, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    return inquiryCriteria;
+}
+
+// 판매자 문의 목록(답변완료)
+const showSellerAnsweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getAnsweredList(page, keyword, sellerInquiryLayout.showList);
+    sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
+    sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
+
+    // console.log("여기----------", customersCriteria)
+    return inquiryCriteria;
+}
+
+// 매입 승인 목록
+const showSellerPurchaseList = async (page = 1, keyword) => {
+    const purchaseCriteria = await purchaseService.getPurchaseService(page, keyword, purchaseLayout.showList);
+    purchaseLayout.renderPagination(purchaseCriteria.criteria);
+    purchaseLayout.totalCount(purchaseCriteria.criteria);
+
+    return purchaseCriteria;
+}
+
+// 검색
+let keyword ="";
+
+contentArea.addEventListener("keyup", async (e) => {
+    const input = e.target
+
+    if(input.closest(".input-search")){
+        if (!input.closest(".input-search")) return;
+        if (e.key === "Enter") {
+            e.preventDefault();
+            keyword = e.target.value.trim();
+
+            const result = await currentLoader(1, keyword);
+            customerLayout.renderPagination(result.criteria);
+            customerLayout.totalCount(result.criteria);
+        }
+    }
+
+    if(input.closest(".form-control")){
+        if (!input.closest(".form-control")) return;
+        if (e.key === "Enter") {
+            e.preventDefault();
+            keyword = e.target.value.trim();
+
+            // 회원 문의목록 검색
+            if(currentPageType === "buyer-inquiry"){
+                const result = await currentLoader(1, keyword);
+                inquiryLayout.renderPagination(result.criteria);
+                inquiryLayout.totalCount(result.criteria);
+            }
+
+            // 판매자 문의목록 검색
+            if(currentPageType === "seller-inquiry"){
+                const result = await currentLoader(1, keyword);
+                sellerInquiryLayout.renderPagination(result.criteria);
+                sellerInquiryLayout.totalCount(result.criteria);
+            }
+
+            // 매입승인 검색
+            if(currentPageType === "purchase-list"){
+                const result = await currentLoader(1, keyword);
+                purchaseLayout.renderPagination(result.criteria);
+                purchaseLayout.totalCount(result.criteria);
+            }
+        }
+    }
+});
+
+contentArea.addEventListener("click", async (e) => {
+    const btn = e.target;
+
+    if(btn.closest("#btn-customer-search")){
+        if (!btn.closest("#btn-customer-search")) return;
+
+        const inputBox = btn.closest(".input-group");
+        const input = inputBox.querySelector(".input-search");
+        keyword = input.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        customerLayout.renderPagination(result.criteria);
+        customerLayout.totalCount(result.criteria);
+    }
+
+    if(btn.closest("#btn-purchase-search")){
+        if (!btn.closest("#btn-purchase-search")) return;
+
+        const inputBox = btn.closest(".input-group");
+        const input = inputBox.querySelector(".input-search");
+        keyword = input.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        purchaseLayout.renderPagination(result.criteria);
+        purchaseLayout.totalCount(result.criteria);
+    }
+});
+
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+
+    // 상단 tab-name 누르면 사이드 바 따라가는 이벤트
+    if (!target.classList.contains("tab-name")) {
+    } else {
+        const tabs = contentArea.querySelectorAll(".tab-name");
+        const headerTabname = e.target.closest(".tab-name");
+
+        e.preventDefault();
+
+        tabs.forEach((tab) => {
+            tab.classList.toggle("active", tab === headerTabname);
+        });
+
+        if (!headerTabname) return;
+        const tabText = headerTabname.textContent.trim();
+
+        if (tabText === "전체") {
+            setList(showList);
+        } else if (tabText === "일반 회원") {
+            setList(showNonSubscribedList)
+        } else if (tabText === "구독 회원") {
+            setList(showSubscribedList);
+        }
+    }
+
+    // 모달
+    if(target.classList.contains("action-btn")) {
+        const modal = document.querySelector(".modal");
+        if (!modal) return;
+
+        modal.style.display = "block";
+
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+        const row = target.closest("tr");
+        if (!row) return;
+
+        // 상세보기 팝업
+        if (target.closest(".member-action-btn")) {
+            const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
+            const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+            if (!currentCustomerId) return;
+
+            customerLayout.showDetail(customerDetail);
+
+        } else if (target.closest(".inquiry-action-btn")) {
+            const inquiryId = row.dataset.inquiryId;
+            const inquiryDetail = await inquiryService.getDetail(inquiryId);
+            if (!inquiryId) return;
+
+            inquiryLayout.showDetail(inquiryDetail);
+
+        }
+        if (target.classList.contains("purchase-action-btn")) {
+            const purchaseId = row.dataset.purchaseId;
+            const purchaseDetail = await purchaseService.getDetail(purchaseId);
+            if (!purchaseId) return;
+
+            purchaseLayout.showDetail(purchaseDetail);
+
+        }
+    }
+
+    // 매입 요청 승인 버튼 토글
+    if (target.classList.contains("approval-action-btn")) {
+        console.log("버튼 잘눌림")
+        const btMenu = target.closest(".bt-pop-menu");
+        const btPopMenuContext = btMenu.querySelector(".bt-pop-menu-context");
+        btPopMenuContext.classList.toggle("show");
+
+        document.querySelectorAll(".bt-pop-menu-context.show").forEach(m => {
+            if (m !== btPopMenuContext) m.classList.remove("show");
+        });
+    }
+
+    // 매입 상태 적용
+    if(target.classList.contains("apply-status-btn")){
+        console.log("승인하기 확인 버튼 눌렀니?")
+
+        const applyBtn = e.target.closest(".apply-status-btn");
+        if (!applyBtn) return;
 
 
-// ########################### 회원상세 ###########################
-// 일반회원 상세 모달 창 열고 닫는 이벤트
-const customerTable = document.querySelector(".table-container tbody");
-const modal = document.querySelector(".member-modal");
-const closeButtons = document.querySelectorAll(".close");
+        const row = applyBtn.closest("tr.purchase-row");
+        const menu = applyBtn.closest(".bt-pop-menu");
+        if (!row || !menu) return;
 
-customerTable.addEventListener("click", async  (e, callback)=>{
-    modal.style.display = "block";
+        const purchaseId = row.dataset.purchaseId;
 
-    setTimeout(() => {
-        modal.classList.add("show");
-        modal.style.background = "rgba(0,0,0,0.5)";
-        document.body.classList.add("modal-open");
-    }, 100);
+        const checked = menu.querySelector("input[type=radio]:checked");
+        if (!checked) {
+            alert("승인/거절 중 하나를 선택해줘!");
+            return;
+        }
 
-    // 팝업 상세 내용
-    const currentCustomerId = e.target.closest("tr").querySelector(".member-id").innerText;
-    const customerDetail = await customerService.getCustomerDetail(currentCustomerId);
+        const status = checked.dataset.status;
 
-    // console.log(customerDetail)
-    customerLayout.showDetail(customerDetail);
+        const ok = await purchaseService.updatePurchaseStatus(purchaseId, status);
+        if (!ok) {
+            alert("상태 변경 실패");
+            return;
+        }
+
+        // 메뉴 닫기
+        menu.querySelector(".bt-pop-menu-context")?.classList.remove("show");
+        alert("상태가 변경되었습니다!");
+    }
+
+    // 문의 답변하기
+    if(target.classList.contains("btn-answer")) {
+        const modal = target.closest(".modal-dialog")
+        const form = modal.querySelector("#answerForm");
+        const inquiryAnswerContent = modal.querySelector(".answer-textarea").value.trim();
+        const inquiryId = form.dataset.inquiryId
+        if (!inquiryAnswerContent) return;
+
+        const result = await inquiryService.writeAnswer(inquiryId, inquiryAnswerContent);
+
+        if (result) {
+            alert("문의 답변이 등록되었습니다.");
+            inquiryLayout.showDetail(result);
+
+            const inquiriesCriteria = await inquiryService.getInquiryList(
+                inquiryService.getCurrentPage()
+            );
+            inquiryLayout.showList(inquiriesCriteria);
+        } else {
+            alert("문의 답변 등록 실패");
+        }
+    }
+
+    // 답변 상태 드롭박스
+    if(target.classList.contains("boot-pop-checkbox-filter-btn")) {
+        const btPopMenuContext = document.querySelector(".bt-pop-menu-context");
+        btPopMenuContext.classList.toggle("show");
+    }
+
+    // 답변 상태 체크박스
+    if(target.closest("#filter-apply")) {
+        const answered   = document.querySelector("#check-box1").checked;
+        const unanswered = document.querySelector("#check-box2").checked;
+
+        if (currentPageType === "buyer-inquiry") {
+            if (answered && !unanswered) {
+                await setList(showAnsweredList);
+            } else if (!answered && unanswered) {
+                await setList(showUnansweredList);
+            } else {
+                await setList(showInquiryList);
+            }
+        } else if (currentPageType === "seller-inquiry") {
+            if (answered && !unanswered) {
+                await setList(showSellerAnsweredList);
+            } else if (!answered && unanswered) {
+                await setList(showSellerUnansweredList);
+            } else {
+                await setList(showSellerInquiryList);
+            }
+        }
+        document.querySelector(".bt-pop-menu-context").classList.remove("show");
+    }
+
 });
 
 // 모달 닫기
 document.addEventListener("click", (e) => {
+    const modal = document.querySelector(".modal.show");
+
     if (e.target.closest(".close") || e.target.closest(".btn-close")) {
-        closeModal();
+        closeModal(modal);
     }
 
-    if (e.target === modal) {
-        closeModal();
+    if (modal && e.target === modal) {
+        closeModal(modal);
     }
 });
 
 // 공통 닫기 함수
-function closeModal() {
+function closeModal(modal) {
     modal.classList.remove("show");
     document.body.classList.remove("modal-open");
     setTimeout(() => {
@@ -309,31 +620,38 @@ function closeModal() {
     }, 100);
 }
 
-// 검색
-const searchInput = document.querySelector(".input-search");
-const searchButton = document.querySelector(".btn-search");
+// 배너
+contentArea.addEventListener("change", (e) => {
+    const target = e.target;
 
-let keyword ="";
+    if(target.classList.contains("banner-file")){
+        const bannerContainer = document.querySelector("ul.pg-list");
+        const [file] = e.target.files;
+        console.log(e.target.files)
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", (e) => {
+            let text = `
+            <li class="pg-list-item show">
+                <div class="pg-logo-wrapper">
+                    <button type="button" class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <img src="${e.target.result}" class="pg-logo" ">
+                </div>
+            </li>
+        `;
 
-searchInput.addEventListener("keyup", async (e)=> {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        keyword = e.target.value.trim();
-
-        const result = await currentLoader(1,keyword);
-        customerLayout.renderPagination(result.criteria);
-        customerLayout.customerCount(result.criteria);
+            bannerContainer.innerHTML += text;
+        });
     }
 });
 
-searchButton.addEventListener("click", async() => {
-    keyword = searchInput.value.trim();
-    // console.log(keyword)
-
-    const result = await currentLoader(1,keyword);
-    customerLayout.renderPagination(result.criteria);
-    customerLayout.customerCount(result.criteria);
-});
-
-
+// bannerContainer.addEventListener('click',(e)=>{
+//     if(e.target.classList.contains("delete-btn")){
+//
+//         e.target.parentElement.parentElement.remove();
+//     }
+//
+// })
 

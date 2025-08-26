@@ -15,7 +15,7 @@ public interface AdminCustomerMapper {
 //    회원 목록(전쳬)
     public List<MemberDTO> selectCustomerAll(@Param("criteria") Criteria criteria, @Param("keyword") String keyword);
 
-//    전체 개수 조회(전쳬)
+//    전체 개수 조회(전체)
     public int selectCountAll(@Param("keyword") String keyword);
 
 //    회원 상세

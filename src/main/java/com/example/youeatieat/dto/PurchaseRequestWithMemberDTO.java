@@ -1,18 +1,18 @@
-package com.example.youeatieat.domain;
+package com.example.youeatieat.dto;
 
-import com.example.youeatieat.audit.Period;
 import com.example.youeatieat.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import org.springframework.stereotype.Component;
 
-@Getter @ToString
-@SuperBuilder
+@Component
+@Getter @Setter @ToString
 @EqualsAndHashCode(of="id")
-public class PurchaseRequestVO extends Period {
+public class PurchaseRequestWithMemberDTO {
     private Long id;
     private String purchaseRequestProductName;
     private String purchaseRequestDescription;
@@ -25,5 +25,7 @@ public class PurchaseRequestVO extends Period {
     private PurchaseRequestApproval purchaseRequestApprovalStatus;
     private Status purchaseRequestStatus;
     private Long memberId;
+    private String memberName;
+    private String createdDate;
+    private String updatedDate;
 }
-
