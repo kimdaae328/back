@@ -16,23 +16,23 @@ public class AdminSellerInquiryDAO {
     private final AdminSellerInquiryMapper inquiryMapper;
 
 //    문의 목록(전체)
-    public List<InquiryWithAnswerDTO> findInquiryAll(Criteria criteria){
-        return inquiryMapper.selectInquiryAll(criteria);
+    public List<InquiryWithAnswerDTO> findInquiryAll(Criteria criteria, String keyword){
+        return inquiryMapper.selectInquiryAll(criteria, keyword);
     }
 
 //    문의 목록(미답변)
-    public List<InquiryWithAnswerDTO> findUnansweredAll(Criteria criteria){
-        return inquiryMapper.selectUnansweredAll(criteria);
+    public List<InquiryWithAnswerDTO> findUnansweredAll(Criteria criteria, String keyword){
+        return inquiryMapper.selectUnansweredAll(criteria, keyword);
     }
 
 //    문의 목록(답변완료)
-    public List<InquiryWithAnswerDTO> findAnsweredAll(Criteria criteria){
-        return inquiryMapper.selectAnsweredAll(criteria);
+    public List<InquiryWithAnswerDTO> findAnsweredAll(Criteria criteria, String keyword){
+        return inquiryMapper.selectAnsweredAll(criteria, keyword);
     }
 
 //    문의 조회(전쳬)
-    public int findInquiryCountAll(){
-        return inquiryMapper.selectInquiryCountAll();
+    public int findInquiryCountAll(String keyword){
+        return inquiryMapper.selectInquiryCountAll(keyword);
     }
 
 //    문의 상세
@@ -46,12 +46,12 @@ public class AdminSellerInquiryDAO {
     }
 
 //    문의 조회(미답변)
-    public int findUnansweredCountAll(){
-        return inquiryMapper.selectUnansweredCountAll();
+    public int findUnansweredCountAll(String keyword){
+        return inquiryMapper.selectUnansweredCountAll(keyword);
     }
 
 //    문의 조회(답변완료)
-    public int findAnsweredCountAll(){
-        return inquiryMapper.selectAnsweredCountAll();
+    public int findAnsweredCountAll(String keyword){
+        return inquiryMapper.selectAnsweredCountAll(keyword);
     }
 }

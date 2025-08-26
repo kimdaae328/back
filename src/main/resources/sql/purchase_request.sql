@@ -23,3 +23,14 @@ alter table tbl_product modify product_category enum('vegetables','fruits','fish
 
 select * from tbl_purchase_request;
 
+select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
+       m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
+from tbl_inquiry i
+         left join tbl_inquiry_answer ia
+                   on ia.inquiry_id = i.id
+         join tbl_member m
+              on m.id = i.member_id
+where m.member_status = 'active' and m.member_role = 'buyer'
+  and m.member_name like concat('%', '박', '%')
+            order by m.id desc
+

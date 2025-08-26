@@ -16,11 +16,11 @@ public class AdminInquiryServicelmpl implements AdminInquiryService {
 
 //    문의 목록(전체)
     @Override
-    public AdminInquiryCriteriaDTO getInquiryList(int page) {
+    public AdminInquiryCriteriaDTO getInquiryList(int page, String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = new AdminInquiryCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminInquiryDAO.findInquiryCountAll());
+        Criteria criteria = new Criteria(page, adminInquiryDAO.findInquiryCountAll(keyword));
 
-        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findInquiryAll(criteria);
+        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findInquiryAll(criteria, keyword);
 
         criteria.setHasMore(inquiries.size() > criteria.getRowCount());
 
@@ -36,11 +36,11 @@ public class AdminInquiryServicelmpl implements AdminInquiryService {
 
 //    문의 목록(미답변)
     @Override
-    public AdminInquiryCriteriaDTO getUnansweredList(int page) {
+    public AdminInquiryCriteriaDTO getUnansweredList(int page, String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = new AdminInquiryCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminInquiryDAO.findUnansweredCountAll());
+        Criteria criteria = new Criteria(page, adminInquiryDAO.findUnansweredCountAll(keyword));
 
-        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findUnansweredAll(criteria);
+        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findUnansweredAll(criteria, keyword);
 
         criteria.setHasMore(inquiries.size() > criteria.getRowCount());
 
@@ -56,11 +56,11 @@ public class AdminInquiryServicelmpl implements AdminInquiryService {
 
 //    문의 목록(답변완료)
     @Override
-    public AdminInquiryCriteriaDTO getAnsweredList(int page) {
+    public AdminInquiryCriteriaDTO getAnsweredList(int page, String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = new AdminInquiryCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminInquiryDAO.findAnsweredCountAll());
+        Criteria criteria = new Criteria(page, adminInquiryDAO.findAnsweredCountAll(keyword));
 
-        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findAnsweredAll(criteria);
+        List<InquiryWithAnswerDTO> inquiries = adminInquiryDAO.findAnsweredAll(criteria, keyword);
 
         criteria.setHasMore(inquiries.size() > criteria.getRowCount());
 

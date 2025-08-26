@@ -18,8 +18,8 @@ public class AdminSellerInquiriesController {
 
 //    문의 목록(전체)
     @GetMapping("list/{page}")
-    public ResponseEntity<?> inquiryList(@PathVariable("page") int page) {
-        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getInquiryList(page);
+    public ResponseEntity<?> inquiryList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getInquiryList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
         }
@@ -28,8 +28,8 @@ public class AdminSellerInquiriesController {
 
 //    문의 목록(미답변)
     @GetMapping("list/unanswered/{page}")
-    public ResponseEntity<?> unansweredList(@PathVariable("page") int page) {
-        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getUnansweredList(page);
+    public ResponseEntity<?> unansweredList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getUnansweredList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
         }
@@ -38,8 +38,8 @@ public class AdminSellerInquiriesController {
 
 //    문의 목록(답변완료)
     @GetMapping("list/answered/{page}")
-    public ResponseEntity<?> answeredList(@PathVariable("page") int page) {
-        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getAnsweredList(page);
+    public ResponseEntity<?> answeredList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+        AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getAnsweredList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
         }

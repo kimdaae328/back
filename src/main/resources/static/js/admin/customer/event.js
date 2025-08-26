@@ -145,13 +145,21 @@ sideSubLinks.forEach((sideSubLink) => {
 
         if (subMenuText === '회원 목록') {
 
+            currentPageType = "buyer-list";
+
             console.log("회원 목록 클릭함");
             customerLayout.contentLayout();
             await setList(showList);
 
+        } else if (subMenuText === '판매자 목록') {
+
+            currentPageType = "seller-list";
+
+            sellerLayout.contentLayout()
+
         } else if (subMenuText === '회원 문의 목록') {
 
-            currentPageType = "buyer";
+            currentPageType = "buyer-inquiry";
 
             inquiryLayout.contentLayout();
 
@@ -165,13 +173,9 @@ sideSubLinks.forEach((sideSubLink) => {
 
             await setList(showInquiryList);
 
-        } else if (subMenuText === '판매자 목록') {
-
-            sellerLayout.contentLayout()
-
         } else if (subMenuText === '판매자 문의목록') {
 
-            currentPageType = "seller";
+            currentPageType = "seller-inquiry";
 
             sellerInquiryLayout.contentLayout();
 
@@ -187,6 +191,8 @@ sideSubLinks.forEach((sideSubLink) => {
 
         } else if (subMenuText === '매입 승인 목록') {
 
+            currentPageType = "purchase-list";
+
             purchaseLayout.contentLayout();
 
             // 승인완료 총 합계
@@ -196,6 +202,8 @@ sideSubLinks.forEach((sideSubLink) => {
             await setList(showSellerPurchaseList);
 
         } else if (subMenuText === '배너 등록') {
+
+            currentPageType = "banner";
 
             bannerLayout.contentLayout();
 
@@ -311,8 +319,8 @@ const showAnsweredList = async (page = 1) => {
 }
 
 // 판매자 문의 목록(전체)
-const showSellerInquiryList = async (page = 1) => {
-    const inquiryCriteria = await sellerInquiryService.getInquiryList(page, sellerInquiryLayout.showList);
+const showSellerInquiryList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getInquiryList(page, keyword, sellerInquiryLayout.showList);
     sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
     sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -320,8 +328,8 @@ const showSellerInquiryList = async (page = 1) => {
 }
 
 // 판매자 문의 목록(미답변)
-const showSellerUnansweredList = async (page = 1) => {
-    const inquiryCriteria = await sellerInquiryService.getUnansweredList(page, sellerInquiryLayout.showList);
+const showSellerUnansweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getUnansweredList(page, keyword, sellerInquiryLayout.showList);
     sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
     sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -329,8 +337,8 @@ const showSellerUnansweredList = async (page = 1) => {
 }
 
 // 판매자 문의 목록(답변완료)
-const showSellerAnsweredList = async (page = 1) => {
-    const inquiryCriteria = await sellerInquiryService.getAnsweredList(page, sellerInquiryLayout.showList);
+const showSellerAnsweredList = async (page = 1, keyword) => {
+    const inquiryCriteria = await sellerInquiryService.getAnsweredList(page, keyword, sellerInquiryLayout.showList);
     sellerInquiryLayout.renderPagination(inquiryCriteria.criteria);
     sellerInquiryLayout.totalCount(inquiryCriteria.criteria);
 
@@ -371,9 +379,19 @@ contentArea.addEventListener("keyup", async (e) => {
             e.preventDefault();
             keyword = e.target.value.trim();
 
-            const result = await currentLoader(1, keyword);
-            purchaseLayout.renderPagination(result.criteria);
-            purchaseLayout.totalCount(result.criteria);
+            // 판매자 문의목록 검색
+            if(currentPageType === "seller-inquiry"){
+                const result = await currentLoader(1, keyword);
+                sellerInquiryLayout.renderPagination(result.criteria);
+                sellerInquiryLayout.totalCount(result.criteria);
+            }
+
+            // 매입승인 검색
+            if(currentPageType === "purchase-list"){
+                const result = await currentLoader(1, keyword);
+                purchaseLayout.renderPagination(result.criteria);
+                purchaseLayout.totalCount(result.criteria);
+            }
         }
     }
 });
@@ -555,7 +573,7 @@ contentArea.addEventListener("click", async (e) => {
         const answered   = document.querySelector("#check-box1").checked;
         const unanswered = document.querySelector("#check-box2").checked;
 
-        if (currentPageType === "buyer") {
+        if (currentPageType === "buyer-inquiry") {
             if (answered && !unanswered) {
                 await setList(showAnsweredList);
             } else if (!answered && unanswered) {
@@ -563,7 +581,7 @@ contentArea.addEventListener("click", async (e) => {
             } else {
                 await setList(showInquiryList);
             }
-        } else if (currentPageType === "seller") {
+        } else if (currentPageType === "seller-inquiry") {
             if (answered && !unanswered) {
                 await setList(showSellerAnsweredList);
             } else if (!answered && unanswered) {

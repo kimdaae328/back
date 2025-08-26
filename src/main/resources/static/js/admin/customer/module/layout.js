@@ -1840,6 +1840,7 @@ const purchaseLayout = (() => {
     return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail};
 })();
 
+// 배너 등록
 const bannerLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
