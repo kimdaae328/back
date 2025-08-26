@@ -16,7 +16,7 @@ public class PurchaseRequestWithMemberDTO {
     private Long id;
     private String purchaseRequestProductName;
     private String purchaseRequestDescription;
-    private ProductCategory purchaseRequestCategory;
+    private String purchaseRequestCategory;
     private int purchaseRequestQuantityKg;
     private int purchaseRequestProposedPricePerKg;
     private String purchaseRequestCountryOfOrigin;

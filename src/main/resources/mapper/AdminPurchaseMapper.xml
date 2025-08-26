@@ -8,8 +8,13 @@
             join tbl_member m
                 on m.id = pr.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                    member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by m.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectPurchaseCountAll">
@@ -18,78 +23,34 @@
              join tbl_member m
                   on m.id = pr.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
-    <select id="selectInquiryDetail">
-        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
-               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
-        from tbl_inquiry i
-             left join tbl_inquiry_answer ia
-                       on ia.inquiry_id = i.id
+    <select id="selectPurchaseDetail">
+        select pr.id, pr.purchase_request_product_name, pr.purchase_request_description, pr.purchase_request_category, pr.purchase_request_quantity_kg, pr.purchase_request_proposed_price_per_kg, pr.purchase_request_country_of_origin, pr.purchase_request_date_of_manufacture, pr.purchase_request_detail_img, pr.purchase_request_approval_status, pr.purchase_request_status, pr.member_id, pr.created_date, pr.updated_date,
+               m.member_name
+        from tbl_purchase_request pr
              join tbl_member m
-                  on m.id = i.member_id
-        where i.id = #{inquiryId}
+                  on m.id = pr.member_id
+        where pr.id = #{purchaseId}
     </select>
 
-<!--    <update id="updateInquiryAnswer">-->
-<!--        update tbl_inquiry_answer-->
-<!--        set inquiry_answer_content = #{answerContent},-->
-<!--            updated_date = NOW()-->
-<!--        where inquiry_id = #{inquiryId}-->
-<!--    </update>-->
-
-    <insert id="insertInquiryAnswer">
-        insert into tbl_inquiry_answer (inquiry_id, inquiry_answer_content)
-        values (#{inquiryId}, #{inquiryAnswerContent})
-    </insert>
-
-    <select id="selectUnansweredAll">
-        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
-               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
-        from tbl_inquiry i
-             left join tbl_inquiry_answer ia
-                       on ia.inquiry_id = i.id
-             join tbl_member m
-                  on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'seller'
-            and ia.inquiry_answer_content is null
-        order by i.id desc
-        limit #{count} offset #{offset}
-    </select>
-
-    <select id="selectUnansweredCountAll">
+    <select id="selectApprovedCountAll">
         select count(*)
-        from tbl_inquiry i
-             left join tbl_inquiry_answer ia
-                   on ia.inquiry_id = i.id
+        from tbl_purchase_request pr
              join tbl_member m
-                  on m.id = i.member_id
+                  on m.id = pr.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
-            and ia.inquiry_answer_content is null
+            and purchase_request_approval_status = 'approved'
     </select>
 
-    <select id="selectAnsweredAll">
-        select i.id, i.inquiry_category, i.inquiry_title, i.inquiry_content, i.inquiry_image, i.member_id, i.created_date as inquiryCreatedDate, i.updated_date as inquiryUpdatedDate,
-               m.member_name, ia.inquiry_id, ia.inquiry_answer_content, ia.created_date as answerCreatedDate, ia.updated_date as answerUpdatedDate
-        from tbl_inquiry i
-                 left join tbl_inquiry_answer ia
-                           on ia.inquiry_id = i.id
-                 join tbl_member m
-                      on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'seller'
-            and ia.inquiry_answer_content is not null
-        order by i.id desc
-        limit #{count} offset #{offset}
-    </select>
-
-    <select id="selectAnsweredCountAll">
-        select count(*)
-        from tbl_inquiry i
-             left join tbl_inquiry_answer ia
-                   on ia.inquiry_id = i.id
-             join tbl_member m
-                  on m.id = i.member_id
-        where m.member_status = 'active' and m.member_role = 'seller'
-          and ia.inquiry_answer_content is not null
-    </select>
+    <update id="updatePurchaseStatus">
+        update tbl_purchase_request
+        set purchase_request_approval_status = #{status}
+        where id = #{id}
+    </update>
 </mapper>

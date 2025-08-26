@@ -1,7 +1,6 @@
 package com.example.youeatieat.service;
 
 import com.example.youeatieat.dto.*;
-import com.example.youeatieat.repository.AdminInquiryDAO;
 import com.example.youeatieat.repository.AdminPurchaseDAO;
 import com.example.youeatieat.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +14,13 @@ import java.util.Optional;
 public class AdminPurchaseServicelmpl implements AdminPurchaseService {
     private final AdminPurchaseDAO adminPurchaseDAO;
 
-//    문의 목록(전체)
+//     매입(전체)
     @Override
-    public AdminPurchaseCriteriaDTO getPurchaseList(int page) {
+    public AdminPurchaseCriteriaDTO getPurchaseList(int page, String keyword) {
         AdminPurchaseCriteriaDTO purchaseCriteriaDTO = new AdminPurchaseCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminPurchaseDAO.findPurchaseCountAll());
+        Criteria criteria = new Criteria(page, adminPurchaseDAO.findPurchaseCountAll(keyword));
 
-        List<PurchaseRequestWithMemberDTO> purchases = adminPurchaseDAO.findPurchaseAll(criteria);
+        List<PurchaseRequestWithMemberDTO> purchases = adminPurchaseDAO.findPurchaseAll(criteria, keyword);
 
         criteria.setHasMore(purchases.size() > criteria.getRowCount());
 
@@ -35,14 +34,25 @@ public class AdminPurchaseServicelmpl implements AdminPurchaseService {
         return purchaseCriteriaDTO;
     }
 
-////    문의 상세
-//    @Override
-//    public InquiryWithAnswerDTO getInquiryDetail(Long inquiryId) {
-//        InquiryWithAnswerDTO inquiryDetailWithAnswerDTO = Optional.ofNullable(adminInquiryDAO.findInquiryDetail(inquiryId))
-//                .orElseThrow(() -> new RuntimeException("해당 문의을 찾을 수 없습니다."));
-//
-//        return inquiryDetailWithAnswerDTO;
-//    }
-//
+//    매입 상세
+    @Override
+    public PurchaseRequestWithMemberDTO getPurchaseDetail(Long purchaseId) {
+        PurchaseRequestWithMemberDTO purchaseRequestDTO = Optional.ofNullable(adminPurchaseDAO.findPurchaseDetail(purchaseId))
+                .orElseThrow(() -> new RuntimeException("해당 매입을 찾을 수 없습니다."));
+
+        return purchaseRequestDTO;
+    }
+
+//    매입 승인 완료 건수
+    @Override
+    public int getApprovedCountAll() {
+        return adminPurchaseDAO.findApprovedCountAll();
+    }
+
+//    매입 승인 상태
+    @Override
+    public void changeApprovedStatus(Long id, String status) {
+        adminPurchaseDAO.changePurchaseStatus(id, status);
+    }
 
 }

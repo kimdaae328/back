@@ -88,6 +88,101 @@ const customerService = (() => {
     return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
 })();
 
+const sellerService = (() => {
+    // 회원 목록
+    const getSellerList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/${page}?keyword=${keyword ?? ""}`);
+        const sellersCriteria = await response.json();
+
+        console.log("회원목록",sellersCriteria)
+
+        if(callback){
+            setTimeout(() => {
+                callback(sellersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("게시글 존재")
+        }else if(response.status === 404){
+            console.log("게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return sellersCriteria;
+    }
+
+    // 회원 상세
+    const getSellerDetail = async (id) => {
+        const response = await fetch(`/api/admin/sellers/${id}`);
+
+        if (!response.ok) {
+            console.error("회원 상세 조회 실패", response.status);
+            return;
+        }
+
+        const data = await response.json();
+
+        if (!data.purchase || data.purchase.length === 0) {
+            console.log("구매 내역이 없습니다.");
+        }
+
+        return data;
+    };
+
+    // 회원 목록(일반 로그인)
+    const getSellerYoueatieatList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/youeatieat/${page}?keyword=${keyword ?? ""}`);
+        const sellersCriteria = await response.json();
+
+        if(callback){
+            setTimeout(() => {
+                callback(sellersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("일반 회원 존재")
+        }else if(response.status === 404){
+            console.log("일반 회원 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return sellersCriteria;
+    }
+
+    // 회원 목록(카카오 로그인)
+    const getSellerKakaoList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/sellers/list/kakao/${page}?keyword=${keyword ?? ""}`);
+        const sellersCriteria = await response.json();
+
+        console.log("카카오목록",sellersCriteria)
+
+        if(callback){
+            setTimeout(() => {
+                callback(sellersCriteria);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("카카오 회원 존재")
+        }else if(response.status === 404){
+            console.log("카카오 회원 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return sellersCriteria;
+    }
+
+    return {getSellerList, getSellerDetail, getSellerYoueatieatList, getSellerKakaoList}
+})();
+
 const inquiryService = (() => {
     // 문의 목록
     let currentPage = 1;
@@ -175,7 +270,7 @@ const inquiryService = (() => {
     const getCurrentPage = () => currentPage;
 
     // 문의 상세
-    const getInquiryDetail = async (inquiryId) => {
+    const getDetail = async (inquiryId) => {
         const response = await fetch(`/api/admin/inquiries/${inquiryId}`);
 
         if (!response.ok) {
@@ -209,7 +304,7 @@ const inquiryService = (() => {
         return await response.json();
     };
 
-    return {getInquiryList, getUnansweredList, getInquiryDetail, writeAnswer, getCurrentPage, getAnsweredList}
+    return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
 const sellerInquiryService = (() => {
@@ -299,7 +394,7 @@ const sellerInquiryService = (() => {
     const getCurrentPage = () => currentPage;
 
     // 문의 상세
-    const getInquiryDetail = async (inquiryId) => {
+    const getDetail = async (inquiryId) => {
         const response = await fetch(`/api/admin/seller/inquiries/${inquiryId}`);
 
         if (!response.ok) {
@@ -333,13 +428,13 @@ const sellerInquiryService = (() => {
         return await response.json();
     };
 
-    return {getInquiryList, getUnansweredList, getInquiryDetail, writeAnswer, getCurrentPage, getAnsweredList}
+    return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
 const purchaseService = (() => {
     // 매입 목록
-    const getPurchaseService = async (page, callback) => {
-        const response = await fetch(`/api/admin/purchases/list/${page}`);
+    const getPurchaseService = async (page, keyword= "", callback) => {
+        const response = await fetch(`/api/admin/purchases/list/${page}?keyword=${keyword ?? ""}`);
         const purchasesCriteria = await response.json();
 
         if(callback){
@@ -351,9 +446,9 @@ const purchaseService = (() => {
         console.log(purchasesCriteria)
 
         if(response.ok) {
-            console.log("문의글 존재")
+            console.log("매입상세글 존재")
         }else if(response.status === 404){
-            console.log("게시글 없음")
+            console.log("매입상세글 없음")
         }else {
             const error = await response.text()
             console.log(error);
@@ -366,20 +461,42 @@ const purchaseService = (() => {
     const getCurrentPage = () => currentPage;
 
     // 문의 상세
-    const getInquiryDetail = async (inquiryId) => {
-        const response = await fetch(`/api/admin/seller/inquiries/${inquiryId}`);
+    const getDetail = async (inquiryId) => {
+        const response = await fetch(`/api/admin/purchases/${inquiryId}`);
 
         if (!response.ok) {
             console.error("문의 상세 조회 실패", response.status);
             return;
         }
 
-        console.log(response)
-
         const data = await response.json();
 
         return data;
     };
 
-    return {getPurchaseService, getInquiryDetail, getCurrentPage}
+    //    매입 승인 완료 조회
+    const getApprovedCountAll = async () => {
+        const res = await fetch('/api/admin/purchases/approved/count');
+        if (!res.ok) {
+            console.error("승인 건수 불러오기 실패!!");
+            return 0;
+        }
+        return await res.json();
+    };
+
+    const updatePurchaseStatus = async (purchaseId, status) => {
+        const response = await fetch(`/api/admin/purchases/${purchaseId}/status?status=${status}`,{
+            method:"POST"
+        });
+
+        if (!response.ok) {
+            const msg = await response.text().catch(() => "");
+            console.error("status 실패:", response.status, msg);
+            return null;
+        }
+
+        return true;
+    };
+
+    return {getPurchaseService, getCurrentPage, getDetail, getApprovedCountAll, updatePurchaseStatus}
 })();

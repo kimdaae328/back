@@ -23,17 +23,8 @@ alter table tbl_product modify product_category enum('vegetables','fruits','fish
 
 select * from tbl_purchase_request;
 
-drop table tbl_purchase_request;
+update tbl_purchase_request
+set purchase_request_approval_status = 'pending'
+where id = 91;
 
-select pr.id, pr.purchase_request_product_name, pr.purchase_request_description, pr.purchase_request_category, pr.purchase_request_quantity_kg, pr.purchase_request_proposed_price_per_kg, pr.purchase_request_country_of_origin, pr.purchase_request_date_of_manufacture, pr.purchase_request_detail_img, pr.purchase_request_approval_status, pr.purchase_request_status, pr.member_id, pr.created_date, pr.updated_date,
-       m.member_name
-from tbl_purchase_request pr
-         join tbl_member m
-              on m.id = pr.member_id
-where m.member_status = 'active' and m.member_role = 'seller'
-order by m.id desc;
-
-select count(*) from tbl_purchase_request pr
-                         join tbl_member m on m.id = pr.member_id
-where m.member_status='active' and m.member_role='seller';
 
