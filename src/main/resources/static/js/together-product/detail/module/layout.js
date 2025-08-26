@@ -72,6 +72,7 @@ const layout = (() => {
 
     };
 
+    // 리뷰 상세
     const showPopupReview = (review, i, total) => {
         const modalWrap = document.getElementById("modal-wrap");
 
@@ -266,5 +267,5 @@ const layout = (() => {
 
 
 
-    return { showListReview, showPopupReview, showAnswer, showListInquiry};
+    return { showListReview:showListReview, showPopupReview:showPopupReview, showAnswer:showAnswer, showListInquiry:showListInquiry};
 })();
