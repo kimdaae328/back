@@ -254,14 +254,12 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
-// ########################### 회원목록 ###########################
 // 전체 회원
 const showList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getCustomerList(page, keyword, customerLayout.showList);
     customerLayout.renderPagination(customersCriteria.criteria);
     customerLayout.totalCount(customersCriteria.criteria);
 
-    // console.log("여기----------", customersCriteria)
     return customersCriteria;
 }
 
@@ -289,7 +287,6 @@ const showSubscribedList = async (page = 1, keyword) => {
     return customersCriteria;
 };
 
-// ########################### 문의 목록 ###########################
 // 문의 목록(전체)
 const showInquiryList = async (page = 1, keyword) => {
     const inquiryCriteria = await inquiryService.getInquiryList(page, keyword, inquiryLayout.showList);
@@ -545,7 +542,6 @@ contentArea.addEventListener("click", async (e) => {
         alert("상태가 변경되었습니다!");
     }
 
-
     // 문의 답변하기
     if(target.classList.contains("btn-answer")) {
         const modal = target.closest(".modal-dialog")
@@ -602,8 +598,6 @@ contentArea.addEventListener("click", async (e) => {
 
 });
 
-
-
 // 모달 닫기
 document.addEventListener("click", (e) => {
     const modal = document.querySelector(".modal.show");
@@ -626,4 +620,38 @@ function closeModal(modal) {
     }, 100);
 }
 
+// 배너
+contentArea.addEventListener("change", (e) => {
+    const target = e.target;
+
+    if(target.classList.contains("banner-file")){
+        const bannerContainer = document.querySelector("ul.pg-list");
+        const [file] = e.target.files;
+        console.log(e.target.files)
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", (e) => {
+            let text = `
+            <li class="pg-list-item show">
+                <div class="pg-logo-wrapper">
+                    <button type="button" class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <img src="${e.target.result}" class="pg-logo" ">
+                </div>
+            </li>
+        `;
+
+            bannerContainer.innerHTML += text;
+        });
+    }
+});
+
+// bannerContainer.addEventListener('click',(e)=>{
+//     if(e.target.classList.contains("delete-btn")){
+//
+//         e.target.parentElement.parentElement.remove();
+//     }
+//
+// })
 

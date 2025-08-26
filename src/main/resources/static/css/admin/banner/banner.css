@@ -456,13 +456,13 @@ address, dl, ol, ul {
 .payment-setting-index .page-body, .payment-setting-layout .page-body {
     min-width: 500px;
 }
-.payment-setting-index .page-body .pg-box, .payment-setting-layout .page-body .pg-box {
+.payment-setting-index .page-body .pg-box, .payment-setting-layout .page-body .pg-box, .banner-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px hsla(0, 0%, 39%, .05), 0 -1px 2px hsla(0, 0%, 39%, .05);
     padding: 25px;
 }
-.payment-setting-index .page-body .title, .payment-setting-layout .page-body .title {
+.payment-setting-index .page-body .title, .payment-setting-layout .page-body .title, .banner-container .title {
     color: #292929;
     font-size: 16px;
     font-weight: 700;
@@ -523,8 +523,8 @@ address, dl, ol, ul {
 .mdi-download:before {
     content: "\F01DA";
 }
-.pg-list .show{
-
+.pg-list-item:not(:first-child){
+    margin-top: 20px;
 }
 .pg-list-item img {
     width: 100%;
@@ -533,9 +533,7 @@ address, dl, ol, ul {
     display: block; /* 여백 제거용 */
   }
 
-
-
-  .boot-tip {
+.boot-tip {
     background-color: rgba(80, 124, 243, .07);
     border: 1px dashed #507cf3;
     border-radius: 6px;
@@ -593,4 +591,14 @@ address, dl, ol, ul {
 #bootpay>#bootpay-side #side-wrapper>.menu-wrapper>ul.menu-list>li>a.active {
     background: linear-gradient(90deg, #507cf3, rgba(139, 170, 255, .5));
     color: #fff;
+}
+
+.banner-container .pg-logo-wrapper {
+    position: relative;
+}
+
+.banner-container .delete-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
