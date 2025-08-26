@@ -15,7 +15,18 @@ public interface AdminBannerService {
 //    추가
     public void upload(BannerDTO bannerDTO, List<MultipartFile> files);
 
+//    조회
+    public List<BannerFileDTO> getBannerFiles();
+
     default String getPath(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
+
+    default BannerFileVO toBannerFileVO(BannerFileDTO bannerFileDTO){
+        return BannerFileVO.builder()
+            .id(bannerFileDTO.getId())
+            .bannerId(bannerFileDTO.getBannerId())
+            .fileId(bannerFileDTO.getFileId())
+            .build();
     }
 }

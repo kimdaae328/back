@@ -23,11 +23,15 @@ public class AdminBannersController {
     @PostMapping
     public ResponseEntity<?> uploadBanner(BannerDTO bannerDTO, @RequestParam("file") List<MultipartFile> files) {
         //확인
-//        files.forEach(file -> {
-//            if(!file.getOriginalFilename().equals("")){
-//                log.info(file.getOriginalFilename());
-//            }
-//        });
+        log.info("bannerStatus = {}", bannerDTO.getBannerStatus());
+//        log.info("bannerOrder  = {}", bannerDTO.getBannerOrder());
+
+        files.forEach(file -> {
+            if(!file.getOriginalFilename().equals("")){
+                log.info(file.getOriginalFilename());
+                log.info(file.getName());
+            }
+        });
 ////        List<FileDTO> result = bannerService.saveFile(files);
         bannerService.upload(bannerDTO, files);
         return ResponseEntity.ok().build();

@@ -1851,26 +1851,66 @@ const bannerLayout = (() => {
             </div>
             <div class="page-body temp-page">
                 <div class="pg-box banner-container">
-                    <div class="title">
-                        메인페이지 배너등록
+                    <div class="banner-insert">
+                        <div class="title">
+                            메인페이지 배너등록
+                        </div>
+                        <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
+                            <select id="banner-status" name="bannerStatus">
+                                <option value="main">메인</option>
+                                <option value="sub">서브</option>
+                            </select>
+                            <!-- 아래 Li수만큼 Img -->
+                            <div class="dropdown">
+                                <label>
+                                    <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
+                                    <div class="add-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <a>사진등록</a>
+                                </label>
+                            </div>
+                            <div class="boot-tip tip primary">
+                                <ul class="pg-list list-unstyled">
+                                </ul>
+                                <a href="#" class="register-link">등록</a>
+                            </div>
+                        </form>
                     </div>
-                    <form action="/api/admin/banners" method="post" enctype="multipart/form-data">
-                        <!-- 아래 Li수만큼 Img -->
-                        <div class="dropdown">
-                            <label>
-                                <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
-                                <div class="add-btn">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                                <a>사진등록</a>
-                            </label>
-                        </div>
-                        <div class="boot-tip tip primary">
-                            <ul class="pg-list list-unstyled">
-                            </ul>
-                            <a href="#" class="register-link">등록</a>
-                        </div>
-                    </form>
+                    
+                    <table class="table grey-header-table w-100" style="margin-top: 50px;">
+                        <colgroup>
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:17%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+                            <col style="width:15%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>배너 번호</th>
+                                <th>노출 위치</th>
+                                <th>이미지 위치</th>
+                                <th>이미지 원본 이름</th>
+                                <th>업로드 날짜</th>
+                                <th>수정/삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <button>수정</button>
+                                    <button>삭제</button>   
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         `

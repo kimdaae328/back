@@ -626,9 +626,12 @@ contentArea.addEventListener("change", async (e) => {
     const target = e.target;
 
     if(target.classList.contains("banner-file")){
+        const status = document.querySelector('#banner-status').value;
+        
         formData = new FormData();
         formData.append("file", target.files[0]);
         formData.append("name", target.files[0].name);
+        formData.append('bannerStatus', status);
 
         const bannerContainer = document.querySelector("ul.pg-list");
         const [file] = e.target.files;

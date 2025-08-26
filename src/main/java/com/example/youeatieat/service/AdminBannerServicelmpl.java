@@ -39,6 +39,7 @@ public class AdminBannerServicelmpl implements AdminBannerService {
             UUID uuid = UUID.randomUUID();
 
             FileDTO fileDTO = new FileDTO();
+            BannerFileDTO bannerFileDTO = new BannerFileDTO();
 
             fileDTO.setFileName(uuid.toString() + "_" + file.getOriginalFilename());
             fileDTO.setFileOriginalName(file.getOriginalFilename());
@@ -47,6 +48,8 @@ public class AdminBannerServicelmpl implements AdminBannerService {
 //            fileDTO.setFileContentType(file.getContentType());
 
             fileDAO.save(fileDTO);
+
+            bannerFileDAO.save(toBannerFileVO(bannerFileDTO));
 
             File directory = new File(rootPath);
             if(!directory.exists()){
@@ -62,5 +65,11 @@ public class AdminBannerServicelmpl implements AdminBannerService {
             }
 
         });
+    }
+
+    @Override
+    public List<BannerFileDTO> getBannerFiles() {
+        List<BannerFileDTO> banners = bannerDAO.findBannerAll();
+        return banners;
     }
 }
