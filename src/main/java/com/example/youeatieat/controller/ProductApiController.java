@@ -1,21 +1,20 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.NoProductException;
-import com.example.youeatieat.common.exception.handler.NotFoundReviewException;
-import com.example.youeatieat.domain.ReviewImageVO;
-import com.example.youeatieat.domain.ReviewVO;
-import com.example.youeatieat.dto.*;
-import com.example.youeatieat.service.*;
+import com.example.youeatieat.dto.ProductCriteriaDTO;
+import com.example.youeatieat.dto.ProductDTO;
+import com.example.youeatieat.service.ProductServiceImpl;
 import com.example.youeatieat.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -40,8 +39,6 @@ public class ProductApiController {
         log.info("search: {}", search);
         log.info("mainCategories: {}", search.getMainCategories());
 
-        System.out.println("Mapper 호출 전 search.mainCategories = " + search.getMainCategories());
-        System.out.println("Mapper 호출 전 search.priceKeyword = " + search.getPriceKeyword());
 
         ProductCriteriaDTO productCriteriaDTO = productService.getList(page, search);
         int count = productService.getCount(search);

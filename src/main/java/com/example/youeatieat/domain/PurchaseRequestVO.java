@@ -1,7 +1,6 @@
 package com.example.youeatieat.domain;
 
 import com.example.youeatieat.audit.Period;
-import com.example.youeatieat.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
