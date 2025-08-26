@@ -1,3 +1,4 @@
+// 회원목록(구매자)
 const customerService = (() => {
     // 회원 목록
     const getCustomerList = async (page, keyword = "", callback) => {
@@ -88,6 +89,7 @@ const customerService = (() => {
     return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
 })();
 
+// 회원목록(판매자)
 const sellerService = (() => {
     // 회원 목록
     const getSellerList = async (page, keyword = "", callback) => {
@@ -183,6 +185,7 @@ const sellerService = (() => {
     return {getSellerList, getSellerDetail, getSellerYoueatieatList, getSellerKakaoList}
 })();
 
+// 구매자 문의
 const inquiryService = (() => {
     // 문의 목록
     let currentPage = 1;
@@ -307,6 +310,7 @@ const inquiryService = (() => {
     return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
+// 판매자 문의
 const sellerInquiryService = (() => {
     // 문의 목록
     let currentPage = 1;
@@ -431,6 +435,7 @@ const sellerInquiryService = (() => {
     return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
+// 매입 승인
 const purchaseService = (() => {
     // 매입 목록
     const getPurchaseService = async (page, keyword= "", callback) => {

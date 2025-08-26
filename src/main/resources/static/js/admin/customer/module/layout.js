@@ -1485,7 +1485,7 @@ const sellerInquiryLayout = (() => {
     return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, answeredCount, anUnansweredCount};
 })();
 
-// 매입 승인 목록
+// 매입 승인
 const purchaseLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
@@ -1850,14 +1850,14 @@ const bannerLayout = (() => {
                 <div class="page-subtitle">실시간 메인 배너 등록</div>
             </div>
             <div class="page-body temp-page">
-                <div class="pg-box">
+                <div class="pg-box banner-container">
                     <div class="title">
                         메인페이지 배너등록
                     </div>
                     <!-- 아래 Li수만큼 Img -->
                     <div class="dropdown">
                         <label>
-                            <input type="file" id="banner-file" style="display: none;">
+                            <input type="file" id="banner-file" class="banner-file" style="display: none;" multiple >
                             <div class="add-btn">
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -1875,4 +1875,4 @@ const bannerLayout = (() => {
     }
 
     return {contentLayout}
-})
+})();
