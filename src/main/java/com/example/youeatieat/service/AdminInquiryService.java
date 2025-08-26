@@ -6,13 +6,13 @@ import com.example.youeatieat.dto.InquiryWithAnswerDTO;
 
 public interface AdminInquiryService {
 //    문의 목록(전체)
-    public AdminInquiryCriteriaDTO getInquiryList(int page);
+    public AdminInquiryCriteriaDTO getInquiryList(int page, String keyword);
 
 //    문의 목록(미답변)
-    AdminInquiryCriteriaDTO getUnansweredList(int page);
+    AdminInquiryCriteriaDTO getUnansweredList(int page, String keyword);
 
 //    문의 목록(답변완료)
-    AdminInquiryCriteriaDTO getAnsweredList(int page);
+    AdminInquiryCriteriaDTO getAnsweredList(int page, String keyword);
 
 //    회원 상세
     InquiryWithAnswerDTO getInquiryDetail(Long inquiryId);

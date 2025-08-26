@@ -310,8 +310,8 @@ const inquiryService = (() => {
 const sellerInquiryService = (() => {
     // 문의 목록
     let currentPage = 1;
-    const getInquiryList = async (page, callback) => {
-        const response = await fetch(`/api/admin/seller/inquiries/list/${page}`);
+    const getInquiryList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/seller/inquiries/list/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
@@ -323,13 +323,11 @@ const sellerInquiryService = (() => {
         console.log(inquiriesCriteria)
 
         if(response.ok) {
-            console.log("문의글 존재")
-            // console.log("키워드 전달 문제없음둥둥", keyword)
-
-            currentPage = inquiriesCriteria.criteria.page;
+            console.log("게시글 존재")
+            console.log("키워드 전달 문제없음둥둥", keyword)
         }else if(response.status === 404){
             console.log("게시글 없음")
-            // console.log("키워드 전달 문제있음둥")
+            console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
             console.log(error);
@@ -339,8 +337,8 @@ const sellerInquiryService = (() => {
     }
 
     // 문의 목록(미답변)
-    const getUnansweredList = async (page, callback) => {
-        const response = await fetch(`/api/admin/seller/inquiries/list/unanswered/${page}`);
+    const getUnansweredList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/seller/inquiries/list/unanswered/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
@@ -356,6 +354,7 @@ const sellerInquiryService = (() => {
             currentPage = inquiriesCriteria.criteria.page;
         }else if(response.status === 404){
             console.log("미답변글 없음")
+            console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
             console.log(error);
@@ -365,8 +364,8 @@ const sellerInquiryService = (() => {
     }
 
     // 문의 목록(답변완료)
-    const getAnsweredList = async (page, callback) => {
-        const response = await fetch(`/api/admin/seller/inquiries/list/answered/${page}`);
+    const getAnsweredList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/seller/inquiries/list/answered/${page}?keyword=${keyword ?? ""}`);
         const inquiriesCriteria = await response.json();
 
         if(callback){
@@ -382,6 +381,7 @@ const sellerInquiryService = (() => {
             currentPage = inquiriesCriteria.criteria.page;
         }else if(response.status === 404){
             console.log("답변완료글 없음")
+            console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
             console.log(error);

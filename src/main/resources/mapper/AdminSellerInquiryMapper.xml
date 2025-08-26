@@ -10,8 +10,14 @@
             join tbl_member m
                 on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by i.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectInquiryCountAll">
@@ -20,6 +26,12 @@
              join tbl_member m
                   on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectInquiryDetail">
@@ -55,8 +67,14 @@
                   on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
             and ia.inquiry_answer_content is null
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by i.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectUnansweredCountAll">
@@ -68,6 +86,12 @@
                   on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
           and ia.inquiry_answer_content is null
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 
     <select id="selectAnsweredAll">
@@ -80,8 +104,14 @@
                       on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
             and ia.inquiry_answer_content is not null
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         order by i.id desc
-        limit #{count} offset #{offset}
+        limit #{criteria.count} offset #{criteria.offset}
     </select>
 
     <select id="selectAnsweredCountAll">
@@ -93,5 +123,11 @@
                   on m.id = i.member_id
         where m.member_status = 'active' and m.member_role = 'seller'
           and ia.inquiry_answer_content is not null
+            <if test="keyword != null">
+                and (
+                i.id like concat('%', #{keyword}, '%') or
+                m.member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
     </select>
 </mapper>
