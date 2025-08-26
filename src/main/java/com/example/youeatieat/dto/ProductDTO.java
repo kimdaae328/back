@@ -1,6 +1,5 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,13 +16,16 @@ public class ProductDTO {
     private String productName;
     private Integer productPrice;
     private String productQuantity;
-    private ProductCategory productCategory;
     private String productTitleImageUrl;
     private String productInfoImageUrl;
     private Integer productMinNumber;
     private Status productStatus;
+    private String createdDate;
+    private String updatedDate;
+    private Long mainCategoryId;
+    private String[] mainCategoryNames;
+    private Long subCategoryId;
+    private String subCategoryName;
     private boolean likeStatus;
     private Long memberId;
-    private String createdDatetime;
-    private String updatedDatetime;
 }

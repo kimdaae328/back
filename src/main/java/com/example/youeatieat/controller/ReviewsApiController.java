@@ -32,6 +32,7 @@ public class ReviewsApiController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(reviewCriteriaDTO);
         }
 
+//        리뷰 사진
         reviewCriteriaDTO.getReviews().forEach(review -> {
             List<ReviewImageDTO> images = reviewImageService.getReviewImages(review.getId());
             review.setImages(images);
