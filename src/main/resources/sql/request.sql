@@ -17,5 +17,10 @@ create table tbl_request(
     constraint fk_request_group foreign key (group_index_number, product_id)
       references tbl_group(group_index_number, product_id)
 );
-
+INSERT INTO tbl_request
+(request_amount, request_price, request_status, member_id, group_index_number, product_id)
+VALUES
+    (10, 500, 'done', 57, 1, 1),
+    (5, 300, 'done', 57, 2, 2),
+    (8, 400, 'cancel', 57, 4, 2);
 select * from tbl_request;

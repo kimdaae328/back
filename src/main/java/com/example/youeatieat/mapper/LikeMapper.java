@@ -4,7 +4,7 @@ import com.example.youeatieat.domain.LikeVO;
 import com.example.youeatieat.dto.LikeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Optional;
+import java.util.List;
 
 
 @Mapper
@@ -17,5 +17,8 @@ public interface LikeMapper {
 
 //    찜 상태
     public boolean likeStatus(LikeDTO likeDTO);
+
+//    찜 목록
+      public List<LikeDTO> selectLikeByMemberId(Long memberId);
 
 }

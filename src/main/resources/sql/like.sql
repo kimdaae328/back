@@ -11,6 +11,9 @@ create table tbl_like(
      constraint fk_like_product foreign key (product_id)
          references tbl_product(id)
 );
+INSERT INTO tbl_like (product_id, member_id)
+VALUES
+    (3, 57);
 
 
 select * from tbl_like;

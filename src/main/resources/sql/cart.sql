@@ -14,6 +14,8 @@ create table tbl_cart(
                              references tbl_product(id)
 );
 
+
+
 select * from tbl_cart;
 
 drop table tbl_cart;

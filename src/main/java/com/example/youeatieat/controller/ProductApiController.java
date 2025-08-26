@@ -9,16 +9,13 @@ import com.example.youeatieat.service.*;
 import com.example.youeatieat.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -32,6 +29,7 @@ public class ProductApiController {
     @GetMapping("image")
     public byte[] display(String filePath) throws IOException {
         return FileCopyUtils.copyToByteArray(new File("C:" + filePath));
+
     }
 
 

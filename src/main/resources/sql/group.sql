@@ -19,7 +19,6 @@ VALUES
     (4, 2, 'able'),
     (5, 3, 'unable')
 ON DUPLICATE KEY UPDATE
-                     group_cancelable = VALUES(group_cancelable),
-                     updated_date = CURRENT_TIMESTAMP;
+                     group_cancelable = VALUES(group_cancelable);
 
 drop table tbl_group;

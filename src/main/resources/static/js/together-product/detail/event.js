@@ -24,7 +24,8 @@ detailInfoButton.addEventListener("click", (e) => {
 
 reviewGoButton.addEventListener("click", (e) => {
     const reviewGoY = document.querySelector("#product-review").getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
+    window.scrollTo(
+        {
         top: reviewGoY - 100,
         behavior: "smooth"
     });
