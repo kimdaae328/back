@@ -1,0 +1,31 @@
+package com.example.youeatieat.dto;
+
+import com.example.youeatieat.enumeration.ProductCategory;
+import com.example.youeatieat.enumeration.PurchaseRequestApproval;
+import com.example.youeatieat.enumeration.Status;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+@Component
+@Getter @Setter @ToString
+@EqualsAndHashCode(of="id")
+public class PurchaseRequestWithMemberDTO {
+    private Long id;
+    private String purchaseRequestProductName;
+    private String purchaseRequestDescription;
+    private String purchaseRequestCategory;
+    private int purchaseRequestQuantityKg;
+    private int purchaseRequestProposedPricePerKg;
+    private String purchaseRequestCountryOfOrigin;
+    private String purchaseRequestDateOfManufacture;
+    private String purchaseRequestDetailImg;
+    private PurchaseRequestApproval purchaseRequestApprovalStatus;
+    private Status purchaseRequestStatus;
+    private Long memberId;
+    private String memberName;
+    private String createdDate;
+    private String updatedDate;
+}

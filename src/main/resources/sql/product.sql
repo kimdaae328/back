@@ -17,19 +17,3 @@ create table tbl_product(
                                 references tbl_member(id)
 );
 
-alter table tbl_product modify product_category enum('vegetables','fruits','fisheries','butchers','etc') not null;
-INSERT INTO tbl_product
-(id,product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, product_status, member_id)
-VALUES
-
-    ('4','루꼴라', 700, '1.0g', 'vegetables', '/images/product-images/lucola.jpg,',  '/images/product-images/lucola_info.jpg', 10, 'active', 32),
-    ('5','고등어', 3000, '6.3g', 'fisheries', '/images/product-images/mackerel.jpg', '/images/product-images/mackerel_info.jpg', 2, 'active', 32),
-    ('6', '항정살', 5000,'2.0g', 'butchers', '/images/product-images/pork_cutlet.jpeg', '/images/product-images/pork_cutlet_info.jpeg', 6, 'active', 32);
-
-select * from tbl_product;
-
-delete from tbl_product
-
-where id = 13;
-
-

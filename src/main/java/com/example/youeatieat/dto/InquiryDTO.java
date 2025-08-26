@@ -19,6 +19,6 @@ public class InquiryDTO {
     private String inquiryContent;
     private String inquiryImage;
     private Long memberId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
 }

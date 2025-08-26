@@ -176,40 +176,6 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// // 탭 선택
-// const tabButtons = document.querySelectorAll(".tab-link");
-//
-// tabButtons.forEach((button) => {
-//     button.addEventListener("click", (e) => {
-//         tabButtons.forEach((btn) => btn.classList.remove("on"));
-//         e.currentTarget.classList.add("on");
-//     });
-// });
-//
-// // 자세히보기 드롭다운
-// const moreBtns = document.querySelectorAll(".btn-more");
-//
-// moreBtns.forEach((button) => {
-//     button.addEventListener("click", (e) => {
-//         button.classList.toggle("on");
-//     });
-// });
-//
-// // 상품문의 드롭다운
-// const inquiryButtons = document.querySelectorAll(".btn-title");
-//
-// inquiryButtons.forEach((button) => {
-//     button.addEventListener("click", () => {
-//         if (button.classList.contains("secret")) return;
-//
-//         const tr = button.closest("tr");
-//         const answerTr = tr.nextElementSibling;
-//
-//         answerTr.classList.toggle("hidden");
-//     });
-// });
-
-
 // textarea 글자수 카운트
 const textarea = document.querySelector("textarea");
 const textEnter = document.querySelector(".text-enter");

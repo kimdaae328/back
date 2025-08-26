@@ -19,7 +19,6 @@
                             <span class="comp-provider-name ">
                                 <span class="pn-name">관리자 이름</span>
                             </span>
-
                         </div>
                         <a class="app-name d-flex justify-content-between align-items-center " href="">
                             <span>관리자 등급표시</span>
@@ -234,18 +233,14 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
             <div class="page wide-page receipt-index">
                 <div class="page-header"> 
-                <div class="page-title">매입 승인 목록</div>
-                <div class="page-subtitle"></div>
+                    <div class="page-title">매입 승인 목록</div>
+                    <div class="page-subtitle"></div>
                 </div>
                 <div class="page-body">
                     <div class="pill-row row">
@@ -256,272 +251,231 @@
                                         <i class="mdi mdi-check-all"></i>
                                     </span>
                                     <span>승인완료</span>
-
-                                </div><div class="pill-value">
-                                        <span class="span-amount">0</span>
-                                        <span class="amount-unit">건</span>
-
-                                    </div></div></div>
-                    </div>
-
-                </div>
-                <div class="page-content">
-                    <div class="table-layout white-panel">
-                        <div class="filter-section">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <span class="receipt-count">총
-                                        <span class="count-amount">0</span>
-                                    건</span>
-
                                 </div>
-                            <div class="col-auto">
-                                <div class="filter-wrapper filter-status mr-2">
-
+                                <div class="pill-value">
+                                    <span class="span-amount">0</span>
+                                    <span class="amount-unit">건</span>
                                 </div>
-
-
                             </div>
-                            <div class="col text-right"></div>
-                            <div class="col-auto">
-                                <div class="filter-wrapper filter-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control flex-grow-1" placeholder="판매자명">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-search">
-                                                <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
-                                            </button>
-
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <div class="table-layout white-panel">
+                            <div class="filter-section">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <span class="receipt-count">총
+                                            <span class="count-amount">0</span>건
+                                        </span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="filter-wrapper filter-status mr-2"></div>
+                                    </div>
+                                    <div class="col text-right"></div>
+                                    <div class="col-auto">
+                                        <div class="filter-wrapper filter-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control flex-grow-1" placeholder="판매자명">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-search">
+                                                        <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
-
-                            </div> 
-
-                        </div>
-                        <table class="table grey-header-table w-100 text-center receipt-table">
-                            <colgroup>
-                                <col style="width:15%">
-                                <col style="width:15%">
-                                <col style="width:17%">
-                                <col style="width:15%">
-                                <col style="width:15%">
-                                <col style="width:15%">
-                            </colgroup>                           
-                             <thead>
-                                <tr>
-                                    <th class="td-name">판매자명</th>
-                                    <th>판매자 아이디</th>
-                                    <th class="td-status">판매상품</th>
-                                    <th class="td-user">kg당 단가</th>
-                                    <th class="td-at">매입 신청일</th>
-                                    <th>상세보기</th>
-                                    <th class="td-action">승인하기</th>                   
+                            <table class="table grey-header-table w-100 text-center receipt-table">
+                                <colgroup>
+                                    <col style="width:15%">
+                                    <col style="width:15%">
+                                    <col style="width:17%">
+                                    <col style="width:15%">
+                                    <col style="width:15%">
+                                    <col style="width:15%">
+                                </colgroup>
+                                 <thead>
+                                    <tr>
+                                        <th class="td-name">판매자명</th>
+                                        <th>판매자 아이디</th>
+                                        <th class="td-status">판매상품</th>
+                                        <th class="td-user">kg당 단가</th>
+                                        <th class="td-at">매입 신청일</th>
+                                        <th>상세보기</th>
+                                        <th class="td-action">승인하기</th>
                                     </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                
-                                <td class="text-center font-weight-bold" colspan="1" >-</td>
-                                <td class="text-center font-weight-bold" colspan="1" >-</td>
-                                <td class="text-center font-weight-bold" colspan="1" >-</td>
-                                <td class="text-center font-weight-bold" colspan="1" >-</td>
-                                <td class="text-center font-weight-bold" colspan="1" >-</td>
-                                <td class="td-action text-center" style="position:relative"><div id="modal-open2"class="action-btn"><i  class="mdi mdi-chevron-right"></i></div>
-                                <td class="td-action text-center" style="position:relative"><div id="modal-open"class="action-btn"><i id="modalbtn" class="mdi mdi-chevron-right"></i></div>
-                                <div id="approvalbtn"class="dropdown-menu dropdown-menu-right" style="position: absolute;transform: translate3d(-110px, 30px, 0px);top: 27%;left: 35%;will-change: transform;">
-                                    <div class="dropdown-item">
-                                        <i class="mdi mdi-pencil"></i>
-                                    승인하기
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <i class="mdi mdi-trash-can-outline"></i>
-                                    승인거절
-                                    </div>
+                                </thead>
+                                <tbody>
 
-                                </div>
-                                
-                                </td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div id ="modal"class="modal fade receipt-modal"aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title">
-                                상품상세
-                
-                                
-
-                            </div>
-                            <button id="close"class="close"><i class="mdi mdi-close">
-
-                            </i> </button>
-
+<!--                                여기-->
+                                    <tr>
+                                        <td class="text-center font-weight-bold" colspan="1" >-</td>
+                                        <td class="text-center font-weight-bold" colspan="1" >-</td>
+                                        <td class="text-center font-weight-bold" colspan="1" >-</td>
+                                        <td class="text-center font-weight-bold" colspan="1" >-</td>
+                                        <td class="text-center font-weight-bold" colspan="1" >-</td>
+                                        <td class="td-action text-center" style="position:relative">
+                                            <div id="modal-open2" class="action-btn">
+                                                <i  class="mdi mdi-chevron-right"></i>
+                                            </div>
+                                        </td>
+                                        <td class="td-action text-center" style="position:relative">
+                                            <div id="modal-open"class="action-btn">
+                                                <i id="modalbtn" class="mdi mdi-chevron-right"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div id="approvalbtn"class="dropdown-menu dropdown-menu-right" style="position: absolute;transform: translate3d(-110px, 30px, 0px);top: 27%;left: 35%;will-change: transform;">
+                                                <div class="dropdown-item">
+                                                    <i class="mdi mdi-pencil"></i>
+                                                    승인하기
+                                                </div>
+                                                <div class="dropdown-item">
+                                                    <i class="mdi mdi-trash-can-outline"></i>
+                                                    승인거절
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="modal-body">
-                            <div class="divider"></div>
-                            <div class="tab-view">
-                                <div class="tab-view-header">
-                                    <div class="tab-switch-row">
-                                        <div class="tab-switch active">상세정보</div>
-
-                                    </div>
+                    </div>
+                </div>
+                <div id="modal" class="modal fade receipt-modal" aria-modal="true" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                    상품상세
                                 </div>
-                                <div class="tab-view-body">
-                                    <div style="display: block;">
-                                        <div class="tab-inner tab-detail">
-                                            <div class="info-layout detail-info">
-                                                <div class="info-title justify-content-between">
-                                                    <div class="flex-left d-flex">
-                                                        <div class="title">상품정보</div>
-
-                                                    </div>
-                                                    <div class="flex-right"></div>
-
-                                                </div>
-                                                <div class="d-table w-100">
-                                                    <div class="d-table-cell">
-                                                        <table class="info-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>판매자 아이디</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>판매자명</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                
-                                                            </tbody>
-
-                                                        </table>
-
-                                                    </div><div class="d-table-cell">
-                                                        <table class="info-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>kg당 단가</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>매입 신청일</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                            </tbody>
-
-                                                        </table>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="info-layout detail-info">
-                                                <div class="info-title justify-content-between">
-                                                    <div class="flex-left d-flex">
-                                                        <div class="title">상품 상세정보</div>
-
-                                                    </div>
-                                                    <div class="flex-right"></div>
-
-                                                </div>
-                                                <div class="d-table w-100">
-                                                    <div class="d-table-cell">
-                                                        <table class="info-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>상품명</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>중량</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>원산지</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>보관방법 또는 취급방법</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>카테고리</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                
-                                                            </tbody>
-
-                                                        </table>
-
-                                                    </div>
-                                                    <div class="d-table-cell">
-                                                        <table class="info-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>kg당 단가</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>생산자</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>제조연월일</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>소비자안전을 위한 주의사항</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>기타</th>
-                                                                    <td>-</td>
-                                                                </tr>
-                                                            </tbody>
-
-                                                        </table>
-
-                                                    </div>
-                                                    
-
-                                                </div>
-
-                                            </div>
-
+                                <button id="close" class="close">
+                                    <i class="mdi mdi-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="divider"></div>
+                                <div class="tab-view">
+                                    <div class="tab-view-header">
+                                        <div class="tab-switch-row">
+                                            <div class="tab-switch active">상세정보</div>
                                         </div>
-
                                     </div>
-
+                                    <div class="tab-view-body">
+                                        <div style="display: block;">
+                                            <div class="tab-inner tab-detail">
+                                                <div class="info-layout detail-info">
+                                                    <div class="info-title justify-content-between">
+                                                        <div class="flex-left d-flex">
+                                                            <div class="title">상품정보</div>
+                                                        </div>
+                                                        <div class="flex-right"></div>
+                                                    </div>
+                                                    <div class="d-table w-100">
+                                                        <div class="d-table-cell">
+                                                            <table class="info-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>판매자 아이디</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>판매자명</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="d-table-cell">
+                                                            <table class="info-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>kg당 단가</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>매입 신청일</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-layout detail-info">
+                                                    <div class="info-title justify-content-between">
+                                                        <div class="flex-left d-flex">
+                                                            <div class="title">상품 상세정보</div>
+                                                        </div>
+                                                        <div class="flex-right"></div>
+                                                    </div>
+                                                    <div class="d-table w-100">
+                                                        <div class="d-table-cell">
+                                                            <table class="info-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>상품명</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>중량</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>원산지</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>보관방법 또는 취급방법</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>카테고리</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="d-table-cell">
+                                                            <table class="info-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>kg당 단가</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>생산자</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>제조연월일</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>소비자안전을 위한 주의사항</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>기타</th>
+                                                                        <td>-</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
-
             </div>
-
-            </div>
-
         </div>
     </div>
-    
 </body>
 <script src="/js/admin/purchase-approval/purchase-approval.js"></script>
 </html>

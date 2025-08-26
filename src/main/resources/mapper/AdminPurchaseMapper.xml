@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminPurchaseMapper">
+    <select id="selectPurchaseAll">
+        select pr.id, pr.purchase_request_product_name, pr.purchase_request_description, pr.purchase_request_category, pr.purchase_request_quantity_kg, pr.purchase_request_proposed_price_per_kg, pr.purchase_request_country_of_origin, pr.purchase_request_date_of_manufacture, pr.purchase_request_detail_img, pr.purchase_request_approval_status, pr.purchase_request_status, pr.member_id, pr.created_date, pr.updated_date,
+               m.member_name
+        from tbl_purchase_request pr
+            join tbl_member m
+                on m.id = pr.member_id
+        where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                    member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
+        order by m.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectPurchaseCountAll">
+        select count(*)
+        from tbl_purchase_request pr
+             join tbl_member m
+                  on m.id = pr.member_id
+        where m.member_status = 'active' and m.member_role = 'seller'
+            <if test="keyword != null">
+                and (
+                member_name like concat('%', #{keyword}, '%')
+                )
+            </if>
+    </select>
+
+    <select id="selectPurchaseDetail">
+        select pr.id, pr.purchase_request_product_name, pr.purchase_request_description, pr.purchase_request_category, pr.purchase_request_quantity_kg, pr.purchase_request_proposed_price_per_kg, pr.purchase_request_country_of_origin, pr.purchase_request_date_of_manufacture, pr.purchase_request_detail_img, pr.purchase_request_approval_status, pr.purchase_request_status, pr.member_id, pr.created_date, pr.updated_date,
+               m.member_name
+        from tbl_purchase_request pr
+             join tbl_member m
+                  on m.id = pr.member_id
+        where pr.id = #{purchaseId}
+    </select>
+
+    <select id="selectApprovedCountAll">
+        select count(*)
+        from tbl_purchase_request pr
+             join tbl_member m
+                  on m.id = pr.member_id
+        where m.member_status = 'active' and m.member_role = 'seller'
+            and purchase_request_approval_status = 'approved'
+    </select>
+
+    <update id="updatePurchaseStatus">
+        update tbl_purchase_request
+        set purchase_request_approval_status = #{status}
+        where id = #{id}
+    </update>
+</mapper>

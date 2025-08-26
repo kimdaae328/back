@@ -1,6 +1,7 @@
 package com.example.youeatieat.domain;
 
 import com.example.youeatieat.audit.Period;
+import com.example.youeatieat.enumeration.ProductCategory;
 import com.example.youeatieat.enumeration.PurchaseRequestApproval;
 import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ public class PurchaseRequestVO extends Period {
     private Long id;
     private String purchaseRequestProductName;
     private String purchaseRequestDescription;
-//    private ProductCategory purchaseRequestCategory;
+    private String purchaseRequestCategory;
     private int purchaseRequestQuantityKg;
     private int purchaseRequestProposedPricePerKg;
     private String purchaseRequestCountryOfOrigin;

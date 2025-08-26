@@ -6,7 +6,11 @@
     <title>너도먹고나도먹고</title>
     <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsSAAALEgHS3X78AAAEEklEQVRYw72YP0wbdxTHP3ZGnxMPlWNLiRoQ9oRUrKqNcQc7hVIJWzKbUQagStrBiajZQDGq2yQKsGCXxmoTWpGhbTK0Acl0aapiD85N/FHoUIygliLZcZXwz0goHdyBs2XjA9/xJ0/ycPK79/v83vve/d47TaFQQKnZHZ4OoANoAt6RcVkA5oFJMRmbVBpXUwvC7vAYgID0O4Ny2wDCQFhMxtYPDWF3eAJASOXicjABMRmbUAUh7X4C8HJ89kCCWa8JIQHM7FPzo9oC4NoLopVxPCkApLhVgtXuyUJYDYBe0DEyHMTtblUD4pTWqS6H3eFxAX+qAYhGh9ALOkwmIx+1+djKb6uBuSQmYzN7MzGhJoLFWo+loQ5B0AFgNp9VW5pQRTmkl9DbSu+2WuoZGQqSWl7l4aMpUsurRO/ewWqpV1sWV3kmetQARO/eIZPN4ff3M/79T/j9/WSyucOA9ABoLja7DcCaUg1YGupILa/i9/dXaEAv6Pju2xGMxrdKgAo0siEmYwatdA7UtGh0iPzWbtDR8L2qBbby2/z482MEQUd+a5todEhJ2DN2h8elBVxKSmBpqMNmawTA3S7/SL7/3u5+bLZGzCaj0tI0aZVqILW8iv/6AOHIfdztLQwG+yr8BoN9fNzmYuybH/BfH1CjEcOpc+etIeCCnAaa7e8yMhws1Tidfs7iX3+Tyea4euUyZvNZEgmRwWAf7vYWbt4O88uv02QyOZ78nsDpbKbT5yWdfs6rl2u8fv2fHERcc7HZPQM41YgQwO1uZfBGoHR983aY6eknqI0DfKmVzorK1A72YTYZyee3icefyqo8tbQCwNzcIgCzs8+qfLak+7PZHHpBRyDwmWw9ZDVR3JEg6HA6m9FLb8Vy8/m8bG7msdka2dzMc/XKZVk9dfq8mExGBEFHIvFUbrl1rdSOVRYpIdLa5qOruxezyVg6I8pF6G5vITI2jt3hITI2XiXWoqABurp7aW3zEU+IchDzp86dt2aBfrl/X75aQxRn6fR5+fDSB2Rf/EtPt68kwmLGUqmVCrFqgJHhIAD+awMspVb2fTTEZOwTTaFQwO7wTB7URVkt9XwduYXBcBqAcOQ+Dx9NVfl1+rwEPv+0dN3V3XsgADAlJmMdRU0c2BkvpVbY2dlhbm5xV6zyaS0JOLW8SjabqwVQOrm1UkomgPRB3qPhewh6Hf5rA2QyL9hP0NO//YFe0PHVrdFaAOniWFDe1HQAj3lzVt3USFQP3hBApAgg954ISB3xSdpCeVdVBSG14q4TBFHW8peBxI8ZIC4HoGQMDAFfHHHxDWkeDR1lIL4g1bD7kKNfSEzG/jnSVL5nPOyRSuXaZ0jekE7lSenzwPqxfBqoAdYEGIB1MRmbP2yc/wEm+tU03FWIvQAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="/css/admin/customer/list.css">
+    <link rel="stylesheet" href="/css/admin/seller/list.css">
+    <link rel="stylesheet" href="/css/admin/inquiry/seller-inquiry.css">
+    <link rel="stylesheet" href="/css/admin/banner/banner.css">
     <link rel="shorcut icon" href="/images/main/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <!-- 리바운드 판매자페이지 퍼워서 아이디가 조금 차이남 -->
@@ -38,30 +42,28 @@
                             </a>
                         </li>
                         <li class="menu menu-item d-flex flex-column">
-                            <a href="" class="menu-btn d-flex w-100 current" data-toggle="collapse" aria-expanded="true" aria-controls="menu-6109064136799700f1ebced6">
+                            <a href="" class="menu-btn d-flex w-100" data-toggle="collapse" aria-expanded="true" aria-controls="menu-6109064136799700f1ebced6">
                                 <!-- aria-controls는 밑 ul태그의 id와 똑같다 -->
                                 <!-- 리스트가 열려있으면 menu-btn d-flex w-100 -->
                                 <!-- 닫혀있으면 클래스명 뒤에 collapsed와 aria-expanded="false", 현재 클릭 되어 있는 곳이면 클래스명 뒤에 current -->
                                 <i class="mdi mdi mdi-credit-card-plus-outline"></i>
                                 <span class="menu-name">회원 관리</span>
                                 <div class="icon-wrapper flex-grow-1 text-right">
-                                    <i class="mdi mdi-chevron-down"></i>
+                                    <i class="mdi mdi-chevron-right"></i>
                                     <!-- 리스트가 보이는 상태의 아이콘 i class="mdi mdi-chevron-down" -->
                                 </div>
                             </a>
                             <!-- 리스트가 보이는 상태 ul class="menu-sub-list collapse show" -->
-                            <ul class="menu-sub-list collapse show" id="menu-6109064136799700f1ebced6">
+                            <ul class="menu-sub-list collapse" id="menu-6109064136799700f1ebced6">
                                 <li class="submenu menu-item">
                                     <!-- 클릭 한 부분 active -->
-                                    <a href="" class="rebound-link active" data-param="0">
-                                        - 
-                                        회원 목록
+                                    <a href="" class="rebound-link">
+                                        - 회원 목록
                                     </a>
                                 </li>
                                 <li class="submenu menu-item">
-                                    <a href="" class="rebound-link" data-param="0">
-                                        -  
-                                        회원 문의 목록
+                                    <a href="" class="rebound-link">
+                                        - 회원 문의 목록
                                     </a>
                                 </li>
                             </ul>
@@ -81,7 +83,6 @@
                                         상품 목록
                                     </a>
                                 </li>
-    
                             </ul>
                         </li>
                         <li class="menu menu-item d-flex flex-column">
@@ -132,7 +133,7 @@
                                 <li class="submenu menu-item">
                                     <a href="" class="rebound-link" data-param="3">
                                         - 
-                                        배너 목록
+                                        배너 등록
                                     </a>
                                 </li>
                             </ul>
@@ -190,499 +191,13 @@
                     </div>
                 </div>
             </div>
-            <div class="page ana-user-index wide-page">
-                <div class="page-header">
-                    <div class="page-title">회원 관리</div>
-                    <div class="page-subtitle"></div>
-                </div>
-                <div class="page-body">
-                    <div class="tab-box">
-                        <div class="tab-row white-panel">
-                            <div class="row">
-                                <div class="col col-auto">
-                                    <ul class="tab-name-list list-unstyled list-inline">
-                                        <!-- 클릭 한 부분은 active -->
-                                        <li class="tab-name active">전체</li>
-                                        <li class="tab-name">일반 회원</li>
-                                        <li class="tab-name">구독 회원</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="page-content">
-                        <div class="table-layout white-panel">
-                            <div class="filter-section">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <span class="member-count">총
-                                            <span class="count-amount">n</span>명
-                                        </span>
-                                    </div>
-                                    <!-- PG 선택, 결제방식선택, 결제상태선택 버튼 -->
-                                    <div class="col-auto">
-                                        <div class="filter-wrapper filter-search ml-1">
-                                            <div class="input-group">
-                                                <input class="form-control flex-grow-1 input-search" type="text" placeholder="이름/ID" value="">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-search">
-                                                        <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
-                                                            <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fill-table-layout">
-                                <table class="table-container table grey-header-table w-100 member-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="td-name">회원번호</th>
-                                            <th class="td-amount pr-4">이름</th>
-                                            <th class="td-email">이메일</th>
-                                            <th class="td-phone">핸드폰 번호</th>
-                                            <th class="td-start">가입일</th>
-                                            <th class="td-recent">최근 접속일</th>
-                                            <th class="td-action">상세</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- 회원 목록 페이지 당 10명 -->
-                                    <!-- 첫 번째 회원 -->
-                                    <tbody>
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-                                    </tbody>
-                                    <!-- 두 번째 회원 -->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                    <tbody class="">-->
-<!--                                        <tr>-->
-<!--                                            <td class="td-name">-->
-<!--                                                <div class="member-name">Test01-->
-<!--                                                    <span class="badge-label badge text-danger ml-2" data-for="93fee9a1-f685-4eca-ba41-83be3901b9c9" data-toggle="tooltip" data-custom-class="" title="" data-original-title="">일반회원</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="member-id">TestId01</div>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-amount text-center pr-4 font-weight-bold">테스트01-->
-<!--                                                <span class="amount-unit"> 님</span>-->
-<!--                                            </td>-->
-<!--                                            <td class="td-email">test01@gmail.com</td>-->
-<!--                                            <td class="td-phone">010-1234-5678</td>-->
-<!--                                            <td class="td-start">2025-06-12</td>-->
-<!--                                            <td class="td-recent">2025-07-29</td>-->
-<!--                                            <td class="td-action text-center">-->
-<!--                                                <div class="action-btn">-->
-<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
-<!--                                                </div>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-                                </table>
-                            </div>
-                            <!-- 페이지 번호 -->
-                            <nav class="rebound-pagination-wrapper mt-5 mb-4">
-                                <ul class="pagination rebound-pagination">
-                                    <!-- 현재 페이지는 active 클래스 추가된다. -->
-                                    <li class="page-item page-num active">
-                                        <!-- class명 앞에 rebound-link를 사이드바 이벤트로 인해 배제했습니다. -->
-                                        <a href="" class="page-item-link page-item-num">1</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">2</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">3</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">4</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">5</a>
-                                    </li>
-                                </ul>
-<!--                                <div class="pagination-desc">-->
-<!--                                    &lt;!&ndash; 회원이 1페이지(10명 미만)일 때 &ndash;&gt;-->
-<!--                                    <div class="des text-ignore">-->
-<!--                                        <span>-->
-<!--                                            <span class="highlight">last</span>-->
-<!--                                            of-->
-<!--                                            1-->
-<!--                                        </span>-->
-<!--                                        results-->
-<!--                                    </div>-->
-<!--                                </div>-->
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade member-modal" style="display: none;">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="modal-title">
-                                    (TestId01) Test01
-                                    <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>
-                                </div>
-                                <button class="close">
-                                    <i class="mdi mdi-close"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="divider">
-                                    <div class="tab-view">
-                                        <div class="tab-view-header"></div>
-                                        <div class="tab-view-body">
-                                            <div style="display: block;">
-                                                <div class="tab-inner tab-detail">
-                                                    <!-- 일반회원 상세정보 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">회원 상세정보</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100 table-member-detail">
-                                                            <!-- 테이블 왼쪽 -->
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table left-table">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>이름</th>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>핸드폰 번호</th>
-                                                                            <td>010-1234-5678</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>가입일</th>
-                                                                            <td>2025-06-12</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>나이</th>
-                                                                            <td>20</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <!-- 테이블 오른쪽 -->                                                        
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table right-table">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>회원ID</th>
-                                                                            <td>TestId01</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>이메일</th>
-                                                                            <td>test01@gmail.com</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>최근 접속일</th>
-                                                                            <td>2025-07-29</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>성별</th>
-                                                                            <td>남</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <a href="" class="info-detail">
-                                                                    <div class="title">결제내역
-                                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>총 주문수</th>
-                                                                        <th>총 결제금액</th>
-                                                                        <th>최근 결제일</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>12</td>
-                                                                          <td>250,000</td>
-                                                                        <td>2025-08-01</td>
-                                                                    </tr>
-                                                                   
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
-                                                    </div>
-                                                    <!-- 회원 작성 게시글 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <!-- 작성 게시글 클릭 시 콘텐츠 관리 내 게시글 페이지로 이동 -->
-                                                                <a href="" class="info-detail">
-                                                                    <div class="title">구매내역
-                                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>주문번호</th>
-                                                                        <th>물품</th>
-                                                                        <th>가격</th>
-                                                                        <th>결제일</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>--</td>
-                                                                        <td>--</td>
-                                                                        <td>0</td>
-                                                                        <td>2025-08-01</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>--</td>
-                                                                        <td>--</td>
-                                                                        <td>0</td>
-                                                                        <td>2025-08-01</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>--</td>
-                                                                        <td>--</td>
-                                                                        <td>0</td>
-                                                                        <td>2025-08-01</td>
-                                                                    </tr>                                                                                                                               
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn-close btn btn-outline-filter">닫기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="content-area" class="page wide-page">
+                <!--공통 영역-->
             </div>
         </div>
     </div>
 </body>
-<script src="/js/admin/customer/module/service.js"></script>
 <script src="/js/admin/customer/module/layout.js"></script>
+<script src="/js/admin/customer/module/service.js"></script>
 <script src="/js/admin/customer/event.js"></script>
 </html>
