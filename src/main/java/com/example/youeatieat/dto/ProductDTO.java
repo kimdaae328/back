@@ -28,4 +28,5 @@ public class ProductDTO {
     private String subCategoryName;
     private boolean likeStatus;
     private Long memberId;
+    private int likeCount;
 }

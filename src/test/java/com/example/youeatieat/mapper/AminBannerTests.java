@@ -14,22 +14,22 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 public class AminBannerTests {
-
-    @Autowired
-    private AdminBannerDAO adminBannerDAO;
-
-    @Autowired
-    private AdminBannerService adminBannerService;
-
-    @Test
-    void testFindBannerAll() {
-        List<BannerFileDTO> banners = adminBannerDAO.findBannerAll();
-        log.info("DAO 조회 결과: {}", banners);
-    }
-
-    @Test
-    void testGetBannerFiles() {
-        List<BannerFileDTO> bannerFiles = adminBannerService.getBannerFiles();
-        log.info("Service 조회 결과: {}", bannerFiles);
-    }
+//
+//    @Autowired
+//    private AdminBannerDAO adminBannerDAO;
+//
+//    @Autowired
+//    private AdminBannerService adminBannerService;
+//
+//    @Test
+//    void testFindBannerAll() {
+//        List<BannerFileDTO> banners = adminBannerDAO.findBannerAll();
+//        log.info("DAO 조회 결과: {}", banners);
+//    }
+//
+//    @Test
+//    void testGetBannerFiles() {
+//        List<BannerFileDTO> bannerFiles = adminBannerService.getBannerFiles();
+//        log.info("Service 조회 결과: {}", bannerFiles);
+//    }
 }

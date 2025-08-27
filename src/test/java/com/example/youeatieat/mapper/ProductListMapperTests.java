@@ -1,6 +1,7 @@
 package com.example.youeatieat.mapper;
 
 
+import com.example.youeatieat.util.Criteria;
 import com.example.youeatieat.util.Search;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +17,22 @@ import java.util.Arrays;
 public class ProductListMapperTests {
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private BestProductMapper bestProductMapper;
 
     @Test
     public void testSelectAll() {
         Search search = new Search();
         search.setMainCategories(new ArrayList<>(Arrays.asList("vegetables")));
         productMapper.countProduct(search);
+    }
+
+    @Test
+    public void testSelectAll2() {
+        Criteria criteria = new Criteria(1, 9);
+        Search search = new Search();
+
+        System.out.println(bestProductMapper.selectList(criteria, search));
     }
 
 //    @Autowired

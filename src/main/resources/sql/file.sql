@@ -12,4 +12,6 @@ create table tbl_file (
 );
 
 select * from tbl_file;
-drop table tbl_file;
+
+
+# drop table tbl_file;

@@ -3,6 +3,7 @@ package com.example.youeatieat.controller;
 import com.example.youeatieat.common.exception.NoProductException;
 import com.example.youeatieat.dto.ProductCriteriaDTO;
 import com.example.youeatieat.dto.ProductDTO;
+import com.example.youeatieat.service.BestProductServiceImpl;
 import com.example.youeatieat.service.ProductServiceImpl;
 import com.example.youeatieat.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -21,18 +22,35 @@ import java.util.Optional;
 @RequestMapping("/api/best-product/**")
 @RequiredArgsConstructor
 public class BestProductsApiController {
-    private final ProductServiceImpl productService;
+    private final BestProductServiceImpl bestProductService;
 
 //    best 목록 뿌리기
+//    @PostMapping("/best-list/{page}")
+//    public ResponseEntity<?> getAllProducts(@PathVariable("page") int page,
+//                                           @RequestBody Search search) {
+//        log.info("search: {}", search);
+//        log.info("mainCategories: {}", search.getMainCategories());
+//        log.info("priceKeyword=" + (search != null ? search.getPriceKeyword() : "xxx"));
+//
+//        ProductCriteriaDTO productCriteriaDTO = bestProductService.getList(page, search);
+//        int count = bestProductService.getCount(search);
+//
+//        if (productCriteriaDTO == null || productCriteriaDTO.getProducts().isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productCriteriaDTO);
+//        }
+//
+//        productCriteriaDTO.setTotalCount(count);
+//        return ResponseEntity.ok(productCriteriaDTO);
+//    }
+
+    //    신상품 목록 뿌리기
     @PostMapping("/best-list/{page}")
     public ResponseEntity<?> getAllProducts(@PathVariable("page") int page,
-                                           @RequestBody Search search) {
-        log.info("search: {}", search);
-        log.info("mainCategories: {}", search.getMainCategories());
-        log.info("priceKeyword=" + (search != null ? search.getPriceKeyword() : "xxx"));
+                                            @RequestBody Search search) {
 
-        ProductCriteriaDTO productCriteriaDTO = productService.getList(page, search);
-        int count = productService.getCount(search);
+
+        ProductCriteriaDTO productCriteriaDTO = bestProductService.getList(page, search);
+        int count = bestProductService.getCount(search);
 
         if (productCriteriaDTO == null || productCriteriaDTO.getProducts().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productCriteriaDTO);
