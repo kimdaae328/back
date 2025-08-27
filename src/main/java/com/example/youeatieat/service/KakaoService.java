@@ -85,7 +85,6 @@ public class KakaoService {
                 }
                 JsonElement jsonElement = JsonParser.parseString(result);
                 JsonElement kakaoAccount = jsonElement.getAsJsonObject().get("kakao_account").getAsJsonObject();
-                JsonElement profile = kakaoAccount.getAsJsonObject().get("profile");
 
                 memberDTO = new MemberDTO();
                 memberDTO.setMemberKakaoEmail(kakaoAccount.getAsJsonObject().get("email").getAsString());

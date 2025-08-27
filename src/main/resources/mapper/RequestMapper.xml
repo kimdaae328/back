@@ -14,14 +14,14 @@
         </if>
     </sql>
     <select id="selectAll">
-        select distinct m.member_name, p.id, p.post_title, p.post_content,
-        p.post_read_count, p.post_status, p.member_id, p.created_datetime, p.updated_datetime
+        select distinct r.id,r.request_amount,r.request_price,r.request_status,m.id  as memberId,g.group_index_number
+        ,p.id as productId,p.product_name as productName,p.product_title_image_url as productTitleImageUrl ,r.created_date as createdDatetime
         from tbl_request r join tbl_group g
         on r.group_index_number = g.group_index_number and r.product_id=g.product_id
         join tbl_member m on r.member_id= m.id
         join tbl_product p on r.product_id = p.id
         <include refid="search"></include>
-        order by r.id desc
+        order by r.created_date desc, r.id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
     <select id="selectCountAll">

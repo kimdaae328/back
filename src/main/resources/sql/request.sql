@@ -17,10 +17,19 @@ create table tbl_request(
     constraint fk_request_group foreign key (group_index_number, product_id)
       references tbl_group(group_index_number, product_id)
 );
+# 기존에 크리에이티드 데이트 업데이트 데이트없어서 넣음
+ALTER TABLE tbl_request
+    ADD COLUMN created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ADD COLUMN updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 INSERT INTO tbl_request
 (request_amount, request_price, request_status, member_id, group_index_number, product_id)
 VALUES
-    (10, 500, 'done', 57, 1, 1),
-    (5, 300, 'done', 57, 2, 2),
-    (8, 400, 'cancel', 57, 4, 2);
+    (10, 600, 'done', 57, 1, 1),
+    (5, 500, 'done', 57, 2, 2),
+    (8, 700, 'cancel', 57, 4, 2);
 select * from tbl_request;
+
+
+UPDATE tbl_request
+SET created_date = '2025-08-24 12:00:00'
+WHERE id = 18;

@@ -18,5 +18,3 @@ create table tbl_member(
 );
 
 select * from tbl_member;
-
-alter table tbl_member add column member_kakao_email varchar(255);

@@ -31,7 +31,12 @@ public class MemberController {
     @GetMapping("signup")
     public String goToJoinForm(MemberDTO memberDTO, Model model) {
         model.addAttribute("memberDTO", memberDTO);
-        return "/member/signup";
+        return "member/signup";
+    }
+    @GetMapping("signup-guide")
+    public String goToSingUpGuide(MemberDTO memberDTO, Model model) {
+        model.addAttribute("memberDTO", memberDTO);
+        return "/member/signup-guide";
     }
 
     @PostMapping("signup")
