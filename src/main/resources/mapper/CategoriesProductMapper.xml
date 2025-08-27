@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.youeatieat.mapper.BestProductMapper">
-    <!-- 대카 검색 -->
-    <sql id="search">
-        <if test="search.mainCategories != null and search.mainCategories.size() > 0">
-            and
-            <trim suffixOverrides="or" prefix="(" suffix=")">
-                <foreach item="category" collection="search.mainCategories">
-                    main_category_name = #{category} or
-                </foreach>
-            </trim>
-        </if>
-    </sql>
-
+<mapper namespace="com.example.youeatieat.mapper.CategoriesProductMapper">
     <!-- 가격 필터 -->
     <sql id="priceFilter">
-        <if test="search.priceKeyword != null">
+        <if test="search.priceKeyword != null and search.priceKeyword != ''">
             <choose>
                 <when test="search.priceKeyword == '1000'">
                     and product_price &lt;= 1000
@@ -36,18 +24,30 @@
         </if>
     </sql>
 
-    <!-- 인기순 조회 -->
+    <!-- 카테고리 조회 -->
     <select id="selectList">
-        select id, product_name, product_price, product_quantity,
-        product_title_image_url, product_info_image_url, product_min_number,
-        product_status, created_date, updated_date,
-        main_category_id, main_category_name,
-        sub_category_id, sub_category_name, like_count
-        from view_best_product_detail
+        select id, product_name, product_price, product_quantity, product_title_image_url, product_info_image_url, product_min_number, product_status, created_date, main_category_id, sub_category_name
+        from tbl_product
         where product_status = 'active'
-        <include refid="search"/>
+        and main_category_id = #{id}
+        <if test="search.subCategoryName != null and search.priceKeyword != ''">
+            and sub_category_name = #{search.subCategoryName}
+        </if>
         <include refid="priceFilter"/>
-        order by like_count desc
+        <choose>
+            <when test="search.keyword == 'latest'">
+                order by created_date desc
+            </when>
+            <when test="search.keyword == 'priceHigh'">
+                order by product_price desc
+            </when>
+            <when test="search.keyword == 'priceLow'">
+                order by product_price asc
+            </when>
+            <otherwise>
+                order by created_date desc
+            </otherwise>
+        </choose>
         limit #{criteria.rowCount} offset #{criteria.offset}
     </select>
 
@@ -66,9 +66,12 @@
     <!-- 개수 조회-->
     <select id="countProduct">
         select count(*)
-        from view_best_product_detail
+        from tbl_product
         where product_status = 'active'
-        <include refid="search"/>
+        and main_category_id = #{id}
+        <if test="search.subCategoryName != null and search.priceKeyword != ''">
+            and sub_category_name = #{search.subCategoryName}
+        </if>
         <include refid="priceFilter"/>
     </select>
 </mapper>

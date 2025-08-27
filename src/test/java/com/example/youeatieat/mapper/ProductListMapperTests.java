@@ -19,6 +19,8 @@ public class ProductListMapperTests {
     private ProductMapper productMapper;
     @Autowired
     private BestProductMapper bestProductMapper;
+    @Autowired
+    private CategoriesProductMapper  categoriesProductMapper;
 
     @Test
     public void testSelectAll() {
@@ -33,6 +35,16 @@ public class ProductListMapperTests {
         Search search = new Search();
 
         System.out.println(bestProductMapper.selectList(criteria, search));
+    }
+
+    @Test
+    public void testSelectAll3() {
+        Search search = new Search();
+        Criteria criteria = new Criteria(1, 9);
+        search.setPriceKeyword("1000");
+        System.out.println(search.getPriceKeyword());
+
+        System.out.println(categoriesProductMapper.selectList(criteria, search, 1L));
     }
 
 //    @Autowired
