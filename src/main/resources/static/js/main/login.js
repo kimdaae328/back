@@ -58,3 +58,9 @@ const kakaoLoginButton = document.getElementById("kakao-login");
 kakaoLoginButton.addEventListener("click", (e) => {
     window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=bcbe3d461481de9236a2f79e83eb29fd&redirect_uri=http://localhost:10000/kakao/login&response_type=code";
 });
+
+const kakaoLoginButton2 = document.getElementById("kakao-login2");
+kakaoLoginButton2.addEventListener("click", (e) => {
+    window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=bcbe3d461481de9236a2f79e83eb29fd&redirect_uri=http://localhost:10000/kakao/login&response_type=code";
+});
+

@@ -14,6 +14,8 @@ public class RequestDTO {
     private Long id;
     private int requestAmount;
     private int requestPrice;
+    private String productName;
+    private String productTitleImageUrl;
     private Request requestStatus;
     private Long memberId;
     private Long groupIndexNumber;

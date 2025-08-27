@@ -21,7 +21,8 @@ public class RequestController {
         if(search.getMonth() != null && search.getMonth().isEmpty()){
             search.setMonth(null);
         }
-        model.addAttribute("requestCriteriaDTO", requestService.getList(page, search));
+        model.addAttribute("requestsCriteriaDTO", requestService.getList(page, search));
+        log.info("requestsCriteriaDTO = {}", requestService.getList(page, search));
         model.addAttribute("search", search);
         return "/mypage/request";
     }
