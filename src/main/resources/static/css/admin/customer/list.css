@@ -102,10 +102,6 @@ table.table tr td, table.table tr>th {
     vertical-align: middle;
 }
 
-table.table tr:last-child td, table.table tr:last-child>th {
-    border-bottom: 0;
-}
-
 svg {
     overflow: hidden;
 }
@@ -933,7 +929,8 @@ body #rebound {
     width: 100%;
 }
 
-input.form-control {
+input.form-control,
+.input-order input {
     border: 1px solid #ededed;
     font-size: 13px;
     height: 38px;
@@ -947,7 +944,8 @@ input.form-control {
     width: 1%;
 }
 
-.page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group input.form-control {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group input.form-control,
+.input-order input {
     border-color: #ededed;
     border-radius: 5px;
     display: inline-block;
@@ -1041,13 +1039,13 @@ button.btn .comp-icon {
     z-index: 1;
 }
 
-.fill-table-layout>table.table>thead tr th:first-child {
+table.table>thead tr th:first-child {
     border-radius: 5px 0 0 5px;
     -moz-border-radius: 5px 0 0 5px;
 }
 
 /* 간격 조정을 위해 padding 수정 */
-.page-content .table-layout table thead th {
+.table-layout table thead th {
     box-shadow: inset 0 -2px 0 #f5f5f5;
     padding: 16px 30px;
     position: relative;
@@ -1055,7 +1053,7 @@ button.btn .comp-icon {
     white-space: nowrap;
 }
 
-.page-content .table-layout table.member-table thead th .member-search-btn {
+.table-layout table.member-table thead th .member-search-btn {
     background-color: #fff;
     border: 1px solid #f5f5f5;
     border-radius: 4px;
@@ -1065,26 +1063,26 @@ button.btn .comp-icon {
     padding-right: 2.5px;
 }
 
-.fill-table-layout>table.table>thead tr th:last-child {
+table.table>thead tr th:last-child {
     border-radius: 0 5px 5px 0;
     -moz-border-radius: 0 5px 5px 0;
 }
 
-.page-content .table-layout table tbody td {
+.table-layout table tbody td {
     border-bottom: 1px solid #ededed;
     padding: 18px 12px;
     font-size: 13px;
 }
 
-.page-content .table-layout table.member-table tr td {
+.table-layout table.member-table tr td {
     transition: background-color .2s;
 }
 
-.page-content .table-layout table.member-table tr:hover td {
+.table-layout table.member-table tr:hover td {
     background-color: #f7fafc;
 }
 
-.page-content .table-layout table.member-table td.td-name {
+.table-layout table.member-table td.td-name {
     max-width: 400px;
     min-width: 200px;
 }
@@ -1897,10 +1895,15 @@ img, svg {
 table.table tr:last-child td, table.table tr:last-child>th {
     border-bottom: 0;
 }
+table.table tr:last-child>th {
+    text-align: center;
+}
 table.table tr td, table.table tr>th {
     border-bottom: 1px solid #e2e2e2;
     border-top: 0;
     vertical-align: middle;
+    box-shadow: inset 0 -2px 0 #f5f5f5;
+    padding: 16px 30px;
 }
 .receipt-index .page-content .table-layout table.receipt-table tr td {
     transition: background-color .2s;
@@ -2083,3 +2086,24 @@ table {
 
 .approval-action-btn * { pointer-events: none; }
 .purchase-action-btn  * { pointer-events: none; }
+
+.banner-row td {
+    text-align: center;
+}
+
+.order-update-btn, .banner-delete-btn {
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    display: inline-block;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    width: 60px;
+    height: 100%;
+}
+
+.input-order {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -8,11 +8,13 @@ import com.example.youeatieat.repository.AdminBannerDAO;
 import com.example.youeatieat.repository.AdminBannerFileDAO;
 import com.example.youeatieat.repository.AdminFileDAO;
 import lombok.RequiredArgsConstructor;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -66,6 +68,14 @@ public class AdminBannerServicelmpl implements AdminBannerService {
             try {
 //                원본 업로드
                 file.transferTo(new File(rootPath, uuid.toString() + "_" + file.getOriginalFilename()));
+
+//                썸네일 업로드
+                if(file.getContentType().startsWith("image")) {
+//                    UUID tUuid = new UUID(); // 원본 이미지의 UUID와 다르게 설정
+                    FileOutputStream out = new FileOutputStream(new File(rootPath, "t_" + uuid.toString() + "_" + file.getOriginalFilename()));
+                    Thumbnailator.createThumbnail(file.getInputStream(), out, 100, 100);
+                    out.close();
+                }
 
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -639,15 +639,18 @@ contentArea.addEventListener("change", async (e) => {
 
     if(target.classList.contains("banner-file")){
         formData = new FormData();
-        formData.append("file", target.files[0]);
-        formData.append("name", target.files[0].name);
 
+        const files = target.files;
         const bannerContainer = document.querySelector("ul.pg-list");
-        const [file] = e.target.files;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.addEventListener("load", (e) => {
-            let text = `
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            formData.append("file", file);
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.addEventListener("load", (e) => {
+                let text = `
                 <li class="pg-list-item show">
                     <div class="pg-logo-wrapper">
                         <button type="button" class="delete-btn">
@@ -658,8 +661,9 @@ contentArea.addEventListener("change", async (e) => {
                 </li>
             `;
 
-            bannerContainer.innerHTML += text;
-        });
+                bannerContainer.innerHTML += text;
+            });
+        }
     }
 
 });

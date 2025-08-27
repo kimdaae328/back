@@ -1876,18 +1876,19 @@ const bannerLayout = (() => {
                     
                     <table id="banner-table" class="table grey-header-table w-100" style="margin-top: 50px;">
                         <colgroup>
-                            <col style="width:15%">
-                            <col style="width:15%">
-                            <col style="width:17%">
-                            <col style="width:20%">
-                            <col style="width:20%">
-                            <col style="width:15%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>배너 순서</th>
                                 <th>이미지 위치</th>
                                 <th>이미지 원본 이름</th>
+                                <th>이미지</th>
                                 <th>업로드 날짜</th>
                                 <th>수정/삭제</th>
                             </tr>
@@ -1909,7 +1910,7 @@ const bannerLayout = (() => {
         if (!bannerList || bannerList.length === 0) {
             bannersContainer.innerHTML = `
             <tr>
-                <td colspan="5" style="text-align:center; padding:20px; color:#777;">
+                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
                     등록된 배너가 없습니다.
                 </td>
             </tr>
@@ -1929,6 +1930,13 @@ const bannerLayout = (() => {
                     </td>
                     <td>${banner.filePath}</td>
                     <td>${banner.fileOriginalName}</td>
+                    <td>
+                        <img 
+                          src="/api/files/display?filePath=${banner.filePath}&fileName=${banner.fileName}" 
+                          alt="${banner.fileOriginalName}" 
+                          style="width:120px; height:60px; object-fit:cover; border-radius:6px;"
+                        >
+                    </td>
                     <td>${banner.updatedDate}</td>
                     <td>
                         <button class="banner-delete-btn">삭제</button>   
