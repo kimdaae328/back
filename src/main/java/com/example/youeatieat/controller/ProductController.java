@@ -4,6 +4,7 @@ import com.example.youeatieat.common.exception.NoProductException;
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.*;
 import com.example.youeatieat.util.Search;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,21 @@ import java.util.List;
 public class ProductController {
     private final ProductServiceImpl productServiceImpl;
     private final NoticeServiceImpl noticeServiceImpl;
+    private final LikeServiceImpl likeServiceImpl;
+    private final HttpSession session;
 
-    //   상품 목록으로 이동
+    //   신상품 목록으로 이동
     @GetMapping("list")
-    public String list() {
+    public String list(Model model) {
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        model.addAttribute("member", memberDTO);
         return "/together-product/list";
+    }
+
+//    베스트 목록으로 이동
+    @GetMapping("best-list")
+    public String bestList() {
+    return "/together-product/best-list";
     }
 
 
@@ -42,6 +53,19 @@ public class ProductController {
         model.addAttribute("product", product);
         List<NoticeDTO> notices = noticeServiceImpl.findAll();
         model.addAttribute("notices", notices);
+
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        model.addAttribute("member", memberDTO);
+
+//        찜 상태 확인
+        boolean liked = false;
+        if (memberDTO != null) {
+            LikeDTO likeDTO = new LikeDTO();
+            likeDTO.setMemberId(memberDTO.getId());
+            likeDTO.setProductId(product.getId());
+            liked = likeServiceImpl.getLike(likeDTO); // true or false
+        }
+        model.addAttribute("liked", liked);
 
         return "/together-product/detail";
     }

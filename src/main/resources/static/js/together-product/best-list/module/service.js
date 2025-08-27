@@ -1,7 +1,7 @@
 const productListService = (() => {
 //     상품 목록 가져오기
     const getProductList = async (page, callback) =>{
-        const response = await fetch(`/api/product/list/${page}`);
+        const response = await fetch(`/api/best-product/best-list/${page}`);
         const data = await response.json();
 
         if (callback) callback(data);
