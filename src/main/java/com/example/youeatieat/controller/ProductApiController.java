@@ -1,11 +1,9 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.NoProductException;
-import com.example.youeatieat.common.exception.handler.NotFoundReviewException;
-import com.example.youeatieat.domain.ReviewImageVO;
-import com.example.youeatieat.domain.ReviewVO;
-import com.example.youeatieat.dto.*;
-import com.example.youeatieat.service.*;
+import com.example.youeatieat.dto.ProductCriteriaDTO;
+import com.example.youeatieat.dto.ProductDTO;
+import com.example.youeatieat.service.ProductServiceImpl;
 import com.example.youeatieat.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +36,7 @@ public class ProductApiController {
     @PostMapping("/list/{page}")
     public ResponseEntity<?> getAllProducts(@PathVariable("page") int page,
                                            @RequestBody Search search) {
-        log.info("search: {}", search);
-        log.info("mainCategories: {}", search.getMainCategories());
-        log.info("priceKeyword=" + (search != null ? search.getPriceKeyword() : "xxx"));
+       
 
         ProductCriteriaDTO productCriteriaDTO = productService.getList(page, search);
         int count = productService.getCount(search);
