@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LikeDAO {
     private final LikeMapper likeMapper;
-    private final CartMapper cartMapper;
 
     //   찜 하기
     public void likeProduct(LikeVO likeVO){likeMapper.insertLike(likeVO);}

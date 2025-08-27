@@ -1,4 +1,8 @@
 
+const memberIdInput = document.getElementById("member-id");
+    const memberId = memberIdInput.value;
+
+
 //  바로가기 네비게이션
 
 const infoButton = document.querySelector(".info-button");
@@ -38,8 +42,6 @@ inquiryButton.addEventListener("click", (e) => {
         top: inquiryY - 100,
         behavior: "smooth"
     });
-
-
 })
 
 // 스크롤감지 탭버튼 활성화
@@ -209,13 +211,14 @@ toggleSubmitButton();
 
 // btn-wish 버튼
 const wishButtons = document.querySelectorAll(".btn-wish");
-wishButtons.forEach((button) => {
-    console.log(product.likeStatus)
-    button.classList.toggle("on", product.likeStatus);
+wishButtons.forEach(async (button) => {
+
+    let liked = await togetherProductService.getLike(product.id);
+    button.classList.toggle("on", liked);
     button.addEventListener("click", async () => {
         const like = {
             productId: product.id,
-            likeStatus: product.likeStatus
+            memberId: memberId
         };
         const isActive = button.classList.contains("on");
         let success = false;
@@ -223,15 +226,15 @@ wishButtons.forEach((button) => {
             success = await togetherProductService.unlike(like);
             if (success) {
                 button.classList.remove("on");
-                like.likeStatus = false;
-                console.log(like.likeStatus);
+                liked = false;
+                console.log(liked);
             }
         } else {
             success = await togetherProductService.like(like);
             if (success) {
                 button.classList.add("on");
-                like.likeStatus = true;
-                console.log(like.likeStatus);
+                liked = true;
+                console.log(liked);
             }
         }
     });

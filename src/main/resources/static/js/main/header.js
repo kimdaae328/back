@@ -1,3 +1,6 @@
+const memberInput = document.getElementById("member-id");
+const memberId = memberInput.value;
+console.log(memberId);
 const icon = document.querySelector("div.alarm-icon");
 const alarmTap = document.querySelector(".alarm-icon-wrap");
 

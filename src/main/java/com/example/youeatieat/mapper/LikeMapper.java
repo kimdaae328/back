@@ -21,4 +21,6 @@ public interface LikeMapper {
 //    찜 목록
       public List<LikeDTO> selectLikeByMemberId(Long memberId);
 
+
+
 }

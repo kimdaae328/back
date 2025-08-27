@@ -18,25 +18,18 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/product/**")
+@RequestMapping("/api/best-product/**")
 @RequiredArgsConstructor
-public class ProductApiController {
-
+public class BestProductsApiController {
     private final ProductServiceImpl productService;
 
-    //   이미지
-    @GetMapping("image")
-    public byte[] display(String filePath) throws IOException {
-        return FileCopyUtils.copyToByteArray(new File("C:" + filePath));
-
-    }
-
-
-//    신상품 목록 뿌리기
-    @PostMapping("/list/{page}")
+//    best 목록 뿌리기
+    @PostMapping("/best-list/{page}")
     public ResponseEntity<?> getAllProducts(@PathVariable("page") int page,
                                            @RequestBody Search search) {
-       
+        log.info("search: {}", search);
+        log.info("mainCategories: {}", search.getMainCategories());
+        log.info("priceKeyword=" + (search != null ? search.getPriceKeyword() : "xxx"));
 
         ProductCriteriaDTO productCriteriaDTO = productService.getList(page, search);
         int count = productService.getCount(search);
@@ -47,14 +40,6 @@ public class ProductApiController {
 
         productCriteriaDTO.setTotalCount(count);
         return ResponseEntity.ok(productCriteriaDTO);
-    }
-
-    //    장바구니 담기로 이동
-    @GetMapping("/{productId}")
-    public ResponseEntity<?> goCartAddPage(@PathVariable Long productId) {
-        Optional<ProductDTO> product = productService.goDetail(productId);
-
-        return product.map(ResponseEntity::ok).orElseThrow(NoProductException::new);
     }
 
 }
