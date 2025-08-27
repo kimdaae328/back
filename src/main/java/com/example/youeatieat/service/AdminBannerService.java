@@ -1,11 +1,9 @@
 package com.example.youeatieat.service;
 
 import com.example.youeatieat.domain.BannerFileVO;
-import com.example.youeatieat.domain.BannerVO;
 import com.example.youeatieat.dto.BannerDTO;
 import com.example.youeatieat.dto.BannerFileDTO;
 import com.example.youeatieat.dto.BannerWithFileDTO;
-import com.example.youeatieat.dto.FileDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -18,6 +16,9 @@ public interface AdminBannerService {
 
 //    조회
     public List<BannerWithFileDTO> getBannerFiles();
+
+//    삭제
+    public boolean deleteBannerFiles(Long id);
 
     default String getPath(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

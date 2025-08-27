@@ -8,4 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AdminFileMapper {
 //    추가
     public void insertFile(FileDTO fileDTO);
+
+//    삭제
+    public void deleteFile(Long id);
 }

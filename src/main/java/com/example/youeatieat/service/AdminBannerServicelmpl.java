@@ -8,13 +8,11 @@ import com.example.youeatieat.repository.AdminBannerDAO;
 import com.example.youeatieat.repository.AdminBannerFileDAO;
 import com.example.youeatieat.repository.AdminFileDAO;
 import lombok.RequiredArgsConstructor;
-import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -48,7 +46,7 @@ public class AdminBannerServicelmpl implements AdminBannerService {
             fileDTO.setFileOriginalName(file.getOriginalFilename());
             fileDTO.setFilePath(todayPath);
             fileDTO.setFileSize(String.valueOf(file.getSize()));
-//            fileDTO.setFileContentType(file.getContentType());
+            fileDTO.setFileContentType(file.getContentType());
 
             fileDAO.save(fileDTO);
             Long fileId = fileDTO.getId();
@@ -80,5 +78,38 @@ public class AdminBannerServicelmpl implements AdminBannerService {
     public List<BannerWithFileDTO> getBannerFiles() {
         List<BannerWithFileDTO> banners = bannerDAO.findBannerAll();
         return banners;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteBannerFiles(Long bannerId) {
+        List<BannerWithFileDTO> banners = bannerFileDAO.findFiles(bannerId);
+
+        bannerFileDAO.delete(bannerId);
+
+//        banners.forEach(file -> {
+//            System.out.println("삭제하려는 fileId = " + file.getId());
+//            fileDAO.delete(file.getId());
+//        });
+
+        banners.forEach(file -> fileDAO.delete(file.getFileId()));
+        bannerDAO.delete(bannerId);
+
+        banners.stream().map(bannerFile -> bannerFile.getBannerId()).forEach(bannerDAO::delete);
+
+        banners.forEach((bannerFile) -> {
+            File file = new File("C:/file/" + bannerFile.getFilePath(), bannerFile.getFileName());
+            if(file.exists()){
+                file.delete();
+            }
+
+            if(bannerFile.getFileContentType().startsWith("image")) {
+                file = new File("C:/file/" + bannerFile.getFilePath(), "t_" + bannerFile.getFileName());
+                if(file.exists()){
+                    file.delete();
+                }
+            }
+        });
+        return false;
     }
 }

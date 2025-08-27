@@ -8,10 +8,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class AdminFileDAO {
-    private final AdminFileMapper adminFileMapper;
+    private final AdminFileMapper fileMapper;
 
 //    추가
     public void save(FileDTO fileDTO) {
-        adminFileMapper.insertFile(fileDTO);
+        fileMapper.insertFile(fileDTO);
+    }
+
+//    삭제
+    public void delete(Long id) {
+        fileMapper.deleteFile(id);
     }
 }

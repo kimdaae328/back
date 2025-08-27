@@ -12,6 +12,5 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id")
 public class BannerVO {
     private Long id;
-    private BannerStatus bannerStatus;
     private int bannerOrder;
 }

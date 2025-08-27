@@ -17,6 +17,7 @@ public class FileDTO {
     private String fileName;
     private String fileOriginalName;
     private String fileSize;
+    private String fileContentType;
     private String createdDate;
     private String updatedDate;
 }

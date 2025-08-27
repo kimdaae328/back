@@ -12,4 +12,7 @@ public interface AdminBannerMapper {
 
 //    조회
     public List<BannerWithFileDTO> selectBannerAll();
+
+//    삭제
+    public void deleteBanner(Long bannerId);
 }

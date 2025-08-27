@@ -24,4 +24,9 @@ public class AdminBannerDAO {
     public List<BannerWithFileDTO> findBannerAll() {
         return bannerMapper.selectBannerAll();
     }
+
+//    삭제
+    public void delete(Long bannerId) {
+        bannerMapper.deleteBanner(bannerId);
+    }
 }

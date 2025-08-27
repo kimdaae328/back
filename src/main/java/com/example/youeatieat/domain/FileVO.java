@@ -15,4 +15,5 @@ public class FileVO {
     private String fileName;
     private String fileOriginal_name;
     private String fileSize;
+    private String fileContentType;
 }

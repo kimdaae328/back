@@ -1455,8 +1455,8 @@ const sellerInquiryLayout = (() => {
                                                     <tbody>
                                                         <th>답변내용</th>
                                                         <td>${inquiryDetail.inquiryAnswerContent ?
-            inquiryDetail.inquiryAnswerContent :
-            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
+                                                            inquiryDetail.inquiryAnswerContent :
+                                                            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
                                                                 <input class="inquiry-id-input" type="hidden" name="" value="${inquiryDetail.id}">
                                                                 <textarea class="answer-textarea"
                                                                     name=""
@@ -1855,10 +1855,22 @@ const bannerLayout = (() => {
                             메인페이지 배너등록
                         </div>
                         <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
-                            <select id="banner-status" name="bannerStatus">
-                                <option value="main">메인</option>
-                                <option value="sub">서브</option>
-                            </select>
+<!--                            <select id="banner-order" name="bannerOrder">-->
+<!--                                <option value="1">1</option>-->
+<!--                                <option value="2">2</option>-->
+<!--                                <option value="3">3</option>-->
+<!--                                <option value="4">4</option>-->
+<!--                                <option value="5">5</option>-->
+<!--                                <option value="6">6</option>-->
+<!--                                <option value="7">7</option>-->
+<!--                                <option value="8">8</option>-->
+<!--                                <option value="9">9</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                            </select>-->
                             <!-- 아래 Li수만큼 Img -->
                             <div class="dropdown">
                                 <label>
@@ -1888,8 +1900,7 @@ const bannerLayout = (() => {
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>배너 번호</th>
-                                <th>노출 위치</th>
+                                <th>배너 순서</th>
                                 <th>이미지 위치</th>
                                 <th>이미지 원본 이름</th>
                                 <th>업로드 날짜</th>
@@ -1913,15 +1924,18 @@ const bannerLayout = (() => {
         let text = "";
         bannerList.forEach((banner) => {
             text += `
-                <tr>
-                    <td>${banner.id}</td>
-                    <td>${banner.bannerStatus}</td>
+                <tr class="banner-row" data-banner-id="${banner.id}">
+                    <td>
+                        <div class="input-order">
+                            <input type="text" value="${banner.bannerOrder}">
+                            <button>확인</button>
+                        </div>
+                    </td>
                     <td>${banner.filePath}</td>
                     <td>${banner.fileOriginalName}</td>
                     <td>${banner.updatedDate}</td>
                     <td>
-                        <button>수정</button>
-                        <button>삭제</button>   
+                        <button class="banner-delete-btn">삭제</button>   
                     </td>
                 </tr>
             `;

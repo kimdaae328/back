@@ -16,7 +16,6 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class BannerDTO {
     private Long id;
-    private BannerStatus bannerStatus;
     private int bannerOrder;
     private String createdDate;
     private String updatedDate;

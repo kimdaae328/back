@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.youeatieat.mapper.AdminBannerMapper">
     <insert id="insertBanner" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_banner (banner_status, banner_order)
-        values (#{bannerStatus}, #{bannerOrder})
+        insert into tbl_banner (banner_order)
+        values (#{bannerOrder})
     </insert>
 
     <select id="selectBannerAll">
-        select b.id, b.banner_status, b.banner_order, b.created_date, b.updated_date, f.file_path, f.file_name, f.file_original_name, f.file_size
+        select b.id, b.banner_order, b.created_date, b.updated_date, f.file_path, f.file_name, f.file_original_name, f.file_content_type, f.file_size
         from tbl_banner b
         join tbl_banner_file bf on b.id = bf.banner_id
         join tbl_file f on f.id = bf.file_id

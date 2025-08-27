@@ -518,29 +518,47 @@ const bannerService = (() => {
         const data = await response.json();
 
         if(response.ok) {
-            console.log("banner 보내짐!!!", data)
-        } else if(!response.ok) {
-            console.log("banner 실패!!!!!!!");
+            console.log("배너 보냈음", data)
+        }else if(response.status === 404){
+            console.log("배너 못보냈음")
+        }else {
+            const error = await response.text()
+            console.log(error);
         }
     }
 
     const getList = async () => {
         const response = await fetch('/api/admin/banners');
-        const bannerList = await response.json();
+        const data = await response.json();
 
-        console.log(bannerList)
+        console.log(data)
 
         if(response.ok) {
-            console.log("매입상세글 존재")
+            console.log("배너 존재")
         }else if(response.status === 404){
-            console.log("매입상세글 없음")
+            console.log("배너 없음")
         }else {
             const error = await response.text()
             console.log(error);
         }
 
-        return bannerList;
+        return data;
     };
 
-    return {uploadService, getList}
+    // 매입 상태 변경
+    const deleteBanner = async (id) => {
+        const response = await fetch(`/api/admin/banners/${id}`,{
+            method:"DELETE"
+        });
+
+        if (!response.ok) {
+            const msg = await response.text().catch(() => "");
+            console.error("삭제 실패:", response.status, msg);
+            return null;
+        }
+
+        return true;
+    };
+
+    return {uploadService, getList, deleteBanner}
 })();

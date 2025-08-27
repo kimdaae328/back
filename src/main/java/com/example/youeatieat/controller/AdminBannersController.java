@@ -1,9 +1,6 @@
 package com.example.youeatieat.controller;
 
-import com.example.youeatieat.dto.BannerDTO;
-import com.example.youeatieat.dto.BannerFileDTO;
-import com.example.youeatieat.dto.BannerWithFileDTO;
-import com.example.youeatieat.dto.FileDTO;
+import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.AdminBannerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +23,6 @@ public class AdminBannersController {
     @PostMapping
     public ResponseEntity<?> uploadBanner(BannerDTO bannerDTO, @RequestParam("file") List<MultipartFile> files) {
         //확인
-        log.info("bannerStatus = {}", bannerDTO.getBannerStatus());
 //        log.info("bannerOrder  = {}", bannerDTO.getBannerOrder());
 
         files.forEach(file -> {
@@ -43,10 +39,19 @@ public class AdminBannersController {
     @GetMapping
     public ResponseEntity<?> list(){
         List<BannerWithFileDTO> bannerWithFileDTO = bannerService.getBannerFiles();
-        if(bannerWithFileDTO == null || bannerWithFileDTO.isEmpty()){
+        if(bannerWithFileDTO == null || bannerWithFileDTO.size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bannerWithFileDTO);
         }
         return ResponseEntity.ok(bannerWithFileDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        boolean result = bannerService.deleteBannerFiles(id);
+        if(!result){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+        }
+        return ResponseEntity.ok(result);
     }
 
 }

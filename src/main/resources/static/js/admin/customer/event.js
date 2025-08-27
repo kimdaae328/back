@@ -638,12 +638,12 @@ function addBanner() {
         const target = e.target;
 
         if(target.classList.contains("banner-file")){
-            const status = document.querySelector('#banner-status').value;
+            // const status = document.querySelector('#banner-status').value;
 
             formData = new FormData();
             formData.append("file", target.files[0]);
             formData.append("name", target.files[0].name);
-            formData.append('bannerStatus', status);
+            // formData.append('bannerStatus', status);
 
             const bannerContainer = document.querySelector("ul.pg-list");
             const [file] = e.target.files;
@@ -668,19 +668,35 @@ function addBanner() {
     });
 
     contentArea.addEventListener("click", async (e) => {
-    const target = e.target;
-    if (target.classList.contains("register-link")) {
-        e.preventDefault();
-        await bannerService.uploadService(formData);
-    }
-});
+        const target = e.target;
+        if (target.classList.contains("register-link")) {
+            e.preventDefault();
+            await bannerService.uploadService(formData);
+            await currentLoader(1)
+        }
+    });
 }
 
-// bannerContainer.addEventListener('click',(e)=>{
-//     if(e.target.classList.contains("delete-btn")){
-//
-//         e.target.parentElement.parentElement.remove();
-//     }
-//
-// })
 
+
+contentArea.addEventListener('click', async (e) => {
+    const target = e.target;
+
+    // 배너 사진 등록중 삭제
+    if(target.classList.contains("delete-btn")){
+        const delBtn = e.target.closest('.delete-btn');
+        const item = delBtn.closest('.pg-list-item');
+        if (!item) return;
+
+        item.remove();
+    }
+
+    // 배너 리스트 삭제
+    if(target.classList.contains("banner-delete-btn")){
+        const row = target.closest("tr");
+        const bannerId = row.dataset.bannerId;
+        // console.log(bannerId)
+        await bannerService.deleteBanner(bannerId)
+        await currentLoader(1);
+    }
+});
