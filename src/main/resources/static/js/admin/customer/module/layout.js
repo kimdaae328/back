@@ -1455,8 +1455,8 @@ const sellerInquiryLayout = (() => {
                                                     <tbody>
                                                         <th>답변내용</th>
                                                         <td>${inquiryDetail.inquiryAnswerContent ?
-            inquiryDetail.inquiryAnswerContent :
-            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
+                                                            inquiryDetail.inquiryAnswerContent :
+                                                            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
                                                                 <input class="inquiry-id-input" type="hidden" name="" value="${inquiryDetail.id}">
                                                                 <textarea class="answer-textarea"
                                                                     name=""
@@ -1598,7 +1598,6 @@ const purchaseLayout = (() => {
             APPROVED: "승인",
             REJECTED: "거절"
         };
-
 
         purchasesCriteria.purchases.forEach((purchase) => {
             const status = purchase.purchaseRequestApprovalStatus;
@@ -1851,28 +1850,99 @@ const bannerLayout = (() => {
             </div>
             <div class="page-body temp-page">
                 <div class="pg-box banner-container">
-                    <div class="title">
-                        메인페이지 배너등록
-                    </div>
-                    <!-- 아래 Li수만큼 Img -->
-                    <div class="dropdown">
-                        <label>
-                            <input type="file" id="banner-file" class="banner-file" style="display: none;" multiple >
-                            <div class="add-btn">
-                                <i class="fas fa-plus"></i>
+                    <div class="banner-insert">
+                        <div class="title">
+                            메인페이지 배너등록
+                        </div>
+                        <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
+<!--                            <select id="banner-order" name="bannerOrder">-->
+<!--                                <option value="1">1</option>-->
+<!--                                <option value="2">2</option>-->
+<!--                                <option value="3">3</option>-->
+<!--                                <option value="4">4</option>-->
+<!--                                <option value="5">5</option>-->
+<!--                                <option value="6">6</option>-->
+<!--                                <option value="7">7</option>-->
+<!--                                <option value="8">8</option>-->
+<!--                                <option value="9">9</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                                <option value="10">10</option>-->
+<!--                            </select>-->
+                            <!-- 아래 Li수만큼 Img -->
+                            <div class="dropdown">
+                                <label>
+                                    <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
+                                    <div class="add-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <a>사진등록</a>
+                                </label>
                             </div>
-                            <a>사진등록</a>
-                        </label>
+                            <div class="boot-tip tip primary">
+                                <ul class="pg-list list-unstyled">
+                                </ul>
+                                <a href="#" class="register-link">등록</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="boot-tip tip primary">
-                        <ul class="pg-list list-unstyled">
-                        </ul>
-                        <a href="#" class="register-link">등록</a>
-                    </div>
+                    
+                    <table id="banner-table" class="table grey-header-table w-100" style="margin-top: 50px;">
+                        <colgroup>
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:17%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+                            <col style="width:15%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>배너 순서</th>
+                                <th>이미지 위치</th>
+                                <th>이미지 원본 이름</th>
+                                <th>업로드 날짜</th>
+                                <th>수정/삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         `
     }
 
-    return {contentLayout}
+    // 배너 목록
+    const showList = (bannerList) => {
+        const bannersContainer = document.querySelector("#banner-table tbody");
+        if (!bannersContainer) return;
+
+        let text = "";
+        bannerList.forEach((banner) => {
+            text += `
+                <tr class="banner-row" data-banner-id="${banner.id}">
+                    <td>
+                        <div class="input-order">
+                            <input type="text" value="${banner.bannerOrder}">
+                            <button>확인</button>
+                        </div>
+                    </td>
+                    <td>${banner.filePath}</td>
+                    <td>${banner.fileOriginalName}</td>
+                    <td>${banner.updatedDate}</td>
+                    <td>
+                        <button class="banner-delete-btn">삭제</button>   
+                    </td>
+                </tr>
+            `;
+        });
+
+        bannersContainer.innerHTML = text;
+    };
+
+    return {contentLayout, showList}
 })();

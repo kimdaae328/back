@@ -6,7 +6,7 @@
         values  (#{memberEmail},#{memberPassword},#{memberName},#{memberBirth},#{memberPhone},#{memberGender})
     </insert>
     <insert id="kakaoInsertMember" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_member (member_kakao_email,member_name,member_birth,member_phone,member_gender,member_provider)
+        insert into tbl_member (member_kakao_email, member_name,member_birth,member_phone,member_gender,member_provider)
         values (#{memberKakaoEmail},#{memberName},#{memberBirth},#{memberPhone},#{memberGender},#{memberProvider})
     </insert>
     <select id="selectMemberForLogin">

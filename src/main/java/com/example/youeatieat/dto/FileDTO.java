@@ -1,21 +1,23 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-@Getter
-@ToString @Setter
-@EqualsAndHashCode(of = "id")
-public class BannerDTO {
+@Getter @Setter
+@ToString
+@EqualsAndHashCode(of="id")
+public class FileDTO {
     private Long id;
-    private int bannerOrder;
+    private String filePath;
+    private String fileName;
+    private String fileOriginalName;
+    private String fileSize;
+    private String fileContentType;
     private String createdDate;
     private String updatedDate;
 }

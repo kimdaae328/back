@@ -9,8 +9,11 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 @SuperBuilder
 @EqualsAndHashCode(of="id")
-
-public class BannerVO {
+public class FileVO {
     private Long id;
-    private int bannerOrder;
+    private String filePath;
+    private String fileName;
+    private String fileOriginal_name;
+    private String fileSize;
+    private String fileContentType;
 }

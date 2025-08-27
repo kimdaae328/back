@@ -1,6 +1,5 @@
 package com.example.youeatieat.dto;
 
-import com.example.youeatieat.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +12,15 @@ import java.util.List;
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class BannerDTO {
-    private Long id;
+public class BannerWithFileDTO {
+    private Long bannerId;
+    private Long fileId;
     private int bannerOrder;
     private String createdDate;
     private String updatedDate;
+    private String filePath;
+    private String fileName;
+    private String fileOriginalName;
+    private String fileSize;
+    private String fileContentType;
 }

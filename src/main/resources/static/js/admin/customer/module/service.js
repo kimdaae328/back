@@ -479,7 +479,7 @@ const purchaseService = (() => {
         return data;
     };
 
-    //    매입 승인 완료 조회
+    // 매입 승인 완료 조회
     const getApprovedCountAll = async () => {
         const res = await fetch('/api/admin/purchases/approved/count');
         if (!res.ok) {
@@ -489,6 +489,7 @@ const purchaseService = (() => {
         return await res.json();
     };
 
+    // 매입 상태 변경
     const updatePurchaseStatus = async (purchaseId, status) => {
         const response = await fetch(`/api/admin/purchases/${purchaseId}/status?status=${status}`,{
             method:"POST"
@@ -504,4 +505,60 @@ const purchaseService = (() => {
     };
 
     return {getPurchaseService, getCurrentPage, getDetail, getApprovedCountAll, updatePurchaseStatus}
+})();
+
+// 배너
+const bannerService = (() => {
+    const uploadService = async (formData) => {
+        const response = await fetch(`/api/admin/banners`,{
+            method:"POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if(response.ok) {
+            console.log("배너 보냈음", data)
+        }else if(response.status === 404){
+            console.log("배너 못보냈음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+    }
+
+    const getList = async () => {
+        const response = await fetch('/api/admin/banners');
+        const data = await response.json();
+
+        console.log(data)
+
+        if(response.ok) {
+            console.log("배너 존재")
+        }else if(response.status === 404){
+            console.log("배너 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return data;
+    };
+
+    // 매입 상태 변경
+    const deleteBanner = async (id) => {
+        const response = await fetch(`/api/admin/banners/${id}`,{
+            method:"DELETE"
+        });
+
+        if (!response.ok) {
+            const msg = await response.text().catch(() => "");
+            console.error("삭제 실패:", response.status, msg);
+            return null;
+        }
+
+        return true;
+    };
+
+    return {uploadService, getList, deleteBanner}
 })();
