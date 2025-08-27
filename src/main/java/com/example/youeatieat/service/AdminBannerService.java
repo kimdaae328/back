@@ -18,7 +18,10 @@ public interface AdminBannerService {
     public List<BannerWithFileDTO> getBannerFiles();
 
 //    삭제
-    public boolean deleteBannerFiles(Long id);
+    public void deleteBannerFiles(Long id);
+
+//    순서 수정
+    public void updateBannerOrder(Long bannerId, int bannerOrder);
 
     default String getPath(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

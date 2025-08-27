@@ -30,7 +30,7 @@ public class AdminBannerServicelmpl implements AdminBannerService {
         String todayPath = getPath();
         String rootPath = "C:/file/" + todayPath;
 
-        bannerDAO.uploadBanner(bannerDTO);
+        bannerDAO.upload(bannerDTO);
         Long bannerId = bannerDTO.getId();
 
         files.forEach(file -> {
@@ -82,7 +82,7 @@ public class AdminBannerServicelmpl implements AdminBannerService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteBannerFiles(Long bannerId) {
+    public void deleteBannerFiles(Long bannerId) {
         List<BannerWithFileDTO> banners = bannerFileDAO.findFiles(bannerId);
 
         bannerFileDAO.delete(bannerId);
@@ -92,12 +92,15 @@ public class AdminBannerServicelmpl implements AdminBannerService {
 //            fileDAO.delete(file.getId());
 //        });
 
-        banners.forEach(file -> fileDAO.delete(file.getFileId()));
+//        banners.forEach(file -> fileDAO.delete(file.getFileId()));
         bannerDAO.delete(bannerId);
 
-        banners.stream().map(bannerFile -> bannerFile.getBannerId()).forEach(bannerDAO::delete);
+//        banners.stream().map(bannerFile -> bannerFile.getBannerId()).forEach(bannerDAO::delete);
 
         banners.forEach((bannerFile) -> {
+
+            fileDAO.delete(bannerFile.getFileId());
+
             File file = new File("C:/file/" + bannerFile.getFilePath(), bannerFile.getFileName());
             if(file.exists()){
                 file.delete();
@@ -110,6 +113,11 @@ public class AdminBannerServicelmpl implements AdminBannerService {
                 }
             }
         });
-        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateBannerOrder(Long bannerId, int bannerOrder) {
+        bannerDAO.updateOrder(bannerId, bannerOrder);
     }
 }

@@ -7,7 +7,7 @@
     </insert>
 
     <select id="selectBannerAll">
-        select b.id, b.banner_order, b.created_date, b.updated_date, f.file_path, f.file_name, f.file_original_name, f.file_content_type, f.file_size
+        select b.id as bannerId, b.banner_order, b.created_date, b.updated_date, f.id as fileId, f.file_path, f.file_name, f.file_original_name, f.file_content_type, f.file_size
         from tbl_banner b
         join tbl_banner_file bf on b.id = bf.banner_id
         join tbl_file f on f.id = bf.file_id
@@ -24,4 +24,10 @@
         delete from tbl_banner
         where id = #{id}
     </delete>
+
+    <update id="updateBannerOrder">
+        update tbl_banner
+        set banner_order = #{bannerOrder}
+        where id = #{bannerId}
+    </update>
 </mapper>

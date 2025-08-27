@@ -206,8 +206,9 @@ sideSubLinks.forEach((sideSubLink) => {
             currentPageType = "banner";
 
             bannerLayout.contentLayout();
+            // addBanner();
             await setList(showBannerList);
-            addBanner();
+
 
         } else {
             console.log("?????");
@@ -632,25 +633,21 @@ function closeModal(modal) {
 }
 
 // 배너
-function addBanner() {
-    let formData = null;
-    contentArea.addEventListener("change", async (e) => {
-        const target = e.target;
+let formData = null;
+contentArea.addEventListener("change", async (e) => {
+    const target = e.target;
 
-        if(target.classList.contains("banner-file")){
-            // const status = document.querySelector('#banner-status').value;
+    if(target.classList.contains("banner-file")){
+        formData = new FormData();
+        formData.append("file", target.files[0]);
+        formData.append("name", target.files[0].name);
 
-            formData = new FormData();
-            formData.append("file", target.files[0]);
-            formData.append("name", target.files[0].name);
-            // formData.append('bannerStatus', status);
-
-            const bannerContainer = document.querySelector("ul.pg-list");
-            const [file] = e.target.files;
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.addEventListener("load", (e) => {
-                let text = `
+        const bannerContainer = document.querySelector("ul.pg-list");
+        const [file] = e.target.files;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", (e) => {
+            let text = `
                 <li class="pg-list-item show">
                     <div class="pg-logo-wrapper">
                         <button type="button" class="delete-btn">
@@ -661,23 +658,20 @@ function addBanner() {
                 </li>
             `;
 
-                bannerContainer.innerHTML += text;
-            });
-        }
+            bannerContainer.innerHTML += text;
+        });
+    }
 
-    });
+});
 
-    contentArea.addEventListener("click", async (e) => {
-        const target = e.target;
-        if (target.classList.contains("register-link")) {
-            e.preventDefault();
-            await bannerService.uploadService(formData);
-            await currentLoader(1)
-        }
-    });
-}
-
-
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+    if (target.classList.contains("register-link")) {
+        e.preventDefault();
+        await bannerService.uploadService(formData);
+        await currentLoader(1)
+    }
+});
 
 contentArea.addEventListener('click', async (e) => {
     const target = e.target;
@@ -695,8 +689,30 @@ contentArea.addEventListener('click', async (e) => {
     if(target.classList.contains("banner-delete-btn")){
         const row = target.closest("tr");
         const bannerId = row.dataset.bannerId;
-        // console.log(bannerId)
         await bannerService.deleteBanner(bannerId)
         await currentLoader(1);
+    }
+
+    // 배너 등록후 다시 화면 로드
+    if(target.classList.contains("register-link")){
+        await currentLoader(1);
+    }
+
+    if(target.classList.contains("order-update-btn")){
+        e.preventDefault()
+        const row = e.target.closest(".banner-row");
+        const bannerId = row.dataset.bannerId;
+        const newOrder = row.querySelector("input").value;
+
+        console.log("업데이트 간다!!!", bannerId, newOrder);
+
+        const result = await bannerService.updateOrder(bannerId, newOrder);
+
+        if (result) {
+            alert("순서 변경 성공!!!!!!");
+            // await currentLoader(1);
+        } else {
+            alert("순서 변경 실패!");
+        }
     }
 });

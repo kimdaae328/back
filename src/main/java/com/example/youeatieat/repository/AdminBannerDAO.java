@@ -16,7 +16,7 @@ public class AdminBannerDAO {
     private final AdminBannerMapper bannerMapper;
 
 //    추가
-    public void uploadBanner(BannerDTO bannerDTO) {
+    public void upload(BannerDTO bannerDTO) {
         bannerMapper.insertBanner(bannerDTO);
     }
 
@@ -29,4 +29,9 @@ public class AdminBannerDAO {
     public void delete(Long bannerId) {
         bannerMapper.deleteBanner(bannerId);
     }
+
+//    순서 수정
+    public void updateOrder(Long bannerId, int bannerOrder) {
+        bannerMapper.updateBannerOrder(bannerId, bannerOrder);
+    };
 }

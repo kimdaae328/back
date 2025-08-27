@@ -1843,6 +1843,7 @@ const purchaseLayout = (() => {
 const bannerLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
+
         contentArea.innerHTML = `
             <div class="page-header">
                 <div class="page-title">메인 배너 등록</div>
@@ -1855,22 +1856,6 @@ const bannerLayout = (() => {
                             메인페이지 배너등록
                         </div>
                         <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
-<!--                            <select id="banner-order" name="bannerOrder">-->
-<!--                                <option value="1">1</option>-->
-<!--                                <option value="2">2</option>-->
-<!--                                <option value="3">3</option>-->
-<!--                                <option value="4">4</option>-->
-<!--                                <option value="5">5</option>-->
-<!--                                <option value="6">6</option>-->
-<!--                                <option value="7">7</option>-->
-<!--                                <option value="8">8</option>-->
-<!--                                <option value="9">9</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                            </select>-->
                             <!-- 아래 Li수만큼 Img -->
                             <div class="dropdown">
                                 <label>
@@ -1921,14 +1906,25 @@ const bannerLayout = (() => {
         const bannersContainer = document.querySelector("#banner-table tbody");
         if (!bannersContainer) return;
 
+        if (!bannerList || bannerList.length === 0) {
+            bannersContainer.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align:center; padding:20px; color:#777;">
+                    등록된 배너가 없습니다.
+                </td>
+            </tr>
+        `;
+            return;
+        }
+
         let text = "";
         bannerList.forEach((banner) => {
             text += `
-                <tr class="banner-row" data-banner-id="${banner.id}">
+                <tr class="banner-row" data-banner-id="${banner.bannerId}">
                     <td>
                         <div class="input-order">
                             <input type="text" value="${banner.bannerOrder}">
-                            <button>확인</button>
+                            <button class="order-update-btn">확인</button>
                         </div>
                     </td>
                     <td>${banner.filePath}</td>
