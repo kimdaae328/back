@@ -21,8 +21,7 @@ public interface LikeService {
     default LikeVO toVO(LikeDTO likeDTO){
         return LikeVO.builder()
                 .productId(likeDTO.getProductId())
-                .memberId(2L) // 로그인한 사용자 ID
-//                .memberId(cartDTO.getMemberId())
+                .memberId(likeDTO.getMemberId())
                 .build();
     }
 }

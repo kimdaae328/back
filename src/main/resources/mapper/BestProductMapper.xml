@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.youeatieat.mapper.ProductMapper">
+<mapper namespace="com.example.youeatieat.mapper.BestProductMapper">
     <!-- 대카 검색 -->
     <sql id="search">
         <if test="search.mainCategories != null and search.mainCategories.size() > 0">
@@ -42,12 +42,12 @@
         product_title_image_url, product_info_image_url, product_min_number,
         product_status, created_date, updated_date,
         main_category_id, main_category_name,
-        sub_category_id, sub_category_name
-        from view_product_detail
+        sub_category_id, sub_category_name, like_count
+        from view_best_product_detail
         where product_status = 'active'
         <include refid="search"/>
         <include refid="priceFilter"/>
-        order by created_date desc
+        order by like_count desc
         limit #{criteria.rowCount} offset #{criteria.offset}
     </select>
 
@@ -59,14 +59,14 @@
                product_status, created_date, updated_date,
                main_category_id, main_category_name,
                sub_category_id, sub_category_name
-        from view_product_detail
+        from view_best_product_detail
         where id = #{id}
     </select>
 
     <!-- 개수 조회-->
     <select id="countProduct">
         select count(*)
-        from view_product_detail
+        from view_best_product_detail
         where product_status = 'active'
         <include refid="search"/>
         <include refid="priceFilter"/>

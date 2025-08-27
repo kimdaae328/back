@@ -17,3 +17,4 @@ create table tbl_product(
                                 references tbl_member(id)
 );
 
+select * from tbl_product;

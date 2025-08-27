@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
-    <link rel="stylesheet" href="/css/together-product/list.css">
+    <link rel="stylesheet" href="/css/together-product/banner.css">
     <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     <title>너도먹고나도먹고</title>
 </head>
 <body>
-<div class="sub">
-    <div>
-        <header th:replace="~{/main/header.html :: header}"></header>
+    <div class="sub">
+        <div>
+            <header th:replace="~{/main/header.html :: header}"></header>
 
-        <div class="banner-wrap">
-
+            <div class="banner-wrap">
+                <ul class="banner-list">
+                </ul>
+            </div>
         </div>
     </div>
-<footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
-
 <script src="/js/main/header.js"></script>
-<script src="/js/together-product/list/module/service.js"></script>
-<script src="/js/together-product/list/module/layout.js"></script>
-<script src="/js/together-product/list/event.js"></script>
+<script src="/js/together-product/banner/module/service.js"></script>
+<script src="/js/together-product/banner/module/layout.js"></script>
+<script src="/js/together-product/banner/event.js"></script>
 </html>
