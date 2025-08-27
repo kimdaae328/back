@@ -17,3 +17,6 @@ create table tbl_member(
     updated_date datetime default current_timestamp
 );
 
+select * from tbl_member;
+
+alter table tbl_member add column member_kakao_email varchar(255);

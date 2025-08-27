@@ -28,4 +28,5 @@
         from tbl_like l join tbl_member m on l.member_id = m.id join tbl_product p on l.product_id= p.id
         where l.member_id=#{memberId}
     </select>
+
 </mapper>

@@ -27,9 +27,13 @@
 <!--                     로그인 했을 때-->
                       <div class="customer-service" >
                           <th:block th:if="${session.member != null}">
-                             <a href="" class="customer-name" th:text="${session.member.memberName}">
-                                 <span class="customer-service-icon" ></span>
-                             </a>
+                              <a href="" class="customer-name" th:text="${session.member.memberName}">
+                                  <span class="customer-service-icon" ></span>
+<!--                                  <input id="member-id" type="hidden" th:value="${session.member.id}" />-->
+                              </a>
+                          </th:block>
+                          <th:block th:if="${session.member != null}">
+                              <input id="member-id" type="hidden" th:value="${session.member.id}"/>
                           </th:block>
                          <div class="member-menu customer-service-list">
                              <form action="/request/list/1" method="get">

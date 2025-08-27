@@ -39,6 +39,25 @@ const togetherProductService = (() => {
         return response.ok
     };
 
+    // 좋아요 조회
+    const getLike = async (productId) => {
+        const response = await fetch(`/api/like/status?productId=${productId}`);
+        if (!response.ok) {
+            console.log("서버 에러");
+            return false;
+        }
+
+        const liked = await response.json();
+
+        if (liked) {
+            console.log("좋아요 존재");
+        } else {
+            console.log("좋아요 없음");
+        }
+
+        return liked;
+    }
+
     // 리뷰 목록
 
         const getReview = async (productId, page, callback) => {
@@ -127,6 +146,6 @@ const togetherProductService = (() => {
         return await response.json();
     };
 
-    return {save:save, like:like, unlike:unlike, getReview:getReview, getReviewDetail:getReviewDetail, inquiry:inquiry, getInquiry:getInquiry, getAnswer:getAnswer};
+    return {save:save, like:like, unlike:unlike, getLike:getLike, getReview:getReview, getReviewDetail:getReviewDetail, inquiry:inquiry, getInquiry:getInquiry, getAnswer:getAnswer};
 
 })();

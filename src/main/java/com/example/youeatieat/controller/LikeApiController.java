@@ -20,7 +20,8 @@ public class LikeApiController {
     //    찜하기
     @PostMapping("like")
     public ResponseEntity<?> likeProduct(@RequestBody LikeDTO likeDTO) {
-        likeDTO.setMemberId(2L);
+        MemberDTO member = (MemberDTO) session.getAttribute("member");
+        likeDTO.setMemberId(member.getId());
         likeService.like(likeDTO);
         return ResponseEntity.ok().body(likeDTO);
     }
@@ -28,7 +29,8 @@ public class LikeApiController {
     //    찜 취소하기
     @PostMapping("unlike")
     public ResponseEntity<?> unlikeProduct(@RequestBody LikeDTO likeDTO) {
-        likeDTO.setMemberId(2L);
+        MemberDTO member = (MemberDTO) session.getAttribute("member");
+        likeDTO.setMemberId(member.getId());
         likeService.unlike(likeDTO);
         return ResponseEntity.ok().body(likeDTO);
     }
@@ -40,6 +42,20 @@ public class LikeApiController {
         List<LikeDTO> likes = likeService.getLikeListByMemberId(member.getId());
 
         return ResponseEntity.ok(likes);
+    }
+
+//    좋아요 상태 조회
+    @GetMapping("status")
+    public ResponseEntity<Boolean> getLikeStatus(@RequestParam("productId") Long productId) {
+        MemberDTO member = (MemberDTO) session.getAttribute("member");
+        if (member == null) return ResponseEntity.ok(false);
+
+        LikeDTO likeDTO = new LikeDTO();
+        likeDTO.setMemberId(member.getId());
+        likeDTO.setProductId(productId);
+
+        boolean liked = likeService.getLike(likeDTO);
+        return ResponseEntity.ok(liked);
     }
 
 }

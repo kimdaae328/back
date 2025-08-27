@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.BannerMapper">
+    <select id="selectAllBanner">
+        select banner_image, banner_order, banner_status
+        from tbl_banner
+        where banner_status = 'active'
+        order by banner_order
+    </select>
+</mapper>
