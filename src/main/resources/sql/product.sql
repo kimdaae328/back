@@ -24,3 +24,24 @@ FROM tbl_product
 WHERE product_status = 'active'
   AND main_category_id = 1
   AND sub_category_name = '잎채소';
+
+select p1.*, p2.c from tbl_product p1
+                           join
+                       (
+                           select product_id, count(*) c from tbl_cart
+                           where created_date >= DATE_ADD(NOW(), INTERVAL -1 WEEK)
+                           group by product_id
+                       ) p2
+                       on p1.id = p2.product_id
+order by p2.c desc
+limit 8 offset 0;
+
+select p1.* from tbl_product p1
+                     join
+                 (
+                     select product_id, count(*) c from tbl_like
+                     group by product_id
+                 ) p2
+                 on p1.id = p2.product_id
+order by p2.c desc
+limit 10 offset 0;

@@ -763,23 +763,23 @@ button.btn {
     text-rendering: auto;
 }
 #sublist1 {
-    display: none;  
+    display: none;
 }
 #sublist1.show {
-    display: block; 
+    display: block;
 }
 .mdi-chevron-down:before {
     content: "\F0140";
 }
 
 #usermenubtn {
-        cursor: pointer;  /* 클릭할 수 있는 요소임을 나타냄 */
-        
-   
-    }
-    .dropdown-menu.show {
-        display: block;
-    }
+    cursor: pointer;  /* 클릭할 수 있는 요소임을 나타냄 */
+
+
+}
+.dropdown-menu.show {
+    display: block;
+}
 #usermenu{
     position: absolute;  top: 40px; left: 20px; will-change: transform;
 }
@@ -809,12 +809,12 @@ button.btn {
 }
 
 .dropdown-menu{
- bottom: auto;
-    right: auto;   
+    bottom: auto;
+    right: auto;
 }
 .tab-name:hover{
- cursor: pointer;
- 
+    cursor: pointer;
+
 }
 .user-menu{
     position: relative;
@@ -847,7 +847,7 @@ button.btn {
         flex: 0 0 100%;
         max-width: 100%;
     }
-    
+
 }
 @media (min-width: 992px) {
     .col-md-6 {
@@ -855,9 +855,9 @@ button.btn {
         max-width: 50%;
     }
 }.ana-access-index .info-box .info-card {
-    margin-bottom: -20px;
-    margin-top: -20px;
-}
+     margin-bottom: -20px;
+     margin-top: -20px;
+ }
 .ana-access-index .info-box .info-card .info-title {
     color: #afb7ba;
     font-size: 16px;
@@ -895,7 +895,7 @@ button.btn {
         max-width: 33.33333333%;
     }
 }
-.receipt-index .amount-section {
+.amount-section {
     background-color: #fff;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -903,7 +903,11 @@ button.btn {
     width: 100%;
 }
 
-.receipt-index .amount-section .amount-box {
+.amount-section .amount-wrap {
+    display: flex;
+}
+
+.amount-section .amount-box {
     border-right: 1px solid #ededed;
     display: inline-block;
     height: 100%;
@@ -911,10 +915,10 @@ button.btn {
     vertical-align: top;
     width: 50%;
 }
-.receipt-index .amount-section .amount-box .title-col {
+.amount-section .amount-box .title-col {
     min-width: 150px;
 }
-.receipt-index .amount-section .amount-box .col, .receipt-index .amount-section .amount-box .col-auto {
+.amount-section .amount-box .col, .amount-section .amount-box .col-auto {
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -923,7 +927,7 @@ button.btn {
     max-width: 100%;
     width: auto;
 }
-.receipt-index .amount-section .amount-box span.badge-label {
+.amount-section .amount-box span.badge-label {
     color: #56626a;
     display: inline-block;
     font-size: 16px;
@@ -931,7 +935,7 @@ button.btn {
     padding: 0;
     vertical-align: middle;
 }
-.receipt-index .amount-section .amount-box span.icon-label {
+.amount-section .amount-box span.icon-label {
     height: 38px;
     line-height: 18px;
     margin-right: 14px;
@@ -954,12 +958,12 @@ button.btn {
 .text-primary {
     color: #507cf3 !important;
 }
-.receipt-index .amount-section .amount-box span.icon-label i.mdi {
+.amount-section .amount-box span.icon-label i.mdi {
     font-size: 20px;
     line-height: 38px;
 }
 
-.receipt-index .amount-section .amount-box:nth-child(2n) {
+.amount-section .amount-box:nth-child(2n) {
     border-right: 0;
 }
 .col {
@@ -967,30 +971,39 @@ button.btn {
     flex-grow: 1;
     max-width: 100%;
 }
-.receipt-index .amount-section .amount-box span.span-amount {
+.amount-section .amount-box span.span-amount {
     color: #292929;
     font-size: 24px;
     font-weight: 700;
     vertical-align: middle;
     white-space: nowrap;
 }
-.receipt-index .amount-section .amount-box span.amount-unit {
+.amount-section .amount-box span.amount-unit {
     font-size: 19px;
     font-weight: 700;
     margin-left: 3px;
     vertical-align: middle;
 }
 
-.receipt-index .amount-section .amount-box span.magnify-btn {
+.amount-section .amount-box span.magnify-btn {
     color: #afb7ba;
     font-size: 16px;
     margin-right: 10px;
     vertical-align: middle;
+    cursor: pointer;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 3px;
 }
+
+.extra-info {
+    display: flex;
+}
+
 .mdi-close:before {
     content: "\F0156";
 }
-.receipt-index .amount-section .amount-box span.badge-label {
+.amount-section .amount-box span.badge-label {
     color: #56626a;
     display: inline-block;
     font-size: 16px;
@@ -1005,13 +1018,13 @@ button.btn {
 .text-danger {
     color: #fe657e !important;
 }
-.receipt-index .amount-section .extra-info .amount-box.extra-box {
+.amount-section .extra-info .amount-box.extra-box {
     padding-left: 40px;
 }
-.receipt-index .amount-section .extra-info .amount-box {
+.amount-section .extra-info .amount-box {
     padding-top: 4px;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub {
+.amount-section .extra-info .amount-box .sub {
     background-color: rgba(80, 124, 243, .07);
     border-radius: 16px;
     margin-bottom: 20px;
@@ -1021,13 +1034,13 @@ button.btn {
 table {
     border-collapse: collapse;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub table.sub-table td {
+.amount-section .extra-info .amount-box .sub table.sub-table td {
     white-space: nowrap;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub span.badge-label {
+.amount-section .extra-info .amount-box .sub span.badge-label {
     font-size: 15px;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub span.icon-label {
+.amount-section .extra-info .amount-box .sub span.icon-label {
     height: 30px;
     margin-right: 14px;
     width: 30px;
@@ -1035,22 +1048,22 @@ table {
 .mdi-check-all:before {
     content: "\F012D";
 }
-.receipt-index .amount-section .extra-info .amount-box .sub table.sub-table td.td-operator {
+.amount-section .extra-info .amount-box .sub table.sub-table td.td-operator {
     color: #8b9298;
     font-weight: 700;
     padding-right: 14px;
     text-align: right;
     width: 120%;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub table.sub-table td.td-amount {
+.amount-section .extra-info .amount-box .sub table.sub-table td.td-amount {
     text-align: right;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub span.span-amount {
+.amount-section .extra-info .amount-box .sub span.span-amount {
     font-size: 14px;
     font-weight: 400;
     line-height: 30px;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub span.amount-unit {
+.amount-section .extra-info .amount-box .sub span.amount-unit {
     font-size: 16px;
     font-weight: 400;
 }
@@ -1064,7 +1077,7 @@ table {
 .text-success {
     color: #40c8bc !important;
 }
-.receipt-index .amount-section .extra-info .amount-box .sub span.icon-label i.mdi {
+.amount-section .extra-info .amount-box .sub span.icon-label i.mdi {
     font-size: 16px;
     line-height: 30px;
 }
@@ -1076,7 +1089,7 @@ table {
 .mdi-bank-off-outline:before {
     content: "\F1657";
 }
-.receipt-index .amount-section .extra-info .amount-box .sub.cancel {
+.amount-section .extra-info .amount-box .sub.cancel {
     background-color: rgba(254, 101, 126, .07);
 }
 
@@ -1087,7 +1100,7 @@ table {
     background-color: rgba(255, 153, 51, .07);
     background-image: radial-gradient(rgba(255, 247, 239, .349), rgba(255, 153, 51, .07));
 }
-.receipt-index .amount-section .expand-btn {
+.amount-section .expand-btn {
     background-color: #fff;
     border-radius: 50%;
     bottom: -4px;
@@ -1098,44 +1111,44 @@ table {
     position: absolute;
 }
 
-.receipt-index .page-content {
+.page-content {
     min-width: 1000px;
 }
-.receipt-index .page-content .table-layout {
+.page-content .table-layout {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
 }
-.receipt-index .page-content .table-layout .filter-section {
+.page-content .table-layout .filter-section {
     margin-bottom: 6px;
 }
-.receipt-index .page-content .table-layout .filter-section .row {
+.page-content .table-layout .filter-section .row {
     margin-left: -2px;
     margin-right: -2px;
 }
-.receipt-index .page-content .table-layout .filter-section .row .col, .receipt-index .page-content .table-layout .filter-section .row .col-auto {
+.page-content .table-layout .filter-section .row .col, .page-content .table-layout .filter-section .row .col-auto {
     padding-left: 2px;
     padding-right: 2px;
 }
-.receipt-index .page-content .table-layout .filter-section span.receipt-count {
+.page-content .table-layout .filter-section span.receipt-count {
     color: #afb7ba;
     display: inline-block;
     font-size: 14px;
     line-height: 42px;
     margin-right: 30px;
 }
-.receipt-index .page-content .table-layout .filter-section span.receipt-count span.count-amount {
+.page-content .table-layout .filter-section span.receipt-count span.count-amount {
     color: #292929;
     font-weight: 700;
     margin: 0 3px;
 }
-.receipt-index .page-content .table-layout .filter-section .row .col .filter-wrapper, .receipt-index .page-content .table-layout .filter-section .row .col-auto .filter-wrapper {
+.page-content .table-layout .filter-section .row .col .filter-wrapper, .page-content .table-layout .filter-section .row .col-auto .filter-wrapper {
     margin-bottom: 12px;
 }
 .boot-pop-checkbox {
     background-color: #fff;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper button {
+.page-content .table-layout .filter-section .filter-wrapper button {
     font-size: 13px;
     height: 42px;
     letter-spacing: -.5px;
@@ -1144,7 +1157,7 @@ table {
 .boot-pop-checkbox button.boot-pop-checkbox-filter-btn {
     padding: 9px 9px 8px 15px;
 }
-/* 
+/*
 주석 눌렀을때 이색깔로변경
 #btn-filter-pm {
     background-color: rgb(44, 97, 241);
@@ -1153,9 +1166,9 @@ table {
     border-left-color: rgb(32, 88, 240);
     border-right-color: rgb(32, 88, 240);
     border-top-color: rgb(32, 88, 240);
-    
+
 } */
- .boot-pop-checkbox button.boot-pop-checkbox-filter-btn i.mdi {
+.boot-pop-checkbox button.boot-pop-checkbox-filter-btn i.mdi {
     font-size: 19px;
     line-height: 20px;
     margin-left: 10px;
@@ -1195,8 +1208,8 @@ table {
     font-size: .8rem;
     padding: 4px;
 }.font-weight-bold {
-    font-weight: 700 !important;
-}
+     font-weight: 700 !important;
+ }
 .text-center {
     text-align: center !important;
 }
@@ -1286,7 +1299,7 @@ button.btn.btn-outline-filter {
     max-width: 100%;
     width: auto;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-time {
+.page-content .table-layout .filter-section .filter-wrapper.filter-time {
     display: inline-block;
     margin-right: 5px;
     white-space: nowrap;
@@ -1315,7 +1328,7 @@ button.btn.btn-outline-filter {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     width: 100%;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search {
     max-width: 230px;
     min-width: 180px;
 }
@@ -1334,11 +1347,11 @@ button.btn.btn-outline-filter {
     position: relative;
     width: 100%;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group {
     display: inline-block;
     position: relative;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group input.form-control {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group input.form-control {
     border-color: #ededed;
     border-radius: 5px;
     display: inline-block;
@@ -1359,7 +1372,7 @@ input.form-control {
     font-size: 13px;
     height: 38px;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group .input-group-append {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search .input-group .input-group-append {
     display: inline-block;
     z-index: 100;
 }
@@ -1371,7 +1384,7 @@ input.form-control {
 .input-group-append {
     margin-left: -1px;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search button.btn-search {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search button.btn-search {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     font-size: 20px;
@@ -1380,7 +1393,7 @@ input.form-control {
     padding-bottom: 0;
     padding-top: 0;
 }
-.receipt-index .page-content .table-layout .filter-section .filter-wrapper.filter-search button.btn-search .comp-icon.icon-magnify {
+.page-content .table-layout .filter-section .filter-wrapper.filter-search button.btn-search .comp-icon.icon-magnify {
     line-height: 26px;
     vertical-align: top;
 }
@@ -1403,7 +1416,7 @@ button.btn .comp-icon {
     box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
     outline: 0;
 }
-.receipt-index .page-content .table-layout table.receipt-table {
+.page-content .table-layout table.receipt-table {
     font-size: .9rem;
 }
 .table {
@@ -1412,7 +1425,7 @@ button.btn .comp-icon {
     width: 100%;
     table-layout: fixed;
 }
-.receipt-index .page-content .table-layout table.receipt-table thead th {
+.page-content .table-layout table.receipt-table thead th {
     box-shadow: inset 0 -2px 0 #f5f5f5;
     padding: 16px 8px;
     position: relative;
@@ -1428,7 +1441,7 @@ table.table tr td, table.table tr>th {
     border-top: 0;
     vertical-align: middle;
 }
-.receipt-index .page-content .table-layout table.receipt-table thead th .item-search-btn {
+.page-content .table-layout table.receipt-table thead th .item-search-btn {
     background-color: #fff;
     border: 1px solid #f5f5f5;
     border-radius: 4px;
@@ -1440,7 +1453,7 @@ table.table tr td, table.table tr>th {
 .d-inline-block {
     display: inline-block !important;
 }
-.receipt-index .page-content .table-layout table.receipt-table thead {
+.page-content .table-layout table.receipt-table thead {
     background-color: #f5f5f5;
     position: -webkit-sticky;
     position: sticky;
@@ -1451,10 +1464,10 @@ table.table tr td, table.table tr>th {
 .fill-table-layout>table.table>thead {
     font-size: 14px;
 }
-.receipt-index .page-content .table-layout table.receipt-table tr td {
+.page-content .table-layout table.receipt-table tr td {
     transition: background-color .2s;
 }
-.receipt-index .page-content .table-layout table.receipt-table td {
+.page-content .table-layout table.receipt-table td {
     border-bottom: 1px solid #ededed;
     padding: 18px 12px;
 }
@@ -1467,17 +1480,17 @@ table.table tr td, table.table tr>th {
 .revenue-box .mdi-check:before {
     content: "\F012C";
 }
-.receipt-index .page-content .table-layout table.receipt-table td.td-action {
+.page-content .table-layout table.receipt-table td.td-action {
     width: 80px;
 }
-.receipt-index .page-content .table-layout table.receipt-table tr td {
+.page-content .table-layout table.receipt-table tr td {
     transition: background-color .2s;
 }
-.receipt-index .page-content .table-layout table.receipt-table td {
+.page-content .table-layout table.receipt-table td {
     border-bottom: 1px solid #ededed;
     padding: 18px 12px;
 }
-.receipt-index .page-content .table-layout table.receipt-table td.td-action .action-btn {
+.page-content .table-layout table.receipt-table td.td-action .action-btn {
     border: 1px solid #ededed;
     border-radius: 4px;
     display: inline-block;
@@ -1525,7 +1538,7 @@ table.table tr td, table.table tr>th {
 }
 
 .modal-lg, .modal-xl {
-        max-width: 800px;
+    max-width: 800px;
 }
 
 @media (min-width: 800px) {

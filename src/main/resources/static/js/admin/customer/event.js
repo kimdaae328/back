@@ -57,16 +57,6 @@ sideMenuButtons.forEach((sideMenuButton) => {
             targetIcon.classList.add("mdi-chevron-down");
         }
         homeButton.classList.remove("current1");
-
-        const menuText = sideMenuButton.textContent.trim();
-
-        // if (menuText === '회원 관리') {
-        //     console.log("회원 관리 클릭함");
-        // } else if (menuText === '회원 문의 목록') {
-        //     console.log("회원 문의 목록");
-        // } else {
-        //     console.log("?????");
-        // }
     });
 });
 
@@ -192,6 +182,11 @@ sideSubLinks.forEach((sideSubLink) => {
 
             productLayout.contentLayout();
             await setList(showProductList);
+        } else if (subMenuText === '결제 목록') {
+            currentPageType = "payment";
+
+            requestLayout.contentLayout();
+            await setList(showRequestList);
         } else {
             console.log("?????");
         }
@@ -355,6 +350,14 @@ const showProductList = async (page = 1, keyword) => {
     return productCriteria;
 }
 
+// 결제 목록
+const showRequestList = async (page = 1, keyword) => {
+    const requestCriteria = await requestService.getList(page, keyword, requestLayout.showList); // 이름 맞추기
+    requestLayout.renderPagination(requestCriteria.criteria);
+    requestLayout.totalCount(requestCriteria.criteria);
+    return requestCriteria;
+}
+
 
 // 검색
 let keyword ="";
@@ -514,11 +517,8 @@ contentArea.addEventListener("click", async (e) => {
 
     // 매입 상태 적용
     if(target.classList.contains("apply-status-btn")){
-        console.log("승인하기 확인 버튼 눌렀니?")
-
         const applyBtn = e.target.closest(".apply-status-btn");
         if (!applyBtn) return;
-
 
         const row = applyBtn.closest("tr.purchase-row");
         const menu = applyBtn.closest(".bt-pop-menu");
@@ -693,21 +693,25 @@ contentArea.addEventListener('click', async (e) => {
         await currentLoader(1);
     }
 
+    // 배너 순서 수정
     if(target.classList.contains("order-update-btn")){
         e.preventDefault()
         const row = e.target.closest(".banner-row");
         const bannerId = row.dataset.bannerId;
         const newOrder = row.querySelector("input").value;
 
-        console.log("업데이트 간다!!!", bannerId, newOrder);
-
         const result = await bannerService.updateOrder(bannerId, newOrder);
 
         if (result) {
-            alert("순서 변경 성공!!!!!!");
-            // await currentLoader(1);
+            alert("순서 변경을 완료했습니다");
         } else {
-            alert("순서 변경 실패!");
+            alert("순서 변경을 실패했습니다");
         }
+    }
+
+    // 결제 내역 돋보기 버튼
+    if(target.classList.contains("magnify-btn")){
+        const extraInfoBox = document.querySelector(".extra-info");
+        extraInfoBox.classList.toggle("show")
     }
 });

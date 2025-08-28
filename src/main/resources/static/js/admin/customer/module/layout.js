@@ -1091,9 +1091,9 @@ const inquiryLayout = (() => {
                                                 <table class="info-table" style="height:100px">
                                                     <tbody>
                                                         <th>답변내용</th>
-                                                        <td>${inquiryDetail.inquiryAnswerContent ? 
-                                                            inquiryDetail.inquiryAnswerContent : 
-                                                            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
+                                                        <td>${inquiryDetail.inquiryAnswerContent ?
+            inquiryDetail.inquiryAnswerContent :
+            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
                                                                 <input class="inquiry-id-input" type="hidden" name="" value="${inquiryDetail.id}">
                                                                 <textarea class="answer-textarea"
                                                                     name=""
@@ -1455,8 +1455,8 @@ const sellerInquiryLayout = (() => {
                                                     <tbody>
                                                         <th>답변내용</th>
                                                         <td>${inquiryDetail.inquiryAnswerContent ?
-                                                            inquiryDetail.inquiryAnswerContent :
-                                                            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
+            inquiryDetail.inquiryAnswerContent :
+            `<form id="answerForm" data-inquiry-id="${inquiryDetail.id}">
                                                                 <input class="inquiry-id-input" type="hidden" name="" value="${inquiryDetail.id}">
                                                                 <textarea class="answer-textarea"
                                                                     name=""
@@ -2014,10 +2014,21 @@ const productLayout = (() => {
         `
     }
 
-    // 문의 목록(전체)
+    // 상품 목록
     const showList = (productsCriteria) => {
         const productsContainer = document.querySelector("#product-table tbody");
         if (!productsContainer) return;
+
+        if (!productsCriteria || productsCriteria.length === 0) {
+            productsContainer.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
+                    등록된 상품이 없습니다.
+                </td>
+            </tr>
+        `;
+            return;
+        }
 
         let text = "";
         productsCriteria.products.forEach((product) => {
@@ -2038,6 +2049,524 @@ const productLayout = (() => {
         });
 
         productsContainer.innerHTML = text;
+    };
+
+    // 페이지네이션 - layout
+    const renderPagination = (criteria) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        let html = ``;
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? "active" : ""}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+
+        pagination.innerHTML = html;
+    };
+
+    // 페이지네이션 - event
+    const connectToPagination = (navi) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        pagination.addEventListener("click", (e) => {
+            // if(e.target.classList.contains(".page-item-link")) {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
+            // }
+        });
+    };
+
+    // 총 합계
+    const totalCount = (criteria) => {
+        const countText = document.querySelector("#content-area .count-amount");
+        if (!countText) return;
+
+        countText.textContent = criteria.total;
+    };
+
+    return {contentLayout, showList, renderPagination, connectToPagination, totalCount}
+})();
+
+// 결제 관리
+const requestLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+
+        contentArea.innerHTML = `
+            <div class="page-header">
+                <div class="page-title">결제내역조회</div>
+                <div class="page-subtitle">조건을 설정하여 조회할 수 있습니다</div>
+            </div>
+            <div class="page-body">
+                <div class="amount-section">
+                    <div class="amount-container">
+                        <div class="amount-wrap">
+                            <div class="amount-box revenue-box">
+                                <div class="row">
+                                    <div class="col-auto title-col">
+                                        <span class="badge-label text-primary icon-label mr-3"><i class="mdi mdi-check"></i></span>
+                                        <span class="badge-label">결제승인</span>
+                                    </div>
+                                    <div class="col text-right amount-col"><span class="magnify-btn" data-toggle="collapse" data-target="#extra-sum-collapse" aria-expanded="true"><i class="mdi mdi-magnify"></i></span><span class="span-amount">0</span><span class="amount-unit">원</span></div>
+                                </div>
+                            </div>
+                            <div class="amount-box cancel-box">
+                                <div class="row">
+                                    <div class="col-auto title-col">
+                                        <span class="badge-label text-danger icon-label mr-3"><i class="mdi mdi-close"></i></span>
+                                        <span class="badge-label">결제취소</span>
+                                    </div>
+                                    <div class="col text-right amount-col"><span class="magnify-btn" data-toggle="collapse" data-target="#extra-sum-collapse" aria-expanded="true"><i class="mdi mdi-magnify"></i></span><span class="span-amount">0</span><span class="amount-unit">원</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 주석 밑의show유무로 아래가열림 -->
+                        <div class="extra-info collapse" id="extra-sum-collapse">
+                        <div class="amount-box extra-box">
+                            <div class="sub">
+                                <table class="sub-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="badge-label text-primary icon-label">
+                                                    <i class="mdi mdi-check-all"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">총 승인금액</span>
+                                            </td>
+                                            <td class="td-operator">=</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit calc calc-minus">원</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-primary icon-label">
+                                                    <i class="mdi mdi-cash-minus"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">부분취소금액</span>
+                                            </td>
+                                            <td class="td-operator">-</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="sub">
+                                <table class="sub-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-success icon-label">
+                                                    <i class="mdi mdi-bank-outline"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">승인 과세금액</span>
+                                            </td>
+                                            <td class="td-operator">
+                                                =
+                                            </td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-success icon-label">
+                                                    <i class="mdi mdi-bank-off-outline"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">승인 비과세금액</span>
+                                            </td>
+                                            <td class="td-operator">+</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="amount-box extra-box">
+                            <div class="sub cancel">
+                                <table class="sub-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-danger icon-label">
+                                                    <i class="mdi mdi-close"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">매입 전 취소 (전체취소)</span>
+                                            </td>
+                                            <td class="td-operator">=</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit calc calc-plus">원</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-danger icon-label">
+                                                    <i class="mdi mdi-cash-minus"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">매입 후 취소 (부분취소)</span>
+                                            </td>
+                                            <td class="td-operator">+</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="sub cancel">
+                                <table class="sub-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-warning icon-label">
+                                                    <i class="mdi mdi-bank-outline"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">취소 과세금액</span>
+                                            </td>
+                                            <td class="td-operator">=</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-icon">
+                                                <span class="badge-label text-warning icon-label">
+                                                    <i class="mdi mdi-bank-off-outline"></i>
+                                                </span>
+                                            </td>
+                                            <td class="td-title">
+                                                <span class="badge-label">취소 비과세금액</span>
+                                            </td>
+                                            <td class="td-operator">+</td>
+                                            <td class="td-amount">
+                                                <span class="span-amount">0</span>
+                                            </td>
+                                            <td class="td-unit">
+                                                <span class="amount-unit">원</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="table-layout white-panel">
+                        <div class="filter-section">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="receipt-count">총<span class="count-amount">0</span>건</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-pm" id="filter-pm">
+                                        <div class="boot-pop-checkbox">
+                                            <button class="boot-pop-checkbox-filter-btn btn btn-outline-filter" id="btn-filter-pm">결제방식선택
+                                                <i class="mdi mdi-menu-down"></i>
+                                            </button>
+                                            <div class="bt-pop-menu">
+                                            <!-- 아래 show class유무의따라 태그창이열림 -->
+                                            <div id ="pop-menu-bt1" class="bt-pop-menu-back"></div>
+                                            <div id ="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
+                                                <ul class="list-wrapper list-unstyled">
+                                                    <li class="text-center font-weight-bold">결제방식선택</li>
+                                                    <li class="list-item row mb-2">
+                                                        <div class="col col-6">
+                                                            <button id="allchecked2"class="btn btn-outline-default btn-sm">
+                                                                <i class="mdi mdi-checkbox-multiple-marked mr-1"></i>
+                                                                전체선택
+                                                            </button>
+                                                        </div>
+                                                        <div class="col col-6">
+                                                            <button id="allflasechecked2" class="btn btn-outline-default btn-sm">
+                                                                <i class="mdi mdi-checkbox-multiple-marked-outline mr-1"></i>
+                                                                선택취소
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                    <!-- 주석 체크박스클릭시 list item옆에 active도 생기면서  아래 체크박스 class checked생김 -->
+                                                    <li id ="checkboxactive1" class="list-item">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="boot-check d-flex align-items-center undefined checked">
+                                                                    <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                        <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                    </div>
+                                                                    <div class="boot-check-content flex-grow-1">카드</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li id ="checkboxactive2" class="list-item">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="boot-check d-flex align-items-center undefined checked">
+                                                                    <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                        <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                    </div>
+                                                                    <div class="boot-check-content flex-grow-1">계좌이체</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-item mt-2">
+                                                        <button class="btn btn-outline-primary btn-sm">확인</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-status" id="filter-status">
+                                        <div class="boot-pop-checkbox">
+                                            <button class="boot-pop-checkbox-filter-btn btn btn-outline-filter" id="btn-filter-status">
+                                                결제상태선택
+                                                <i class="mdi mdi-menu-down"></i>
+                                            </button>
+                                            <div class="bt-pop-menu">
+                                                <div id ="pop-menu-bt3" class="bt-pop-menu-back "></div>
+                                                <div id ="pop-menu-bt4" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -52.25px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
+                                                    <ul class="list-wrapper list-unstyled">
+                                                        <li class="text-center font-weight-bold">결제상태선택</li>
+                                                        <li class="list-item row mb-2">
+                                                            <div class="col col-6">
+                                                                <button id="allchecked1" class="btn btn-outline-default btn-sm">
+                                                                    <i class="mdi mdi-checkbox-multiple-marked mr-1"></i>
+                                                                    전체선택
+                                                                </button>
+                                                            </div>
+                                                            <div class="col col-6">
+                                                                <button id="allflasechecked1" class="btn btn-outline-default btn-sm">
+                                                                    <i class="mdi mdi-checkbox-multiple-marked-outline mr-1"></i>
+                                                                    선택취소
+                                                                </button>
+                                                            </div>
+                                                        </li>
+                                                        <li id ="checkboxactive3" class="list-item ">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="boot-check d-flex align-items-center undefined checked">
+                                                                        <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                            <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                        </div>
+                                                                        <div class="boot-check-content flex-grow-1">결제진행중</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a class="collapsed" href="" data-toggle="collapse" aria-expanded="false">
+                                                                        <i class="mdi mdi-plus"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li id ="checkboxactive4" class="list-item">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="boot-check d-flex align-items-center undefined checked">
+                                                                        <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                            <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                        </div>
+                                                                        <div class="boot-check-content flex-grow-1">결제완료</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a class="" href="#" data-toggle="collapse" aria-expanded="false">
+                                                                        <i class="mdi mdi-plus"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="collapse" id="">
+                                                                <ul class="sub-list-wrapper list-unstyled">
+                                                                    <li class="list-item active">
+                                                                        <div class="boot-check d-flex align-items-center undefined checked">
+                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                            </div>
+                                                                            <div class="boot-check-content flex-grow-1">결제완료</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-item active">
+                                                                        <div class="boot-check d-flex align-items-center undefined checked">
+                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                            </div>
+                                                                            <div class="boot-check-content flex-grow-1">본인인증완료</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-item active">
+                                                                        <div class="boot-check d-flex align-items-center undefined checked">
+                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
+                                                                            </div>
+                                                                            <div class="boot-check-content flex-grow-1">현금영수증발행완료</div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-item mt-2"><button class="btn btn-outline-primary btn-sm">확인</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto"></div>
+                                <div class="col-auto"></div>
+                                <div class="col-auto"></div>
+                                <div class="col text-right"></div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-time">
+                                        <div class="bootpay-date-range-input-container" id="bootpay-date-input-bbcde7e9-2cef-41a9-a007-e7bd828ff998">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-search ml-1">
+                                        <div class="input-group">
+                                            <input class="form-control flex-grow-1" type="text" placeholder="ID/주문번호/구매자정보/카드정보">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-search">
+                                                    <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
+                                                        <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fill-table-layout">
+                            <table id="request-table" class="table grey-header-table w-100 receipt-table">
+                                <colgroup>
+                                    <col style="width:20%">
+                                    <col style="width:15%">
+                                    <col style="width:30%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="td-name">
+                                            상품명
+                                            <div class="item-search-btn d-inline-block">
+                                            </div>
+                                        </th>
+                                        <th class="td-amount text-right pr-4">결제금액</th>
+                                        <th class="td-method">결제수단</th>
+                                        <th class="td-at">결제완료 시간</th>
+                                        <th class="td-buyer">구매자</th>
+                                        <th class="td-action">상세</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade member-modal" style="display: none;">
+                <div class="modal-dialog modal-lg">
+<!--                    모달 내용 들어와야함-->
+                </div>
+            </div>
+        `
+    }
+
+    // 결제 목록
+    const showList = (requestsCriteria) => {
+        const requestsContainer = document.querySelector("#request-table tbody");
+        if (!requestsContainer) return;
+
+        if (!requestsCriteria || requestsCriteria.length === 0) {
+            requestsContainer.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
+                    결제내역이 없습니다.
+                </td>
+            </tr>
+        `;
+            return;
+        }
+
+        let text = "";
+        requestsCriteria.requests.forEach((request) => {
+            text += `
+                <tr class="request-row" data-request-id="${request.id}">
+                    <td class="text-center font-weight-bold" colspan="1">${request.productName}</td>
+                    <td class="text-center font-weight-bold" colspan="1">${request.requestPrice}</td>
+                    <td class="text-center font-weight-bold" colspan="1">${request.paymentMethod}</td>
+                    <td class="text-center font-weight-bold" colspan="1">${request.paymentDate}</td>
+                    <td class="text-center font-weight-bold" colspan="1">${request.memberName}</td>
+                    <td class="td-action text-center">
+                        <div id="modal-open" class="action-btn">
+                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        requestsContainer.innerHTML = text;
     };
 
     // 페이지네이션 - layout
@@ -2085,5 +2614,120 @@ const productLayout = (() => {
         countText.textContent = criteria.total;
     };
 
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount}
+    // 결제 상세
+    const showDetail = (requestDetail) => {
+        const tableDetail = document.querySelector(".modal-dialog");
+
+        // 결제 상세 - layout
+        tableDetail.innerHTML= `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        (35,000원) 결제내역
+                        <span class="badge-label text-success font-weight-bold ml-2">결제완료</span>
+                    </div>
+                    <button class="close">
+                        <i class="mdi mdi-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="divider"></div>
+                    <div class="tab-view">
+                        <div class="tab-view-header">
+                            <div class="tab-switch-row">
+                                <div class="tab-switch active">상세정보</div>
+                            </div>
+                        </div>
+                        <div class="tab-view-body">
+                            <div style="display: block;">
+                                <div class="tab-inner tab-detail">
+                                    <div class="info-layout detail-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">승인정보</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-table w-100">
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>주문번호</th>
+                                                            <td>-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>총 결제금액 ①</th>
+                                                            <td>35,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>취소금액</th>
+                                                            <td>0</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-table-cell">
+                                                <table class="info-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>승인시각</th>
+                                                            <td>2025-08-01 13:52:10</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>물품</th>
+                                                            <td>-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>결제방식</th>
+                                                            <td>카드</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-layout user-info">
+                                        <div class="info-title justify-content-between">
+                                            <div class="flex-left d-flex">
+                                                <div class="title">구매자정보</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-body">
+                                            <div class="table-info row">
+                                                <div class="col-6">
+                                                    <div class="row inner-table">
+                                                        <div class="col-auto w-120px">구매자명</div>
+                                                        <div class="col">-</div>
+                                                    </div>
+                                                    <div class="row inner-table">
+                                                        <div class="col-auto w-120px">주소</div>
+                                                        <div class="col">-</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row inner-table">
+                                                        <div class="col-auto w-120px">이메일</div>
+                                                        <div class="col">-</div>
+                                                    </div>
+                                                    <div class="row inner-table">
+                                                        <div class="col-auto w-120px">전화번호</div>
+                                                        <div class="col">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-close btn btn-outline-filter">배송시작</button>
+                </div>
+            </div>
+           `;
+    }
+
+    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail}
 })();

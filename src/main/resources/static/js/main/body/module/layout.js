@@ -131,7 +131,44 @@ const layout = (() => {
         modalWrap.innerHTML = text;
     }
 
-    return {showPopupCart:showPopupCart}
+    const categoryList = async (productCriteria) => {
+        const categoryWrap = document.querySelector(".filter-list");
+        const categories = productCriteria.categories;
+        let text = ``;
+        categories.forEach((category, i) => {
+            let categoryTitle = "";
+
+            if (category.categoryName === "butchers") {
+                categoryTitle = "정육·가공육·달걀";
+            } else if(category.categoryName === "etc") {
+                categoryTitle = "기타";
+            } else if(category.categoryName === "fisheries") {
+                categoryTitle = "수산·해산·건어물";
+            } else if(category.categoryName === "fruits") {
+                categoryTitle = "과일·견과·쌀";
+            } else if(category.categoryName === "vegetables") {
+                categoryTitle = "채소";
+            }
+            text += `
+                 <li class="filter-item">
+                    <span class="btn-check-box">
+                        <label for="check${i}">
+                            <input type="checkbox" id="check${i}" name="arCategoryName" value="${category.mainCategoryId}">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="none"></path>
+                                <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="title category">${categoryTitle}</span>
+                        </label>
+                    </span>
+                </li>
+            `;
+        })
+
+        categoryWrap.innerHTML = text;
+
+    }
+
+    return {showProductList:showProductList, showPopupCart:showPopupCart, categoryList:categoryList}
 })();
 
 

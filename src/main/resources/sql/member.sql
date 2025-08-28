@@ -24,3 +24,9 @@ select * from tbl_member;
 UPDATE tbl_member
 SET member_role = 'admin'
 WHERE id = 58;
+
+select * from tbl_member;
+
+UPDATE tbl_member
+SET member_verified = 1
+WHERE id = 3;
