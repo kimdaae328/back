@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -33,25 +34,30 @@ public class AdminBannersController {
         });
 ////        List<FileDTO> result = bannerService.saveFile(files);
         bannerService.uploadBannerFiles(bannerDTO, files);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(bannerDTO);
     }
 
     @GetMapping
     public ResponseEntity<?> list(){
         List<BannerWithFileDTO> bannerWithFileDTO = bannerService.getBannerFiles();
         if(bannerWithFileDTO == null || bannerWithFileDTO.size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bannerWithFileDTO);
+            return ResponseEntity.ok(Collections.emptyList());
         }
         return ResponseEntity.ok(bannerWithFileDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        boolean result = bannerService.deleteBannerFiles(id);
-        if(!result){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
-        }
-        return ResponseEntity.ok(result);
+        bannerService.deleteBannerFiles(id);
+
+        return ResponseEntity.ok(id + "번 댓글 삭제");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateOrder(@PathVariable("id") Long bannerId, @RequestBody BannerWithFileDTO bannerWithFileDTO){
+        bannerService.updateBannerOrder(bannerId, bannerWithFileDTO.getBannerOrder());
+
+        return ResponseEntity.ok(bannerWithFileDTO);
     }
 
 }

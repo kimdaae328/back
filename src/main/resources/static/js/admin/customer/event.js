@@ -207,8 +207,12 @@ sideSubLinks.forEach((sideSubLink) => {
 
             bannerLayout.contentLayout();
             await setList(showBannerList);
-            addBanner();
 
+        } else if (subMenuText === '상품 목록') {
+            currentPageType = "product";
+
+            productLayout.contentLayout();
+            await setList(showProductList);
         } else {
             console.log("?????");
         }
@@ -363,6 +367,15 @@ const showBannerList = async () => {
 
     return bannerList;
 }
+
+// 상품 목록
+const showProductList = async (page = 1, keyword) => {
+    const productCriteria = await productService.getList(page, keyword, productLayout.showList); // 이름 맞추기
+    productLayout.renderPagination(productCriteria.criteria);
+    productLayout.totalCount(productCriteria.criteria);
+    return productCriteria;
+}
+
 
 // 검색
 let keyword ="";
@@ -632,21 +645,20 @@ function closeModal(modal) {
 }
 
 // 배너
-function addBanner() {
-    let formData = null;
-    contentArea.addEventListener("change", async (e) => {
-        const target = e.target;
+let formData = null;
+contentArea.addEventListener("change", async (e) => {
+    const target = e.target;
 
-        if(target.classList.contains("banner-file")){
-            // const status = document.querySelector('#banner-status').value;
+    if(target.classList.contains("banner-file")){
+        formData = new FormData();
 
-            formData = new FormData();
-            formData.append("file", target.files[0]);
-            formData.append("name", target.files[0].name);
-            // formData.append('bannerStatus', status);
+        const files = target.files;
+        const bannerContainer = document.querySelector("ul.pg-list");
 
-            const bannerContainer = document.querySelector("ul.pg-list");
-            const [file] = e.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            formData.append("file", file);
+
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.addEventListener("load", (e) => {
@@ -664,20 +676,18 @@ function addBanner() {
                 bannerContainer.innerHTML += text;
             });
         }
+    }
 
-    });
+});
 
-    contentArea.addEventListener("click", async (e) => {
-        const target = e.target;
-        if (target.classList.contains("register-link")) {
-            e.preventDefault();
-            await bannerService.uploadService(formData);
-            await currentLoader(1)
-        }
-    });
-}
-
-
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+    if (target.classList.contains("register-link")) {
+        e.preventDefault();
+        await bannerService.uploadService(formData);
+        await currentLoader(1)
+    }
+});
 
 contentArea.addEventListener('click', async (e) => {
     const target = e.target;
@@ -695,8 +705,30 @@ contentArea.addEventListener('click', async (e) => {
     if(target.classList.contains("banner-delete-btn")){
         const row = target.closest("tr");
         const bannerId = row.dataset.bannerId;
-        // console.log(bannerId)
         await bannerService.deleteBanner(bannerId)
         await currentLoader(1);
+    }
+
+    // 배너 등록후 다시 화면 로드
+    if(target.classList.contains("register-link")){
+        await currentLoader(1);
+    }
+
+    if(target.classList.contains("order-update-btn")){
+        e.preventDefault()
+        const row = e.target.closest(".banner-row");
+        const bannerId = row.dataset.bannerId;
+        const newOrder = row.querySelector("input").value;
+
+        console.log("업데이트 간다!!!", bannerId, newOrder);
+
+        const result = await bannerService.updateOrder(bannerId, newOrder);
+
+        if (result) {
+            alert("순서 변경 성공!!!!!!");
+            // await currentLoader(1);
+        } else {
+            alert("순서 변경 실패!");
+        }
     }
 });

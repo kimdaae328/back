@@ -531,8 +531,6 @@ const bannerService = (() => {
         const response = await fetch('/api/admin/banners');
         const data = await response.json();
 
-        console.log(data)
-
         if(response.ok) {
             console.log("배너 존재")
         }else if(response.status === 404){
@@ -545,20 +543,78 @@ const bannerService = (() => {
         return data;
     };
 
-    // 매입 상태 변경
-    const deleteBanner = async (id) => {
-        const response = await fetch(`/api/admin/banners/${id}`,{
+    // 배너 삭제
+    const deleteBanner = async (bannerId) => {
+        const response = await fetch(`/api/admin/banners/${bannerId}`,{
             method:"DELETE"
         });
 
-        if (!response.ok) {
-            const msg = await response.text().catch(() => "");
-            console.error("삭제 실패:", response.status, msg);
-            return null;
+        if(response.ok) {
+            console.log("오 삭제 성공!!!!")
+        }else if(response.status === 404){
+            console.log("삭제 실패!!!!")
+        }else {
+            const error = await response.text()
+            console.log(error);
         }
 
         return true;
     };
 
-    return {uploadService, getList, deleteBanner}
+    // 순서 변경
+    const updateOrder = async (bannerId, newOrder) => {
+        const response = await fetch(`/api/admin/banners/${bannerId}`,{
+            method:"PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ bannerOrder: newOrder })
+        });
+
+        const data = await response.json();
+
+        console.log(data)
+
+        if(response.ok) {
+            console.log("순서변경 성공")
+        }else if(response.status === 404){
+            console.log("순서변경 실패")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return data;
+    }
+
+    return {uploadService, getList, deleteBanner, updateOrder}
+})();
+
+// 상품 관리
+const productService = (() => {
+    // 상품 목록
+    const getList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/products/list/${page}?keyword=${keyword ?? ""}`);
+        const data = await response.json();
+
+        console.log(data)
+
+        if(callback){
+            setTimeout(() => {
+                callback(data);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("상품게시글 존재")
+        }else if(response.status === 404){
+            console.log("상품게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return data;
+    }
+    return {getList}
 })();

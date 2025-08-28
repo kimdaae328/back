@@ -1843,6 +1843,7 @@ const purchaseLayout = (() => {
 const bannerLayout = (() => {
     const contentLayout = () => {
         const contentArea = document.querySelector("#content-area");
+
         contentArea.innerHTML = `
             <div class="page-header">
                 <div class="page-title">메인 배너 등록</div>
@@ -1855,22 +1856,6 @@ const bannerLayout = (() => {
                             메인페이지 배너등록
                         </div>
                         <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
-<!--                            <select id="banner-order" name="bannerOrder">-->
-<!--                                <option value="1">1</option>-->
-<!--                                <option value="2">2</option>-->
-<!--                                <option value="3">3</option>-->
-<!--                                <option value="4">4</option>-->
-<!--                                <option value="5">5</option>-->
-<!--                                <option value="6">6</option>-->
-<!--                                <option value="7">7</option>-->
-<!--                                <option value="8">8</option>-->
-<!--                                <option value="9">9</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                                <option value="10">10</option>-->
-<!--                            </select>-->
                             <!-- 아래 Li수만큼 Img -->
                             <div class="dropdown">
                                 <label>
@@ -1891,18 +1876,19 @@ const bannerLayout = (() => {
                     
                     <table id="banner-table" class="table grey-header-table w-100" style="margin-top: 50px;">
                         <colgroup>
-                            <col style="width:15%">
-                            <col style="width:15%">
-                            <col style="width:17%">
-                            <col style="width:20%">
-                            <col style="width:20%">
-                            <col style="width:15%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
+                            <col style="width:16%">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>배너 순서</th>
                                 <th>이미지 위치</th>
                                 <th>이미지 원본 이름</th>
+                                <th>이미지</th>
                                 <th>업로드 날짜</th>
                                 <th>수정/삭제</th>
                             </tr>
@@ -1921,18 +1907,36 @@ const bannerLayout = (() => {
         const bannersContainer = document.querySelector("#banner-table tbody");
         if (!bannersContainer) return;
 
+        if (!bannerList || bannerList.length === 0) {
+            bannersContainer.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
+                    등록된 배너가 없습니다.
+                </td>
+            </tr>
+        `;
+            return;
+        }
+
         let text = "";
         bannerList.forEach((banner) => {
             text += `
-                <tr class="banner-row" data-banner-id="${banner.id}">
+                <tr class="banner-row" data-banner-id="${banner.bannerId}">
                     <td>
                         <div class="input-order">
                             <input type="text" value="${banner.bannerOrder}">
-                            <button>확인</button>
+                            <button class="order-update-btn">확인</button>
                         </div>
                     </td>
                     <td>${banner.filePath}</td>
                     <td>${banner.fileOriginalName}</td>
+                    <td>
+                        <img 
+                          src="/api/files/display?filePath=${banner.filePath}&fileName=${banner.fileName}" 
+                          alt="${banner.fileOriginalName}" 
+                          style="width:120px; height:60px; object-fit:cover; border-radius:6px;"
+                        >
+                    </td>
                     <td>${banner.updatedDate}</td>
                     <td>
                         <button class="banner-delete-btn">삭제</button>   
@@ -1945,4 +1949,141 @@ const bannerLayout = (() => {
     };
 
     return {contentLayout, showList}
+})();
+
+// 상품 관리
+const productLayout = (() => {
+    const contentLayout = () => {
+        const contentArea = document.querySelector("#content-area");
+
+        contentArea.innerHTML = `
+            <div class="page-header"> 
+                <div class="page-title">상품 목록</div>
+                <div class="page-subtitle">상품목록</div>
+            </div>
+            <div class="page-body">
+                <div class="page-content">
+                    <div class="table-layout white-panel">
+                        <div class="filter-section">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="filter-wrapper filter-status mr-2">
+                                    </div>
+                                </div>
+                            <div class="col text-right"></div>
+                            <div class="col-auto">
+                                <div class="filter-wrapper filter-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control flex-grow-1" placeholder="상품명">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-search">
+                                                <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> 
+                    </div>
+                    <table id="product-table" class="table grey-header-table w-100 text-center receipt-table">
+                        <colgroup>
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:17%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+                            <col style="width:15%">
+                        </colgroup>                           
+                         <thead>
+                            <tr>
+                                <th class="td-name">상품명</th>
+                                <th>판매자</th>
+                                <th class="td-status">가격</th>
+                                <th class="td-user">보유 중량(kg)</th>
+                                <th class="td-at">등록일자</th>
+                                <th class="td-action">상세보기(판매등록)</th>                   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `
+    }
+
+    // 문의 목록(전체)
+    const showList = (productsCriteria) => {
+        const productsContainer = document.querySelector("#product-table tbody");
+        if (!productsContainer) return;
+
+        let text = "";
+        productsCriteria.products.forEach((product) => {
+            text += `
+                <tr class="product-row" data-product-id="${product.id}">
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productName}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.memberId}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productPrice}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >-</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.updatedDate}</td>
+                    <td class="td-action text-center">
+                        <div id="modal-open" class="action-btn">
+                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        productsContainer.innerHTML = text;
+    };
+
+    // 페이지네이션 - layout
+    const renderPagination = (criteria) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        let html = ``;
+
+        for (let i = criteria.startPage; i <= criteria.endPage; i++) {
+            html += `
+            <li class="page-item page-num">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? "active" : ""}">
+                    ${i}
+                </a>
+            </li>
+            `;
+        }
+
+        pagination.innerHTML = html;
+    };
+
+    // 페이지네이션 - event
+    const connectToPagination = (navi) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
+        pagination.addEventListener("click", (e) => {
+            // if(e.target.classList.contains(".page-item-link")) {
+            e.preventDefault();
+
+            const linkButton = e.target.closest(".page-item-link");
+            const page = linkButton.dataset.page;
+            // const page = linkButton.getAttribute("href");
+            navi(page);
+            // }
+        });
+    };
+
+    // 총 합계
+    const totalCount = (criteria) => {
+        const countText = document.querySelector("#content-area .count-amount");
+        if (!countText) return;
+
+        countText.textContent = criteria.total;
+    };
+
+    return {contentLayout, showList, renderPagination, connectToPagination, totalCount}
 })();
