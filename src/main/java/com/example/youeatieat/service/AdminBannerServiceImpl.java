@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AdminBannerServicelmpl implements AdminBannerService {
+public class AdminBannerServiceImpl implements AdminBannerService {
     private final AdminFileDAO fileDAO;
     private final AdminBannerDAO bannerDAO;
     private final AdminBannerFileDAO bannerFileDAO;
