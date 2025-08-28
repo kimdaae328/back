@@ -1,14 +1,12 @@
 package com.example.youeatieat.service;
 
 import com.example.youeatieat.dto.*;
-import com.example.youeatieat.repository.AdminCustomerDAO;
 import com.example.youeatieat.repository.AdminProductDAO;
 import com.example.youeatieat.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

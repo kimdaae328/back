@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AdminInquiryServicelmpl implements AdminInquiryService {
+public class AdminInquiryServiceImpl implements AdminInquiryService {
     private final AdminInquiryDAO adminInquiryDAO;
 
 //    문의 목록(전체)
