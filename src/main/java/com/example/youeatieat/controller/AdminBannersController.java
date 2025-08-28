@@ -2,7 +2,7 @@ package com.example.youeatieat.controller;
 
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.AdminBannerService;
-import com.example.youeatieat.service.AdminBannerServicelmpl;
+import com.example.youeatieat.service.AdminBannerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/banners")
 public class AdminBannersController {
-    private final AdminBannerServicelmpl bannerService;
+    private final AdminBannerServiceImpl bannerService;
 
     @PostMapping
     public ResponseEntity<?> uploadBanner(BannerDTO bannerDTO, @RequestParam("file") List<MultipartFile> files) {

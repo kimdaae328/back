@@ -28,7 +28,7 @@ public class ProductController {
     private final NoticeServiceImpl noticeServiceImpl;
     private final LikeServiceImpl likeServiceImpl;
     private final CategoryServiceImpl categoryServiceImpl;
-    private final AdminBannerServicelmpl adminBannerService;
+    private final AdminBannerServiceImpl adminBannerService;
 
     private final HttpSession session;
 
