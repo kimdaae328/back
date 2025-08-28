@@ -37,7 +37,7 @@ public class CartController {
     }
 
     @PostMapping("cart")
-    public String goPayment(@RequestBody CartDTO cartDTO) {
+    public String goPayment(@RequestParam List<CartDTO> carts) {
         return  "redirect:/payment/list";
     }
 

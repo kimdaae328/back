@@ -15,7 +15,7 @@
                 <h2 class="title">
                     <p>장바구니</p>
                 </h2>
-                <form id="cartForm" action="/payment/list" method="post">
+                <form id="cartForm" action="/cart/cart" method="post">
                     <div class="cart-body">
                         <div class="cart-product">
                             <div class="total">
@@ -25,16 +25,16 @@
                                         <div class="checkbox-div"></div>
                                         <p class="total-select"></p>
                                     </label>
-                                    <button class="all-seclet-button">선택삭제</button>
+                                    <button type="button" class="all-seclet-button">선택삭제</button>
                                 </div>
                                 <!-- 장바구니에 아무것도 없으면 지우기 -->
                                 <div class="a-button">
                                     <span style="height: 62px;">
                                         <div class="a-button-wrap">
-                                            <button class="possibility-button">
+                                            <button type="button" class="possibility-button">
                                                 <p>너도나도배송</p>
                                             </button>
-                                            <button class="impossibility">
+                                            <button type="button" class="impossibility">
                                                 <p>품절/구매불가</p>
                                             </button>
                                         </div>
@@ -68,7 +68,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <button class="product-remove">
+                                            <button type="button" class="product-remove">
                                                 <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
                                                 </svg>
@@ -85,14 +85,14 @@
                                                     <p th:text="${item.productPrice} + '원'"></p>
                                                 </div>
                                                 <div class="number">
-                                                    <button class="m-button">
+                                                    <button type="button" class="m-button">
                                                         <svg width="13.333" height="20" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 0H16V2H0V0Z" fill="#bcc4cc"></path>
                                                         </svg>
                                                     </button>
                                                     <p class="count" th:text="${item.cartCount}">
                                                     </p>
-                                                    <button class="p-button">
+                                                    <button type="button" class="p-button">
                                                         <svg width="13.333" height="13.333" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M9 0H7V7H0V9H7V16H9V9H16V7H9V0Z" fill="#bcc4cc"></path>
                                                         </svg>
@@ -117,7 +117,7 @@
                                         <div class="no-header-title">
                                             <p>품절/구매불가</p>
                                         </div>
-                                        <button class="no-all-remove">
+                                        <button type="button" class="no-all-remove">
                                             <p>전체삭제</p>
                                         </button>
                                     </div>
@@ -137,7 +137,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="no-remove">
+                                        <button type="button" class="no-remove">
                                             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
                                             </svg>
@@ -159,7 +159,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="no-remove">
+                                        <button type="button" class="no-remove">
                                             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
                                             </svg>

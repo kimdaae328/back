@@ -1,6 +1,4 @@
 
-const memberIdInput = document.getElementById("member-id");
-    const memberId = memberIdInput.value;
 
 
 //  바로가기 네비게이션

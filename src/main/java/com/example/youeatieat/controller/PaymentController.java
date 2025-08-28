@@ -37,9 +37,11 @@ public class PaymentController {
     }
 
 
-    //   결제 완료 창
+    //   결제 완료창
     @GetMapping("payment-ok")
     public String paymentOk(Model model) {
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        model.addAttribute("member", memberDTO);
         return "/together-product/payment-ok";
     }
 
