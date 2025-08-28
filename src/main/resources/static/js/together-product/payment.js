@@ -218,7 +218,7 @@ const getAddressWindow = () => {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('addressPostNumber').value = data.zonecode;
-            document.getElementById('address').value = addr;
+            document.getElementById('orderer-text').value = addr;
 
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
             if(roadAddr !== ''){
