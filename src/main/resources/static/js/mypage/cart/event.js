@@ -209,3 +209,4 @@ const charge = Number(
 );
 const final = document.querySelector(".final");
 const finalPrice = document.querySelector(".final-price");
+

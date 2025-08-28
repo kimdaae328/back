@@ -9,3 +9,5 @@ create table tbl_banner(
 
 select * from tbl_banner;
 
+drop table  tbl_banner;
+
