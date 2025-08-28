@@ -11,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 @Getter @ToString
 @SuperBuilder
 @EqualsAndHashCode(of="id")
-public class groupIndexVO{
-    private Long id;
+public class GroupVO extends Period{
     private Long groupIndexNumber;
     private Long productId;
+    private CancelableStatus groupCancelable;
 }

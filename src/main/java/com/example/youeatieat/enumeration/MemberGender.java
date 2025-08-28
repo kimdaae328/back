@@ -1,12 +1,15 @@
 package com.example.youeatieat.enumeration;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Slf4j
 public enum MemberGender {
     MALE("male"), FEMALE("female"), NOT("not");
 
