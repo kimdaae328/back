@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminRequestMapper">
+    <select id="selectRequestAll">
+        select r.id, r.request_amount, r.request_price, r.request_status, r.member_id, r.group_index_number, r.product_id, r.created_date, r.updated_date,
+               rp.payment_method, rp.payment_date, rp.payment_status, rp.request_id, rp.created_date, rp.updated_date,
+               p.product_name, m.member_name
+        from tbl_request r
+                 left join tbl_request_payment rp
+                           on rp.request_id = r.id
+                 join tbl_member m
+                      on r.member_id = m.id
+                 join tbl_product p
+                      on p.id = r.product_id
+        order by r.created_date desc
+        limit #{criteria.count} offset #{criteria.offset};
+    </select>
+
+    <select id="selectCountAll">
+        select count(*)
+        from tbl_request r
+                 left join tbl_request_payment p
+                           on p.request_id = r.id
+                 join tbl_member m
+                      on r.member_id = m.id
+    </select>
+</mapper>
