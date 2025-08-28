@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/mypage/subcribe.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 </head>
 <body>
+<form action="/subscription/pay" method="post">
+    <header th:replace="~{/main/header.html :: header}"></header>
     <div class="body-wrap">
         <div class="body">
             <div class="body-inner">
@@ -130,6 +134,11 @@
             </div>
         </div>
     </div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
+</form>
+
 </body>
 <script src="/js/mypage/subcribe.js"></script>
+<script src="/js/main/header.js"></script>
+<script src="/js/main/body.js"></script>
 </html>
