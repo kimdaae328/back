@@ -2,7 +2,7 @@ const cartService = (() => {
 
     const updateCount = async (cartId, count) => {
         try {
-            const response = await fetch('/cart/update', {
+            const response = await fetch('/api/carts/update', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ cartCount: count,cartId: cartId })
@@ -24,7 +24,7 @@ const cartService = (() => {
 
     const deleteCart = async (cartId,callback) => {
         try {
-            const response = await fetch('/cart/delete', {
+            const response = await fetch('/api/carts/delete', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ cartId: cartId })
@@ -48,7 +48,7 @@ const cartService = (() => {
     };
     const selectDeleteCart = async (cartId,callback) => {
         try {
-            const response = await fetch('/cart/select-delete', {
+            const response = await fetch('/api/carts/select-delete', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ cartId: cartId })
