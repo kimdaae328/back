@@ -12,10 +12,16 @@
     </delete>
 
     <select id="findFilesByBannerId">
-        select f.id as fileId, f.file_path, f.file_name, f.file_original_name, f.file_size, f.file_content_type, bf.banner_id
+        select f.id as fileId,
+               f.file_path,
+               f.file_name,
+               f.file_original_name,
+               f.file_size,
+               f.file_content_type,
+               bf.banner_id as bannerId
         from tbl_file f
-        join tbl_banner_file bf on f.id = bf.file_id
-        join tbl_banner b on bf.banner_id = b.id
+                 join tbl_banner_file bf on f.id = bf.file_id
+                 join tbl_banner b on bf.banner_id = b.id
         where b.id = #{bannerId}
     </select>
 </mapper>

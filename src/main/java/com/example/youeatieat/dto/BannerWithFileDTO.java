@@ -13,7 +13,6 @@ import java.util.List;
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
 public class BannerWithFileDTO {
-    private Long bannerId;
     private Long fileId;
     private int bannerOrder;
     private String createdDate;
@@ -23,4 +22,5 @@ public class BannerWithFileDTO {
     private String fileOriginalName;
     private String fileSize;
     private String fileContentType;
+    private Long bannerId;
 }

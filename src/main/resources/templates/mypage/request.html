@@ -24,6 +24,7 @@
                                             <span class="hello-text">반가워요!</span>
                                         </div>
                                         <div class="user-name" th:text="${session.member.memberName}+'님'"></div>
+                                        <input type="hidden" id="member-id" th:value="${session.member.id}" />
                                     </div>
                                 </div>
                             </div>
@@ -166,8 +167,6 @@
                                             </div>
                                             <ul>
                                                 <li id="request-container">
-                                                    <div  class="order-product-wrap">
-                                                    </div>
                                                     <div  class="order-product-wrap">
                                                         <div class="order-product">
                                                             <a href="">
@@ -402,7 +401,6 @@
 </body>
 <script th:inline="javascript">
     const requestsCriteriaDTO = [[${requestsCriteriaDTO}]];
-    console.log(requestsCriteriaDTO);
     const criteria = requestsCriteriaDTO.criteria;
     const requests = requestsCriteriaDTO.requests;
 
@@ -410,5 +408,8 @@
     const keyword = search.keyword;
     const month = search.month || "";
 </script>
-<script src="/js/mypage/order/event.js"></script>
+<script src="/js/mypage/request/event.js"></script>
+<script src="/js/mypage/request/module/service.js"></script>
+<script src="/js/mypage/request/module/layout.js"></script>
+
 </html>
