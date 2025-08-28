@@ -9,8 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDTO {
+public class SubCategoryDTO {
     private Long id;
-    private String categoryName;
-    private List<SubCategoryDTO> subCategoryNames;
+    private String subCategoryName;
 }

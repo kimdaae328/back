@@ -32,7 +32,7 @@ public class ProductApiController {
     }
 
 
-//    신상품 목록 뿌리기
+//    키테고리 목록 뿌리기
     @PostMapping("/list/{page}")
     public ResponseEntity<?> getAllProducts(@PathVariable("page") int page,
                                            @RequestBody Search search) {

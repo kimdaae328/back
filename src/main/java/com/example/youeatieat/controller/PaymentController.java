@@ -1,10 +1,12 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.NoProductException;
+import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.dto.NoticeDTO;
 import com.example.youeatieat.dto.ProductDTO;
 import com.example.youeatieat.service.NoticeServiceImpl;
 import com.example.youeatieat.service.ProductServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,15 +21,18 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/together-product/**")
+@RequestMapping("/payment/**")
 public class PaymentController {
-    private final ProductServiceImpl productServiceImpl;
-    private final NoticeServiceImpl noticeServiceImpl;
+
+    private final HttpSession session;
 
 
     //   결제 창
-    @GetMapping("payment")
+    @GetMapping("list")
     public String payment(Model model) {
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        model.addAttribute("member", memberDTO);
+        System.out.println(memberDTO);
         return "/together-product/payment";
     }
 

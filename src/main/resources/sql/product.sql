@@ -18,3 +18,9 @@ create table tbl_product(
 );
 
 select * from tbl_product;
+
+SELECT *
+FROM tbl_product
+WHERE product_status = 'active'
+  AND main_category_id = 1
+  AND sub_category_name = '잎채소';

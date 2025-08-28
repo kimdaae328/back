@@ -1,12 +1,14 @@
 package com.example.youeatieat.controller;
 
 import com.example.youeatieat.common.exception.NoProductException;
+import com.example.youeatieat.common.exception.handler.NoCategoryException;
 import com.example.youeatieat.dto.*;
 import com.example.youeatieat.service.*;
 import com.example.youeatieat.util.Search;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class ProductController {
     private final ProductServiceImpl productServiceImpl;
     private final NoticeServiceImpl noticeServiceImpl;
     private final LikeServiceImpl likeServiceImpl;
+    private final CategoryServiceImpl categoryServiceImpl;
+
     private final HttpSession session;
 
     //   신상품 목록으로 이동
@@ -32,6 +36,7 @@ public class ProductController {
     public String list(Model model) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
         model.addAttribute("member", memberDTO);
+        System.out.println(memberDTO);
         return "/together-product/list";
     }
 
@@ -41,8 +46,25 @@ public class ProductController {
     return "/together-product/best-list";
     }
 
+    //    카테고리별 목록으로 이동
+    @GetMapping("by-best-list")
+    public String byCategoryList(@RequestParam("id") Long id, Model model) {
 
-//    상품 상세로 이동
+        CategoryDTO category = categoryServiceImpl.getOneCategories(id).orElseThrow(NoCategoryException::new);
+        System.out.println(category.toString());
+
+        if (category.getId() == null) {
+            return "redirect:/error";
+        }
+
+        model.addAttribute("category", category);
+
+        return "/together-product/by-category-list";
+    }
+
+
+
+    //    상품 상세로 이동
     @GetMapping("detail")
     public String detail(@RequestParam("id") Long id, Model model) {
         ProductDTO product = productServiceImpl.goDetail(id).orElseThrow(NoProductException::new);

@@ -12,5 +12,8 @@ import java.util.List;
 public class Search {
     private List<String> mainCategories;
     private String priceKeyword;
+//    private Long mainCategoryId;
+    private String subCategoryName;
     private String month;
+    private String keyword;
 }
