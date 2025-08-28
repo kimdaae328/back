@@ -46,18 +46,45 @@ productCheckboxes.forEach((checkbox) => {
 });
 
 // 개별 체크박스
-
 productCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", function () {
+    checkbox.addEventListener("change", function (e) {
         const productDiv = checkbox.nextElementSibling;
+
+        console.log(e.target)
+        console.log(e.target.checked)
+
         if (checkbox.checked) {
             productDiv.classList.add("checked-style");
         } else {
             productDiv.classList.remove("checked-style");
         }
+
+        showTotalPrice();
         selectTotal();
     });
 });
+// 총 가격 계산
+const showTotalPrice = () => {
+    NodeList.prototype.filter = Array.prototype.filter;
+    let total = 0;
+    let deliveryFee = 2500;
+    const finalPrices = document.querySelectorAll("span.final-price")
+    const orderPrice = document.querySelector("span.order-price");
+
+    productCheckboxes.filter((productCheckbox) => productCheckbox.checked).forEach((checkbox) => {
+        let count = parseInt(checkbox.closest("div.product-header").nextElementSibling.querySelector("p.count").innerText);
+        total += parseInt(checkbox.classList[1]) * count;
+    });
+
+    total += deliveryFee;
+
+    finalPrices.forEach((finalPrice) => {
+        finalPrice.innerText = total;
+    });
+
+    orderPrice.innerText = total - deliveryFee;
+}
+
 
 // 선택 삭제(배송 가능)
 
@@ -146,20 +173,14 @@ noRemoves.forEach((noRemove) => {
             count++;
             itemDiv.querySelector(".count").innerText = count;
             let cartId = itemDiv.querySelector(".cart-id").value
-            await cartService.updateCount(cartId, count, totalUpdate)
+            if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
+                return;
+            }
+            await cartService.updateCount(cartId, count);
+            showTotalPrice();
         })
         }
     )
-function totalUpdate(data){
-        console.log("콜백 실행됨:", data);
-    const totalPriceSp = document.querySelector("#total-price");
-    const finalPriceSp = document.querySelectorAll(".final-price");
-    let finalPrice = data.totalPrice+2500;
-    totalPriceSp.innerText = data.totalPrice;
-    finalPriceSp.forEach(sp=>{
-        sp.innerText=finalPrice;
-    })
-}
     const minusBtns = document.querySelectorAll(".m-button")
     minusBtns.forEach((btn)=>{
         btn.addEventListener("click",async (e) => {
@@ -168,7 +189,11 @@ function totalUpdate(data){
             count--;
             itemDiv.querySelector(".count").innerText = count;
             let cartId = itemDiv.querySelector(".cart-id").value
-            await cartService.updateCount(cartId, count, totalUpdate)
+            if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
+                return;
+            }
+            await cartService.updateCount(cartId, count);
+            showTotalPrice();
         })
     }
 )
@@ -184,36 +209,3 @@ const charge = Number(
 );
 const final = document.querySelector(".final");
 const finalPrice = document.querySelector(".final-price");
-
-// const orderPriceGet = () => {
-//     let totalPrice = 0;
-//
-//     // 주문 금액
-//     refrigerationProducts.forEach((refrigerationProduct) => {
-//         const checkbox = refrigerationProduct.querySelector(".product-input");
-//         if (checkbox.checked) {
-//             const productInfoPrice = refrigerationProduct.querySelector(
-//                 ".product-info-price"
-//             );
-//             const price = Number(
-//                 productInfoPrice
-//                     .querySelector(".price p")
-//                     .innerText.replace(/[^0-9]/g, "")
-//             );
-//             const orderCount = Number(
-//                 productInfoPrice
-//                     .querySelector(".count")
-//                     .innerText.replace(/[^0-9]/g, "")
-//             );
-//             totalPrice += price * orderCount;
-//         }
-//     });
-//     orderPrice.innerText = totalPrice.toLocaleString();
-//
-//     // 최종 결제 금액
-//     let price = totalPrice + charge;
-//     final.innerText = price.toLocaleString();
-//     finalPrice.innerText = price.toLocaleString();
-// };
-//
-// orderPriceGet();
