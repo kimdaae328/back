@@ -217,3 +217,10 @@ const finalPrice = document.querySelector(".final-price");
 // };
 //
 // orderPriceGet();
+
+
+
+
+
+
+

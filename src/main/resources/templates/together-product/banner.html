@@ -17,6 +17,11 @@
 
             <div class="banner-wrap">
                 <ul class="banner-list">
+                    <li class="banner" th:each="b : ${banners}">
+                    <span class="banner-span">
+                        <img th:src="@{/api/files/display/original(filePath=${b.filePath}, fileName=${b.fileName})}">
+                    </span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -24,7 +29,4 @@
     <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
 <script src="/js/main/header.js"></script>
-<script src="/js/together-product/banner/module/service.js"></script>
-<script src="/js/together-product/banner/module/layout.js"></script>
-<script src="/js/together-product/banner/event.js"></script>
 </html>

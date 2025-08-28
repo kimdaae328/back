@@ -28,6 +28,7 @@ public class ProductController {
     private final NoticeServiceImpl noticeServiceImpl;
     private final LikeServiceImpl likeServiceImpl;
     private final CategoryServiceImpl categoryServiceImpl;
+    private final AdminBannerServicelmpl adminBannerService;
 
     private final HttpSession session;
 
@@ -96,6 +97,9 @@ public class ProductController {
 
     @GetMapping("banner")
     public String event(Model model) {
+        List<BannerWithFileDTO> banners = adminBannerService.getBannerFiles();
+//        banners.forEach(b -> System.out.println("배너ID=" + b.getBannerId() + ", files=" + b.getFiles()));
+        model.addAttribute("banners", banners);
         return "/together-product/banner";
     }
 
