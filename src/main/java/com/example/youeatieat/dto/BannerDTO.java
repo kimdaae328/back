@@ -7,16 +7,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
 public class BannerDTO {
     private Long id;
-    private String bannerImage;
     private int bannerOrder;
-    private Status bannerStatus;
-    private Long memberId;
-    private String createdDatetime;
-    private String updatedDatetime;
+    private String createdDate;
+    private String updatedDate;
 }

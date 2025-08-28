@@ -32,27 +32,7 @@ homeButton.addEventListener("click", (e) => {
     });
 });
 
-payoutButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    sideMenuButtons.forEach((payoutButton) => {
-        payoutButton.classList.remove("current");
-    });
-    homeButton.classList.remove("current1");
-    payoutButton.classList.add("current1");
 
-    sideSubLists.forEach((homeByList) => {
-        homeByList.classList.remove("show");
-    });
-
-    sideSubLinks.forEach((homeByLink) => {
-        homeByLink.classList.remove("active");
-    });
-
-    icons.forEach((homeByIcon) => {
-        homeByIcon.classList.remove("mdi-chevron-down");
-        homeByIcon.classList.add("mdi-chevron-right");
-    });
-});
 // 사이드 바 메인 메뉴 클릭 시 리스트 열고 닫기 + 아이콘
 // 사이드 바 서브 링크 클릭 시 이벤트 + 다른 리스트 닫기
 // 상단 tab바 이벤트
@@ -76,7 +56,6 @@ sideMenuButtons.forEach((sideMenuButton) => {
             targetIcon.classList.remove("mdi-chevron-right");
             targetIcon.classList.add("mdi-chevron-down");
         }
-        payoutButton.classList.remove("current1");
         homeButton.classList.remove("current1");
 
         const menuText = sideMenuButton.textContent.trim();
@@ -206,7 +185,13 @@ sideSubLinks.forEach((sideSubLink) => {
             currentPageType = "banner";
 
             bannerLayout.contentLayout();
+            await setList(showBannerList);
 
+        } else if (subMenuText === '상품 목록') {
+            currentPageType = "product";
+
+            productLayout.contentLayout();
+            await setList(showProductList);
         } else {
             console.log("?????");
         }
@@ -351,6 +336,25 @@ const showSellerPurchaseList = async (page = 1, keyword) => {
 
     return purchaseCriteria;
 }
+
+// 배너 목록
+const showBannerList = async () => {
+    const bannerList = await bannerService.getList();
+    bannerLayout.showList(bannerList);
+    // bannerLayout.renderPagination(bannerCriteria.criteria);
+    // bannerLayout.totalCount(bannerCriteria.criteria);
+
+    return bannerList;
+}
+
+// 상품 목록
+const showProductList = async (page = 1, keyword) => {
+    const productCriteria = await productService.getList(page, keyword, productLayout.showList); // 이름 맞추기
+    productLayout.renderPagination(productCriteria.criteria);
+    productLayout.totalCount(productCriteria.criteria);
+    return productCriteria;
+}
+
 
 // 검색
 let keyword ="";
@@ -499,7 +503,6 @@ contentArea.addEventListener("click", async (e) => {
 
     // 매입 요청 승인 버튼 토글
     if (target.classList.contains("approval-action-btn")) {
-        console.log("버튼 잘눌림")
         const btMenu = target.closest(".bt-pop-menu");
         const btPopMenuContext = btMenu.querySelector(".bt-pop-menu-context");
         btPopMenuContext.classList.toggle("show");
@@ -621,37 +624,90 @@ function closeModal(modal) {
 }
 
 // 배너
-contentArea.addEventListener("change", (e) => {
+let formData = null;
+contentArea.addEventListener("change", async (e) => {
     const target = e.target;
 
     if(target.classList.contains("banner-file")){
-        const bannerContainer = document.querySelector("ul.pg-list");
-        const [file] = e.target.files;
-        console.log(e.target.files)
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.addEventListener("load", (e) => {
-            let text = `
-            <li class="pg-list-item show">
-                <div class="pg-logo-wrapper">
-                    <button type="button" class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    <img src="${e.target.result}" class="pg-logo" ">
-                </div>
-            </li>
-        `;
+        formData = new FormData();
 
-            bannerContainer.innerHTML += text;
-        });
+        const files = target.files;
+        const bannerContainer = document.querySelector("ul.pg-list");
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            formData.append("file", file);
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.addEventListener("load", (e) => {
+                let text = `
+                <li class="pg-list-item show">
+                    <div class="pg-logo-wrapper">
+                        <button type="button" class="delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <img src="${e.target.result}" class="pg-logo">
+                    </div>
+                </li>
+            `;
+
+                bannerContainer.innerHTML += text;
+            });
+        }
+    }
+
+});
+
+contentArea.addEventListener("click", async (e) => {
+    const target = e.target;
+    if (target.classList.contains("register-link")) {
+        e.preventDefault();
+        await bannerService.uploadService(formData);
+        await currentLoader(1)
     }
 });
 
-// bannerContainer.addEventListener('click',(e)=>{
-//     if(e.target.classList.contains("delete-btn")){
-//
-//         e.target.parentElement.parentElement.remove();
-//     }
-//
-// })
+contentArea.addEventListener('click', async (e) => {
+    const target = e.target;
 
+    // 배너 사진 등록중 삭제
+    if(target.classList.contains("delete-btn")){
+        const delBtn = e.target.closest('.delete-btn');
+        const item = delBtn.closest('.pg-list-item');
+        if (!item) return;
+
+        item.remove();
+    }
+
+    // 배너 리스트 삭제
+    if(target.classList.contains("banner-delete-btn")){
+        const row = target.closest("tr");
+        const bannerId = row.dataset.bannerId;
+        await bannerService.deleteBanner(bannerId)
+        await currentLoader(1);
+    }
+
+    // 배너 등록후 다시 화면 로드
+    if(target.classList.contains("register-link")){
+        await currentLoader(1);
+    }
+
+    if(target.classList.contains("order-update-btn")){
+        e.preventDefault()
+        const row = e.target.closest(".banner-row");
+        const bannerId = row.dataset.bannerId;
+        const newOrder = row.querySelector("input").value;
+
+        console.log("업데이트 간다!!!", bannerId, newOrder);
+
+        const result = await bannerService.updateOrder(bannerId, newOrder);
+
+        if (result) {
+            alert("순서 변경 성공!!!!!!");
+            // await currentLoader(1);
+        } else {
+            alert("순서 변경 실패!");
+        }
+    }
+});

@@ -36,7 +36,7 @@
         </if>
     </sql>
 
-    <!-- 신상품 조회 -->
+    <!-- 인기순 조회 -->
     <select id="selectList">
         select id, product_name, product_price, product_quantity,
         product_title_image_url, product_info_image_url, product_min_number,

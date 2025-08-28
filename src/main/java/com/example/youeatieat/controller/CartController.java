@@ -22,6 +22,8 @@ import java.util.Map;
 public class CartController {
     private final CartService cartService;
     private final HttpSession session;
+
+
     @GetMapping("/cart")
     public String GoToCart(Model model){
         MemberDTO member = (MemberDTO) session.getAttribute("member");
@@ -33,56 +35,10 @@ public class CartController {
         model.addAttribute("totalPrice", totalPrice);
         return "/mypage/cart";
     }
-    @PostMapping("/update")
-    @ResponseBody
-    public ResponseEntity<?> updateCount(@RequestBody Map<String, Integer> request){
 
-        int count = request.get("cartCount");
-        Long cartId = Long.valueOf(request.get("cartId"));
-        cartService.updateCartCount(cartId,count);
-        MemberDTO member = (MemberDTO) session.getAttribute("member");
-        List<CartDTO> list = cartService.getCartListByMemberId(member.getId());
-        int totalPrice = list.stream()
-                .mapToInt(cart -> cart.getProductPrice() * cart.getCartCount())
-                .sum();
-        Map<String, Object> response = new HashMap<>();
-        response.put("cartId", cartId);
-        response.put("cartCount", count);
-        response.put("totalPrice", totalPrice);
-        return ResponseEntity.ok(response);
-    }
-    @PostMapping("/delete")
-    @ResponseBody
-    public ResponseEntity<?> deleteCart(@RequestBody Map<String, String> request){
-
-        Long cartId = Long.valueOf(request.get("cartId"));
-        cartService.deleteCartByCartId(cartId);
-        log.info("delete cart id is {}", cartId);
-        MemberDTO member = (MemberDTO) session.getAttribute("member");
-        List<CartDTO> list = cartService.getCartListByMemberId(member.getId());
-        int totalPrice = list.stream()
-                .mapToInt(cart -> cart.getProductPrice() * cart.getCartCount())
-                .sum();
-        Map<String, Object> response = new HashMap<>();
-        response.put("cartId", cartId);
-        response.put("totalPrice", totalPrice);
-        return ResponseEntity.ok(response);
-    }
-    @PostMapping("/select-delete")
-    @ResponseBody
-    public ResponseEntity<?> deleteSelectedCart(@RequestBody Map<String, List<Long>> request) {
-        List<Long> cartIds = request.get("cartIds");
-        cartIds.forEach(cartService::deleteCartByCartId);
-        MemberDTO member = (MemberDTO) session.getAttribute("member");
-        List<CartDTO> list = cartService.getCartListByMemberId(member.getId());
-        int totalPrice = list.stream()
-                .mapToInt(cart -> cart.getProductPrice() * cart.getCartCount())
-                .sum();
-        Map<String, Object> response = new HashMap<>();
-        response.put("deletedIds", cartIds);
-        response.put("totalPrice", totalPrice);
-
-        return ResponseEntity.ok(response);
+    @PostMapping("cart")
+    public String goPayment(@RequestBody CartDTO cartDTO) {
+        return  "redirect:/payment/list";
     }
 
 }

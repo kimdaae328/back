@@ -33,7 +33,7 @@ from tbl_product p
     group by product_id
 ) lc on p.id = lc.product_id;
 
-select * from view_best_product_detail ;
+select * from view_best_product_detail order by like_count desc ;
 
 drop view view_best_product_detail;
 

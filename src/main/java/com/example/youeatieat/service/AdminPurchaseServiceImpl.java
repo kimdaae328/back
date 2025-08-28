@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AdminPurchaseServicelmpl implements AdminPurchaseService {
+public class AdminPurchaseServiceImpl implements AdminPurchaseService {
     private final AdminPurchaseDAO adminPurchaseDAO;
 
 //     매입(전체)

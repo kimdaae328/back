@@ -101,7 +101,7 @@ allSecletButton.addEventListener("click", async (e) => {
         console.log(cartIds);
     })
     if(cartIds.length === 0) return;
-    const response = await fetch('/cart/select-delete', {
+    const response = await fetch('/api/carts/select-delete', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartIds: cartIds })
@@ -120,6 +120,12 @@ allSecletButton.addEventListener("click", async (e) => {
         console.error("선택삭제 실패");
     }
 });
+
+
+// 결제 버튼
+
+
+
 
 // 개별 삭제 버튼(배송 가능)
 const productRemoves = document.querySelectorAll(".product-remove");
@@ -209,3 +215,6 @@ const charge = Number(
 );
 const final = document.querySelector(".final");
 const finalPrice = document.querySelector(".final-price");
+
+
+

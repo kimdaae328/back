@@ -2,7 +2,6 @@ package com.example.youeatieat.controller;
 
 import com.example.youeatieat.dto.AdminCustomerCriteriaDTO;
 import com.example.youeatieat.dto.CustomerDetailWithPaymentDTO;
-import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.AdminCustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -24,7 +24,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Primary
-public class BestProductServiceImpl implements ProductService{
+public class BestProductServiceImpl implements BestProductService{
     private final BestProductDAO  bestProductDAO;
     private final LikeDAO likeDAO;
     private final CategoryDAO categoryDAO;

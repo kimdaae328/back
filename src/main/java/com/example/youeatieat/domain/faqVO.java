@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id")
 public class faqVO extends Period {
     private Long id;
-    private FaqCategory faq_category;
-    private String faq_title;
-    private String faq_content;
+    private FaqCategory faqCategory;
+    private String faqTitle;
+    private String faqContent;
 }

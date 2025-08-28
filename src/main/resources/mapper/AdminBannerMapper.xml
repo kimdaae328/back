@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.AdminBannerMapper">
+    <insert id="insertBanner" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_banner (banner_order)
+        values (#{bannerOrder})
+    </insert>
+
+    <select id="selectBannerAll">
+        select b.id as bannerId, b.banner_order, b.created_date, b.updated_date,
+               f.id as fileId, f.file_path, f.file_name, f.file_original_name, f.file_content_type, f.file_size
+        from tbl_banner b
+        join tbl_banner_file bf on b.id = bf.banner_id
+        join tbl_file f on f.id = bf.file_id
+        order by b.banner_order asc, f.id asc
+    </select>
+
+    <update id="updateBanner">
+        update tbl_banner
+        set banner_order = #{bannerOrder}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBanner">
+        delete from tbl_banner
+        where id = #{id}
+    </delete>
+
+    <update id="updateBannerOrder">
+        update tbl_banner
+        set banner_order = #{bannerOrder}
+        where id = #{bannerId}
+    </update>
+</mapper>
