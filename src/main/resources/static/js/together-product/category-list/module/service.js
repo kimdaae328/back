@@ -25,8 +25,8 @@ const productListService = (() => {
         };
 
         // 대카 가져오기
-    const getList = async (page, callback, search={}) => {
-        const response = await fetch(`/api/best-product/best-list/${page}`, {
+    const getList = async (page, callback, search={}, id) => {
+        const response = await fetch(`/api/category/list/${page}/${id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(search)
@@ -35,6 +35,7 @@ const productListService = (() => {
         if(callback) {
             callback(productCriteriaDTO)
         }
+        console.log(search);
         return productCriteriaDTO
     };
 
