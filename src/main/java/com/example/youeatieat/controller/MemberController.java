@@ -77,7 +77,7 @@ public class MemberController {
         }else{
             kakaoService.logout(token);
         }
-        return new RedirectView("/member/login");
+        return new RedirectView("/");
     }
 }
 

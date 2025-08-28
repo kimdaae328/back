@@ -11,6 +11,6 @@ public class MemberExceptionHandler {
     @ExceptionHandler(LoginFailException.class)
     protected RedirectView handleTestExeption(LoginFailException e, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("login","fail");
-        return new RedirectView("/main/login");}
+        return new RedirectView("/main/body");}
 
 }
