@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Getter @Setter @ToString
 @EqualsAndHashCode(of="id")
@@ -15,7 +17,7 @@ public class SubscriptionPaymentDTO {
     private int subscriptionPaymentPrice;
     private Long memberId;
     private Long subscriptionId;
-    private String subscriptionPaymentDate;
+    private LocalDateTime subscriptionPaymentDate;
     private PaymentStatus subscriptionPaymentStatus;
     private String subscriptionPaymentMethod;
     private String createdDatetime;
