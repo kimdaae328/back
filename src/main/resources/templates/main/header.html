@@ -38,12 +38,10 @@
                           </th:block>
 
                          <div class="member-menu customer-service-list">
-                             <form action="/request/list/1" method="get">
-                             <button class="list-menu">주문 내역</button>
-                             </form>
-                             <form action="/mypage/modify" method="get">
-                             <button class="list-menu">회원 정보 관리</button>
-                             </form>
+                             <a href="/request/list/1" class="list-menu">주문 내역</a>
+
+                                 <a href="/mypage/modify" class="list-menu">회원 정보 관리</a>
+
                              <div class="list-menu">
                                  <form action="/member/logout" method="get">
                                      <button type="submit">로그아웃</button>
@@ -121,14 +119,11 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="/like/like-list" method="get">
-                        <button class="good-icon"></button>
-                        </form>
-                        <form action="/cart/cart" method="get">
+                        <a href="/like/like-list" class="good-icon"></a>
+
                         <div class="cart-icon">
-                            <button class="cart-icon-button"></button>
+                            <a href="/cart/cart" class="cart-icon-button"></a>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -202,6 +197,7 @@
                             <a href="/together-product/banner" class="nav-li-text">이벤트</a>
                         </li>
                     </ul>
+                    <th:block th:if="${session.member.memberVerified == false}">
                     <div class="announce-button">
                         <a href="/mypage/subcribe">
                             <div class="announce-button-in">
@@ -209,6 +205,7 @@
                             </div>
                         </a>
                     </div>
+                        </th:block>
                 </div>
             </div>
         </div>

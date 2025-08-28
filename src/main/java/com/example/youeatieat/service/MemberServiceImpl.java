@@ -36,7 +36,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Optional<MemberDTO> login(MemberDTO memberDTO) {
-        return memberDAO.findMemberByEmailAndMemberPassword(memberDTO);
+        return memberDAO.findMemberByEmailAndMemberPassword(memberDTO)
+                ;
     }
 
     @Override

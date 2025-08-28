@@ -28,6 +28,8 @@ public class MemberDTO {
     private String memberLastLoginDate;
     private String createdDate;
     private String updatedDate;
+    private boolean memberVerified;
     private PaymentStatus subscriptionPaymentStatus;
+
     private boolean remember;
 }

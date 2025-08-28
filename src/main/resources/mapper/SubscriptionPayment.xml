@@ -11,7 +11,7 @@
                    #{subscriptionId},
                    #{subscriptionPaymentDate},
                    #{subscriptionPaymentStatus} ,
-                   #{subscription_payment_method}
+                   #{subscriptionPaymentMethod}
             )
     </insert>
 </mapper>

@@ -40,7 +40,9 @@ public class KakaoController {
             redirectAttributes.addFlashAttribute("kakaoEmail", member.getMemberKakaoEmail());
             return new RedirectView("/kakao/signup");
         }
+
         session.setAttribute("member", foundKakaoMember.get());
+
         return new RedirectView("/");
     }
 
