@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/together-product/payment.css">
+    <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
     <title>너도먹고나도먹고</title>
 </head>
 <body>
     <div class="sub">
         <div>
+            <header th:replace="~{/main/header.html :: header}"></header>
             <div class="layout-wrapper">
                 <div class="container">
                     <div class="payment-section">
@@ -21,7 +24,7 @@
                                     <div class="order-title-wrap">
                                         <h3 class="order-title">주문 상품</h3>
                                         <button class="btn-arrow">
-                                            <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(135 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
+                                            <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><defs><path id="7a02qqg3ja" d="M11 12h9v9"></path></defs><g fill="none" fill-rule="evenodd"><path d="M0 0h30v30H0z"></path><use stroke="#333" stroke-width="2" stroke-linecap="square" transform="rotate(135 15.5 16.5)" href="#7a02qqg3ja"></use></g></svg>
                                         </button>
                                     </div>
 
@@ -109,22 +112,22 @@
                                                 <div class="orderer-content-item">
                                                     <span class="orderer-label">보내는 분</span>
                                                     <div class="orderer-content-wrap">
-                                                        <p class="orderer-text orderer-name">차은우</p>
+                                                        <p class="orderer-text orderer-name" th:text="${session.member.memberName}">차은우</p>
                                                     </div>
                                                 </div>
                                                 <div class="orderer-content-item">
                                                     <span class="orderer-label">휴대폰</span>
                                                     <div class="orderer-content-wrap">
-                                                        <p class="orderer-text orderer-phone">010-2554-9401</p>
+                                                        <p class="orderer-text orderer-phone" th:text="${session.member.memberPhone}">010-2554-9401</p>
                                                     </div>
                                                 </div>
                                                 <div class="orderer-content-item">
                                                     <span class="orderer-label">이메일</span>
                                                     <div class="orderer-content-wrap">
-                                                        <p class="orderer-text">kimdaae328@gmail.com</p>
+                                                        <p class="orderer-text" th:text="${session.member.memberEmail}">kimdaae328@gmail.com</p>
                                                         <div class="orderer-notice">
                                                             <p>이메일을 통해 주문처리과정을 보내드립니다.</p>
-                                                            <p>정보 변경은 마이컬리 &gt; 개인정보 수정 메뉴에서 가능합니다.</p>
+                                                            <p>정보 변경은 내 정보 &gt; 개인정보 수정 메뉴에서 가능합니다.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,7 +141,7 @@
                                                     <div class="tooltip-icon">
                                                         <svg width="14" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.9932 0.700195C8.73506 0.700195 10.3116 1.40557 11.4528 2.54565C12.5943 3.68594 13.3002 5.26111 13.3002 7.0002C13.3002 8.73928 12.5943 10.3145 11.4528 11.4547C10.3116 12.5948 8.73506 13.3002 6.9932 13.3002C5.25512 13.3002 3.68233 12.595 2.54387 11.4554C1.40457 10.315 0.700195 8.73952 0.700195 7.0002C0.700195 5.26087 1.40457 3.68541 2.54387 2.54497C3.68233 1.40537 5.25512 0.700195 6.9932 0.700195Z" stroke="#ccc" stroke-width="1.4"></path><path d="M4.5 5.21081H5.77027C5.81351 4.55135 6.26216 4.12973 6.95946 4.12973C7.64054 4.12973 8.09459 4.53514 8.09459 5.0973C8.09459 5.58784 7.90383 5.86944 7.35576 6.22524L7.1973 6.32432C6.45135 6.76216 6.13784 7.24865 6.18649 8.05946L6.19189 8.42703H7.44595V8.11892C7.44595 7.58378 7.64595 7.30811 8.35405 6.89189C9.08919 6.45405 9.5 5.87568 9.5 5.04865C9.5 3.85405 8.51081 3 7.02973 3C5.42432 3 4.54324 3.92973 4.5 5.21081ZM6.87838 11.0054C6.33784 11.0054 5.98108 10.6649 5.98108 10.1459C5.98108 9.62162 6.33784 9.28108 6.87838 9.28108C7.42973 9.28108 7.77568 9.62162 7.77568 10.1459C7.77568 10.6649 7.42973 11.0054 6.87838 11.0054Z" fill="#ccc"></path>
                                                         </svg>
-                                                        <div class="tooltip-text">장바구니, 마이컬리에서 배송지를 변경할 수 있어요.</div>
+                                                        <div class="tooltip-text">장바구니, 마이페이지에서 배송지를 변경할 수 있어요.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +149,9 @@
                                                 <div class="orderer-content-item">
                                                     <span class="orderer-label">배송지</span>
                                                     <div class="orderer-content-wrap">
+                                                        <div class="order-address-div">
                                                         <p class="orderer-text fz16">주소: 서울특별시 강남구 현익빌딩 3층, 4층 </p>
+                                                        </div>
                                                         <button type="button" class="btn-outline btn-small">변경</button>
                                                     </div>
                                                 </div>
@@ -486,6 +491,9 @@
             </div>
         </div>
     </div>
+    <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/together-product/payment.js"></script>
+<script src="/js/main/header.js"></script>
 </html>
