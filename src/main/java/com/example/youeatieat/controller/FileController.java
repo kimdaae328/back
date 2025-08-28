@@ -15,4 +15,9 @@ public class FileController {
     public byte[] display(String filePath, String fileName) throws IOException {
         return FileCopyUtils.copyToByteArray(new File("C:/file/" + filePath, "t_" + fileName));
     }
+
+    @GetMapping("display/original")
+    public byte[] displayOriginal(String filePath, String fileName) throws IOException {
+        return FileCopyUtils.copyToByteArray(new File("C:/file/" + filePath, fileName));
+    }
 }

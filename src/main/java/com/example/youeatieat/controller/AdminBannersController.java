@@ -56,13 +56,7 @@ public class AdminBannersController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateOrder(@PathVariable("id") Long bannerId, @RequestBody BannerWithFileDTO bannerWithFileDTO){
         bannerService.updateBannerOrder(bannerId, bannerWithFileDTO.getBannerOrder());
-//        if(!result){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
-//        }
-//        return ResponseEntity.ok(result);
 
-//        return result ? ResponseEntity.ok("순서 변경 성공!!!!!!!!!!!!!!!!!!!!-----------")
-//                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("순서 변경 실패!!!!!!!!!!!-----------");
         return ResponseEntity.ok(bannerWithFileDTO);
     }
 

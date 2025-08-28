@@ -589,3 +589,32 @@ const bannerService = (() => {
 
     return {uploadService, getList, deleteBanner, updateOrder}
 })();
+
+// 상품 관리
+const productService = (() => {
+    // 상품 목록
+    const getList = async (page, keyword = "", callback) => {
+        const response = await fetch(`/api/admin/products/list/${page}?keyword=${keyword ?? ""}`);
+        const data = await response.json();
+
+        console.log(data)
+
+        if(callback){
+            setTimeout(() => {
+                callback(data);
+            }, 1000)
+        }
+
+        if(response.ok) {
+            console.log("상품게시글 존재")
+        }else if(response.status === 404){
+            console.log("상품게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return data;
+    }
+    return {getList}
+})();

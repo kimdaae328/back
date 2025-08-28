@@ -206,10 +206,13 @@ sideSubLinks.forEach((sideSubLink) => {
             currentPageType = "banner";
 
             bannerLayout.contentLayout();
-            // addBanner();
             await setList(showBannerList);
 
+        } else if (subMenuText === '상품 목록') {
+            currentPageType = "product";
 
+            productLayout.contentLayout();
+            await setList(showProductList);
         } else {
             console.log("?????");
         }
@@ -364,6 +367,15 @@ const showBannerList = async () => {
 
     return bannerList;
 }
+
+// 상품 목록
+const showProductList = async (page = 1, keyword) => {
+    const productCriteria = await productService.getList(page, keyword, productLayout.showList); // 이름 맞추기
+    productLayout.renderPagination(productCriteria.criteria);
+    productLayout.totalCount(productCriteria.criteria);
+    return productCriteria;
+}
+
 
 // 검색
 let keyword ="";
