@@ -32,13 +32,12 @@ public class AdminBannerServicelmpl implements AdminBannerService {
         String todayPath = getPath();
         String rootPath = "C:/file/" + todayPath;
 
-        bannerDAO.upload(bannerDTO);
-        Long bannerId = bannerDTO.getId();
-
         files.forEach(file -> {
             if(file.getOriginalFilename().equals("")){
                 return;
             }
+            bannerDAO.upload(bannerDTO);
+            Long bannerId = bannerDTO.getId();
 
             UUID uuid = UUID.randomUUID();
 
