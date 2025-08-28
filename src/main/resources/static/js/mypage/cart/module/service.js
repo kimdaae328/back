@@ -1,6 +1,6 @@
 const cartService = (() => {
 
-    const updateCount = async (cartId, count,callback) => {
+    const updateCount = async (cartId, count) => {
         try {
             const response = await fetch('/cart/update', {
                 method: "POST",
@@ -15,15 +15,13 @@ const cartService = (() => {
             }
             const result = await response.json();
             console.log(result)
-            if(callback){
-                callback(result);
-            }
 
             return result
         } catch (error) {
             console.error(error);
         }
     };
+
     const deleteCart = async (cartId,callback) => {
         try {
             const response = await fetch('/cart/delete', {
