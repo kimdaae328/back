@@ -8,6 +8,7 @@ create table tbl_member(
     member_name varchar(255),
     member_birth DATE,
     member_phone varchar(255),
+    member_verified boolean default false,
     member_provider enum('kakao', 'you_i') default 'you_i',
     member_gender enum('male','female', 'not') default 'not',
     member_role enum('buyer','seller','admin') not null ,
@@ -16,5 +17,10 @@ create table tbl_member(
     created_date datetime default current_timestamp,
     updated_date datetime default current_timestamp
 );
-
+ALTER TABLE tbl_member
+    ADD COLUMN member_verified BOOLEAN DEFAULT FALSE;
 select * from tbl_member;
+
+UPDATE tbl_member
+SET member_role = 'admin'
+WHERE id = 58;

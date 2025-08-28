@@ -18,6 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.youeatieat.enumeration.MemberRole.ADMIN;
+
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -68,6 +70,9 @@ public class MemberController {
     public RedirectView login(MemberDTO memberDTO){
         MemberDTO member = memberService.login(memberDTO).orElseThrow(LoginFailException::new);
         session.setAttribute("member", member);
+        if (member.getMemberRole() == ADMIN) {
+        return new RedirectView("/admin/customer/list");
+        }
         return new RedirectView("/");
     }
     @GetMapping("logout")

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @Getter @ToString(callSuper = true)
 @SuperBuilder
 @EqualsAndHashCode(of="id")
@@ -15,7 +17,7 @@ public class SubscriptionPaymentVO extends Period {
     private int subscriptionPaymentPrice;
     private Long memberId;
     private Long subscriptionId;
-    private String subscriptionPaymentDate;
+    private LocalDateTime subscriptionPaymentDate;
     private PaymentStatus subscriptionPaymentStatus;
     private String subscriptionPaymentMethod;
 }

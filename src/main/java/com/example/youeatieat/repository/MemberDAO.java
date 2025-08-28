@@ -35,5 +35,11 @@ public class MemberDAO {
         memberMapper.kakaoInsertMember(memberVO);
     }
 
+//   멤버 구독여부 업데이트
+public void updateMemberVerified(Long memberId) {
+    memberMapper.updateMemberVerified(memberId);
+
+}
+
 
 }

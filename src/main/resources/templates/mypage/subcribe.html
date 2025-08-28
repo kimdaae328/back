@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/mypage/subcribe.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 </head>
 <body>
+
+    <header th:replace="~{/main/header.html :: header}"></header>
+    <form id ="pay-form" action="/subscription/pay" method="post">
     <div class="body-wrap">
         <div class="body">
             <div class="body-inner">
@@ -24,6 +29,7 @@
                     <ul class="auto-pay-ul">
                         <li class="auto-pay-li">결제 금액
                             <span>월 1,900원</span>
+                            <input type="hidden" name="subscriptionPaymentPrice" value="1900">
                         </li>
                         <li class="auto-pay-li">결제 시작일
                             <span id="date"></span>
@@ -44,7 +50,7 @@
                         <div class="select"></div>
                     </div>
                     <label for="naver" class="pay-label">
-                        <input type="radio" id="naver" class="pay-input" name="pay">
+                        <input type="radio" id="naver" class="pay-input" name="subscriptionPaymentMethod"  value="naver">
                         <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="Logo" clip-path="url(#clip0_294_3442)"><g id="Clip path group">
                                 <mask id="mask0_294_3442" maskUnits="userSpaceOnUse" x="0" y="0" width="61" height="20">
@@ -70,7 +76,7 @@
                         </svg>
                     </label>
                     <label for="card" class="pay-label">
-                        <input type="radio" id="card" class="pay-input" name="pay">
+                        <input type="radio" id="card" class="pay-input" name="subscriptionPaymentMethod" value="card">
                         신용카드
                     </label>
                 </div>
@@ -123,13 +129,18 @@
                     </div>
                 </div>
                 <div class="go-button">
-                    <button class="button">
+                    <button type="submit" class="button">
                         <span>너도나도 멤버십 가입하기</span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
+</form>
+
+<footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
+
 </body>
-<script src="/js/mypage/subcribe.js"></script>
+<script src="/js/mypage/subcribe/event.js"></script>
+<script src="/js/main/header.js"></script>
 </html>
