@@ -355,36 +355,28 @@ const popup = document.querySelector(".popup-content");
 quantityControls(popup);
 
 // 팝업
-// const openButtons = document.querySelectorAll(".popup-trigger");
-// const closeButtons = document.querySelectorAll(".popup-close");
-//
-// openButtons.forEach((btn) => {
-//     btn.addEventListener("click", () => {
-//         const targetSelector = btn.dataset.target;
-//         const targetModal = document.querySelector(targetSelector);
-//         const htmlScroll = document.querySelector("html");
-//         if (targetModal) {
-//             targetModal.style.display = "block";
-//             htmlScroll.style.overflow = "hidden";
-//         }
-//     });
-// });
-//
-// closeButtons.forEach((btn) => {
-//     btn.addEventListener("click", () => {
-//         const targetModal = btn.closest(".popup-wrapper");
-//         const htmlScroll = document.querySelector("html");
-//         if (targetModal) {
-//             targetModal.style.display = "none";
-//             htmlScroll.style.overflow = "";
-//         }
-//     });
-// });
-
-
-// 팝업
 const buttonContainer = document.querySelector(".product-wrap");
+const rankingButtonContainer = document.querySelector(".ranking-swiper-wrapper");
 let productId = null;
+
+// 밑에서 올라오는 안내창
+const text = document.querySelector(".add-cart-tap-p");
+const addMessage = document.querySelector(".add-cart-tap-wrap");
+
+function showLoginMessage(message) {
+    text.innerText = message;
+    addMessage.style.display = "block";
+    void addMessage.offsetWidth;
+
+    addMessage.classList.add("show");
+
+    setTimeout(() => {
+        addMessage.classList.remove("show");
+        setTimeout(() => {
+            addMessage.style.display = "none";
+        }, 300);
+    }, 1500);
+}
 
 // 이벤트 위임으로 팝업 열기
 buttonContainer.addEventListener("click", async (e) => {
@@ -392,12 +384,21 @@ buttonContainer.addEventListener("click", async (e) => {
     if (!btn) return;
 
     productId = btn.dataset.productId;
-    console.log(productId);
 
     const product = await productListService.addCart(productId);
 
     layout.showPopupCart(product);
-    console.log();
+});
+
+rankingButtonContainer.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".popup-trigger");
+    if (!btn) return;
+
+    productId = btn.dataset.productId;
+
+    const product = await productListService.addCart(productId);
+
+    layout.showPopupCart(product);
 });
 
 // 이벤트 위임으로 팝업 닫기
@@ -454,9 +455,87 @@ document.addEventListener("click", async (e) => {
                     }, 300);
                 }, 1500);
             }
+        } else {
+            showLoginMessage("로그인 후 이용해주세요.");
         }
     }
 });
+
+const modalWrap = document.querySelector(".modal-wrap");
+
+
+// 총액 계산 함수
+function calculateTotal(container) {
+    let total = 0;
+
+    const productItems = container.querySelectorAll(".popup-product-item");
+    productItems.forEach((item) => {
+        const priceText = item
+            .querySelector(".product-price")
+            .textContent.replace(/[^0-9]/g, "");
+        const count = parseInt(item.querySelector(".count").textContent, 10);
+        const price = parseInt(priceText, 10);
+        total += price * count;
+    });
+
+    const totalAmount = container.querySelector(".total-amount");
+    if (totalAmount) {
+        totalAmount.textContent = total.toLocaleString();
+    }
+}
+
+// 이벤트 위임 개수 버튼
+modalWrap.addEventListener("click", (e) => {
+    const plusBtn = e.target.closest(".quantity-btn.plus");
+    const minusBtn = e.target.closest(".quantity-btn.minus");
+
+    if (!plusBtn && !minusBtn) return;
+
+    const box = plusBtn ? plusBtn.closest(".product-quantity-box") : minusBtn.closest(".product-quantity-box");
+    const countEl = box.querySelector(".count");
+    const minusBtnEl = box.querySelector(".quantity-btn.minus");
+    const container = box.closest(".popup-content");
+
+    if (plusBtn) {
+        let count = Number(countEl.textContent);
+        count++;
+        countEl.textContent = count;
+        minusBtnEl.disabled = count <= 0;
+    } else if (minusBtn) {
+        let count = Number(countEl.textContent);
+        if (count > 0) count--;
+        countEl.textContent = count;
+        minusBtnEl.disabled = count == 0;
+    }
+
+    calculateTotal(container);
+});
+
+// 초기 총액 계산 (팝업 열리자마자)
+const initialContainer = modalWrap.querySelector(".popup-content");
+if (initialContainer) calculateTotal(initialContainer);
+
+
+// 상품 총개수
+const productCards = document.querySelectorAll(".product-list .product-card");
+const countSpan = document.querySelector(".result-count .count");
+
+countSpan.textContent = productCards.length;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const showList = async (page, search) => {
     const productCriteria = await  productListService.getList(page, layout.showProductList, search);
