@@ -87,3 +87,18 @@ terms.forEach((term) => {
     });
 });
 
+const signUpBtn = document.getElementById("sign-up-btn");
+
+signUpBtn.addEventListener("click", (e) => {
+    const selectedPayment = document.querySelector(".pay-input:checked");
+
+    if (!selectedPayment) {
+        e.preventDefault();
+        alert("결제 수단을 선택해주세요!");
+        return;
+    }
+
+    console.log("선택된 결제 수단:", selectedPayment.value);
+});
+
+

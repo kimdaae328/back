@@ -80,7 +80,8 @@
         </div>
     </div>
     <!-- 로그인 실패  팝업 -->
-     <div th:if="${loginFail}"  class="popup-wrapper" id="popup2">
+    <th:block th:if="${loginError}">
+     <div style="display: block "   class="popup-wrapper" id="popup2">
         <div class="popup-inner">
             <div class="dim"></div>
             <div class="popup-container">
@@ -98,6 +99,7 @@
             </div>
         </div>
     </div>
+    </th:block>
 </body>
 <script src="/js/main/login/login.js"></script>
 </html>

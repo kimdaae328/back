@@ -52,67 +52,67 @@ phone.addEventListener("keyup", (e) => {
 });
 
 // 이메일 형식 오류 메세지
-const mailError = document.querySelector(".mail-error");
-
-const printMailError = () => {
-    mailError.innerHTML = `<p class="error-message">이메일을 입력해주세요.</p>`;
-};
-
-// 비밀번호 형식 오류 메세지
-const passwordError = document.querySelector(".password-error");
-
-const printPasswordError = () => {
-    passwordError.innerHTML = `<p class="error-message">영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합</p>`;
-};
-
-// 비밀번호 최소 형식 오류 메세지
-
-const printPasswordMinError = () => {
-    passwordError.innerHTML = `<p class="error-message">최소 10자이상 입력</p>`;
-};
-
-// 비밀번호 확인 오류 메세지
-const passwordCheckError = document.querySelector(".password-error");
-
-const printPasswordCheckError = () => {
-    passwordCheckError.innerHTML = `<p class="error-message">동일한 비밀번호를 입력</p>`;
-};
-
-// 이름 오류 메세지
-const nameError = document.querySelector(".name-error");
-
-const printNameError = () => {
-    nameError.innerHTML = `<p class="error-message">이름을 입력해 주세요.</p>`;
-};
-
-// 생년월일 오류메세지
-
-// 미래일 때
-const brithError = document.querySelector(".brith-error");
-
-const printBrithFutureError = () => {
-    brithError.innerHTML = `<p class="error-message">생년월일이 미래로 입력 되었습니다.</p>`;
-};
-
-// 형식에 맞지 않을 때
-const printBrithRecheckError = () => {
-    brithError.innerHTML = `<p class="error-message"생년월일을 다시 확인해주세요.</p>`;
-};
-
-// 년도 오류일 때
-const printBrithYearError = () => {
-    brithError.innerHTML = `<p class="error-message">태어난 년도 4자리를 정확하게 입력해주세요.</p>`;
-};
-
-// 월 오류일 때
-const printBrithMonthError = () => {
-    brithError.innerHTML = `<p class="error-message">태어난 월을 정확하게 입력해주세요.</p>`;
-};
-
-// 일 오류일 때
-const printBrithDayError = () => {
-    brithError.innerHTML = `<p class="error-message">태어난 일을 정확하게 입력해주세요.</p>`;
-};
+// const mailError = document.querySelector(".mail-error");
+//
+// const printMailError = () => {
+//     mailError.innerHTML = `<p class="error-message">이메일을 입력해주세요.</p>`;
+// };
+//
+// // 비밀번호 형식 오류 메세지
+// const passwordError = document.querySelector(".password-error");
+//
+// const printPasswordError = () => {
+//     passwordError.innerHTML = `<p class="error-message">영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합</p>`;
+// };
+//
+// // 비밀번호 최소 형식 오류 메세지
+//
+// const printPasswordMinError = () => {
+//     passwordError.innerHTML = `<p class="error-message">최소 10자이상 입력</p>`;
+// };
+//
+// // 비밀번호 확인 오류 메세지
+// const passwordCheckError = document.querySelector(".password-error");
+//
+// const printPasswordCheckError = () => {
+//     passwordCheckError.innerHTML = `<p class="error-message">동일한 비밀번호를 입력</p>`;
+// };
+//
+// // 이름 오류 메세지
+// const nameError = document.querySelector(".name-error");
+//
+// const printNameError = () => {
+//     nameError.innerHTML = `<p class="error-message">이름을 입력해 주세요.</p>`;
+// };
+//
+// // 생년월일 오류메세지
+//
+// // 미래일 때
+// const brithError = document.querySelector(".brith-error");
+//
+// const printBrithFutureError = () => {
+//     brithError.innerHTML = `<p class="error-message">생년월일이 미래로 입력 되었습니다.</p>`;
+// };
+//
+// // 형식에 맞지 않을 때
+// const printBrithRecheckError = () => {
+//     brithError.innerHTML = `<p class="error-message"생년월일을 다시 확인해주세요.</p>`;
+// };
+//
+// // 년도 오류일 때
+// const printBrithYearError = () => {
+//     brithError.innerHTML = `<p class="error-message">태어난 년도 4자리를 정확하게 입력해주세요.</p>`;
+// };
+//
+// // 월 오류일 때
+// const printBrithMonthError = () => {
+//     brithError.innerHTML = `<p class="error-message">태어난 월을 정확하게 입력해주세요.</p>`;
+// };
+//
+// // 일 오류일 때
+// const printBrithDayError = () => {
+//     brithError.innerHTML = `<p class="error-message">태어난 일을 정확하게 입력해주세요.</p>`;
+// };
 
 // 동의 체크박스
 NodeList.prototype.filter = Array.prototype.filter;
@@ -283,9 +283,34 @@ signupbutton.addEventListener("click",(e)=>{
     const passwordRegex = /^[A-Za-z\d]{6,}$/;
     const phoneRegex = /^01\d{8,9}$/;
     const birthRegex = /^(19\d{2}|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    const postNumber = document.getElementById('addressPostNumber').value;
+    const address = document.getElementById('address').value;
+    const addressDetail = document.getElementById('addressDetail').value;
+
+
+
+
 
 
     let Error = false;
+
+
+    if (!postNumber || !address || !addressDetail) {
+        Error=true;
+        alert("주소를입력해주세요.");
+    }
+    const errorMessages = document.querySelectorAll("p.error-message");
+    let hasVisibleErrorMessage = false;
+    for (const el of errorMessages) {
+        if (window.getComputedStyle(el).display === "block") {
+            hasVisibleErrorMessage = true;
+           break;
+        }
+    }
+    if(hasVisibleErrorMessage){
+        alert("에러메세지를 확인해주세요.");
+        Error = true;
+    }
 
     if (!emailRegex.test(emailInput.value)) {
         Error = true;
@@ -307,22 +332,22 @@ signupbutton.addEventListener("click",(e)=>{
 
 
 
-    if (!emailInput.value) {
-        errorEmailDiv.style.display = "block";
-        Error = true;
-    }
-    if(!phoneInput.value){
-        errorPhoneDiv.style.display="block";
-        Error = true;
-    }
-    if (!passwordInput.value) {
-        errorPasswordDiv.style.display = "block";
-        Error = true;
-    }
-    if (!nameInput.value) {
-        errorNameDiv.style.display = "block";
-        Error = true;
-    }
+    // if (!emailInput.value) {
+    //     errorEmailDiv.style.display = "block";
+    //     Error = true;
+    // }
+    // if(!phoneInput.value){
+    //     errorPhoneDiv.style.display="block";
+    //     Error = true;
+    // }
+    // if (!passwordInput.value) {
+    //     errorPasswordDiv.style.display = "block";
+    //     Error = true;
+    // }
+    // if (!nameInput.value) {
+    //     errorNameDiv.style.display = "block";
+    //     Error = true;
+    // }
 
 
     if (Error) {

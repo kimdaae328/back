@@ -2,7 +2,7 @@
 function toggleButton(buttons) {
     buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
-            e.preventDefault();
+            // e.preventDefault();
             buttons.forEach((btn) => btn.classList.remove("active"));
             button.classList.add("active");
         });

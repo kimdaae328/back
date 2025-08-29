@@ -226,17 +226,16 @@ signupbutton.addEventListener("click",(e)=>{
     const passwordRegex = /^[A-Za-z\d]{6,}$/;
     const phoneRegex = /^01\d{8,9}$/;
     const birthRegex = /^(19\d{2}|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-
+    const postNumber = document.getElementById('addressPostNumber').value;
+    const address = document.getElementById('address').value;
+    const addressDetail = document.getElementById('addressDetail').value;
 
     let Error = false;
 
-    if (!emailRegex.test(emailInput.value)) {
-        Error = true;
-        alert("이메일 형식을 확인해주세요.")
-    }
-    if(!passwordRegex.test(passwordInput.value)){
+
+    if (!postNumber || !address || !addressDetail) {
         Error=true;
-        alert("패스워드 형식을 확인해주세요.");
+        alert("주소를입력해주세요.");
     }
     if(!phoneRegex.test(phoneInput.value)){
         Error=true;
@@ -250,18 +249,18 @@ signupbutton.addEventListener("click",(e)=>{
 
 
 
-    if (!emailInput.value) {
-        errorEmailDiv.style.display = "block";
-        Error = true;
-    }
+    // if (!emailInput.value) {
+    //     errorEmailDiv.style.display = "block";
+    //     Error = true;
+    // }
     if(!phoneInput.value){
         errorPhoneDiv.style.display="block";
         Error = true;
     }
-    if (!passwordInput.value) {
-        errorPasswordDiv.style.display = "block";
-        Error = true;
-    }
+    // if (!passwordInput.value) {
+    //     errorPasswordDiv.style.display = "block";
+    //     Error = true;
+    // }
     if (!nameInput.value) {
         errorNameDiv.style.display = "block";
         Error = true;
@@ -276,9 +275,6 @@ signupbutton.addEventListener("click",(e)=>{
 
 
 })
-const emailInput = document.querySelector(".emailinputtext");
-const arCheck = new Array(1).fill(false);
-const signupButton = document.getElementById("signupbutton")
 
 
 

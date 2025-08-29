@@ -147,3 +147,9 @@ document.querySelector("#like-container").addEventListener("click", async (e) =>
         parent.remove();
     }
 });
+
+const test = document.querySelector(".info-title a")
+
+test.addEventListener("click",(e)=>{
+    console.log("test");
+})
