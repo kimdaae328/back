@@ -215,6 +215,11 @@ input[type="checkbox"], input[type="radio"] {
     cursor: pointer;
 }
 
+.menu-btn.active {
+    font-weight: 700;
+    color: rgb(50, 116, 63);
+}
+
 .menu-btn:hover {
     font-weight: 700;
     color: rgb(50, 116, 63);
