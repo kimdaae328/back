@@ -1,6 +1,5 @@
 package com.example.youeatieat.controller;
 
-import com.example.youeatieat.common.exception.LoginFailException;
 import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.KakaoService;
 import com.example.youeatieat.service.MemberService;
@@ -13,10 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.example.youeatieat.enumeration.MemberRole.ADMIN;
 
@@ -67,8 +68,14 @@ public class MemberController {
     }
 
     @PostMapping("login")
-    public RedirectView login(MemberDTO memberDTO){
-        MemberDTO member = memberService.login(memberDTO).orElseThrow(LoginFailException::new);
+    public RedirectView login(MemberDTO memberDTO, RedirectAttributes redirectAttributes
+                              ){
+        Optional<MemberDTO> optionalMember = memberService.login(memberDTO);
+        if (optionalMember.isEmpty()) {
+            redirectAttributes.addFlashAttribute("loginError", "아이디 또는 비밀번호가 틀렸습니다.");
+            return new RedirectView("/member/login");
+        }
+        MemberDTO member = optionalMember.get();
         session.setAttribute("member", member);
         if (member.getMemberRole() == ADMIN) {
         return new RedirectView("/admin/customer/list");
