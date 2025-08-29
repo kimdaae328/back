@@ -15,7 +15,7 @@
                 <h2 class="title">
                     <p>장바구니</p>
                 </h2>
-                <form id="cartForm" action="/cart/cart" method="post">
+                <form id="cartForm" action="/together-product/payment" method="get">
                     <div class="cart-body">
                         <div class="cart-product">
                             <div class="total">
@@ -52,55 +52,55 @@
                             <div>
                                 <div class="refrigeration-product-wrap">
                                     <div th:if="${cartList.size() > 0}">
-                                    <div th:each="item, i : ${cartList}" class="refrigeration-product">
-                                        <input type="hidden" class="cart-id" th:value="${item.id}">
-                                        <div class="product-header">
-                                            <div class="product-select">
-                                                <div class="product-button">
-                                                    <label th:for="'product-label-' + ${i}" class="product-label">
-                                                        <input type="checkbox" name="" th:id="'product-label-' + ${i}" th:classappend="'product-input ' + ${item.productPrice}">
-                                                        <div class="product-div"></div>
-                                                    </label>
+                                        <div th:each="item, i : ${cartList}" class="refrigeration-product">
+                                            <input type="hidden" class="cart-id" th:value="${item.id}">
+                                            <div class="product-header">
+                                                <div class="product-select">
+                                                    <div class="product-button">
+                                                        <label th:for="'product-label-' + ${i}" class="product-label">
+                                                            <input type="checkbox" name="cartIds" th:id="'product-label-' + ${i}" th:classappend="'product-input ' + ${item.productPrice}" th:value="${item.id}">
+                                                            <div class="product-div"></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="product-name">
+                                                        <a th:href="@{/together-product/detail(id=${item.productId})}">
+                                                                <p th:text="${item.productName}"></p>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <div class="product-name">
-                                                    <a th:href="@{/together-product/detail(id=${item.productId})}">
-                                                            <p th:text="${item.productName}"></p>
+                                                <button type="button" class="product-remove">
+                                                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="info-img">
+                                                    <a href="">
+                                                        <img th:src="@{${item.productTitleImageUrl}}">
                                                     </a>
                                                 </div>
-                                            </div>
-                                            <button type="button" class="product-remove">
-                                                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.63492 0.22168L0.220703 1.63589L6.58466 7.99985L0.220703 14.3638L1.63492 15.778L7.99888 9.41407L14.3628 15.778L15.7771 14.3638L9.41309 7.99985L15.7771 1.63589L14.3628 0.22168L7.99888 6.58564L1.63492 0.22168Z" fill="#a7b2bc"></path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="info-img">
-                                                <a href="">
-                                                    <img th:src="@{${item.productTitleImageUrl}}">
-                                                </a>
-                                            </div>
-                                            <div class="product-info-price">
-                                                <div class="price">
-                                                    <p th:text="${item.productPrice} + '원'"></p>
-                                                </div>
-                                                <div class="number">
-                                                    <button type="button" class="m-button">
-                                                        <svg width="13.333" height="20" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M0 0H16V2H0V0Z" fill="#bcc4cc"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <p class="count" th:text="${item.cartCount}">
-                                                    </p>
-                                                    <button type="button" class="p-button">
-                                                        <svg width="13.333" height="13.333" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M9 0H7V7H0V9H7V16H9V9H16V7H9V0Z" fill="#bcc4cc"></path>
-                                                        </svg>
-                                                    </button>
+                                                <div class="product-info-price">
+                                                    <div class="price">
+                                                        <p th:text="${item.productPrice} + '원'"></p>
+                                                    </div>
+                                                    <div class="number">
+                                                        <button type="button" class="m-button">
+                                                            <svg width="13.333" height="20" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M0 0H16V2H0V0Z" fill="#bcc4cc"></path>
+                                                            </svg>
+                                                        </button>
+                                                        <p class="count" th:text="${item.cartCount}">
+                                                        </p>
+                                                        <button type="button" class="p-button">
+                                                            <svg width="13.333" height="13.333" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M9 0H7V7H0V9H7V16H9V9H16V7H9V0Z" fill="#bcc4cc"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <!-- 장바구니에 아무것도 없을 때 -->

@@ -347,5 +347,3 @@ const signupButton = document.getElementById("signupbutton")
     signupButton.disable = false;
 });
 
-
-

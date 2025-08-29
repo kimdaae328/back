@@ -19,6 +19,23 @@
         from tbl_cart c join tbl_member m on c.member_id = m.id join tbl_product p on c.product_id =p.id
         where c.member_id=#{memberId}
     </select>
+<!--아이디로 조회-->
+    <select id="selectCartById">
+        select c.id as id,
+               c.cart_status ,
+               c.cart_count ,
+               c.product_id ,
+               c.member_id ,
+               c.created_date ,
+               c.updated_date ,
+               p.product_name ,
+               p.product_price,
+               p.product_title_image_url
+        from tbl_cart c join tbl_member m on c.member_id = m.id join tbl_product p on c.product_id =p.id
+        where c.id=#{id}
+    </select>
+
+
     <update id="updateCartCount">
             update tbl_cart
             set cart_count = #{cartCount}
