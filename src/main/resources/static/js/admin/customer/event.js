@@ -8,31 +8,6 @@ const icons = document.querySelectorAll(".icon-wrapper i");
 const contentArea = document.querySelector("#content-area");
 const answerButton = document.querySelector("#btn-answer");
 
-// 홈 클릭 이벤트
-homeButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    sideMenuButtons.forEach((homeByButton) => {
-        homeByButton.classList.remove("current");
-    });
-
-    payoutButton.classList.remove("current1");
-    homeButton.classList.add("current1");
-
-    sideSubLists.forEach((homeByList) => {
-        homeByList.classList.remove("show");
-    });
-
-    sideSubLinks.forEach((homeByLink) => {
-        homeByLink.classList.remove("active");
-    });
-
-    icons.forEach((homeByIcon) => {
-        homeByIcon.classList.remove("mdi-chevron-down");
-        homeByIcon.classList.add("mdi-chevron-right");
-    });
-});
-
-
 // 사이드 바 메인 메뉴 클릭 시 리스트 열고 닫기 + 아이콘
 // 사이드 바 서브 링크 클릭 시 이벤트 + 다른 리스트 닫기
 // 상단 tab바 이벤트
@@ -193,6 +168,14 @@ sideSubLinks.forEach((sideSubLink) => {
     });
 });
 
+// 첫번째진입시 회원 목록 항상 active
+document.addEventListener("DOMContentLoaded", async () => {
+    if (sideSubLinks.length > 0) {
+        sideSubLinks[0].click();
+        sideSubLists[0].classList.add("show");
+    }
+});
+
 // 상단 오른쪽 관리자 이메일 클릭 시 리스트 출력
 // 출력된 리스트 다시 닫기
 const userMenuWrapper = document.querySelector(".user-menu-wrapper");
@@ -249,6 +232,12 @@ const setList = (loader) => {
     currentLoader(1);
     customerLayout.connectToPagination((page) => currentLoader(page));
 };
+
+// 처음 페이지 로드
+document.addEventListener("DOMContentLoaded", async () => {
+    customerLayout.contentLayout();
+    await setList(showList);
+});
 
 // 일반 회원
 const showNonSubscribedList = async (page = 1, keyword) => {
