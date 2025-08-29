@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CartMapper {
@@ -21,4 +22,7 @@ public interface CartMapper {
     public void updateDuplicateProduct (@Param("cartId") Long cartId, @Param("cartCount") int cartCount);
 
     public  List<CartDTO> selectDuplicateProduct(@Param("memberId") Long memberId, @Param("productId") Long productId);
+
+//    아이디로 조회
+    public Optional<CartDTO> selectCartById(@Param("id") Long id);
 }

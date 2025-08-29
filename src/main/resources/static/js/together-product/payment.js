@@ -37,51 +37,6 @@ closeButtons.forEach((btn) => {
     });
 });
 
-// 결제 수단 탭
-const tabButtons = document.querySelectorAll(".payment-btn-wrap .btn-round");
-const tabContents = document.querySelectorAll(".payment-tab-item");
-
-tabButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-        tabButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
-
-        tabContents.forEach((content) => content.classList.remove("active"));
-        if (tabContents[index]) {
-            tabContents[index].classList.add("active");
-        }
-    });
-});
-
-tabButtons[0].click();
-
-// 카드 선택
-const cardButton = document.querySelectorAll(
-    ".product-scroll-section .btn-round"
-);
-
-cardButton.forEach((selectBtn) => {
-    selectBtn.addEventListener("click", () => {
-        if (!currentButton) return;
-
-        const selectedText = selectBtn.textContent;
-        const span = currentButton.querySelector("span");
-        const popup = selectBtn.closest(".popup-wrapper");
-
-        span.textContent = selectedText;
-        span.style.color = "#222";
-        popup.style.display = "none";
-        htmlScroll.style.overflow = "";
-
-        currentButton = null;
-
-        const cardOptionBtn = document.querySelector(".btn-card-option");
-        if (cardOptionBtn) {
-            cardOptionBtn.style.display = "flex";
-        }
-    });
-});
-
 // 총 합계
 const optionPrice = document.querySelectorAll(".option-price");
 function calculateOrderAmount() {
@@ -100,28 +55,30 @@ function calculateOrderAmount() {
         totalAmount += price * count;
     });
 
+
+
     // 주문금액 표시
     const orderAmount = document.querySelector(
         ".order-amount-item:nth-child(1) .amount-text .count"
     );
-    orderAmount.textContent = totalAmount.toLocaleString();
+    orderAmount.textContent = totalAmount;
 
     // 배송비 (필요시 계산 로직 추가)
     const deliveryAmount = 0;
     const deliveryAmountEl = document.querySelector(
         ".order-amount-item:nth-child(2) .amount-text .count"
     );
-    deliveryAmountEl.textContent = deliveryAmount.toLocaleString();
+    deliveryAmountEl.textContent = '2500';
 
     // 최종 결제금액 계산 및 표시
     const finalAmount = totalAmount + deliveryAmount;
     document.querySelector(
         ".order-amount-item.total .amount-text .count"
-    ).textContent = finalAmount.toLocaleString();
+    ).textContent = Number(finalAmount) + Number(deliveryAmountEl.textContent);
 
     // 버튼 금액 표시
     document.querySelector(".btn-payment .count").textContent =
-        finalAmount.toLocaleString();
+        Number(finalAmount) + Number(deliveryAmountEl.textContent);
 }
 
 // 실행
@@ -167,22 +124,21 @@ checkbox.addEventListener("change", () => {
     }
 });
 
-// 상품 총개수
-const productItems = document.querySelectorAll(
-    ".order-product-list .order-product-item"
-);
-const orderSpan = document.querySelector(".order-content-text .count");
-
-orderSpan.textContent = productItems.length;
-
+// 주문 상품 전체 개수 - 1
+const productCountSpan = document.querySelector("span.product-count");
+productCountSpan.innerText = productCount - 1;
 
 
 // 배송지 변경
 
 const research = document.querySelector(".btn-outline.btn-small");
 const orderAddressBiv = document.querySelector(".order-address-div");
+const addressInput = document.querySelectorAll(".addressInput");
+
 research.addEventListener("click",(e)=>{
     getAddressWindow();
+    orderAddressBiv.style.display = 'block';
+
 })
 
 const getAddressWindow = () => {
@@ -217,23 +173,86 @@ const getAddressWindow = () => {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('addressPostNumber').value = data.zonecode;
-            document.getElementById('orderer-text').value = addr;
+
+            document.querySelector('.main-address').value = data.zonecode;
+            document.querySelector('.extra-address').value = addr;
 
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
             if(roadAddr !== ''){
-                document.getElementById('addressDetail').value = extraRoadAddr;
+                document.querySelector('.addressDetail').value = extraRoadAddr;
             } else {
-                document.getElementById('addressDetail').value = '';
+                document.querySelector('.addressDetail').value = '';
             }
         }
     }).open();
 }
 
+let user = {
+    id: member.id,
+    username: member.memberName,
+    phone: member.memberPhone,
+    email: member.memberEmail
+}
+
+console.log(user)
+
+let items = [];
+
+const charge = {
+    id: 1234567,
+    name: '배송비',
+    qty: 1,
+    price: 2500
+}
+selectedCarts.forEach((cart) => {
+    let item = {
+        id: cart.id,
+        name: cart.productName,
+        qty: cart.cartCount,
+        price: cart.productPrice,
+    }
+
+    items.push(item)
+})
+
+items.push(charge);
+
+
+
+    let extra =  {
+        open_type: "iframe",
+        card_quota: "0,2,3",
+        escrow: false
+    }
+
+// 유효성 검사
+
+// 배송지
+const address = document.querySelector(".main-address");
+const extraAddress = document.querySelector(".extra-address");
+const addressDetail = document.querySelector(".addressDetail");
+
+// 배송받는 사람
+const inputName = document.querySelector(".input-name-real");
+const nameCheckbox = document.querySelector(".name-checkbox");
+
+// 전화번호
+const inputPhone = document.querySelector(".input-phone-real");
+
 // 결제하기 버튼
 const paymentButton = document.querySelector(".btn-primary.btn-payment");
 paymentButton.addEventListener("click", async (e) => {
-    await pay(paymentButton.querySelector("span.count").replace(",", ""));
+
+    if (!(address.value && extraAddress.value && addressDetail.value)) {
+        alert("배송지를 입력해 주세요.")
+    } if (!(inputName.value || nameCheckbox.checked)) {
+        alert("받으실 분을 입력해 주세요.")
+    } if (!(inputPhone.value || nameCheckbox.checked)) {
+        alert("받으실 분의 휴대폰을 입력해 주세요.")
+    } else {
+        await pay(paymentButton.querySelector("span.count").textContent);
+    }
+
 });
 
 // 결제
@@ -245,22 +264,9 @@ const pay = async (price) => {
             order_name: "테스트결제",
             order_id: "TEST_ORDER_ID",
             pg: "다날",
-            // method: "계좌이체",
             tax_free: 0,
-            user: {
-                id: "회원아이디",
-                username: "회원이름",
-                phone: "01000000000",
-                email: "test@test.com",
-            },
-            items: [
-                {
-                    id: "item_id",
-                    name: "테스트아이템",
-                    qty: 1,
-                    price: 1000,
-                },
-            ],
+            user: user,
+            items: items,
             extra: {
                 open_type: "iframe",
                 card_quota: "0,2,3",
@@ -311,4 +317,7 @@ const pay = async (price) => {
         }
     }
 };
+
+
+
 

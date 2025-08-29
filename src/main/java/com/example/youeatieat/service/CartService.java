@@ -4,6 +4,7 @@ import com.example.youeatieat.domain.CartVO;
 import com.example.youeatieat.dto.CartDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CartService {
 
@@ -19,6 +20,8 @@ public interface CartService {
 
 
     public void deleteCartByCartId(Long cartId);
+
+    public Optional<CartDTO> getCartById(Long cartId);
 
     default CartVO toVO(CartDTO cartDTO){
         return CartVO.builder()

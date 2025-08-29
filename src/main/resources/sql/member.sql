@@ -20,13 +20,3 @@ create table tbl_member(
 ALTER TABLE tbl_member
     ADD COLUMN member_verified BOOLEAN DEFAULT FALSE;
 select * from tbl_member;
-
-UPDATE tbl_member
-SET member_role = 'admin'
-WHERE id = 58;
-
-select * from tbl_member;
-
-UPDATE tbl_member
-SET member_verified = 1
-WHERE id = 3;

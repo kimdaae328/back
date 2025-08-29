@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +48,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public void deleteCartByCartId(Long cartId) {
         cartDAO.deleteCartByCartId(cartId);
+    }
+
+//    아이디로 조회
+    @Override
+    public Optional<CartDTO> getCartById(Long id) {
+        return cartDAO.getCartByCartId(id);
     }
 
 }

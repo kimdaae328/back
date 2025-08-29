@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -35,5 +36,10 @@ public class CartDAO {
 
     public void deleteCartByCartId(Long cartId) {
         cartMapper.deleteCartByCartId(cartId);
+    }
+
+//    아이디로 조회
+    public Optional<CartDTO> getCartByCartId(Long id) {
+        return cartMapper.selectCartById(id);
     }
 }

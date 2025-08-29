@@ -20,3 +20,7 @@ DELETE FROM tbl_product WHERE member_id = 55;
 
 drop table tbl_address;
 
+
+
+insert into tbl_address (address, address_detail, address_post_number, member_id)
+values ('경기 구리시 건원대로 92',' (인창동, 인창1단지주공아파트)','11917','8');
