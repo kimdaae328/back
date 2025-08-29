@@ -20,7 +20,7 @@ public class AdminInquiriesController {
     public ResponseEntity<?> inquiryList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getInquiryList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
+            return ResponseEntity.ok(inquiryCriteriaDTO);
         }
         return ResponseEntity.ok(inquiryCriteriaDTO);
     }
@@ -30,7 +30,7 @@ public class AdminInquiriesController {
     public ResponseEntity<?> unansweredList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getUnansweredList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
+            return ResponseEntity.ok(inquiryCriteriaDTO);
         }
         return ResponseEntity.ok(inquiryCriteriaDTO);
     }
@@ -40,7 +40,7 @@ public class AdminInquiriesController {
     public ResponseEntity<?> answeredList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminInquiryCriteriaDTO inquiryCriteriaDTO = inquiriesService.getAnsweredList(page, keyword);
         if(inquiryCriteriaDTO == null || inquiryCriteriaDTO.getInquiries().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(inquiryCriteriaDTO);
+            return ResponseEntity.ok(inquiryCriteriaDTO);
         }
         return ResponseEntity.ok(inquiryCriteriaDTO);
     }

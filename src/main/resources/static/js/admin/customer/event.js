@@ -408,6 +408,13 @@ contentArea.addEventListener("keyup", async (e) => {
                 productLayout.totalCount(result.criteria);
             }
 
+            // 결제 검색
+            if(currentPageType === "payment"){
+                const result = await currentLoader(1, keyword);
+                productLayout.renderPagination(result.criteria);
+                productLayout.totalCount(result.criteria);
+            }
+
             // 회원 문의목록 검색
             if(currentPageType === "buyer-inquiry"){
                 if (answered && !unanswered) {
@@ -503,6 +510,19 @@ contentArea.addEventListener("click", async (e) => {
         const result = await currentLoader(1, keyword);
         productLayout.renderPagination(result.criteria);
         productLayout.totalCount(result.criteria);
+    }
+
+    // 결제 검색 인풋
+    if(btn.closest("#btn-request-search")){
+        if (!btn.closest("#btn-request-search")) return;
+
+        const inputBox = btn.closest(".input-group");
+        const input = inputBox.querySelector(".input-search");
+        keyword = input.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        requestLayout.renderPagination(result.criteria);
+        requestLayout.totalCount(result.criteria);
     }
 });
 
