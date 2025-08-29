@@ -307,7 +307,7 @@ const inquiryService = (() => {
         return await response.json();
     };
 
-    return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
+    return {getInquiryList:getInquiryList, getUnansweredList:getUnansweredList, getDetail:getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
 // 판매자 문의
