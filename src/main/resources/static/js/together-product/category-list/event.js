@@ -45,7 +45,6 @@ function mapTitleToCategory(titleCategory) {
 // 리스트 페이지 필터
 
 const resetButtons = document.querySelectorAll(".btn-reset");
-console.log(categories)
 filterSidebar.addEventListener("change", async (e) => {
 
     const target = e.target;

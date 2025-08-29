@@ -93,7 +93,7 @@
                                             <span class="info-label">상품선택</span>
                                             <div class="info-content">
                                                 <div class="product-option-item">
-                                                    <p class="option-name"  th:text = "${product.productName}">[오봉집] 오봉집 칼낙지 (2인분)</p>
+                                                    <p class="option-name"  th:text = "${product.productName}"></p>
                                                     <div class="option-info">
                                                         <div class="product-quantity-box">
                                                             <button type="button" class="quantity-btn minus"></button>
@@ -384,47 +384,7 @@
                                                         <button type="button" class="notice-text" th:text="*{notice.noticeTitle}"></button>
                                                 </ul>
                                                 <ul class="review-list">
-<!--                                                    <li class="review-item">-->
-<!--                                                        <div class="review-author">-->
-<!--                                                            <span class="badge badge-member">멤버스</span>-->
-<!--                                                            <span class="name">김**</span>-->
-<!--                                                        </div>-->
-<!--                                                        <div class="review-content">-->
-<!--                                                            <div class="review-title-wrap">-->
-<!--                                                                <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>-->
-<!--                                                            </div>-->
-<!--                                                            <div class="review-text-wrap">-->
-<!--                                                                <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.-->
-<!--                                                            </div>-->
-<!--                                                            </p>-->
-<!--                                                            <div class="review-photo-group">-->
-<!--                                                                <button type="button" class="review-photo popup-trigger" data-target="#popup1">-->
-<!--                                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">-->
-<!--                                                                </button>-->
-<!--                                                                <button type="button" class="review-photo popup-trigger" data-target="#popup1">-->
-<!--                                                                    <img src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/9c262604-08d3-4170-b95a-b16770e70b53.jpg">-->
-<!--                                                                </button>-->
-<!--                                                            </div>-->
-<!--                                                            <div class="review-content-footer">-->
-<!--                                                                <span class="review-date">2025.07.26</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
                                                 </ul>
-<!--                                                <div class="null-review">-->
-<!--                                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                                                        <g clip-path="url(#clip0_2061_60391)">-->
-<!--                                                            <path d="M24 47C36.7025 47 47 36.7025 47 24C47 11.2975 36.7025 1 24 1C11.2975 1 1 11.2975 1 24C1 36.7025 11.2975 47 24 47Z" stroke="#e2e2e2" stroke-width="2"></path>-->
-<!--                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M24 13C25.1046 13 26 13.8954 26 15V26C26 27.1046 25.1046 28 24 28C22.8954 28 22 27.1046 22 26V15C22 13.8954 22.8954 13 24 13ZM24 31C25.1046 31 26 31.8954 26 33C26 34.1046 25.1046 35 24 35C22.8954 35 22 34.1046 22 33C22 31.8954 22.8954 31 24 31Z" fill="#e2e2e2"></path>-->
-<!--                                                        </g>-->
-<!--                                                        <defs>-->
-<!--                                                            <clipPath id="clip0_2061_60391">-->
-<!--                                                                <rect width="48" height="48" fill="white"></rect>-->
-<!--                                                            </clipPath>-->
-<!--                                                        </defs>-->
-<!--                                                    </svg>-->
-<!--                                                    <p class="null-message">따끈한 첫 후기를 기다리고 있어요.</p>-->
-<!--                                                </div>-->
                                                 <div class="pagenation">
                                                     <button type="button" class="prev" disabled></button>
                                                     <button type="button" class="next"></button>
@@ -478,7 +438,7 @@
                                 <div class="product-option-wrap">
                                     <div class="product-option-item">
                                         <div class="option-wrap">
-                                            <p class="option-name">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>
+                                            <p class="option-name" th:text = "${product.productName}"></p>
                                         </div>
                                         <div class="option-info">
                                             <div class="product-quantity-box">
@@ -528,96 +488,6 @@
     <div id="modal-wrap">
 
     </div>
-<!--    <div class="popup-wrapper" id="popup1">-->
-<!--        <div class="popup-inner">-->
-<!--            <div class="dim"></div>-->
-<!--            <div class="popup-container popup-review scroll">-->
-<!--                <div class="popup-container-inner">-->
-<!--                    <div class="popup-content">-->
-<!--                        <div class="popup-header">-->
-<!--                            <div class="popup-title-wrap">-->
-<!--                                <p class="popup-title">사진 후기</p>-->
-<!--                            </div>-->
-<!--                            <button type="button" class="btn-close popup-close">-->
-<!--                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2073_60924)"><path d="M26 26L6 6" stroke="#999" stroke-linecap="square" stroke-width="0"></path><path d="M6 26L26 6" stroke="#999" stroke-linecap="square" stroke-width="0"></path></g><path fill-rule="evenodd" clip-rule="evenodd" d="M6.28431 5.58859L6.35355 5.64645L16 15.293L25.6464 5.64645C25.8417 5.45118 26.1583 5.45118 26.3536 5.64645C26.5271 5.82001 26.5464 6.08944 26.4114 6.28431L26.3536 6.35355L16.707 16L26.3536 25.6464C26.5488 25.8417 26.5488 26.1583 26.3536 26.3536C26.18 26.5271 25.9106 26.5464 25.7157 26.4114L25.6464 26.3536L16 16.707L6.35355 26.3536C6.15829 26.5488 5.84171 26.5488 5.64645 26.3536C5.47288 26.18 5.4536 25.9106 5.58859 25.7157L5.64645 25.6464L15.293 16L5.64645 6.35355C5.45118 6.15829 5.45118 5.84171 5.64645 5.64645C5.82001 5.47288 6.08944 5.4536 6.28431 5.58859Z" fill="#999"></path></svg>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <div class="product-scroll-section">-->
-<!--                            <div class="pop-review-wrap">-->
-<!--                                <div class="pop-review-img-wrap">-->
-<!--                                    <span class="pop-review-img">-->
-<!--                                        <img src="https://img-cf.kurly.com/hdims/resize/%3E640x%3E640/quality/90/src/shop/data/review/20250724/b67068f4-6313-4eaa-8dca-42ee340712dc.jpg">-->
-<!--                                    </span>-->
-<!--                                    <div class="pop-preview-list">-->
-<!--                                        <div class="pop-preview-item">-->
-<!--                                            <button type="button" class="btn-img on">-->
-<!--                                                <span>-->
-<!--                                                    <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">-->
-<!--                                                </span>-->
-<!--                                                <div class="select-img">-->
-<!--                                                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                                                        <path d="M1 4.76471L5.5 9L14 1" stroke="#fff" stroke-width="2"></path>-->
-<!--                                                    </svg>-->
-<!--                                                </div>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                        <div class="pop-preview-item">-->
-<!--                                            <button type="button" class="btn-img">-->
-<!--                                                <span>-->
-<!--                                                    <img alt="image-67473845" srcset="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 1x, https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg 2x" src="https://img-cf.kurly.com/hdims/resize/%5E%3E240x%3E240/cropcenter/240x240/quality/85/src/shop/data/review/20250726/c362f7a2-581b-4bbe-b935-aff1970680f9.jpg" decoding="async" data-nimg="intrinsic" class="css-1zjvv7" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">-->
-<!--                                                </span>-->
-<!--                                                <div class="select-img hidden">-->
-<!--                                                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                                                        <path d="M1 4.76471L5.5 9L14 1" stroke="#fff" stroke-width="2"></path>-->
-<!--                                                    </svg>-->
-<!--                                                </div>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="pop-review-content-wrap">-->
-<!--                                    <div class="review-author">-->
-<!--                                        <span class="badge badge-member">멤버스</span>-->
-<!--                                        <span class="name">김**</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="review-content">-->
-<!--                                        <div class="review-title-wrap">-->
-<!--                                            <p class="review-title">식감이 좋은 아삭 복숭아1.2kg[품종: 대월-(딱복)]</p>-->
-<!--                                        </div> -->
-<!--                                        <div class="review-text-wrap">-->
-<!--                                            <p class="review-text">두번째 구매. 처음 건 정말 맛있었는데, 이번엔 맛이 좀 떨어지네요.-->
-<!--                                        </div>-->
-<!--                                        <div class="review-content-footer">-->
-<!--                                            <span class="review-date">2025.07.26</span>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="popup-footer">-->
-<!--                                <div class="popup-button-box">-->
-<!--                                    <button type="button" class="btn-list btn-outline">-->
-<!--                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="path-1-inside-1_101_10540" fill="white"><rect x="0.75" y="0.75" width="6.3" height="6.3" rx="1"></rect></mask><rect x="0.75" y="0.75" width="6.3" height="6.3" rx="1" stroke="#333" stroke-width="2.4" mask="url(#path-1-inside-1_101_10540)"></rect><mask id="path-2-inside-2_101_10540" fill="white"><rect x="8.4502" y="0.75" width="6.3" height="6.3" rx="1"></rect></mask><rect x="8.4502" y="0.75" width="6.3" height="6.3" rx="1" stroke="#333" stroke-width="2.4" mask="url(#path-2-inside-2_101_10540)"></rect><mask id="path-3-inside-3_101_10540" fill="white"><rect x="0.75" y="8.44995" width="6.3" height="6.3" rx="1"></rect></mask><rect x="0.75" y="8.44995" width="6.3" height="6.3" rx="1" stroke="#333" stroke-width="2.4" mask="url(#path-3-inside-3_101_10540)"></rect><mask id="path-4-inside-4_101_10540" fill="white"><rect x="8.4502" y="8.44995" width="6.3" height="6.3" rx="1"></rect></mask><rect x="8.4502" y="8.44995" width="6.3" height="6.3" rx="1" stroke="#333" stroke-width="2.4" mask="url(#path-4-inside-4_101_10540)"></rect></svg>-->
-<!--                                        사진 목록 보기-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <button type="button" class="prev">-->
-<!--                        <svg width="23" height="44" viewBox="0 0 23 44" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                            <path d="M22 1.5L2 22L22 42.5" stroke="#fff" stroke-width="2"></path>-->
-<!--                        </svg>-->
-<!--                    </button>-->
-<!--                    <button type="button" class="next">-->
-<!--                        <svg width="23" height="44" viewBox="0 0 23 44" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                            <path d="M1 1.5L21 22L1 42.5" stroke="#fff" stroke-width="2"></path>-->
-<!--                        </svg>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
     <div class="popup-wrapper" id="popup3">
         <div class="popup-inner">
             <div class="dim"></div>
@@ -653,10 +523,10 @@
                         <div class="product-scroll-section btn-input-active">
                             <div class="product-content-header">
                                 <div class="product-content-img">
-                                    <img src="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg">
+                                    <img th:src="@{/api/product/image(filePath=${product.productTitleImageUrl})}">
                                 </div>
                                 <div class="product-content-title">
-                                    <p class="product-popup-title" th:text = "${product.productName}">[샐러드판다] 그린랩 샌드위치 3종</p>
+                                    <p class="product-popup-title" th:text = "${product.productName}"></p>
                                 </div>
                             </div>
                             <div class="product-content-wrap">

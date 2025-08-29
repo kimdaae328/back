@@ -20,3 +20,6 @@ create table tbl_member(
 ALTER TABLE tbl_member
     ADD COLUMN member_verified BOOLEAN DEFAULT FALSE;
 select * from tbl_member;
+
+delete from tbl_member
+where id = 13;
