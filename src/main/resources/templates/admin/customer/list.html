@@ -23,24 +23,14 @@
             <div class="side-header">
                 <div class="app-wrapper">
                     <div class="provider-name hover-spin">
-                            <span class="comp-provider-name">
-                                <span class="pn-name">관리자 이름</span>
-                            </span>
+                        <span class="comp-provider-name">
+                            <span th:text="${session.member.memberName}" class="pn-name">관리자 이름</span>
+                        </span>
                     </div>
-                    <a class="app-name d-flex justify-content-between align-items-center">
-                        <span>관리자 등급표시</span>
-                    </a>
                 </div>
             </div>
             <div class="menu-wrapper flex-grow-1">
                 <ul class="menu-list">
-                    <li class="menu menu-item d-flex flex-column">
-                        <!-- 홈 버튼 추가를 위해 id="menu-home" 작성 -->
-                        <a href="" id="menu-home" class="menu-btn d-flex w-100" data-toggle="collapse" aria-expanded="true" aria-controls="">
-                            <i class="mdi mdi mdi-credit-card-plus-outline"></i>
-                            <span class="menu-name">HOME</span>
-                        </a>
-                    </li>
                     <li class="menu menu-item d-flex flex-column">
                         <a href="" class="menu-btn d-flex w-100" data-toggle="collapse" aria-expanded="true" aria-controls="menu-6109064136799700f1ebced6">
                             <!-- aria-controls는 밑 ul태그의 id와 똑같다 -->
@@ -160,19 +150,6 @@
                 <div class="flex-grow-1"></div>
                 <div>
                     <div class="header-menu-group d-flex">
-                        <!-- 상단 -->
-                        <a href="" class="rebound-link mr-3">
-                            <div class="header-menu-btn" data-for="" data-toggle="" data-custom-class="" title="" data-original-title="">
-                                <i class="mdi mdi-text-box-outline"></i>
-                            </div>
-                        </a>
-                        <!-- 상단 공지사항 -->
-                        <a href="" class="rebound-link mr-3">
-                            <div class="header-menu-btn " data-for="" data-toggle="" data-custom-class="" title="" data-original-title="공지사항">
-                                <!-- hover시 aria-describedby="tooltip"이 뒤에 표기 -->
-                                <i class="mdi mdi-bullhorn-variant-outline"></i>
-                            </div>
-                        </a>
                         <!-- 상단 관리자 이메일 -->
                         <div class="user-menu">
                             <div class="user-menu-wrapper d-flex align-items-center cursor-pointer" id="user-menu-handler" data-toggle="dropdown" aria-expanded="false">
@@ -184,16 +161,16 @@
                             <div class="user-menu-content dropdown-menu dropdown-menu-right">
                                 <ul class="menu-body list-unstyled">
                                     <li>
-                                        <a href="" class="rebound-link d-block text-dark">
-                                            <i class="mdi mdi-bell-outline mr-2 mdi-18px"></i>
-                                            알림
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="d-block text-dark">
-                                            <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
-                                            로그아웃
-                                        </a>
+                                        <form action="/member/logout" method="get" class="d-block text-dark">
+                                            <button type="submit">
+                                                <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
+                                                로그아웃
+                                            </button>
+                                        </form>
+<!--                                        <a href="" class="d-block text-dark">-->
+<!--                                            <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>-->
+<!--                                            로그아웃-->
+<!--                                        </a>-->
                                     </li>
                                 </ul>
                             </div>
