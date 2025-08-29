@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너도먹고나도먹고</title>
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
     <link rel="stylesheet" href="/css/mypage/cart.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 </head>
 <body>
+<header th:replace="~{/main/header.html :: header}"></header>
     <div>
         <div class="cart-wrap">
             <div class="cart">
@@ -34,9 +37,6 @@
                                         <div class="a-button-wrap">
                                             <button type="button" class="possibility-button">
                                                 <p>너도나도배송</p>
-                                            </button>
-                                            <button type="button" class="impossibility">
-                                                <p>품절/구매불가</p>
                                             </button>
                                         </div>
                                     </span>
@@ -212,11 +212,13 @@
                             </div>
                         </div>
                     </div>
-<!--                </form>-->
+                </form>
             </div>
         </div>
     </div>
+<footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
+<script src="/js/main/header/event.js"></script>
 <script src="/js/mypage/cart/event.js"></script>
 <script src="/js/mypage/cart/module/service.js"></script>
 </html>

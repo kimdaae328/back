@@ -16,8 +16,15 @@ create table tbl_product(
                             constraint fk_product_member foreign key (member_id)
                                 references tbl_member(id)
 );
+alter table tbl_product
+ADD COLUMN sub_category_name varchar(255); -- 새 컬럼 추가);
+
+
 
 select * from tbl_product;
+update tbl_product
+set sub_category_name ='잎채소'
+where id=3;
 
 SELECT *
 FROM tbl_product
