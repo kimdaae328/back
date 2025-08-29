@@ -499,19 +499,19 @@ const sellerLayout = (() => {
         <tr>
             <td class="td-name">
                 <div class="member-name">
-                    <span class="member-name">${seller.memberName}</span>
+                    <span class="member-name">${seller.memberName ? seller.memberName : "-"}</span>
                     <span class="badge-label badge text-danger ml-2">${seller.memberProvider == "YOU_I" ? "일반 로그인" : "카카오 로그인"}</span>
                 </div>
-                <div class="member-id">${seller.id}</div>
+                <div class="member-id">${seller.id ? seller.id : "-"}</div>
             </td>
             <td class="td-amount text-center pr-4 font-weight-bold">
-                <span class="member-name">${seller.memberName}</span>
+                <span class="member-name">${seller.memberName ? seller.memberName : "-"}</span>
                 <span class="amount-unit"> 님</span>
             </td>
             <td class="td-address">${(seller.address || seller.addressDetail) ? `${seller.address ?? ""} ${seller.addressDetail ?? ""}` : "-"}</td>
-            <td class="td-email">${seller.memberEmail}</td>
-            <td class="td-phone">${seller.memberPhone}</td>
-            <td class="td-start">${seller.createdDate}</td>
+            <td class="td-email">${seller.memberEmail ? seller.memberEmail : "-"}</td>
+            <td class="td-phone">${seller.memberPhone ? seller.memberPhone : "-"}</td>
+            <td class="td-start">${seller.createdDate ? seller.createdDate : "-"}</td>
             <td class="td-recent">${seller.memberLastLoginDate ? seller.memberLastLoginDate : "-"}</td>
             <td class="td-action text-center">
                 <button class="action-btn seller-action-btn">
@@ -965,7 +965,7 @@ const inquiryLayout = (() => {
         let text = "";
         if (!inquiriesCriteria.inquiries || inquiriesCriteria.inquiries.length === 0) {
             text += `
-                <tr class="member-row no-data">
+                <tr class="inquiry-row no-data">
                     <td class="" colspan="6">문의 목록이 없습니다.</td>
                 </tr>
             `
@@ -1611,8 +1611,9 @@ const purchaseLayout = (() => {
                                         <col style="width:14%">
                                         <col style="width:14%">
                                         <col style="width:14%">
-                                        <col style="width:14%">
-                                        <col style="width:14%">
+                                        <col style="width:10%">
+                                        <col style="width:10%">
+                                        <col style="width:10%">
                                     </colgroup>                           
                                 <thead>
                                     <tr>
@@ -1627,13 +1628,13 @@ const purchaseLayout = (() => {
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
+<!--                                테이블 내용 들어옴-->
                                 </tbody>
                             </table>
                             </div>
                             <nav class="rebound-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination rebound-pagination">
-    <!--                            여기 페이지 a버튼 들어와야함-->
+    <!--                            여기 페이지 a버튼 들어옴-->
                                 </ul>
                             </nav>
                         </div>
@@ -1659,6 +1660,14 @@ const purchaseLayout = (() => {
             APPROVED: "승인",
             REJECTED: "거절"
         };
+
+        if (!purchasesCriteria.purchases || purchasesCriteria.purchases.length === 0) {
+            text += `
+                <tr class="purchase-row no-data">
+                    <td class="" colspan="8">매입 목록이 없습니다.</td>
+                </tr>
+            `
+        }
 
         purchasesCriteria.purchases.forEach((purchase) => {
             const status = purchase.purchaseRequestApprovalStatus;
@@ -2035,9 +2044,9 @@ const productLayout = (() => {
                             <div class="col-auto">
                                 <div class="filter-wrapper filter-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control flex-grow-1" placeholder="상품명">
+                                        <input type="text" class="form-control flex-grow-1 input-search" placeholder="상품명">
                                         <div class="input-group-append">
-                                            <button class="btn btn-search">
+                                            <button id="btn-product-search" class="btn btn-search">
                                                 <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
                                             </button>
                                         </div>
@@ -2049,12 +2058,12 @@ const productLayout = (() => {
                     </div>
                     <table id="product-table" class="table grey-header-table w-100 text-center receipt-table">
                         <colgroup>
-                            <col style="width:15%">
-                            <col style="width:15%">
-                            <col style="width:17%">
                             <col style="width:20%">
                             <col style="width:20%">
-                            <col style="width:15%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+<!--                            <col style="width:15%">-->
                         </colgroup>                           
                          <thead>
                             <tr>
@@ -2063,7 +2072,7 @@ const productLayout = (() => {
                                 <th class="td-status">가격</th>
                                 <th class="td-user">보유 중량(kg)</th>
                                 <th class="td-at">등록일자</th>
-                                <th class="td-action">상세보기(판매등록)</th>                   
+<!--                                <th class="td-action">상세보기(판매등록)</th>                   -->
                             </tr>
                         </thead>
                         <tbody>
@@ -2080,31 +2089,30 @@ const productLayout = (() => {
         const productsContainer = document.querySelector("#product-table tbody");
         if (!productsContainer) return;
 
-        if (!productsCriteria || productsCriteria.length === 0) {
-            productsContainer.innerHTML = `
-            <tr>
-                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
-                    등록된 상품이 없습니다.
-                </td>
-            </tr>
-        `;
-            return;
+        let text = "";
+        if (!productsCriteria.products || productsCriteria.products.length === 0) {
+            text = `
+                <tr class="no-data">
+                    <td colspan="5">
+                        등록된 상품이 없습니다.
+                    </td>
+                </tr>
+            `;
         }
 
-        let text = "";
         productsCriteria.products.forEach((product) => {
             text += `
                 <tr class="product-row" data-product-id="${product.id}">
-                    <td class="text-center font-weight-bold" colspan="1" >${product.productName}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.memberId}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.productPrice}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >-</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.updatedDate}</td>
-                    <td class="td-action text-center">
-                        <div id="modal-open" class="action-btn">
-                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>
-                        </div>
-                    </td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productName ? product.productName : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.memberId ? product.memberId : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productPrice ? product.productPrice : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productQuantity ? product.productQuantity : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.updatedDate ? product.updatedDate : "-"}</td>
+<!--                    <td class="td-action text-center">-->
+<!--                        <button id="modal-open" class="action-btn">-->
+<!--                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>-->
+<!--                        </button>-->
+<!--                    </td>-->
                 </tr>
             `;
         });
@@ -2137,14 +2145,11 @@ const productLayout = (() => {
         if (!pagination) return;
 
         pagination.addEventListener("click", (e) => {
-            // if(e.target.classList.contains(".page-item-link")) {
             e.preventDefault();
 
             const linkButton = e.target.closest(".page-item-link");
             const page = linkButton.dataset.page;
-            // const page = linkButton.getAttribute("href");
             navi(page);
-            // }
         });
     };
 
@@ -2619,9 +2624,9 @@ const requestLayout = (() => {
                     <td class="text-center font-weight-bold" colspan="1">${request.paymentDate}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.memberName}</td>
                     <td class="td-action text-center">
-                        <div id="modal-open" class="action-btn">
+                        <button id="modal-open" class="action-btn">
                             <i id="modalbtn" class="mdi mdi-chevron-right"></i>
-                        </div>
+                        </button>
                     </td>
                 </tr>
             `;

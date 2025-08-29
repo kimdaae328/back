@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.youeatieat.mapper.AdminProductMapper">
     <select id="selectProductAll">
-        select id, product_name, product_price, product_quantity, product_category, product_title_image_url, product_info_image_url, product_min_number, product_status, member_id, created_date, updated_date
+        select id, product_name, product_price, product_quantity, product_title_image_url, product_info_image_url, product_min_number, product_status, member_id, created_date, updated_date
         from tbl_product
         where product_status = 'active'
             <if test="keyword != null">
