@@ -200,14 +200,7 @@ labelContainer.addEventListener("click", async (e) => {
 
         pagination.goToPage(1, search);
 
-        const filterActiveBox = document.querySelector(".active-filter-list");
-        console.log(filterActiveBox, item)
-        if (filterActiveBox) {
-            const allTagsCount = filterActiveBox.querySelectorAll(".active-filter-item");
-            filterActiveBox.style.display = allTagsCount.length > 0 ? "flex" : "none";
-
-
-        }
+        noTag();
 
         // input박스 초기화
         document.querySelectorAll("input:checked").forEach((input) => {
@@ -219,20 +212,6 @@ labelContainer.addEventListener("click", async (e) => {
 
     }
 })
-
-// 리셋 버튼초기화
-function resetButtonsState() {
-    const isChecked =
-        document.querySelectorAll(".filter-sidebar input:checked").length > 0;
-
-    resetButtons.forEach((btn) => {
-        if (btn.closest(".filter-sidebar")) {
-            btn.classList.toggle("on", isChecked);
-        }
-        btn.disabled = !isChecked;
-    });
-}
-resetButtonsState();
 
 // 태그 삭제
 function removeTag(title) {
@@ -254,8 +233,28 @@ function noTag() {
         );
         filterActiveBox.style.display =
             allTagsCount.length > 0 ? "flex" : "none";
+        if (allTagsCount.length === 0) {
+            console.log("태그 없다!!!!!!!!!");
+            const resetButton = document.querySelector(".btn-reset");
+            resetButton.classList.remove("on");
+
+        }
     }
 }
+
+// 리셋 버튼초기화
+function resetButtonsState() {
+    const isChecked =
+        document.querySelectorAll(".filter-sidebar input:checked").length > 0;
+
+    resetButtons.forEach((btn) => {
+        if (btn.closest(".filter-sidebar")) {
+            btn.classList.toggle("on", isChecked);
+        }
+        btn.disabled = !isChecked;
+    });
+}
+resetButtonsState();
 
 // 라디오 두 번 클릭 시 해제
 const radios = document.querySelectorAll('input[type="radio"]');
@@ -279,7 +278,6 @@ radios.forEach((radio) => {
 
             // 태그 없을때
             noTag();
-            resetButtonsState();
         } else {
             selected = radio;
         }

@@ -140,6 +140,7 @@ filterSidebar.addEventListener("change", async (e) => {
         // 태그 없을때
         noTag();
 
+
         categories = Array.isArray(categories) ? categories : [];
 
     }
@@ -206,6 +207,8 @@ labelContainer.addEventListener("click", async (e) => {
 
         pagination.goToPage(1, search);
 
+        noTag();
+
         const filterActiveBox = document.querySelector(".active-filter-list");
         console.log(filterActiveBox, item)
         if (filterActiveBox) {
@@ -260,6 +263,12 @@ function noTag() {
         );
         filterActiveBox.style.display =
             allTagsCount.length > 0 ? "flex" : "none";
+        if (allTagsCount.length === 0) {
+            console.log("태그 없다!!!!!!!!!");
+            const resetButton = document.querySelector(".btn-reset");
+            resetButton.classList.remove("on");
+
+        }
     }
 }
 
@@ -403,6 +412,27 @@ buttonContainer.addEventListener("click", async (e) => {
     console.log();
 });
 
+
+
+// 밑에서 올라오는 안내창
+const text = document.querySelector(".add-cart-tap-p");
+const addMessage = document.querySelector(".add-cart-tap-wrap");
+
+function showLoginMessage(message) {
+    text.innerText = message;
+    addMessage.style.display = "block";
+    void addMessage.offsetWidth;
+
+    addMessage.classList.add("show");
+
+    setTimeout(() => {
+        addMessage.classList.remove("show");
+        setTimeout(() => {
+            addMessage.style.display = "none";
+        }, 300);
+    }, 1500);
+}
+
 // 이벤트 위임으로 팝업 닫기
 document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".popup-close");
@@ -457,6 +487,8 @@ document.addEventListener("click", async (e) => {
                     }, 300);
                 }, 1500);
             }
+        } else {
+            showLoginMessage("로그인 후 이용해주세요.");
         }
     }
 });
