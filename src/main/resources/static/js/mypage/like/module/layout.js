@@ -26,8 +26,8 @@ const likeLayout = (() => {
                                                 <div class="product-info">
                                                     <div>
                                                         <div class="info-title">
-                                                            <a th:href="@{/together-product/detail(id=${like.productId})}" style="display: block;">
-                                                                 <p>${like.productName}</p>
+                                                            <a href="/together-product/detail?id=${like.productId}" style="display: block;pointer-events: auto;cursor: pointer">
+                                                                 ${like.productName}
                                                             </a>
                                                         </div>
                                                         <div class="info-price">${like.productPrice}원</div>
@@ -36,7 +36,7 @@ const likeLayout = (() => {
                                                         <button class="remove">
                                                             <span>삭제</span>
                                                         </button>
-                                                        <button class="add popup-trigger" data-target="#popup2">
+                                                        <button type="button" class="add popup-trigger" data-target="#popup2">
                                                             <span class="add-button">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
                                                                     <g fill="none" fill-rule="evenodd">

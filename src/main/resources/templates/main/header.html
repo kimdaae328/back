@@ -57,15 +57,9 @@
                             <span class="customer-service-icon"></span>
                         </a>
                         <div class="menu customer-service-list">
-                            <form action="/customerservice/notice" method="get">
-                            <button class="list-menu">공지사항</button>
-                            </form>
-                            <form action="/customerservice/faq" method="get">
-                            <button class="list-menu">자주하는 질문</button>
-                            </form>
-                            <form action="/customerservice/inquiry" method="get">
-                            <button class="list-menu">1:1 문의</button>
-                            </form>
+                            <a href="/customerservice/notice" class="list-menu">공지사항</a>
+                            <a href="/customerservice/faq" class="list-menu">자주하는 질문</a>
+                            <a href="/customerservice/inquiry" class="list-menu">1:1 문의</a>
                         </div>
                     </div>
                 </div>
@@ -197,7 +191,8 @@
                             <a href="/together-product/banner" class="nav-li-text">이벤트</a>
                         </li>
                     </ul>
-                    <th:block th:if="${session.member.memberVerified == false}">
+
+                        <th:block th:if="${session.member != null and session.member.memberVerified == false}">
                     <div class="announce-button">
                         <a href="/mypage/subcribe">
                             <div class="announce-button-in">
@@ -205,7 +200,8 @@
                             </div>
                         </a>
                     </div>
-                        </th:block>
+
+                    </th:block>
                 </div>
             </div>
         </div>

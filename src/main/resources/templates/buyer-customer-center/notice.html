@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main/header.css">
     <link rel="stylesheet" href="/fonts/pretendard/font.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="stylesheet" href="/css/buyer-customer-center/notice.css">
     <title>너도먹고나도먹고</title>
 </head>
 <body>
+<header th:replace="~{/main/header.html :: header}"></header>
     <div class="sub">
         <div>
             <div class="sub-layout-wrapper">
@@ -18,19 +21,19 @@
                                 <h2 class="customer-title">고객센터</h2>
                                 <ul class="sidebar-menu-list">
                                     <li class="sidebar-menu-item">
-                                        <a href="" class="btn-menu active">
+                                        <a href="/customerservice/notice" class="btn-menu active">
                                             <span>공지사항</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><defs><path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path></defs><g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)"><use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use></g></g></g></g></g></svg>
                                         </a>
                                     </li>
                                     <li class="sidebar-menu-item">
-                                        <a href="" class="btn-menu">
+                                        <a href="/customerservice/faq" class="btn-menu">
                                             <span>자주하는 질문</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><defs><path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path></defs><g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)"><use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use></g></g></g></g></g></svg>
                                         </a>
                                     </li>
                                     <li class="sidebar-menu-item">
-                                        <a href="" class="btn-menu">
+                                        <a href="/customerservice/inquiry" class="btn-menu">
                                             <span>1:1 문의</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><defs><path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path></defs><g fill="none" fill-rule="evenodd"><g><g><g><g transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)"><use stroke="#999" stroke-linecap="round" stroke-width="1.8" stroke-linejoin="round" transform="rotate(45 5.657 5.657)" xlink:href="#gfk9q0rhta"></use></g></g></g></g></g></svg>
                                         </a>
@@ -127,6 +130,8 @@
             </div>
         </div>
     </div>
+<footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
+<script src="/js/main/header/event.js"></script>
 <script src="/js/seller-customer-center/notice.js"></script>
 </html>

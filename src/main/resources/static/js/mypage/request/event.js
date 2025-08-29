@@ -26,7 +26,7 @@ dateSet.forEach((date) => {
                         <div class="order-product-wrap">
 
                                     <div class="order-product">
-                                        <a href="">
+                                        <a href="/together-product/detail?id=${obj.productId}">
                                             <div class="order-product-img-wrap">
                                                 <img src="${obj.productTitleImageUrl}" class="order-product-img">
                                             </div>
@@ -35,7 +35,7 @@ dateSet.forEach((date) => {
                                             <div class="delivery-type">
                                                 <p class="delivery-type-text"></p>
                                             </div>
-                                            <a href="">
+                                            <a href="/together-product/detail?id=${obj.productId}">
                                                 <p class="product-info-title"><span>${obj.productName}</span></p>
                                                
                                             </a>

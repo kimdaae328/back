@@ -24,6 +24,8 @@ selectAllCheckbox.addEventListener("change", () => {
         checkbox.checked = selectAllCheckbox.checked;
     });
     selectTotal();
+    showTotalPrice();
+
 });
 
 // 2. 개별 체크박스 클릭 시 → 전부 체크되어 있으면 전체도 체크
@@ -50,8 +52,6 @@ productCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function (e) {
         const productDiv = checkbox.nextElementSibling;
 
-        console.log(e.target)
-        console.log(e.target.checked)
 
         if (checkbox.checked) {
             productDiv.classList.add("checked-style");
@@ -177,9 +177,9 @@ noRemoves.forEach((noRemove) => {
             count++;
             itemDiv.querySelector(".count").innerText = count;
             let cartId = itemDiv.querySelector(".cart-id").value
-            if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
-                return;
-            }
+            // if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
+            //     return;
+            // }
             await cartService.updateCount(cartId, count);
             showTotalPrice();
         })
@@ -190,12 +190,16 @@ noRemoves.forEach((noRemove) => {
         btn.addEventListener("click",async (e) => {
             const itemDiv = btn.closest(".refrigeration-product");
             let count = parseInt(itemDiv.querySelector(".count").innerText);
+            if (count <= 1) {
+                return;
+            }
+
             count--;
             itemDiv.querySelector(".count").innerText = count;
             let cartId = itemDiv.querySelector(".cart-id").value
-            if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
-                return;
-            }
+            // if(!e.target.closest("div.product-info").previousElementSibling.querySelector("input[type=checkbox]").checked){
+            //     return;
+            // }
             await cartService.updateCount(cartId, count);
             showTotalPrice();
         })
