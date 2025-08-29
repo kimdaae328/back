@@ -1159,7 +1159,7 @@ table.table>thead tr th:last-child {
     display: inline-block;
     font-size: 18px;
     height: 30px;
-    line-height: 30px;
+    line-height: 29px;
     text-align: center;
     transition: background-color .2s, color .4s, border-color .3s;
     width: 30px;
@@ -2086,6 +2086,21 @@ table {
 
 .approval-action-btn * { pointer-events: none; }
 .purchase-action-btn  * { pointer-events: none; }
+button * {pointer-events: none;}
+.menu-body.list-unstyled form{
+    width: 100%;
+}
+.menu-body.list-unstyled button {
+    border: none;
+    background: transparent;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.menu-body.list-unstyled button:hover {
+    color: #507cf3;
+}
 
 .banner-row td {
     text-align: center;
@@ -2106,4 +2121,9 @@ table {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+tr.no-data td {
+    text-align: center;
+    padding: 50px !important;
 }

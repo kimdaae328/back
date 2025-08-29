@@ -20,7 +20,7 @@ public class AdminSellersController {
     public ResponseEntity<?> list(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = memberService.getSellerList(page, keyword);
         if(sellerCriteriaDTO == null || sellerCriteriaDTO.getSellers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerCriteriaDTO);
+            return ResponseEntity.ok(sellerCriteriaDTO);
         }
         return ResponseEntity.ok(sellerCriteriaDTO);
     }
@@ -40,7 +40,7 @@ public class AdminSellersController {
     public ResponseEntity<?> youeatieatList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = memberService.getSellerYoueatieatList(page, keyword);
         if(sellerCriteriaDTO == null || sellerCriteriaDTO.getSellers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerCriteriaDTO);
+            return ResponseEntity.ok(sellerCriteriaDTO);
         }
         return ResponseEntity.ok(sellerCriteriaDTO);
     }
@@ -51,7 +51,7 @@ public class AdminSellersController {
     public ResponseEntity<?> kakaoList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminSellerCriteriaDTO sellerCriteriaDTO = memberService.getSellerKakaoList(page, keyword);
         if(sellerCriteriaDTO == null || sellerCriteriaDTO.getSellers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(sellerCriteriaDTO);
+            return ResponseEntity.ok(sellerCriteriaDTO);
         }
         return ResponseEntity.ok(sellerCriteriaDTO);
     }
