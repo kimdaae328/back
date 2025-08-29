@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const verified = document.body.dataset.memberVerified;
+    console.log(verified)
+    if (verified === "true") {
+        alert("구독회원입니다");
+        window.location.href = "/";
+    }
+});
+
 // 결제 시작일
 const todayDate = document.querySelector("#date");
 const today = new Date();

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/main/footer.css">
     <link rel="shortcut icon" href="/images/main/favicon.png" type="image/x-icon">
 </head>
-<body>
+<body th:attr="data-member-verified=${session.member.memberVerified}">
 
     <header th:replace="~{/main/header.html :: header}"></header>
     <form id ="pay-form" action="/subscription/pay" method="post">

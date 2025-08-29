@@ -78,7 +78,7 @@ public class MemberController {
         MemberDTO member = optionalMember.get();
         session.setAttribute("member", member);
         if (member.getMemberRole() == ADMIN) {
-        return new RedirectView("/admin/customer/list");
+        return new RedirectView("/admin");
         }
         return new RedirectView("/");
     }
