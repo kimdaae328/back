@@ -21,20 +21,9 @@ public class AdminRequestsController {
     public ResponseEntity<?> list(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminRequestCriteriaDTO requestCriteriaDTO = requestService.getList(page, keyword);
         if(requestCriteriaDTO == null || requestCriteriaDTO.getRequests().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(requestCriteriaDTO);
+            return ResponseEntity.ok(requestCriteriaDTO);
         }
         return ResponseEntity.ok(requestCriteriaDTO);
     }
-
-//    결제상세
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> detail(@PathVariable("id") Long id) {
-//        CustomerDetailWithPaymentDTO customerDetail = memberService.getCustomerDetail(id);
-//        if (customerDetail == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerDetail);
-//        }
-//        return ResponseEntity.ok(customerDetail);
-//    }
-
 
 }

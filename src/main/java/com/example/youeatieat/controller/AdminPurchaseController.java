@@ -20,7 +20,7 @@ public class AdminPurchaseController {
     public ResponseEntity<?> purchaseList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminPurchaseCriteriaDTO purchaseCriteriaDTO = purchaseService.getPurchaseList(page, keyword);
         if(purchaseCriteriaDTO == null || purchaseCriteriaDTO.getPurchases().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(purchaseCriteriaDTO);
+            return ResponseEntity.ok(purchaseCriteriaDTO);
         }
         return ResponseEntity.ok(purchaseCriteriaDTO);
     }
