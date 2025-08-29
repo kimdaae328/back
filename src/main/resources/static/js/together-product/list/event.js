@@ -374,8 +374,6 @@ function showLoginMessage(message) {
     }, 1500);
 }
 
-
-
 // 이벤트 위임으로 팝업 열기
 buttonContainer.addEventListener("click", async (e) => {
     const btn = e.target.closest(".popup-trigger");
