@@ -390,19 +390,26 @@ contentArea.addEventListener("keyup", async (e) => {
     if(input.classList.contains("form-control")){
         if (!input.classList.contains("form-control")) return;
         if (e.key === "Enter") {
+            console.log("뭐야")
             e.preventDefault();
             keyword = e.target.value.trim();
-            console.log(keyword)
 
-            const answered   = document.querySelector("#check-box1").checked;
-            const unanswered = document.querySelector("#check-box2").checked;
+            const answeredCheckbox   = document.querySelector("#check-box1");
+            const unansweredCheckbox = document.querySelector("#check-box2");
+
+            const hasFilter = !!(answeredCheckbox && unansweredCheckbox);
+            const answered   = hasFilter ? answeredCheckbox.checked   : false;
+            const unanswered = hasFilter ? unansweredCheckbox.checked : false;
+
+            // 상품 검색
+            if(currentPageType === "product"){
+                const result = await currentLoader(1, keyword);
+                productLayout.renderPagination(result.criteria);
+                productLayout.totalCount(result.criteria);
+            }
 
             // 회원 문의목록 검색
             if(currentPageType === "buyer-inquiry"){
-                // const result = await currentLoader(1, keyword);
-                // inquiryLayout.renderPagination(result.criteria);
-                // inquiryLayout.totalCount(result.criteria);
-
                 if (answered && !unanswered) {
                     const result = await showAnsweredList(1, keyword);
                     inquiryLayout.renderPagination(result.criteria);
@@ -420,10 +427,6 @@ contentArea.addEventListener("keyup", async (e) => {
 
             // 판매자 문의목록 검색
             if(currentPageType === "seller-inquiry"){
-                // const result = await currentLoader(1, keyword);
-                // sellerInquiryLayout.renderPagination(result.criteria);
-                // sellerInquiryLayout.totalCount(result.criteria);
-
                 if (answered && !unanswered) {
                     const result = await showSellerAnsweredList(1, keyword);
                     sellerInquiryLayout.renderPagination(result.criteria);
@@ -476,7 +479,7 @@ contentArea.addEventListener("click", async (e) => {
         purchaseLayout.totalCount(result.criteria);
     }
     
-    // 판매자 문의 서치 인풋
+    // 판매자 문의 검색 인풋
     if(btn.closest("#btn-seller-inquiry-search")){
         if (!btn.closest("#btn-seller-inquiry-search")) return;
 
@@ -487,6 +490,19 @@ contentArea.addEventListener("click", async (e) => {
         const result = await currentLoader(1, keyword);
         sellerInquiryLayout.renderPagination(result.criteria);
         sellerInquiryLayout.totalCount(result.criteria);
+    }
+
+    // 상품 검색 인풋
+    if(btn.closest("#btn-product-search")){
+        if (!btn.closest("#btn-product-search")) return;
+
+        const inputBox = btn.closest(".input-group");
+        const input = inputBox.querySelector(".input-search");
+        keyword = input.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        productLayout.renderPagination(result.criteria);
+        productLayout.totalCount(result.criteria);
     }
 });
 
