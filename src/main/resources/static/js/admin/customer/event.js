@@ -98,8 +98,6 @@ sideSubLinks.forEach((sideSubLink) => {
             currentPageType = "seller-list";
             sellerLayout.contentLayout()
             await setList(showSellerList);
-            await setList(showYoueatieatLoginList);
-            await setList(showKakaoLoginList);
 
         } else if (subMenuText === '회원 문의 목록') {
 
@@ -389,24 +387,56 @@ contentArea.addEventListener("keyup", async (e) => {
         }
     }
 
-    if(input.closest(".form-control")){
-        if (!input.closest(".form-control")) return;
+    if(input.classList.contains("form-control")){
+        if (!input.classList.contains("form-control")) return;
         if (e.key === "Enter") {
             e.preventDefault();
             keyword = e.target.value.trim();
+            console.log(keyword)
+
+            const answered   = document.querySelector("#check-box1").checked;
+            const unanswered = document.querySelector("#check-box2").checked;
 
             // 회원 문의목록 검색
             if(currentPageType === "buyer-inquiry"){
-                const result = await currentLoader(1, keyword);
-                inquiryLayout.renderPagination(result.criteria);
-                inquiryLayout.totalCount(result.criteria);
+                // const result = await currentLoader(1, keyword);
+                // inquiryLayout.renderPagination(result.criteria);
+                // inquiryLayout.totalCount(result.criteria);
+
+                if (answered && !unanswered) {
+                    const result = await showAnsweredList(1, keyword);
+                    inquiryLayout.renderPagination(result.criteria);
+                    inquiryLayout.totalCount(result.criteria);
+                } else if (!answered && unanswered) {
+                    const result = await showUnansweredList(1, keyword);
+                    inquiryLayout.renderPagination(result.criteria);
+                    inquiryLayout.totalCount(result.criteria);
+                } else {
+                    const result = await showInquiryList(1, keyword);
+                    inquiryLayout.renderPagination(result.criteria);
+                    inquiryLayout.totalCount(result.criteria);
+                }
             }
 
             // 판매자 문의목록 검색
             if(currentPageType === "seller-inquiry"){
-                const result = await currentLoader(1, keyword);
-                sellerInquiryLayout.renderPagination(result.criteria);
-                sellerInquiryLayout.totalCount(result.criteria);
+                // const result = await currentLoader(1, keyword);
+                // sellerInquiryLayout.renderPagination(result.criteria);
+                // sellerInquiryLayout.totalCount(result.criteria);
+
+                if (answered && !unanswered) {
+                    const result = await showSellerAnsweredList(1, keyword);
+                    sellerInquiryLayout.renderPagination(result.criteria);
+                    sellerInquiryLayout.totalCount(result.criteria);
+                } else if (!answered && unanswered) {
+                    const result = await showSellerUnansweredList(1, keyword);
+                    sellerInquiryLayout.renderPagination(result.criteria);
+                    sellerInquiryLayout.totalCount(result.criteria);
+                } else {
+                    const result = await showSellerInquiryList(1, keyword);
+                    sellerInquiryLayout.renderPagination(result.criteria);
+                    sellerInquiryLayout.totalCount(result.criteria);
+                }
             }
 
             // 매입승인 검색
@@ -444,6 +474,19 @@ contentArea.addEventListener("click", async (e) => {
         const result = await currentLoader(1, keyword);
         purchaseLayout.renderPagination(result.criteria);
         purchaseLayout.totalCount(result.criteria);
+    }
+    
+    // 판매자 문의 서치 인풋
+    if(btn.closest("#btn-seller-inquiry-search")){
+        if (!btn.closest("#btn-seller-inquiry-search")) return;
+
+        const inputBox = btn.closest(".input-group");
+        const input = inputBox.querySelector(".input-search");
+        keyword = input.value.trim();
+
+        const result = await currentLoader(1, keyword);
+        sellerInquiryLayout.renderPagination(result.criteria);
+        sellerInquiryLayout.totalCount(result.criteria);
     }
 });
 

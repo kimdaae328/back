@@ -524,6 +524,7 @@ const sellerLayout = (() => {
     // 회원 목록(전체)
     const showList = (sellersCriteria) => {
         const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
         if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
@@ -543,6 +544,7 @@ const sellerLayout = (() => {
     // 회원 목록(일반)
     const showYoueatieatList = (sellersCriteria) => {
         const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
         if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
@@ -562,6 +564,7 @@ const sellerLayout = (() => {
     // 회원 목록(카카오)
     const showKakaoList = (sellersCriteria) => {
         const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
         if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
@@ -864,9 +867,8 @@ const inquiryLayout = (() => {
                                                 <div class="bt-pop-menu">
                                                 <!-- 해당아래로 show지워야함주석 -->
                                                     <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 40px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
-                                                        <ul class="list-wrapper list-unstyled">
-                                                            <li class="text-center font-weight-bold">발급상태
-                                                            </li>
+                                                        <ul class="list-wrapper list-unstyled seller-status">
+                                                            <li class="text-center font-weight-bold">발급상태</li>
                                                             <li id="checkboxactive1" class="list-item">
                                                                 <div class="row">
                                                                     <div class="col">
@@ -961,6 +963,14 @@ const inquiryLayout = (() => {
         if (!inquiriesContainer) return;
 
         let text = "";
+        if (!inquiriesCriteria.inquiries || inquiriesCriteria.inquiries.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="6">문의 목록이 없습니다.</td>
+                </tr>
+            `
+        }
+
         inquiriesCriteria.inquiries.forEach((inquiry) => {
             text += `
             <tr class="inquiry-row" data-inquiry-id="${inquiry.id}">
@@ -975,9 +985,9 @@ const inquiryLayout = (() => {
                 <td>${inquiry.inquiryAnswerContent ? "답변완료" : "미답변"}</td>
                 <td>${inquiry.answerCreatedDate ? inquiry.answerCreatedDate : "-"}</td>
                 <td class="td-action text-center">
-                    <div class="action-btn inquiry-action-btn">
+                    <button class="action-btn inquiry-action-btn">
                         <i class="mdi mdi-chevron-right"></i>
-                    </div>
+                    </button>
                 </td>
             </tr>`;
         });
@@ -1264,9 +1274,9 @@ const sellerInquiryLayout = (() => {
                                 <div class="col-auto">
                                     <div class="filter-wrapper filter-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control flex-grow-1" placeholder="문의번호/구매자">
+                                            <input type="text" class="form-control flex-grow-1 input-search" placeholder="문의번호/구매자">
                                             <div class="input-group-append">
-                                                <button class="btn btn-search">
+                                                <button id="btn-seller-inquiry-search" class="btn btn-search">
                                                     <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
                                                 </button>
                                             </div>
@@ -1324,6 +1334,13 @@ const sellerInquiryLayout = (() => {
         if (!inquiriesContainer) return;
 
         let text = "";
+        if (!inquiriesCriteria.inquiries || inquiriesCriteria.inquiries.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="6">문의 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         inquiriesCriteria.inquiries.forEach((inquiry) => {
             text += `
             <tr class="inquiry-row" data-inquiry-id="${inquiry.id}">
@@ -1338,9 +1355,9 @@ const sellerInquiryLayout = (() => {
                 <td>${inquiry.inquiryAnswerContent ? "답변완료" : "미답변"}</td>
                 <td>${inquiry.answerCreatedDate ? inquiry.answerCreatedDate : "-"}</td>
                 <td class="td-action text-center">
-                    <div class="action-btn inquiry-action-btn">
+                    <button class="action-btn inquiry-action-btn">
                         <i class="mdi mdi-chevron-right"></i>
-                    </div>
+                    </button>
                 </td>
             </tr>`;
         });
