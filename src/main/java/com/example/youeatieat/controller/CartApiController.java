@@ -40,7 +40,7 @@ public class CartApiController {
     }
 
     @PostMapping("like/save")
-    public ResponseEntity<?> likeProduct(@RequestBody CartDTO cartDTO) {
+    public ResponseEntity<?> likeListCartProduct(@RequestBody CartDTO cartDTO) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
         cartDTO.setMemberId(memberDTO.getId());
         List<CartDTO> carts = cartService.getDuplicateProduct(cartDTO.getMemberId(),cartDTO.getProductId());

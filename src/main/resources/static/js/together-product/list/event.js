@@ -200,14 +200,7 @@ labelContainer.addEventListener("click", async (e) => {
 
         pagination.goToPage(1, search);
 
-        const filterActiveBox = document.querySelector(".active-filter-list");
-        console.log(filterActiveBox, item)
-        if (filterActiveBox) {
-            const allTagsCount = filterActiveBox.querySelectorAll(".active-filter-item");
-            filterActiveBox.style.display = allTagsCount.length > 0 ? "flex" : "none";
-
-
-        }
+        noTag();
 
         // input박스 초기화
         document.querySelectorAll("input:checked").forEach((input) => {
@@ -219,20 +212,6 @@ labelContainer.addEventListener("click", async (e) => {
 
     }
 })
-
-// 리셋 버튼초기화
-function resetButtonsState() {
-    const isChecked =
-        document.querySelectorAll(".filter-sidebar input:checked").length > 0;
-
-    resetButtons.forEach((btn) => {
-        if (btn.closest(".filter-sidebar")) {
-            btn.classList.toggle("on", isChecked);
-        }
-        btn.disabled = !isChecked;
-    });
-}
-resetButtonsState();
 
 // 태그 삭제
 function removeTag(title) {
@@ -254,8 +233,28 @@ function noTag() {
         );
         filterActiveBox.style.display =
             allTagsCount.length > 0 ? "flex" : "none";
+        if (allTagsCount.length === 0) {
+            console.log("태그 없다!!!!!!!!!");
+            const resetButton = document.querySelector(".btn-reset");
+            resetButton.classList.remove("on");
+
+        }
     }
 }
+
+// 리셋 버튼초기화
+function resetButtonsState() {
+    const isChecked =
+        document.querySelectorAll(".filter-sidebar input:checked").length > 0;
+
+    resetButtons.forEach((btn) => {
+        if (btn.closest(".filter-sidebar")) {
+            btn.classList.toggle("on", isChecked);
+        }
+        btn.disabled = !isChecked;
+    });
+}
+resetButtonsState();
 
 // 라디오 두 번 클릭 시 해제
 const radios = document.querySelectorAll('input[type="radio"]');
@@ -352,28 +351,30 @@ scrollTopButton.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// 최근본 상품
-const recentlyButtons = document.querySelectorAll(
-    ".recently-viewed-section button"
-);
-const container = document.querySelector(".recently-viewed-scroll");
-
-recentlyButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (btn.classList.contains("prev")) {
-            container.scrollBy({ top: -150, behavior: "smooth" });
-        } else if (btn.classList.contains("next")) {
-            container.scrollBy({ top: 150, behavior: "smooth" });
-        }
-    });
-});
-
-
-
 // 팝업
 const buttonContainer = document.querySelector(".product-list");
 let productId = null;
+
+// 밑에서 올라오는 안내창
+const text = document.querySelector(".add-cart-tap-p");
+const addMessage = document.querySelector(".add-cart-tap-wrap");
+
+function showLoginMessage(message) {
+    text.innerText = message;
+    addMessage.style.display = "block";
+    void addMessage.offsetWidth;
+
+    addMessage.classList.add("show");
+
+    setTimeout(() => {
+        addMessage.classList.remove("show");
+        setTimeout(() => {
+            addMessage.style.display = "none";
+        }, 300);
+    }, 1500);
+}
+
+
 
 // 이벤트 위임으로 팝업 열기
 buttonContainer.addEventListener("click", async (e) => {
@@ -381,12 +382,11 @@ buttonContainer.addEventListener("click", async (e) => {
     if (!btn) return;
 
     productId = btn.dataset.productId;
-    console.log(productId);
 
     const product = await productListService.addCart(productId);
 
     layout.showPopupCart(product);
-    console.log();
+
 });
 
 // 이벤트 위임으로 팝업 닫기
@@ -443,6 +443,8 @@ document.addEventListener("click", async (e) => {
                     }, 300);
                 }, 1500);
             }
+        } else {
+            showLoginMessage("로그인 후 이용해주세요.");
         }
     }
 });

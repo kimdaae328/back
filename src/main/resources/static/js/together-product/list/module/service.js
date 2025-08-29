@@ -5,7 +5,6 @@ const productListService = (() => {
     const addCart = async (productId) => {
         const response = await fetch(`/api/product/${productId}`);
         if (!response.ok) return null;
-
         const data = await response.json();
         console.log(data)
         return data;
