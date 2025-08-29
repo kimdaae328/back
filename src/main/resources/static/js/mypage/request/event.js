@@ -13,9 +13,9 @@ dateSet.forEach((date) => {
                     <div class="order-info">
                         <p class="order-date">${date}</p>
                     </div>
-                    <a href="" class="order-detail">
-                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_5233_20398)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="#222"></path> </g> <defs> <clipPath id="clip0_5233_20398"> <rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect> </clipPath> </defs> </svg>
-                    </a>
+<!--                    <a href="" class="order-detail">-->
+<!--                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_5233_20398)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2168 10.0001L6.96087 17.256L5.78236 16.0775L11.8598 10.0001L5.78236 3.92265L6.96087 2.74414L14.2168 10.0001Z" fill="#222"></path> </g> <defs> <clipPath id="clip0_5233_20398"> <rect width="8.43444" height="14.5118" fill="white" transform="translate(5.78223 2.74414)"></rect> </clipPath> </defs> </svg>-->
+<!--                    </a>-->
                 </div>
                 <div height="1px" width="100%" class="css-1v7imot e1ypu1ln0"></div>
                 <ul>
@@ -63,7 +63,6 @@ dateSet.forEach((date) => {
                          `).join('')}
                     </li>
                 </ul>
-                <!-- view-more, footer 등 기존 내용 그대로 -->
             </div>
         </div>
     </div>`;
@@ -94,8 +93,9 @@ orderStatus.forEach((status) => {
     if (status.textContent === "DONE") {
         status.textContent = "배송 완료";
     }
-    else if(status.textContent=== "CANCEL"){
-        status.textContent = "배송 실패";
+    else if (status.textContent === "CANCEL") {
+        status.textContent = "배송 준비중";
+        status.style.color = "red";
     }
 });
 
@@ -104,36 +104,36 @@ orderStatus.forEach((status) => {
 
 
 // 개월 드롭다운
-const dropdown = document.querySelector(".custom-dropdown");
-const toggle = dropdown.querySelector(".dropdown-toggle");
-const menu = dropdown.querySelector(".dropdown-menu");
-const items = menu.querySelectorAll("li");
+// const dropdown = document.querySelector(".custom-dropdown");
+// const toggle = dropdown.querySelector(".dropdown-toggle");
+// const menu = dropdown.querySelector(".dropdown-menu");
+// const items = menu.querySelectorAll("li");
+//
+// toggle.addEventListener("click", (e) => {
+//     toggle.classList.toggle("active");
+// });
+//
+// items.forEach((item) => {
+//     item.addEventListener("click", (e) => {
+//         toggle.firstElementChild.innerHTML = `<span>${item.textContent}</span>`;
+//         toggle.classList.remove("active");
+//     });
+// });
 
-toggle.addEventListener("click", (e) => {
-    toggle.classList.toggle("active");
-});
+// // 외부 클릭 시 개월 드롭다운 닫기
+// document.addEventListener("click", (e) => {
+//     if (!dropdown.contains(e.target)) {
+//         toggle.classList.remove("active");
+//     }
+// });
 
-items.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        toggle.firstElementChild.innerHTML = `<span>${item.textContent}</span>`;
-        toggle.classList.remove("active");
-    });
-});
-
-// 외부 클릭 시 개월 드롭다운 닫기
-document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-        toggle.classList.remove("active");
-    }
-});
-
-// 검색 취소 버튼
-const cancelButton = document.querySelector(".order-search-cancel");
-const searchInput = document.querySelector(".search-box-input");
-
-cancelButton.addEventListener("click", (e) => {
-    searchInput.value = "";
-});
+// // 검색 취소 버튼
+// const cancelButton = document.querySelector(".order-search-cancel");
+// const searchInput = document.querySelector(".search-box-input");
+//
+// cancelButton.addEventListener("click", (e) => {
+//     searchInput.value = "";
+// });
 
 // 장바구니 추가 버튼
 
@@ -151,24 +151,3 @@ const addMessage = document.querySelector(".add-cart-tap-wrap");
         }, 300);
     }, 1500);
 }
-// 주문 펼쳐보기 버튼 누를 때
-//
-// const overview = document.querySelector(".view-more.over");
-// const foldview = document.querySelector(".view-more.fold");
-// const products = document.querySelectorAll(".order-product-wrap.fold");
-//
-// overview.addEventListener("click", (e) => {
-//     products.forEach((product) => {
-//         product.classList.toggle("fold");
-//     });
-//     overview.style.display = "none";
-//     foldview.style.display = "flex";
-// });
-//
-// foldview.addEventListener("click", (e) => {
-//     products.forEach((product) => {
-//         product.classList.toggle("fold");
-//     });
-//     foldview.style.display = "none";
-//     overview.style.display = "flex";
-// });

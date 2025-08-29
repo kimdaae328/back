@@ -48,9 +48,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinKakao(MemberDTO memberDTO) {
-//        log.info(memberDTO.toString());
         MemberVO vo =toMemberVO (memberDTO);
-        log.info(vo.toString());
         memberDAO.kakaoSave(vo);
         memberDTO.setId(vo.getId());
         addressDAO.save(toAddressVO(memberDTO));

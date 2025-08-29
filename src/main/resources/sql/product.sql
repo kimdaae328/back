@@ -19,5 +19,3 @@ create table tbl_product(
                             constraint fk_product_main_category foreign key (main_category_id)
                                 references tbl_main_category(id)
 );
-
-select * from tbl_product;

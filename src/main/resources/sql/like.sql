@@ -13,7 +13,7 @@ create table tbl_like(
 );
 INSERT INTO tbl_like (product_id, member_id)
 VALUES
-    (3, 57);
+    (5, 57);
 
 
 select * from tbl_like;

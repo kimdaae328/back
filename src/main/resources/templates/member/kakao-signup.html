@@ -13,6 +13,7 @@
     <div>
         <form id="signupForm" action="/kakao/signup" method="post" th:object="${memberDTO}">
             <input type="hidden" name="kakaoEmail" th:value="${kakaoEmail}">
+            <input type="hidden" th:field="*{memberKakaoEmail}">
             <div class="signuppage" id="1234">
                 <div class="signuptext">회원가입</div>
                 <div class="signupinput">

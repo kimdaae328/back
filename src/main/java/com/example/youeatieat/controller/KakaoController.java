@@ -31,11 +31,12 @@ public class KakaoController {
 
     @GetMapping("login")
     public RedirectView kakaoLogin(String code, RedirectAttributes redirectAttributes){
+
         String token = kakaoService.getKakaoAccessToken(code);
         Optional<MemberDTO> foundMember = kakaoService.getKakaoInfo(token);
         MemberDTO member = foundMember.orElseThrow(RuntimeException::new);
-
         Optional<MemberDTO> foundKakaoMember = memberService.getKakaoMember(member.getMemberKakaoEmail());
+//
        if(foundKakaoMember.isEmpty()) {
             redirectAttributes.addFlashAttribute("kakaoEmail", member.getMemberKakaoEmail());
             return new RedirectView("/kakao/signup");
@@ -53,8 +54,9 @@ public class KakaoController {
     }
 
     @PostMapping("/signup")
-    public RedirectView kakaoSignup(MemberDTO memberDTO){
+    public RedirectView kakaoSignup(MemberDTO memberDTO ,String kakaoEmail){
        memberDTO.setMemberProvider(Provider.KAKAO);
+        memberDTO.setMemberKakaoEmail(kakaoEmail);
         memberService.joinKakao(memberDTO);
        Optional<MemberDTO> foundKakaoMember = memberService.getKakaoMember(memberDTO.getMemberKakaoEmail());
        session.setAttribute("member", foundKakaoMember.orElseThrow(LoginFailException::new));

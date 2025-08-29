@@ -281,5 +281,5 @@ const sellerLayout = (() => {
            `;
     }
 
-    return {showList, renderPagination, connectToPagination, sellerCount, showDetail, showKakaoList, showYoueatieatList};
+    return {showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, sellerCount:sellerCount, showDetail:showDetail, showKakaoList:showKakaoList, showYoueatieatList:showYoueatieatList};
 })();
