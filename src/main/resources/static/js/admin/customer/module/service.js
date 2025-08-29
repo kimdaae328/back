@@ -86,7 +86,7 @@ const customerService = (() => {
         return customersCriteria;
     };
 
-    return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
+    return {getCustomerList:getCustomerList, getCustomerDetail:getCustomerDetail, getNonSubscribedCustomerList:getNonSubscribedCustomerList, getSubscribedCustomerList:getSubscribedCustomerList}
 })();
 
 // 회원목록(판매자)
