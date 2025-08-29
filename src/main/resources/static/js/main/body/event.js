@@ -163,38 +163,6 @@ backButton.addEventListener("click", (e) => {
     }
 });
 
-// 일일특가 시간
-
-const timeShow = document.querySelector(".show-timer");
-
-const restTime = (datetime) => {
-    const date = new Date(datetime);
-
-    const update = () => {
-        const now = new Date();
-        let gap = Math.floor((date.getTime() - now.getTime()) / 1000);
-
-        if (gap <= 0) {
-            timeShow.innerHTML = "다음에 또 만나요🥲";
-            clearInterval(timer);
-            return;
-        }
-
-        const hours = String(Math.floor(gap / 3600)).padStart(2, "0");
-        const minutes = String(Math.floor((gap % 3600) / 60)).padStart(2, "0");
-        const seconds = String(gap % 60).padStart(2, "0");
-
-        timeShow.innerHTML = `<span>${hours}</span><span>${minutes}</span><span>${seconds}</span>`;
-    };
-
-    update();
-    const timer = setInterval(update, 1000);
-};
-
-restTime("2026-07-29T00:00:00");
-
-// restTime("2025-07-18");
-
 // 실시간 인기랭킹
 
 const rankingList = document.querySelectorAll("div.ranking-swiper-slide");
@@ -276,89 +244,58 @@ recentlyButtons.forEach((button) => {
     });
 });
 
-// 타임 세일 인기랭킹 카드
 
-// 남은 시간
-
-const timeShow2 = document.querySelector(".show-timer2");
-
-const restTime2 = (datetime) => {
-    const date = new Date(datetime);
-
-    const update2 = () => {
-        const now = new Date();
-        let gap = Math.floor((date.getTime() - now.getTime()) / 1000);
-
-        if (gap <= 0) {
-            timeShow2.innerHTML = "다음에 또 만나요🥲";
-            clearInterval(timer2);
-            return;
-        }
-
-        const hours = String(Math.floor(gap / 3600)).padStart(2, "0");
-        const minutes = String(Math.floor((gap % 3600) / 60)).padStart(2, "0");
-        const seconds = String(gap % 60).padStart(2, "0");
-
-        timeShow2.innerHTML = `<span>${hours}</span><span>${minutes}</span><span>${seconds}</span>`;
-    };
-
-    update2();
-    const timer2 = setInterval(update2, 1000);
-};
-
-restTime2("2026-07-28T00:00:00");
-
-const rankingList2 = document.querySelectorAll("div.ranking-swiper-slide2");
-const rankingCount2 = Math.ceil(rankingList2.length / 5);
-const rankingBackButton2 = document.querySelector(
-    "button.ranking-button-left2"
-);
-const rankingNextButton2 = document.querySelector(
-    "button.ranking-button-right2"
-);
-const rankingShowProduct2 = document.querySelector(".ranking-swiper-wrapper2");
-
-let rankingProductCount2 = 0;
-const rankingSlideWidth2 = 1075;
-
-// 다음 슬라이드로 이동
-rankingNextButton2.addEventListener("click", (e) => {
-    if (rankingProductCount2 < rankingCount2 - 1) {
-        rankingProductCount2++;
-
-        const move = rankingSlideWidth2 * rankingProductCount2;
-        rankingShowProduct2.style.transform = `translateX(-${move}px)`;
-        rankingShowProduct2.style.transition = "transform 0.5s";
-
-        rankingBackButton2.style.display =
-            rankingProductCount2 > 0 ? "block" : "none";
-        rankingNextButton2.style.display =
-            rankingProductCount2 >= rankingCount2 ? "none" : "block";
-    } else if (rankingProductCount2 === rankingCount2 - 1) {
-        const move =
-            rankingSlideWidth2 * rankingProductCount2 -
-            (rankingProductCount2 - 200);
-        rankingShowProduct2.style.transform = `translate(-${move}px)`;
-        rankingNextButton2.style.display = "none";
-    }
-});
-
-// 이전 슬라이드로 이동
-rankingBackButton2.addEventListener("click", (e) => {
-    if (rankingProductCount2 > 0) {
-        rankingProductCount2--;
-        rankingShowProduct2.style.transform = `translate(-${
-            rankingSlideWidth2 * rankingProductCount2
-        }px)`;
-        rankingShowProduct2.style.transition = `transform 0.5s`;
-    }
-    if (rankingProductCount2 <= 0) {
-        rankingBackButton2.style.display = "none";
-    }
-    if (rankingProductCount2 < rankingCount2 - 1) {
-        rankingNextButton2.style.display = "block";
-    }
-});
+// const rankingList2 = document.querySelectorAll("div.ranking-swiper-slide2");
+// const rankingCount2 = Math.ceil(rankingList2.length / 5);
+// const rankingBackButton2 = document.querySelector(
+//     "button.ranking-button-left2"
+// );
+// const rankingNextButton2 = document.querySelector(
+//     "button.ranking-button-right2"
+// );
+// const rankingShowProduct2 = document.querySelector(".ranking-swiper-wrapper2");
+//
+// let rankingProductCount2 = 0;
+// const rankingSlideWidth2 = 1075;
+//
+// // 다음 슬라이드로 이동
+// rankingNextButton2.addEventListener("click", (e) => {
+//     if (rankingProductCount2 < rankingCount2 - 1) {
+//         rankingProductCount2++;
+//
+//         const move = rankingSlideWidth2 * rankingProductCount2;
+//         rankingShowProduct2.style.transform = `translateX(-${move}px)`;
+//         rankingShowProduct2.style.transition = "transform 0.5s";
+//
+//         rankingBackButton2.style.display =
+//             rankingProductCount2 > 0 ? "block" : "none";
+//         rankingNextButton2.style.display =
+//             rankingProductCount2 >= rankingCount2 ? "none" : "block";
+//     } else if (rankingProductCount2 === rankingCount2 - 1) {
+//         const move =
+//             rankingSlideWidth2 * rankingProductCount2 -
+//             (rankingProductCount2 - 200);
+//         rankingShowProduct2.style.transform = `translate(-${move}px)`;
+//         rankingNextButton2.style.display = "none";
+//     }
+// });
+//
+// // 이전 슬라이드로 이동
+// rankingBackButton2.addEventListener("click", (e) => {
+//     if (rankingProductCount2 > 0) {
+//         rankingProductCount2--;
+//         rankingShowProduct2.style.transform = `translate(-${
+//             rankingSlideWidth2 * rankingProductCount2
+//         }px)`;
+//         rankingShowProduct2.style.transition = `transform 0.5s`;
+//     }
+//     if (rankingProductCount2 <= 0) {
+//         rankingBackButton2.style.display = "none";
+//     }
+//     if (rankingProductCount2 < rankingCount2 - 1) {
+//         rankingNextButton2.style.display = "block";
+//     }
+// });
 
 // 팝업 합계
 const productItem = document.querySelectorAll(".popup-product-item");
@@ -418,28 +355,174 @@ const popup = document.querySelector(".popup-content");
 quantityControls(popup);
 
 // 팝업
-const openButtons = document.querySelectorAll(".popup-trigger");
-const closeButtons = document.querySelectorAll(".popup-close");
+// const openButtons = document.querySelectorAll(".popup-trigger");
+// const closeButtons = document.querySelectorAll(".popup-close");
+//
+// openButtons.forEach((btn) => {
+//     btn.addEventListener("click", () => {
+//         const targetSelector = btn.dataset.target;
+//         const targetModal = document.querySelector(targetSelector);
+//         const htmlScroll = document.querySelector("html");
+//         if (targetModal) {
+//             targetModal.style.display = "block";
+//             htmlScroll.style.overflow = "hidden";
+//         }
+//     });
+// });
+//
+// closeButtons.forEach((btn) => {
+//     btn.addEventListener("click", () => {
+//         const targetModal = btn.closest(".popup-wrapper");
+//         const htmlScroll = document.querySelector("html");
+//         if (targetModal) {
+//             targetModal.style.display = "none";
+//             htmlScroll.style.overflow = "";
+//         }
+//     });
+// });
 
-openButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const targetSelector = btn.dataset.target;
-        const targetModal = document.querySelector(targetSelector);
-        const htmlScroll = document.querySelector("html");
-        if (targetModal) {
-            targetModal.style.display = "block";
-            htmlScroll.style.overflow = "hidden";
-        }
-    });
+
+// 팝업
+const buttonContainer = document.querySelector(".product-wrap");
+let productId = null;
+
+// 이벤트 위임으로 팝업 열기
+buttonContainer.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".popup-trigger");
+    if (!btn) return;
+
+    productId = btn.dataset.productId;
+    console.log(productId);
+
+    const product = await productListService.addCart(productId);
+
+    layout.showPopupCart(product);
+    console.log();
 });
 
-closeButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const targetModal = btn.closest(".popup-wrapper");
-        const htmlScroll = document.querySelector("html");
-        if (targetModal) {
-            targetModal.style.display = "none";
-            htmlScroll.style.overflow = "";
+// 이벤트 위임으로 팝업 닫기
+document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".popup-close");
+    if (!btn) return;
+    const productHeader = document.querySelector(".popup-header");
+
+    const targetModal = btn.closest(".popup-wrapper");
+    console.log(targetModal);
+    if (btn.classList.contains("btn-outline")) {
+        document.getElementById("popup1").remove();
+        htmlScroll.style.overflow = "";
+    }else if (btn.classList.contains("btn-primary")) {
+        const cartCount = document.querySelector("div.count").innerText;
+        const text = document.querySelector(".add-cart-tap-p");
+        const addMessage = document.querySelector(".add-cart-tap-wrap");
+        const productId = productHeader.dataset.productId;
+
+        const cart = {
+            cartCount: Number(cartCount),
+            productId: productId
         }
-    });
+        const result = await productListService.save(cart);
+        document.getElementById("popup1").remove();
+
+        if (result){
+            if(!(Number(cartCount) === 0)){
+                //     장바구니에 추가 완료
+                text.innerText = "장바구니에 상품을 담았어요!"
+                addMessage.style.display = "block";
+                void addMessage.offsetWidth;
+                addMessage.classList.add("show");
+
+                setTimeout(() => {
+                    addMessage.classList.remove("show");
+
+                    setTimeout(() => {
+                        addMessage.style.display = "none";
+                    }, 300);
+                }, 1500);
+            } else if (Number(cartCount) === 0) {
+                text.innerText = `장바구니에 상품을 담지 못했어요.\n수량을 확인해주세요.`
+                addMessage.style.display = "block";
+                void addMessage.offsetWidth;
+
+                addMessage.classList.add("show");
+
+                setTimeout(() => {
+                    addMessage.classList.remove("show");
+
+                    setTimeout(() => {
+                        addMessage.style.display = "none";
+                    }, 300);
+                }, 1500);
+            }
+        }
+    }
 });
+
+const showList = async (page, search) => {
+    const productCriteria = await  productListService.getList(page, layout.showProductList, search);
+
+    return productCriteria;
+
+}
+showList(page = 1, search);
+
+//목록 페이징
+const pagination = (() => {
+    const container = document.querySelector(".pagenation");
+    const numberContainer = container.querySelector(".pagenation-number");
+    const firstBtn = container.querySelector(".first");
+    const prevBtn = container.querySelector(".prev");
+    const nextBtn = container.querySelector(".next");
+    const lastBtn = container.querySelector(".last");
+
+    let currentPage = 1;
+    let totalPage = 1;
+    let currentSearch = {};
+
+    // 숫자 버튼 렌더링
+    const renderPageNumbers = () => {
+        numberContainer.innerHTML = "";
+        for (let i = 1; i <= totalPage; i++) {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "pagenation-btn" + (i === currentPage ? " on" : "");
+            btn.textContent = i;
+            btn.addEventListener("click", () => goToPage(i,currentSearch));
+            numberContainer.appendChild(btn);
+        }
+    };
+
+    // 페이지 이동
+    const goToPage = async (page, search = currentSearch) => {
+        if (page < 1) page = 1;
+        if (page > totalPage) page = totalPage;
+        currentPage = page;
+        currentSearch = search;
+
+        // 상품 목록 가져오기
+        const productCriteria = await productListService.getList(page, layout.showProductList, search);
+
+        // 총 페이지 수 갱신 (API에서 내려주는 값)
+        totalPage = productCriteria.criteria.realEnd || 1;
+
+        // 숫자 버튼 갱신
+        renderPageNumbers();
+
+        // 버튼 활성/비활성 처리
+        prevBtn.disabled = currentPage === 1;
+        firstBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPage;
+        lastBtn.disabled = currentPage === totalPage;
+    };
+
+    // 버튼 이벤트 연결
+    firstBtn.addEventListener("click", () => goToPage(1));
+    prevBtn.addEventListener("click", () => goToPage(currentPage - 1));
+    nextBtn.addEventListener("click", () => goToPage(currentPage + 1));
+    lastBtn.addEventListener("click", () => goToPage(totalPage));
+
+    return { goToPage };
+})();
+
+
+pagination.goToPage(1, search);

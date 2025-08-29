@@ -20,6 +20,7 @@ public boolean existMemberEmail(String memberEmail);
     public Optional<MemberDTO> selectMemberForLogin(MemberDTO memberDTO);
 //  카카오 조회
     public Optional<MemberDTO> selectMemberByKakaoEmail(String kakaoEmail);
-//    삭제
+//    멤버 구독여부 업데이트
+    public void updateMemberVerified(Long id);
 //    수정
 }

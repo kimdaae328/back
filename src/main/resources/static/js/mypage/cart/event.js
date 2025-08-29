@@ -114,7 +114,6 @@ allSecletButton.addEventListener("click", async (e) => {
 
         selectAllCheckbox.checked = false;
 
-        totalUpdate(result);
         selectTotal();
     } else {
         console.error("선택삭제 실패");
@@ -141,7 +140,6 @@ productRemoves.forEach((productRemove) => {
             productRemove.closest(".refrigeration-product").remove();
             productCheckbox.checked = false;
             selectTotal();
-            totalUpdate(result);
         });
     });
 });
