@@ -279,6 +279,7 @@ radios.forEach((radio) => {
 
             // 태그 없을때
             noTag();
+            resetButtonsState();
         } else {
             selected = radio;
         }
@@ -356,18 +357,38 @@ scrollTopButton.addEventListener("click", () => {
 const buttonContainer = document.querySelector(".product-list");
 let productId = null;
 
+// 밑에서 올라오는 안내창
+const text = document.querySelector(".add-cart-tap-p");
+const addMessage = document.querySelector(".add-cart-tap-wrap");
+
+function showLoginMessage(message) {
+    text.innerText = message;
+    addMessage.style.display = "block";
+    void addMessage.offsetWidth;
+
+    addMessage.classList.add("show");
+
+    setTimeout(() => {
+        addMessage.classList.remove("show");
+        setTimeout(() => {
+            addMessage.style.display = "none";
+        }, 300);
+    }, 1500);
+}
+
+
+
 // 이벤트 위임으로 팝업 열기
 buttonContainer.addEventListener("click", async (e) => {
     const btn = e.target.closest(".popup-trigger");
     if (!btn) return;
 
     productId = btn.dataset.productId;
-    console.log(productId);
 
     const product = await productListService.addCart(productId);
 
     layout.showPopupCart(product);
-    console.log();
+
 });
 
 // 이벤트 위임으로 팝업 닫기
@@ -424,6 +445,8 @@ document.addEventListener("click", async (e) => {
                     }, 300);
                 }, 1500);
             }
+        } else {
+            showLoginMessage("로그인 후 이용해주세요.");
         }
     }
 });

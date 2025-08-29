@@ -257,7 +257,6 @@ wishButtons.forEach(async (button) => {
                 liked = true;
                 console.log(liked);
             } else {
-                console.log("-------------------")
                 showLoginMessage("로그인 후 이용해주세요.");
             }
         }

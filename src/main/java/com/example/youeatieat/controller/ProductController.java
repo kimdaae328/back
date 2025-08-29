@@ -37,6 +37,7 @@ public class ProductController {
     public String list(Model model) {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
         model.addAttribute("member", memberDTO);
+
         System.out.println(memberDTO);
         return "/together-product/list";
     }
