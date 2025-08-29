@@ -1159,7 +1159,7 @@ table.table>thead tr th:last-child {
     display: inline-block;
     font-size: 18px;
     height: 30px;
-    line-height: 30px;
+    line-height: 29px;
     text-align: center;
     transition: background-color .2s, color .4s, border-color .3s;
     width: 30px;
@@ -2121,4 +2121,9 @@ button * {pointer-events: none;}
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+tr.no-data td {
+    text-align: center;
+    padding: 50px !important;
 }
