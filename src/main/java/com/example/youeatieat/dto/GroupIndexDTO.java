@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class groupIndexDTO {
+public class GroupIndexDTO {
     private Long id;
     private Long groupIndexNumber;
     private Long productId;

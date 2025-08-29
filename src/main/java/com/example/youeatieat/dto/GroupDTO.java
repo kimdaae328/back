@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @ToString @Setter
 @EqualsAndHashCode(of = "id")
-public class groupDTO {
+public class GroupDTO {
     private Long groupIndexNumber;
     private Long productId;
     private CancelableStatus groupCancelable;
