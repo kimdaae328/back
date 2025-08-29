@@ -1,13 +1,17 @@
 package com.example.youeatieat.controller;
 
+import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.dto.ProductInquiryAnswerDTO;
 import com.example.youeatieat.dto.ProductInquiryCriteriaDTO;
 import com.example.youeatieat.dto.ProductInquiryDTO;
+import com.example.youeatieat.service.MemberService;
 import com.example.youeatieat.service.ProductInquiryAnswerServiceImpl;
 import com.example.youeatieat.service.ProductInquiryServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +22,13 @@ import java.util.List;
 public class InquiriesApiController {
     private final ProductInquiryServiceImpl productInquiryService;
     private final ProductInquiryAnswerServiceImpl productInquiryAnswerService;
+    private final HttpSession session;
 
     //    상품 문의하기
     @PostMapping("/to")
     public ResponseEntity<?> inquiryProduct(@RequestBody ProductInquiryDTO productInquiryDTO) {
-        productInquiryDTO.setMemberId(32L);
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+        productInquiryDTO.setMemberId(memberDTO.getId());
         productInquiryService.toInquire(productInquiryDTO);
         return ResponseEntity.ok().body(productInquiryDTO);
     }

@@ -28,7 +28,7 @@ const customerLayout = (() => {
                             <div class="row">
                                 <div class="col-auto">
                                     <span class="count">총
-                                        <span class="count-amount">n</span>명
+                                        <span class="count-amount"></span>명
                                     </span>
                                 </div>
                                 <!-- PG 선택, 결제방식선택, 결제상태선택 버튼 -->
@@ -65,13 +65,13 @@ const customerLayout = (() => {
                                         </tr>
                                     </thead>
                                     <tbody>
-    <!--                        여기 테이블 들어와야함                    -->
+    <!--                        여기 테이블 들어옴                    -->
                                     </tbody>
                                </table>
                            </div>
                            <nav class="rebound-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination rebound-pagination">
-    <!--                            여기 페이지 a버튼 들어와야함-->
+    <!--                            여기 페이지 a버튼 들어옴-->
                                 </ul>
                             </nav>
                         </div>
@@ -80,7 +80,7 @@ const customerLayout = (() => {
             </div>
             <div class="modal fade member-modal" style="display: none;">
                 <div class="modal-dialog modal-lg">
-<!--                    모달 내용 들어와야함-->
+<!--                    모달 내용 들어옴-->
                 </div>
             </div>
         `;
@@ -101,14 +101,14 @@ const customerLayout = (() => {
                 <span class="member-name">${customer.memberName}</span>
                 <span class="amount-unit"> 님</span>
             </td>
-            <td class="td-email">${customer.memberEmail}</td>
-            <td class="td-phone">${customer.memberPhone}</td>
-            <td class="td-start">${customer.createdDate}</td>
+            <td class="td-email">${customer.memberEmail ? customer.memberEmail : "-"}</td>
+            <td class="td-phone">${customer.memberPhone ? customer.memberPhone : "-"}</td>
+            <td class="td-start">${customer.createdDate ? customer.createdDate : "-"}</td>
             <td class="td-recent">${customer.memberLastLoginDate ? customer.memberLastLoginDate : "-"}</td>
             <td class="td-action text-center">
-                <div class="action-btn member-action-btn">
+                <button class="action-btn member-action-btn">
                     <i class="mdi mdi-chevron-right"></i>
-                </div>
+                </button>
             </td>
         </tr>
     `;
@@ -120,6 +120,13 @@ const customerLayout = (() => {
         if (!customerContainer) return;
 
         let text = "";
+        if (!customersCriteria.customers || customersCriteria.customers.length === 0) {
+            text += `
+                <tr class="member-row no-data" >
+                    <td colspan="7">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         customersCriteria.customers.forEach((customer) => {
             text += customerRowTemplate(customer);
         });
@@ -133,6 +140,13 @@ const customerLayout = (() => {
         if (!customerContainer) return;
 
         let text = "";
+        if (!customersCriteria.customers || customersCriteria.customers.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td colspan="7">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         customersCriteria.customers.forEach((customer) => {
             text += customerRowTemplate(customer);
         });
@@ -146,6 +160,13 @@ const customerLayout = (() => {
         if (!customerContainer) return;
 
         let text = "";
+        if (!customersCriteria.customers || customersCriteria.customers.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td colspan="7">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         customersCriteria.customers.forEach((customer) => {
             text += customerRowTemplate(customer);
         });
@@ -179,14 +200,11 @@ const customerLayout = (() => {
         if (!pagination) return;
 
         pagination.addEventListener("click", (e) => {
-            // if(e.target.classList.contains(".page-item-link")) {
             e.preventDefault();
 
             const linkButton = e.target.closest(".page-item-link");
             const page = linkButton.dataset.page;
-            // const page = linkButton.getAttribute("href");
             navi(page);
-            // }
         });
     };
 
@@ -230,10 +248,10 @@ const customerLayout = (() => {
             customerDetail.payments.forEach((payment) => {
                 paymentRows += `
                     <tr>
-                        <td>${payment.id}</td>
-                        <td>${payment.productName}</td>
-                        <td>${payment.requestPrice}</td>
-                        <td>${payment.paymentDate}</td>
+                        <td>${payment.id ? payment.id : "-"}</td>
+                        <td>${payment.productName ? payment.productName : "-"}</td>
+                        <td>${payment.requestPrice ? payment.requestPrice : "-"}</td>
+                        <td>${payment.paymentDate ? payment.paymentDate : "-"}</td>
                     </tr>
                 `;
             });
@@ -273,19 +291,19 @@ const customerLayout = (() => {
                                                         <tbody>
                                                             <tr>
                                                                 <th>이름</th>
-                                                                <td>${customerDetail.memberName}</td>
+                                                                <td>${customerDetail.memberName ? customerDetail.memberName : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>핸드폰 번호</th>
-                                                                <td>${customerDetail.memberPhone}</td>
+                                                                <td>${customerDetail.memberPhone ? customerDetail.memberPhone : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>가입일</th>
-                                                                <td>${customerDetail.createdDate}</td>
+                                                                <td>${customerDetail.createdDate ? customerDetail.createdDate : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>나이</th>
-                                                                <td>${calculateAge(customerDetail.memberBirth)}</td>
+                                                                <td>${calculateAge(customerDetail.memberBirth) ? calculateAge(customerDetail.memberBirth) : "-"}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -296,11 +314,11 @@ const customerLayout = (() => {
                                                         <tbody>
                                                             <tr>
                                                                 <th>회원ID</th>
-                                                                <td>${customerDetail.id}</td>
+                                                                <td>${customerDetail.id ? customerDetail.id : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>이메일</th>
-                                                                <td>${customerDetail.memberEmail}</td>
+                                                                <td>${customerDetail.memberEmail ? customerDetail.memberEmail : "-"}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>최근 접속일</th>
@@ -336,8 +354,8 @@ const customerLayout = (() => {
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>${customerDetail.paymentCalculate.totalOrders}</td>
-                                                            <td>${customerDetail.paymentCalculate.totalPrice}</td>
+                                                            <td>${customerDetail.paymentCalculate.totalOrders ? customerDetail.paymentCalculate.totalOrders : "-"}</td>
+                                                            <td>${customerDetail.paymentCalculate.totalPrice ? customerDetail.paymentCalculate.totalPrice : "-"}</td>
                                                             <td>${customerDetail.paymentCalculate.lastPaymentDate ? customerDetail.paymentCalculate.lastPaymentDate : "-"}</td>
                                                         </tr>
                                                     </tbody>
@@ -384,7 +402,7 @@ const customerLayout = (() => {
            `;
     }
 
-    return {contentLayout, showList, showNonSubscribedList, showSubscribedList, renderPagination, connectToPagination, totalCount, showDetail};
+    return {contentLayout:contentLayout, showList:showList, showNonSubscribedList:showNonSubscribedList, showSubscribedList:showSubscribedList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount, showDetail:showDetail};
 })();
 
 // 회원목록(판매자)
@@ -393,7 +411,7 @@ const sellerLayout = (() => {
         const contentArea = document.querySelector("#content-area");
         contentArea.innerHTML = `
             <div class="page-header">
-                <div class="page-title">회원 관리</div>
+                <div class="page-title">판매자 관리</div>
                 <div class="page-subtitle"></div>
             </div>
             <div class="page-body">
@@ -404,8 +422,8 @@ const sellerLayout = (() => {
                                 <ul class="tab-name-list list-unstyled list-inline">
                                     <!-- 클릭 한 부분은 active -->
                                     <li class="tab-name active">전체</li>
-                                    <li class="tab-name">일반 회원</li>
-                                    <li class="tab-name">구독 회원</li>
+                                    <li class="tab-name">일반 로그인</li>
+                                    <li class="tab-name">카카오 로그인</li>
                                 </ul>
                             </div>
                         </div>
@@ -441,11 +459,12 @@ const sellerLayout = (() => {
                         </div>
                         <div class="fill-table-layout">
                            <div class="fill-table-layout">
-                                <table id="member-table" class="table grey-header-table w-100 member-table">
+                                <table id="seller-table" class="table grey-header-table w-100 seller-table">
                                     <thead>
                                         <tr>
-                                            <th class="td-name">회원번호</th>
+                                            <th class="td-name">판매자번호</th>
                                             <th class="td-amount pr-4">이름</th>
+                                            <th class="td-name">출고지 주소</th>
                                             <th class="td-email">이메일</th>
                                             <th class="td-phone">핸드폰 번호</th>
                                             <th class="td-start">가입일</th>
@@ -480,33 +499,41 @@ const sellerLayout = (() => {
         <tr>
             <td class="td-name">
                 <div class="member-name">
-                    <span class="member-name">${seller.memberName}</span>
+                    <span class="member-name">${seller.memberName ? seller.memberName : "-"}</span>
                     <span class="badge-label badge text-danger ml-2">${seller.memberProvider == "YOU_I" ? "일반 로그인" : "카카오 로그인"}</span>
                 </div>
-                <div class="member-id">${seller.id}</div>
+                <div class="member-id">${seller.id ? seller.id : "-"}</div>
             </td>
             <td class="td-amount text-center pr-4 font-weight-bold">
-                <span class="member-name">${seller.memberName}</span>
+                <span class="member-name">${seller.memberName ? seller.memberName : "-"}</span>
                 <span class="amount-unit"> 님</span>
             </td>
             <td class="td-address">${(seller.address || seller.addressDetail) ? `${seller.address ?? ""} ${seller.addressDetail ?? ""}` : "-"}</td>
-            <td class="td-email">${seller.memberEmail}</td>
-            <td class="td-phone">${seller.memberPhone}</td>
-            <td class="td-start">${seller.createdDate}</td>
+            <td class="td-email">${seller.memberEmail ? seller.memberEmail : "-"}</td>
+            <td class="td-phone">${seller.memberPhone ? seller.memberPhone : "-"}</td>
+            <td class="td-start">${seller.createdDate ? seller.createdDate : "-"}</td>
             <td class="td-recent">${seller.memberLastLoginDate ? seller.memberLastLoginDate : "-"}</td>
             <td class="td-action text-center">
-                <div class="action-btn">
+                <button class="action-btn seller-action-btn">
                     <i class="mdi mdi-chevron-right"></i>
-                </div>
+                </button>
             </td>
         </tr>
     `;
 
     // 회원 목록(전체)
     const showList = (sellersCriteria) => {
-        const sellerContainer = document.querySelector(".table-container tbody");
+        const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
+        if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="8">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         sellersCriteria.sellers.forEach((seller) => {
             text += sellerRowTemplate(seller);
         });
@@ -516,9 +543,17 @@ const sellerLayout = (() => {
 
     // 회원 목록(일반)
     const showYoueatieatList = (sellersCriteria) => {
-        const sellerContainer = document.querySelector(".table-container tbody");
+        const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
+        if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="8">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         sellersCriteria.sellers.forEach((seller) => {
             text += sellerRowTemplate(seller);
         });
@@ -528,9 +563,17 @@ const sellerLayout = (() => {
 
     // 회원 목록(카카오)
     const showKakaoList = (sellersCriteria) => {
-        const sellerContainer = document.querySelector(".table-container tbody");
+        const sellerContainer = document.querySelector(".seller-table tbody");
+        if (!sellerContainer) return;
 
         let text = "";
+        if (!sellersCriteria.sellers || sellersCriteria.sellers.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="8">회원 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         sellersCriteria.sellers.forEach((seller) => {
             text += sellerRowTemplate(seller);
         });
@@ -539,14 +582,16 @@ const sellerLayout = (() => {
     }
 
     // 페이지네이션 - layout
-    const pagination = document.querySelector(".rebound-pagination");
     const renderPagination = (criteria) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
         let html = ``;
 
         for (let i = criteria.startPage; i <= criteria.endPage; i++) {
             html += `
             <li class="page-item page-num">
-                <a href="${i}" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
+                <a href="#" data-page="${i}" class="page-item-link page-item-num ${i === criteria.page ? 'active' : ''}">
                     ${i}
                 </a>
             </li>
@@ -558,22 +603,24 @@ const sellerLayout = (() => {
 
     // 페이지네이션 - event
     const connectToPagination = (navi) => {
+        const pagination = document.querySelector("#content-area .rebound-pagination");
+        if (!pagination) return;
+
         pagination.addEventListener("click", (e) => {
-            // if(e.target.classList.contains(".page-item-link")) {
             e.preventDefault();
 
             const linkButton = e.target.closest(".page-item-link");
             const page = linkButton.dataset.page;
-            // const page = linkButton.getAttribute("href");
             navi(page);
-            // }
         });
     };
 
     // 총 합계
-    const sellerCountText = document.querySelector(".count-amount");
-    const sellerCount = (criteria) => {
-        sellerCountText.textContent = criteria.total;
+    const totalCount = (criteria) => {
+        const totalCountText = document.querySelector("#content-area .count-amount");
+        if (!totalCountText) return;
+
+        totalCountText.textContent = criteria.total;
     };
 
     // 나이 계산
@@ -757,7 +804,7 @@ const sellerLayout = (() => {
            `;
     }
 
-    return {contentLayout, showList, renderPagination, connectToPagination, sellerCount, showDetail, showKakaoList, showYoueatieatList};
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount, showDetail:showDetail, showKakaoList:showKakaoList, showYoueatieatList:showYoueatieatList};
 })();
 
 // 구매자 문의
@@ -820,9 +867,8 @@ const inquiryLayout = (() => {
                                                 <div class="bt-pop-menu">
                                                 <!-- 해당아래로 show지워야함주석 -->
                                                     <div id="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 40px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
-                                                        <ul class="list-wrapper list-unstyled">
-                                                            <li class="text-center font-weight-bold">발급상태
-                                                            </li>
+                                                        <ul class="list-wrapper list-unstyled seller-status">
+                                                            <li class="text-center font-weight-bold">발급상태</li>
                                                             <li id="checkboxactive1" class="list-item">
                                                                 <div class="row">
                                                                     <div class="col">
@@ -857,9 +903,9 @@ const inquiryLayout = (() => {
                                 <div class="col-auto">
                                     <div class="filter-wrapper filter-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control flex-grow-1" placeholder="문의번호/구매자">
+                                            <input type="text" class="form-control flex-grow-1 input-search" placeholder="문의번호/구매자">
                                             <div class="input-group-append">
-                                                <button class="btn btn-search">
+                                                <button id="btn-inquiry-search" class="btn btn-search">
                                                     <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
                                                 </button>
                                             </div>
@@ -890,13 +936,11 @@ const inquiryLayout = (() => {
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
                                 </tbody>
                             </table>
                             </div>
                             <nav class="rebound-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination rebound-pagination">
-    <!--                            여기 페이지 a버튼 들어와야함-->
                                 </ul>
                             </nav>
                         </div>
@@ -917,6 +961,14 @@ const inquiryLayout = (() => {
         if (!inquiriesContainer) return;
 
         let text = "";
+        if (!inquiriesCriteria.inquiries || inquiriesCriteria.inquiries.length === 0) {
+            text += `
+                <tr class="inquiry-row no-data">
+                    <td class="" colspan="6">문의 목록이 없습니다.</td>
+                </tr>
+            `
+        }
+
         inquiriesCriteria.inquiries.forEach((inquiry) => {
             text += `
             <tr class="inquiry-row" data-inquiry-id="${inquiry.id}">
@@ -931,9 +983,9 @@ const inquiryLayout = (() => {
                 <td>${inquiry.inquiryAnswerContent ? "답변완료" : "미답변"}</td>
                 <td>${inquiry.answerCreatedDate ? inquiry.answerCreatedDate : "-"}</td>
                 <td class="td-action text-center">
-                    <div class="action-btn inquiry-action-btn">
+                    <button class="action-btn inquiry-action-btn">
                         <i class="mdi mdi-chevron-right"></i>
-                    </div>
+                    </button>
                 </td>
             </tr>`;
         });
@@ -1119,7 +1171,7 @@ const inquiryLayout = (() => {
         `;
     }
 
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, answeredCount, anUnansweredCount};
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount, showDetail:showDetail, answeredCount:answeredCount, anUnansweredCount:anUnansweredCount};
 })();
 
 // 판매자 문의
@@ -1220,9 +1272,9 @@ const sellerInquiryLayout = (() => {
                                 <div class="col-auto">
                                     <div class="filter-wrapper filter-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control flex-grow-1" placeholder="문의번호/구매자">
+                                            <input type="text" class="form-control flex-grow-1 input-search" placeholder="문의번호/구매자">
                                             <div class="input-group-append">
-                                                <button class="btn btn-search">
+                                                <button id="btn-seller-inquiry-search" class="btn btn-search">
                                                     <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
                                                 </button>
                                             </div>
@@ -1253,13 +1305,11 @@ const sellerInquiryLayout = (() => {
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
                                 </tbody>
                             </table>
                             </div>
                             <nav class="rebound-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination rebound-pagination">
-    <!--                            여기 페이지 a버튼 들어와야함-->
                                 </ul>
                             </nav>
                         </div>
@@ -1280,6 +1330,13 @@ const sellerInquiryLayout = (() => {
         if (!inquiriesContainer) return;
 
         let text = "";
+        if (!inquiriesCriteria.inquiries || inquiriesCriteria.inquiries.length === 0) {
+            text += `
+                <tr class="member-row no-data">
+                    <td class="" colspan="6">문의 목록이 없습니다.</td>
+                </tr>
+            `
+        }
         inquiriesCriteria.inquiries.forEach((inquiry) => {
             text += `
             <tr class="inquiry-row" data-inquiry-id="${inquiry.id}">
@@ -1294,9 +1351,9 @@ const sellerInquiryLayout = (() => {
                 <td>${inquiry.inquiryAnswerContent ? "답변완료" : "미답변"}</td>
                 <td>${inquiry.answerCreatedDate ? inquiry.answerCreatedDate : "-"}</td>
                 <td class="td-action text-center">
-                    <div class="action-btn inquiry-action-btn">
+                    <button class="action-btn inquiry-action-btn">
                         <i class="mdi mdi-chevron-right"></i>
-                    </div>
+                    </button>
                 </td>
             </tr>`;
         });
@@ -1482,7 +1539,7 @@ const sellerInquiryLayout = (() => {
         `;
     }
 
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail, answeredCount, anUnansweredCount};
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount, showDetail:showDetail, answeredCount:answeredCount, anUnansweredCount:anUnansweredCount};
 })();
 
 // 매입 승인
@@ -1550,8 +1607,9 @@ const purchaseLayout = (() => {
                                         <col style="width:14%">
                                         <col style="width:14%">
                                         <col style="width:14%">
-                                        <col style="width:14%">
-                                        <col style="width:14%">
+                                        <col style="width:10%">
+                                        <col style="width:10%">
+                                        <col style="width:10%">
                                     </colgroup>                           
                                 <thead>
                                     <tr>
@@ -1566,13 +1624,13 @@ const purchaseLayout = (() => {
                                     </tr>
                                 </thead>
                                 <tbody>
-<!--                                        <td class="text-center no-data" colspan="5">문의 내역이 없습니다</td>-->
+<!--                                테이블 내용 들어옴-->
                                 </tbody>
                             </table>
                             </div>
                             <nav class="rebound-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination rebound-pagination">
-    <!--                            여기 페이지 a버튼 들어와야함-->
+    <!--                            여기 페이지 a버튼 들어옴-->
                                 </ul>
                             </nav>
                         </div>
@@ -1598,6 +1656,14 @@ const purchaseLayout = (() => {
             APPROVED: "승인",
             REJECTED: "거절"
         };
+
+        if (!purchasesCriteria.purchases || purchasesCriteria.purchases.length === 0) {
+            text += `
+                <tr class="purchase-row no-data">
+                    <td class="" colspan="8">매입 목록이 없습니다.</td>
+                </tr>
+            `
+        }
 
         purchasesCriteria.purchases.forEach((purchase) => {
             const status = purchase.purchaseRequestApprovalStatus;
@@ -1836,7 +1902,7 @@ const purchaseLayout = (() => {
         `;
     }
 
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail};
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount, showDetail:showDetail};
 })();
 
 // 배너 등록
@@ -1948,7 +2014,7 @@ const bannerLayout = (() => {
         bannersContainer.innerHTML = text;
     };
 
-    return {contentLayout, showList}
+    return {contentLayout:contentLayout, showList:showList}
 })();
 
 // 상품 관리
@@ -1974,9 +2040,9 @@ const productLayout = (() => {
                             <div class="col-auto">
                                 <div class="filter-wrapper filter-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control flex-grow-1" placeholder="상품명">
+                                        <input type="text" class="form-control flex-grow-1 input-search" placeholder="상품명">
                                         <div class="input-group-append">
-                                            <button class="btn btn-search">
+                                            <button id="btn-product-search" class="btn btn-search">
                                                 <span class="comp-icon icon-magnify" id="icons/ico-search.svg"><svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path></svg></span>
                                             </button>
                                         </div>
@@ -1988,12 +2054,12 @@ const productLayout = (() => {
                     </div>
                     <table id="product-table" class="table grey-header-table w-100 text-center receipt-table">
                         <colgroup>
-                            <col style="width:15%">
-                            <col style="width:15%">
-                            <col style="width:17%">
                             <col style="width:20%">
                             <col style="width:20%">
-                            <col style="width:15%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+                            <col style="width:20%">
+<!--                            <col style="width:15%">-->
                         </colgroup>                           
                          <thead>
                             <tr>
@@ -2002,7 +2068,7 @@ const productLayout = (() => {
                                 <th class="td-status">가격</th>
                                 <th class="td-user">보유 중량(kg)</th>
                                 <th class="td-at">등록일자</th>
-                                <th class="td-action">상세보기(판매등록)</th>                   
+<!--                                <th class="td-action">상세보기(판매등록)</th>                   -->
                             </tr>
                         </thead>
                         <tbody>
@@ -2019,31 +2085,30 @@ const productLayout = (() => {
         const productsContainer = document.querySelector("#product-table tbody");
         if (!productsContainer) return;
 
-        if (!productsCriteria || productsCriteria.length === 0) {
-            productsContainer.innerHTML = `
-            <tr>
-                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
-                    등록된 상품이 없습니다.
-                </td>
-            </tr>
-        `;
-            return;
+        let text = "";
+        if (!productsCriteria.products || productsCriteria.products.length === 0) {
+            text = `
+                <tr class="product-row no-data">
+                    <td colspan="5">
+                        등록된 상품이 없습니다.
+                    </td>
+                </tr>
+            `;
         }
 
-        let text = "";
         productsCriteria.products.forEach((product) => {
             text += `
                 <tr class="product-row" data-product-id="${product.id}">
-                    <td class="text-center font-weight-bold" colspan="1" >${product.productName}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.memberId}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.productPrice}</td>
-                    <td class="text-center font-weight-bold" colspan="1" >-</td>
-                    <td class="text-center font-weight-bold" colspan="1" >${product.updatedDate}</td>
-                    <td class="td-action text-center">
-                        <div id="modal-open" class="action-btn">
-                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>
-                        </div>
-                    </td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productName ? product.productName : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.memberId ? product.memberId : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productPrice ? product.productPrice : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.productQuantity ? product.productQuantity : "-"}</td>
+                    <td class="text-center font-weight-bold" colspan="1" >${product.updatedDate ? product.updatedDate : "-"}</td>
+<!--                    <td class="td-action text-center">-->
+<!--                        <button id="modal-open" class="action-btn">-->
+<!--                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>-->
+<!--                        </button>-->
+<!--                    </td>-->
                 </tr>
             `;
         });
@@ -2076,14 +2141,11 @@ const productLayout = (() => {
         if (!pagination) return;
 
         pagination.addEventListener("click", (e) => {
-            // if(e.target.classList.contains(".page-item-link")) {
             e.preventDefault();
 
             const linkButton = e.target.closest(".page-item-link");
             const page = linkButton.dataset.page;
-            // const page = linkButton.getAttribute("href");
             navi(page);
-            // }
         });
     };
 
@@ -2095,7 +2157,7 @@ const productLayout = (() => {
         countText.textContent = criteria.total;
     };
 
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount}
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount}
 })();
 
 // 결제 관리
@@ -2109,360 +2171,12 @@ const requestLayout = (() => {
                 <div class="page-subtitle">조건을 설정하여 조회할 수 있습니다</div>
             </div>
             <div class="page-body">
-                <div class="amount-section">
-                    <div class="amount-container">
-                        <div class="amount-wrap">
-                            <div class="amount-box revenue-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-primary icon-label mr-3"><i class="mdi mdi-check"></i></span>
-                                        <span class="badge-label">결제승인</span>
-                                    </div>
-                                    <div class="col text-right amount-col"><span class="magnify-btn" data-toggle="collapse" data-target="#extra-sum-collapse" aria-expanded="true"><i class="mdi mdi-magnify"></i></span><span class="span-amount">0</span><span class="amount-unit">원</span></div>
-                                </div>
-                            </div>
-                            <div class="amount-box cancel-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-danger icon-label mr-3"><i class="mdi mdi-close"></i></span>
-                                        <span class="badge-label">결제취소</span>
-                                    </div>
-                                    <div class="col text-right amount-col"><span class="magnify-btn" data-toggle="collapse" data-target="#extra-sum-collapse" aria-expanded="true"><i class="mdi mdi-magnify"></i></span><span class="span-amount">0</span><span class="amount-unit">원</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 주석 밑의show유무로 아래가열림 -->
-                        <div class="extra-info collapse" id="extra-sum-collapse">
-                        <div class="amount-box extra-box">
-                            <div class="sub">
-                                <table class="sub-table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span class="badge-label text-primary icon-label">
-                                                    <i class="mdi mdi-check-all"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">총 승인금액</span>
-                                            </td>
-                                            <td class="td-operator">=</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit calc calc-minus">원</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-primary icon-label">
-                                                    <i class="mdi mdi-cash-minus"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">부분취소금액</span>
-                                            </td>
-                                            <td class="td-operator">-</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="sub">
-                                <table class="sub-table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-success icon-label">
-                                                    <i class="mdi mdi-bank-outline"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">승인 과세금액</span>
-                                            </td>
-                                            <td class="td-operator">
-                                                =
-                                            </td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-success icon-label">
-                                                    <i class="mdi mdi-bank-off-outline"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">승인 비과세금액</span>
-                                            </td>
-                                            <td class="td-operator">+</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="amount-box extra-box">
-                            <div class="sub cancel">
-                                <table class="sub-table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-danger icon-label">
-                                                    <i class="mdi mdi-close"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">매입 전 취소 (전체취소)</span>
-                                            </td>
-                                            <td class="td-operator">=</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit calc calc-plus">원</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-danger icon-label">
-                                                    <i class="mdi mdi-cash-minus"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">매입 후 취소 (부분취소)</span>
-                                            </td>
-                                            <td class="td-operator">+</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="sub cancel">
-                                <table class="sub-table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-warning icon-label">
-                                                    <i class="mdi mdi-bank-outline"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">취소 과세금액</span>
-                                            </td>
-                                            <td class="td-operator">=</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-icon">
-                                                <span class="badge-label text-warning icon-label">
-                                                    <i class="mdi mdi-bank-off-outline"></i>
-                                                </span>
-                                            </td>
-                                            <td class="td-title">
-                                                <span class="badge-label">취소 비과세금액</span>
-                                            </td>
-                                            <td class="td-operator">+</td>
-                                            <td class="td-amount">
-                                                <span class="span-amount">0</span>
-                                            </td>
-                                            <td class="td-unit">
-                                                <span class="amount-unit">원</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
                 <div class="page-content">
                     <div class="table-layout white-panel">
                         <div class="filter-section">
                             <div class="row">
                                 <div class="col-auto">
                                     <span class="receipt-count">총<span class="count-amount">0</span>건</span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="filter-wrapper filter-pm" id="filter-pm">
-                                        <div class="boot-pop-checkbox">
-                                            <button class="boot-pop-checkbox-filter-btn btn btn-outline-filter" id="btn-filter-pm">결제방식선택
-                                                <i class="mdi mdi-menu-down"></i>
-                                            </button>
-                                            <div class="bt-pop-menu">
-                                            <!-- 아래 show class유무의따라 태그창이열림 -->
-                                            <div id ="pop-menu-bt1" class="bt-pop-menu-back"></div>
-                                            <div id ="pop-menu-bt2" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -64.75px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
-                                                <ul class="list-wrapper list-unstyled">
-                                                    <li class="text-center font-weight-bold">결제방식선택</li>
-                                                    <li class="list-item row mb-2">
-                                                        <div class="col col-6">
-                                                            <button id="allchecked2"class="btn btn-outline-default btn-sm">
-                                                                <i class="mdi mdi-checkbox-multiple-marked mr-1"></i>
-                                                                전체선택
-                                                            </button>
-                                                        </div>
-                                                        <div class="col col-6">
-                                                            <button id="allflasechecked2" class="btn btn-outline-default btn-sm">
-                                                                <i class="mdi mdi-checkbox-multiple-marked-outline mr-1"></i>
-                                                                선택취소
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                    <!-- 주석 체크박스클릭시 list item옆에 active도 생기면서  아래 체크박스 class checked생김 -->
-                                                    <li id ="checkboxactive1" class="list-item">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="boot-check d-flex align-items-center undefined checked">
-                                                                    <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                        <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                    </div>
-                                                                    <div class="boot-check-content flex-grow-1">카드</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li id ="checkboxactive2" class="list-item">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="boot-check d-flex align-items-center undefined checked">
-                                                                    <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                        <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                    </div>
-                                                                    <div class="boot-check-content flex-grow-1">계좌이체</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-item mt-2">
-                                                        <button class="btn btn-outline-primary btn-sm">확인</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="filter-wrapper filter-status" id="filter-status">
-                                        <div class="boot-pop-checkbox">
-                                            <button class="boot-pop-checkbox-filter-btn btn btn-outline-filter" id="btn-filter-status">
-                                                결제상태선택
-                                                <i class="mdi mdi-menu-down"></i>
-                                            </button>
-                                            <div class="bt-pop-menu">
-                                                <div id ="pop-menu-bt3" class="bt-pop-menu-back "></div>
-                                                <div id ="pop-menu-bt4" class="bt-pop-menu-context exists" style="top: 0px; bottom: unset; left: -52.25px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
-                                                    <ul class="list-wrapper list-unstyled">
-                                                        <li class="text-center font-weight-bold">결제상태선택</li>
-                                                        <li class="list-item row mb-2">
-                                                            <div class="col col-6">
-                                                                <button id="allchecked1" class="btn btn-outline-default btn-sm">
-                                                                    <i class="mdi mdi-checkbox-multiple-marked mr-1"></i>
-                                                                    전체선택
-                                                                </button>
-                                                            </div>
-                                                            <div class="col col-6">
-                                                                <button id="allflasechecked1" class="btn btn-outline-default btn-sm">
-                                                                    <i class="mdi mdi-checkbox-multiple-marked-outline mr-1"></i>
-                                                                    선택취소
-                                                                </button>
-                                                            </div>
-                                                        </li>
-                                                        <li id ="checkboxactive3" class="list-item ">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="boot-check d-flex align-items-center undefined checked">
-                                                                        <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                            <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                        </div>
-                                                                        <div class="boot-check-content flex-grow-1">결제진행중</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <a class="collapsed" href="" data-toggle="collapse" aria-expanded="false">
-                                                                        <i class="mdi mdi-plus"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li id ="checkboxactive4" class="list-item">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="boot-check d-flex align-items-center undefined checked">
-                                                                        <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                            <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                        </div>
-                                                                        <div class="boot-check-content flex-grow-1">결제완료</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <a class="" href="#" data-toggle="collapse" aria-expanded="false">
-                                                                        <i class="mdi mdi-plus"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="collapse" id="">
-                                                                <ul class="sub-list-wrapper list-unstyled">
-                                                                    <li class="list-item active">
-                                                                        <div class="boot-check d-flex align-items-center undefined checked">
-                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                            </div>
-                                                                            <div class="boot-check-content flex-grow-1">결제완료</div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-item active">
-                                                                        <div class="boot-check d-flex align-items-center undefined checked">
-                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                            </div>
-                                                                            <div class="boot-check-content flex-grow-1">본인인증완료</div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="list-item active">
-                                                                        <div class="boot-check d-flex align-items-center undefined checked">
-                                                                            <div class="boot-check-box checked" tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                            </div>
-                                                                            <div class="boot-check-content flex-grow-1">현금영수증발행완료</div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                        <li class="list-item mt-2"><button class="btn btn-outline-primary btn-sm">확인</button></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-auto"></div>
                                 <div class="col-auto"></div>
@@ -2477,9 +2191,9 @@ const requestLayout = (() => {
                                 <div class="col-auto">
                                     <div class="filter-wrapper filter-search ml-1">
                                         <div class="input-group">
-                                            <input class="form-control flex-grow-1" type="text" placeholder="ID/주문번호/구매자정보/카드정보">
+                                            <input class="form-control flex-grow-1 input-search" type="text" placeholder="주문번호/구매자이름/카드정보">
                                             <div class="input-group-append">
-                                                <button class="btn btn-search">
+                                                <button id="btn-request-search" class="btn btn-search">
                                                     <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
                                                         <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
@@ -2495,25 +2209,25 @@ const requestLayout = (() => {
                         <div class="fill-table-layout">
                             <table id="request-table" class="table grey-header-table w-100 receipt-table">
                                 <colgroup>
-                                    <col style="width:20%">
-                                    <col style="width:15%">
-                                    <col style="width:30%">
-                                    <col style="width:20%">
-                                    <col style="width:20%">
-                                    <col style="width:20%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
+                                    <col style="width:16%">
                                 </colgroup>
                                 <thead>
                                     <tr>
+                                        <th>주문번호</th>
                                         <th class="td-name">
                                             상품명
                                             <div class="item-search-btn d-inline-block">
                                             </div>
                                         </th>
-                                        <th class="td-amount text-right pr-4">결제금액</th>
+                                        <th class="td-amount">결제금액</th>
                                         <th class="td-method">결제수단</th>
                                         <th class="td-at">결제완료 시간</th>
                                         <th class="td-buyer">구매자</th>
-                                        <th class="td-action">상세</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -2537,31 +2251,26 @@ const requestLayout = (() => {
         const requestsContainer = document.querySelector("#request-table tbody");
         if (!requestsContainer) return;
 
-        if (!requestsCriteria || requestsCriteria.length === 0) {
-            requestsContainer.innerHTML = `
-            <tr>
-                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
-                    결제내역이 없습니다.
-                </td>
-            </tr>
-        `;
-            return;
+        let text = "";
+        if (!requestsCriteria.requests || requestsCriteria.requests.length === 0) {
+            text = `
+                <tr class="request-row no-data">
+                    <td colspan="6">
+                        결제내역이 없습니다.
+                    </td>
+                </tr>
+            `;
         }
 
-        let text = "";
         requestsCriteria.requests.forEach((request) => {
             text += `
                 <tr class="request-row" data-request-id="${request.id}">
+                    <td class="text-center font-weight-bold" colspan="1">${request.id}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.productName}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.requestPrice}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.paymentMethod}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.paymentDate}</td>
                     <td class="text-center font-weight-bold" colspan="1">${request.memberName}</td>
-                    <td class="td-action text-center">
-                        <div id="modal-open" class="action-btn">
-                            <i id="modalbtn" class="mdi mdi-chevron-right"></i>
-                        </div>
-                    </td>
                 </tr>
             `;
         });
@@ -2614,120 +2323,5 @@ const requestLayout = (() => {
         countText.textContent = criteria.total;
     };
 
-    // 결제 상세
-    const showDetail = (requestDetail) => {
-        const tableDetail = document.querySelector(".modal-dialog");
-
-        // 결제 상세 - layout
-        tableDetail.innerHTML= `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title">
-                        (35,000원) 결제내역
-                        <span class="badge-label text-success font-weight-bold ml-2">결제완료</span>
-                    </div>
-                    <button class="close">
-                        <i class="mdi mdi-close"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="divider"></div>
-                    <div class="tab-view">
-                        <div class="tab-view-header">
-                            <div class="tab-switch-row">
-                                <div class="tab-switch active">상세정보</div>
-                            </div>
-                        </div>
-                        <div class="tab-view-body">
-                            <div style="display: block;">
-                                <div class="tab-inner tab-detail">
-                                    <div class="info-layout detail-info">
-                                        <div class="info-title justify-content-between">
-                                            <div class="flex-left d-flex">
-                                                <div class="title">승인정보</div>
-                                            </div>
-                                        </div>
-                                        <div class="d-table w-100">
-                                            <div class="d-table-cell">
-                                                <table class="info-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>주문번호</th>
-                                                            <td>-</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>총 결제금액 ①</th>
-                                                            <td>35,000</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>취소금액</th>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="d-table-cell">
-                                                <table class="info-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>승인시각</th>
-                                                            <td>2025-08-01 13:52:10</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>물품</th>
-                                                            <td>-</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>결제방식</th>
-                                                            <td>카드</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-layout user-info">
-                                        <div class="info-title justify-content-between">
-                                            <div class="flex-left d-flex">
-                                                <div class="title">구매자정보</div>
-                                            </div>
-                                        </div>
-                                        <div class="info-body">
-                                            <div class="table-info row">
-                                                <div class="col-6">
-                                                    <div class="row inner-table">
-                                                        <div class="col-auto w-120px">구매자명</div>
-                                                        <div class="col">-</div>
-                                                    </div>
-                                                    <div class="row inner-table">
-                                                        <div class="col-auto w-120px">주소</div>
-                                                        <div class="col">-</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="row inner-table">
-                                                        <div class="col-auto w-120px">이메일</div>
-                                                        <div class="col">-</div>
-                                                    </div>
-                                                    <div class="row inner-table">
-                                                        <div class="col-auto w-120px">전화번호</div>
-                                                        <div class="col">-</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn-close btn btn-outline-filter">배송시작</button>
-                </div>
-            </div>
-           `;
-    }
-
-    return {contentLayout, showList, renderPagination, connectToPagination, totalCount, showDetail}
+    return {contentLayout:contentLayout, showList:showList, renderPagination:renderPagination, connectToPagination:connectToPagination, totalCount:totalCount}
 })();

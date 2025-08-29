@@ -5,11 +5,13 @@ import com.example.youeatieat.dto.MemberDTO;
 import com.example.youeatieat.service.LikeServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/like/**")
 @RequiredArgsConstructor
@@ -21,7 +23,12 @@ public class LikeApiController {
     @PostMapping("like")
     public ResponseEntity<?> likeProduct(@RequestBody LikeDTO likeDTO) {
         MemberDTO member = (MemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return ResponseEntity.ok(false);
+        }
         likeDTO.setMemberId(member.getId());
+        log.info(member.getId().toString());
+
         likeService.like(likeDTO);
         return ResponseEntity.ok().body(likeDTO);
     }

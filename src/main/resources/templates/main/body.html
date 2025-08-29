@@ -78,20 +78,20 @@
                             <div class="now-most-popular-list">
                                 <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events now-most-popular-list-in">
                                     <div class="product-swiper-wrapper product-wrap product-list" style="transform: translate(0px, 0px, 0px);">
-                                        <div th:each="deal : ${packDeals}" class="product-card" style="width: 249px; margin-right: 18px;">
+                                        <div th:each="deal : ${packDeals}" class="product-card" style="width: 249px; margin-right: 18px;" th:data-id="${deal.id}">
                                             <div class="product-thumbnail">
-                                                <a href="" class="product-media">
+                                                <a th:href="@{/together-product/detail(id=${deal.id})}" class="product-media">
                                                     <div class="product-img">
                                                         <img th:src="@{'/api/product/image'(filePath=${deal.productTitleImageUrl})}">
                                                     </div>
                                                 </a>
                                                 <div class="product-btn">
-                                                    <button type="button" class="popup-trigger" data-target="#popup1">
+                                                    <button type="button" class="popup-trigger" data-target="#popup1" th:data-product-id="${deal.id}">
                                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z" stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path></svg>
                                                         담기
                                                     </button>
                                                 </div>
-                                                <a href="" class="product-info">
+                                                <a th:href="@{/together-product/detail(id=${deal.id})}" class="product-info">
                                                     <div class="product-badge">
                                                         <span class="">너도나도 배송</span>
                                                     </div>
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="product-card" style="width: 249px; margin-right: 18px;">
                                             <div class="last-product-card">
-                                                <a href="" class="showAll">
+                                                <a href="/together-product/best-list" class="showAll">
                                                         <span class="icon">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
                                                             <g fill="none" fill-rule="evenodd">
@@ -207,10 +207,10 @@
                         <div class="ranking-body">
                             <div class="ranking-swiper ranking-swiper-initialized ranking-swiper-horizontal ranking-swiper-pointer-events ranking-list">
                                 <div class="ranking-swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                                    <div th:each="best, stat :${bests}" class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;">
+                                    <div th:each="best, stat :${bests}" class="ranking-swiper-slide" style="width: 190px; margin-right: 25px;" th:data-id="${best.id}">
                                         <div class="ranking-product-card" style="width: 249px; margin-right: 18px;">
                                             <div class="ranking-product-thumbnail">
-                                                <a href="" class="ranking-product-media">
+                                                <a th:href="@{/together-product/detail(id=${best.id})}" class="ranking-product-media">
                                                     <div class="ranking-product-img">
                                                         <div class="ranking-product-img-in" style="padding-bottom: 123.158%;">
                                                             <div class="ranking-product-img-in-in">
@@ -221,7 +221,7 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a href="" class="ranking-product-info ranking-product-detail">
+                                                <a th:href="@{/together-product/detail(id=${best.id})}" class="ranking-product-info ranking-product-detail">
                                                     <div th:text="${stat.count}" class="ranking-number"></div>
                                                     <div class="ranking-product-detail-in">
                                                         <div th:text="${best.productName}" class="ranking-product-detail-name"></div>
@@ -238,7 +238,7 @@
                                                     </div>
                                                 </a>
                                                 <div class="ranking-button-wrapper">
-                                                    <button type="button" class="ranking-product-function ranking-product-function popup-trigger" data-target="#popup1">
+                                                    <button type="button" class="ranking-product-function ranking-product-function popup-trigger" data-target="#popup1" th:data-product-id="${best.id}">
                                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z" stroke="#333333" stroke-linecap="square" stroke-linejoin="round"></path>
                                                         </svg>
@@ -250,7 +250,7 @@
                                     </div>
                                     <div class="ranking-product-card2" style="width: 190px; margin-right: 25px;">
                                         <div class="ranking-product-card-last2">
-                                            <a href="" class="ranking-product-card-last-link2">
+                                            <a href="/together-product/best-list" class="ranking-product-card-last-link2">
                                                     <span class="icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
                                                         <g fill="none" fill-rule="evenodd">
@@ -337,99 +337,13 @@
         </div>
 
     </div>
-</div>
-
-<!-- 팝업 창 -->
-<div class="popup-wrapper" id="popup1">
-    <div class="popup-inner">
-        <div class="dim"></div>
-        <div class="popup-container popup-product">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <div class="popup-img">
-                        <img src="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg" decoding="async" data-nimg="fill" class="css-0" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;" sizes="100vw" srcset="https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 640w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 750w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 828w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1080w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1200w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 1920w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 2048w, https://product-image.kurly.com/product/image/1238a282-7b82-4bf7-8272-54f4e476e769.jpg 3840w">
-                    </div>
-                    <div class="popup-title-wrap">
-                        <p class="popup-title">[샐러드판다] 그린랩 샌드위치 3종</p>
-                    </div>
-                </div>
-                <ul class="popup-product-list">
-                    <li class="popup-product-item">
-                        <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                        <div class="product-price-box">
-                            <div class="product-price-box">
-                                <span class="product-price">5,050원</span>
-                                <span class="product-original-price">6,000원</span>
-                            </div>
-                            <div class="product-quantity-box">
-                                <button type="button" class="quantity-btn minus"></button>
-                                <div class="count">0</div>
-                                <button type="button" class="quantity-btn plus"></button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="popup-product-item">
-                        <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                        <div class="product-price-box">
-                            <div class="product-price-box">
-                                <span class="product-price">5,050원</span>
-                                <span class="product-original-price">6,000원</span>
-                            </div>
-                            <div class="product-quantity-box">
-                                <button type="button" class="quantity-btn minus"></button>
-                                <div class="count">0</div>
-                                <button type="button" class="quantity-btn plus"></button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="popup-product-item">
-                        <p class="product-name">[샐러드판다] 허브닭안심 그린랩 샌드위치</h4>
-                        <div class="product-price-box">
-                            <div class="product-price-box">
-                                <span class="product-price">5,050원</span>
-                                <span class="product-original-price">6,000원</span>
-                            </div>
-                            <div class="product-quantity-box">
-                                <button type="button" class="quantity-btn minus"></button>
-                                <div class="count">0</div>
-                                <button type="button" class="quantity-btn plus"></button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="total-price-box">
-                    <p class="total-label">합계</p>
-                    <div class="total-price">
-                        <span class="total-amount">0</span>
-                        <span class="total-unit">원</span>
-                    </div>
-                </div>
-                <div class="popup-footer">
-                    <div class="popup-button-box">
-                        <!-- 팝업 닫기 : popup-close 클래스 있을시 -->
-                        <button type="button" class="btn-outline popup-close">취소</button>
-                        <button type="button" class="btn-primary popup-close">장바구니</button>
-                    </div>
-                </div>
-            </div>
+    <div class="add-cart-tap-wrap">
+        <div class="add-cart-tap">
+            <p class="add-cart-tap-p"><br></p>
         </div>
     </div>
 </div>
-<div class="popup-wrapper" id="popup2">
-    <div class="popup-inner">
-        <div class="dim"></div>
-        <div class="popup-container">
-            <div class="popup-content">
-                <div class="popup-message">
-                    <p>검색어를 입력해주세요.</p>
-                </div>
-                <div class="popup-footer">
-                    <button type="button" class="btn-default popup-close">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal-wrap"></div>
 <footer th:replace="~{/main/footer.html :: div.footer-big}"></footer>
 </body>
 <script th:inline="javascript">

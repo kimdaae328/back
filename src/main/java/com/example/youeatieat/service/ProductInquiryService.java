@@ -22,8 +22,7 @@ public interface ProductInquiryService {
                 .productInquiryContent(productInquiryDTO.getProductInquiryContent())
                 .productInquiryTitle(productInquiryDTO.getProductInquiryTitle())
                 .productId(productInquiryDTO.getProductId())
-                .memberId(2L)
-//                .memberId(productInquiryDTO.getMemberId())
+                .memberId(productInquiryDTO.getMemberId())
                 .build();
     }
 

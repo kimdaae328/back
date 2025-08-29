@@ -86,7 +86,7 @@ const customerService = (() => {
         return customersCriteria;
     };
 
-    return {getCustomerList, getCustomerDetail, getNonSubscribedCustomerList, getSubscribedCustomerList}
+    return {getCustomerList:getCustomerList, getCustomerDetail:getCustomerDetail, getNonSubscribedCustomerList:getNonSubscribedCustomerList, getSubscribedCustomerList:getSubscribedCustomerList}
 })();
 
 // 회원목록(판매자)
@@ -307,7 +307,7 @@ const inquiryService = (() => {
         return await response.json();
     };
 
-    return {getInquiryList, getUnansweredList, getDetail, writeAnswer, getCurrentPage, getAnsweredList}
+    return {getInquiryList:getInquiryList, getUnansweredList:getUnansweredList, getDetail:getDetail, writeAnswer, getCurrentPage, getAnsweredList}
 })();
 
 // 판매자 문의

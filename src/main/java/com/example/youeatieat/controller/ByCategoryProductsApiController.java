@@ -25,15 +25,16 @@ public class ByCategoryProductsApiController {
                                             @RequestBody Search search) {
         System.out.println(search);
 
-        ProductCriteriaDTO productCriterias = categoriesProductService.getList(page, search, id);
+        ProductCriteriaDTO products = categoriesProductService.getList(page, search, id);
+        log.info("products: {}", products);
         int count = categoriesProductService.getCount(search, id);
 
-        if (productCriterias == null || productCriterias.getProducts().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productCriterias);
+        if (products == null || products.getProducts().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(products);
         }
 
-        productCriterias.setTotalCount(count);
-        return ResponseEntity.ok(productCriterias);
+        products.setTotalCount(count);
+        return ResponseEntity.ok(products);
     }
 
 }

@@ -19,7 +19,7 @@ public class AdminCustomersController {
     public ResponseEntity<?> list(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
+            return ResponseEntity.ok(customerCriteriaDTO);
         }
         return ResponseEntity.ok(customerCriteriaDTO);
     }
@@ -39,7 +39,7 @@ public class AdminCustomersController {
     public ResponseEntity<?> nonSubscribedList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getNonSubscribedList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
+            return ResponseEntity.ok(customerCriteriaDTO);
         }
         return ResponseEntity.ok(customerCriteriaDTO);
     }
@@ -49,7 +49,7 @@ public class AdminCustomersController {
     public ResponseEntity<?> subscribedList(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminCustomerCriteriaDTO customerCriteriaDTO = memberService.getSubscribedList(page, keyword);
         if(customerCriteriaDTO == null || customerCriteriaDTO.getCustomers().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerCriteriaDTO);
+            return ResponseEntity.ok(customerCriteriaDTO);
         }
         return ResponseEntity.ok(customerCriteriaDTO);
     }

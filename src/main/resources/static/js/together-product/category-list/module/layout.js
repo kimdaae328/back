@@ -131,7 +131,7 @@ const layout = (() => {
         modalWrap.innerHTML = text;
     }
 
-    return {showPopupCart:showPopupCart}
+    return {showProductList:showProductList, showPopupCart:showPopupCart}
 })();
 
 

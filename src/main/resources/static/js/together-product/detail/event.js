@@ -208,16 +208,39 @@ contentTextarea.addEventListener("input", toggleSubmitButton);
 toggleSubmitButton();
 
 // btn-wish 버튼
+
+const text = document.querySelector(".add-cart-tap-p");
+const addMessage = document.querySelector(".add-cart-tap-wrap");
+const saveInCarts = document.querySelectorAll("button.btn-cart");
+
+function showLoginMessage(message) {
+    text.innerText = message;
+    addMessage.style.display = "block";
+    void addMessage.offsetWidth;
+
+    addMessage.classList.add("show");
+
+    setTimeout(() => {
+        addMessage.classList.remove("show");
+        setTimeout(() => {
+            addMessage.style.display = "none";
+        }, 300);
+    }, 1500);
+}
+
+
 const wishButtons = document.querySelectorAll(".btn-wish");
 wishButtons.forEach(async (button) => {
 
     let liked = await togetherProductService.getLike(product.id);
     button.classList.toggle("on", liked);
     button.addEventListener("click", async () => {
+
+
         const like = {
             productId: product.id,
-            memberId: memberId
         };
+
         const isActive = button.classList.contains("on");
         let success = false;
         if (isActive) {
@@ -233,6 +256,8 @@ wishButtons.forEach(async (button) => {
                 button.classList.add("on");
                 liked = true;
                 console.log(liked);
+            } else {
+                showLoginMessage("로그인 후 이용해주세요.");
             }
         }
     });
@@ -259,50 +284,26 @@ tabLinkSpan.textContent = reviewItems.length;
 
 
 //###################################  장바구니  ###################################
-const saveInCarts = document.querySelectorAll("button.btn-cart");
+
 saveInCarts.forEach((saveInCart)=>{
     saveInCart.addEventListener("click", async (e) => {
         const cartCount = document.querySelector("div.count").innerText;
-        const text = document.querySelector(".add-cart-tap-p");
-        const addMessage = document.querySelector(".add-cart-tap-wrap");
 
         const cart = {
             cartCount: Number(cartCount),
             productId: product.id
         }
-
         const result = await togetherProductService.save(cart);
 
         if (result){
             if(!(Number(cartCount) === 0)){
                 //     장바구니에 추가 완료
-                text.innerText = "장바구니에 상품을 담았어요!"
-                addMessage.style.display = "block";
-                void addMessage.offsetWidth;
-                addMessage.classList.add("show");
-
-                setTimeout(() => {
-                    addMessage.classList.remove("show");
-
-                    setTimeout(() => {
-                        addMessage.style.display = "none";
-                    }, 300);
-                }, 1500);
+                showLoginMessage("장바구니에 상품을 담았어요!");
             } else if (Number(cartCount) === 0) {
-                text.innerText = `장바구니에 상품을 담지 못했어요.\n수량을 확인해주세요.`
-                addMessage.style.display = "block";
-                void addMessage.offsetWidth;
-
-                addMessage.classList.add("show");
-
-                setTimeout(() => {
-                    addMessage.classList.remove("show");
-
-                    setTimeout(() => {
-                        addMessage.style.display = "none";
-                    }, 300);
-                }, 1500);
+                showLoginMessage(`장바구니에 상품을 담지 못했어요.\n수량을 확인해주세요.`);
             }
+        }  else {
+            showLoginMessage("로그인 후 이용해주세요.");
         }
     })
 })
@@ -518,7 +519,6 @@ submitBtn.addEventListener("click", async (e) => {
     const inquiry = {
         productInquiryTitle: title,
         productInquiryContent: content,
-        memberId: 2,
         productId: productId
     };
 
@@ -527,10 +527,9 @@ submitBtn.addEventListener("click", async (e) => {
     const result = await togetherProductService.inquiry(inquiry);
 
     if (result) {
-        console.log("등록 완료", result);
-        alert("문의가 등록되었습니다!");
+        showLoginMessage("문의가 등록되었습니다!");
     } else {
-        alert("등록 실패");
+        showLoginMessage("로그인 후 이용해주세요.");
     }
 
     document.querySelector(".form-content .title").value = "";

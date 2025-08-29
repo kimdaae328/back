@@ -192,15 +192,14 @@
                         </li>
                     </ul>
 
-                        <th:block th:if="${session.member != null and session.member.memberVerified == false}">
-                    <div class="announce-button">
-                        <a href="/mypage/subcribe">
-                            <div class="announce-button-in">
-                                <span class="announce-button-text">구독하기</span>
-                            </div>
-                        </a>
-                    </div>
-
+                    <th:block th:if="${session.member != null and session.member.memberVerified == false}">
+                      <div class="announce-button">
+                          <a href="/mypage/subcribe">
+                              <div class="announce-button-in">
+                                  <span class="announce-button-text">구독하기</span>
+                              </div>
+                          </a>
+                      </div>
                     </th:block>
                 </div>
             </div>

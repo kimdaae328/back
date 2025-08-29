@@ -21,19 +21,10 @@ public class AdminProductsController {
     public ResponseEntity<?> list(@PathVariable("page") int page, @RequestParam(required = false) String keyword) {
         AdminProductCriteriaDTO productCriteriaDTO = productService.getList(page, keyword);
         if(productCriteriaDTO == null || productCriteriaDTO.getProducts().size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(productCriteriaDTO);
+            return ResponseEntity.ok(productCriteriaDTO);
         }
         return ResponseEntity.ok(productCriteriaDTO);
     }
 
-//    회원상세
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> detail(@PathVariable("id") Long id) {
-//        CustomerDetailWithPaymentDTO customerDetail = memberService.getCustomerDetail(id);
-//        if (customerDetail == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customerDetail);
-//        }
-//        return ResponseEntity.ok(customerDetail);
-//    }
 
 }
