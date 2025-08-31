@@ -459,7 +459,7 @@ const sellerLayout = (() => {
                         </div>
                         <div class="fill-table-layout">
                            <div class="fill-table-layout">
-                                <table id="seller-table" class="table grey-header-table w-100 seller-table">
+                                <table id="seller-table" class="table grey-header-table w-100 text-center receipt-table seller-table">
                                     <thead>
                                         <tr>
                                             <th class="td-name">판매자번호</th>
@@ -1600,7 +1600,7 @@ const purchaseLayout = (() => {
                         </div>
                         <div class="fill-table-layout">
                             <div class="fill-table-layout">
-                                <table id="purchases-table" class="table grey-header-table w-100 text-center purchases-table">
+                                <table id="purchases-table" class="table grey-header-table w-100 text-center receipt-table purchases-table">
                                     <colgroup>
                                         <col style="width:14%">
                                         <col style="width:14%">
@@ -2033,8 +2033,9 @@ const productLayout = (() => {
                         <div class="filter-section">
                             <div class="row">
                                 <div class="col-auto">
-                                    <div class="filter-wrapper filter-status mr-2">
-                                    </div>
+                                    <span class="count">총
+                                        <span class="count-amount">22</span>개
+                                    </span>
                                 </div>
                             <div class="col text-right"></div>
                             <div class="col-auto">
@@ -2048,33 +2049,39 @@ const productLayout = (() => {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </div> 
+                        </div>
+                        <div class="fill-table-layout">
+                            <table id="product-table" class="table grey-header-table w-100 text-center receipt-table">
+                                <colgroup>
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+                                    <col style="width:20%">
+        <!--                            <col style="width:15%">-->
+                                </colgroup>                           
+                                 <thead>
+                                    <tr>
+                                        <th class="td-name">상품명</th>
+                                        <th>판매자</th>
+                                        <th class="td-status">가격</th>
+                                        <th class="td-user">보유 중량(kg)</th>
+                                        <th class="td-at">등록일자</th>
+        <!--                                <th class="td-action">상세보기(판매등록)</th>                   -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="rebound-pagination-wrapper mt-5 mb-4">
+                            <ul class="pagination rebound-pagination">
+<!--                            여기 페이지 a버튼 들어옴-->
+                            </ul>
+                        </nav>
                     </div>
-                    <table id="product-table" class="table grey-header-table w-100 text-center receipt-table">
-                        <colgroup>
-                            <col style="width:20%">
-                            <col style="width:20%">
-                            <col style="width:20%">
-                            <col style="width:20%">
-                            <col style="width:20%">
-<!--                            <col style="width:15%">-->
-                        </colgroup>                           
-                         <thead>
-                            <tr>
-                                <th class="td-name">상품명</th>
-                                <th>판매자</th>
-                                <th class="td-status">가격</th>
-                                <th class="td-user">보유 중량(kg)</th>
-                                <th class="td-at">등록일자</th>
-<!--                                <th class="td-action">상세보기(판매등록)</th>                   -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
                 </div>
             </div>
         `
@@ -2235,6 +2242,11 @@ const requestLayout = (() => {
                                 </tbody>
                             </table>
                         </div>
+                        <nav class="rebound-pagination-wrapper mt-5 mb-4">
+                            <ul class="pagination rebound-pagination">
+<!--                            여기 페이지 a버튼 들어옴-->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
