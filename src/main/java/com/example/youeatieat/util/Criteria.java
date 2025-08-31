@@ -31,8 +31,8 @@ public class Criteria {
         realEnd = (int)(Math.ceil(total / (double)rowCount));
         endPage = Math.min(realEnd, endPage);
         endPage = Math.max(1, endPage);
-        offset = (page - 1) * rowCount;
-        hasNextPage = endPage < realEnd;
-        hasPreviousPage = startPage > 1;
+        offset = (this.page - 1) * rowCount;
+        hasNextPage = this.page < realEnd;;
+        hasPreviousPage = this.page > 1;
     }
 }

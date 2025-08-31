@@ -211,6 +211,13 @@ pageItemNums.forEach((pageItemNum) => {
     });
 });
 
+let currentLoader = "";
+const setList = (loader) => {
+    currentLoader = loader;
+    currentLoader(1);
+    customerLayout.connectToPagination((page) => currentLoader(page));
+};
+
 // 전체 회원
 const showList = async (page = 1, keyword) => {
     const customersCriteria = await customerService.getCustomerList(page, keyword, customerLayout.showList);
@@ -219,13 +226,6 @@ const showList = async (page = 1, keyword) => {
 
     return customersCriteria;
 }
-
-let currentLoader = "";
-const setList = (loader) => {
-    currentLoader = loader;
-    currentLoader(1);
-    customerLayout.connectToPagination((page) => currentLoader(page));
-};
 
 // 처음 페이지 로드
 document.addEventListener("DOMContentLoaded", async () => {
@@ -544,21 +544,24 @@ contentArea.addEventListener("click", async (e) => {
         if (!headerTabname) return;
         const tabText = headerTabname.textContent.trim();
 
-        if (tabText === "전체") {
-            setList(showList);
-        } else if (tabText === "일반 회원") {
-            setList(showNonSubscribedList)
-        } else if (tabText === "구독 회원") {
-            setList(showSubscribedList);
+        if(currentPageType === "buyer-list"){
+            if (tabText === "전체") {
+                setList(showList);
+            } else if (tabText === "일반 회원") {
+                setList(showNonSubscribedList)
+            } else if (tabText === "구독 회원") {
+                setList(showSubscribedList);
+            }
         }
 
-        if (tabText === "전체") {
-            setList(showSellerList);
-        } else if (tabText === "일반 로그인") {
-            console.log("asdasdasdad")
-            setList(showYoueatieatLoginList)
-        } else if (tabText === "카카오 로그인") {
-            setList(showKakaoLoginList);
+        if(currentPageType === "seller-list") {
+            if (tabText === "전체") {
+                setList(showSellerList);
+            } else if (tabText === "일반 로그인") {
+                setList(showYoueatieatLoginList)
+            } else if (tabText === "카카오 로그인") {
+                setList(showKakaoLoginList);
+            }
         }
     }
 
@@ -768,17 +771,15 @@ contentArea.addEventListener("change", async (e) => {
 
 });
 
-contentArea.addEventListener("click", async (e) => {
+contentArea.addEventListener('click', async (e) => {
     const target = e.target;
+
+    // 배너 등록
     if (target.classList.contains("register-link")) {
         e.preventDefault();
         await bannerService.uploadService(formData);
         await currentLoader(1)
     }
-});
-
-contentArea.addEventListener('click', async (e) => {
-    const target = e.target;
 
     // 배너 사진 등록중 삭제
     if(target.classList.contains("delete-btn")){

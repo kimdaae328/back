@@ -3,26 +3,25 @@ const customerService = (() => {
     // 회원 목록
     const getCustomerList = async (page, keyword = "", callback) => {
         const response = await fetch(`/api/admin/customers/list/${page}?keyword=${keyword ?? ""}`);
-        const customersCriteria = await response.json();
+        const data = await response.json();
 
         if(callback){
             setTimeout(() => {
-                callback(customersCriteria);
+                callback(data);
             }, 1000)
         }
 
         if(response.ok) {
             console.log("게시글 존재")
-            // console.log("키워드 전달 문제없음둥둥", keyword)
+            console.log(data)
         }else if(response.status === 404){
             console.log("게시글 없음")
-            // console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
             console.log(error);
         }
 
-        return customersCriteria;
+        return data;
     }
 
     // 회원 상세
@@ -52,7 +51,6 @@ const customerService = (() => {
 
         if(response.ok) {
             console.log("일반 회원 존재");
-            console.log("키워드존재", keyword)
         }else if(response.status === 404){
             console.log("일반 회원 없음");
         }else {
@@ -94,13 +92,11 @@ const sellerService = (() => {
     // 회원 목록
     const getSellerList = async (page, keyword = "", callback) => {
         const response = await fetch(`/api/admin/sellers/list/${page}?keyword=${keyword ?? ""}`);
-        const sellersCriteria = await response.json();
-
-        console.log("회원목록",sellersCriteria)
+        const data = await response.json();
 
         if(callback){
             setTimeout(() => {
-                callback(sellersCriteria);
+                callback(data);
             }, 1000)
         }
 
@@ -113,7 +109,7 @@ const sellerService = (() => {
             console.log(error);
         }
 
-        return sellersCriteria;
+        return data;
     }
 
     // 회원 상세
@@ -182,7 +178,7 @@ const sellerService = (() => {
         return sellersCriteria;
     }
 
-    return {getSellerList, getSellerDetail, getSellerYoueatieatList, getSellerKakaoList}
+    return {getSellerList:getSellerList, getSellerDetail:getSellerDetail, getSellerYoueatieatList:getSellerYoueatieatList, getSellerKakaoList:getSellerKakaoList}
 })();
 
 // 구매자 문의
@@ -202,12 +198,12 @@ const inquiryService = (() => {
         console.log(inquiriesCriteria)
 
         if(response.ok) {
-            console.log("문의글 존재")
+            console.log(" 존재")
             // console.log("키워드 전달 문제없음둥둥", keyword)
 
             currentPage = inquiriesCriteria.criteria.page;
         }else if(response.status === 404){
-            console.log("게시글 없음")
+            console.log("문의글 없음")
             // console.log("키워드 전달 문제있음둥")
         }else {
             const error = await response.text()
@@ -327,11 +323,9 @@ const sellerInquiryService = (() => {
         console.log(inquiriesCriteria)
 
         if(response.ok) {
-            console.log("게시글 존재")
-            console.log("키워드 전달 문제없음둥둥", keyword)
+            console.log("판매자 문의글 존재")
         }else if(response.status === 404){
-            console.log("게시글 없음")
-            console.log("키워드 전달 문제있음둥")
+            console.log("판매자 문의글 없음")
         }else {
             const error = await response.text()
             console.log(error);
@@ -625,8 +619,6 @@ const requestService = (() => {
     const getList = async (page, keyword = "", callback) => {
         const response = await fetch(`/api/admin/requests/list/${page}?keyword=${keyword ?? ""}`);
         const data = await response.json();
-
-        console.log(data)
 
         if(callback){
             setTimeout(() => {

@@ -23,3 +23,16 @@ select * from tbl_member;
 
 delete from tbl_member
 where id = 13;
+
+select m.id, m.member_name, m.member_email,
+       m.member_phone, m.member_last_login_date, m.created_date, m.updated_date,
+       ifnull(sp.subscription_payment_status, 'failed') as "subscription_payment_status"
+from tbl_member m
+         left join tbl_subscription_payment sp
+                   on m.id = sp.member_id
+where m.member_status = 'active' and m.member_role = 'buyer'
+        order by m.id desc
+
+select count(*)
+from tbl_member
+where member_status = 'active' and member_role = 'buyer'
