@@ -1,5 +1,6 @@
 package com.example.youeatieat.service;
 
+import com.example.youeatieat.domain.RequestVO;
 import com.example.youeatieat.dto.RequestCriteriaDTO;
 import com.example.youeatieat.dto.RequestDTO;
 import com.example.youeatieat.repository.RequestDAO;
@@ -16,6 +17,8 @@ import java.util.List;
 @Primary
 public class RequestServiceImpl implements RequestService{
     private final RequestDAO requestDAO;
+
+
     @Override
     public RequestCriteriaDTO getList(int page, MypageSearch search) {
         RequestCriteriaDTO requestCriteriaDTO = new RequestCriteriaDTO();
@@ -30,4 +33,6 @@ public class RequestServiceImpl implements RequestService{
         requestCriteriaDTO.setCriteria(criteria);
         return requestCriteriaDTO;
     }
+
+
 }

@@ -29,7 +29,6 @@ public class LikeController {
         MemberDTO member = (MemberDTO) session.getAttribute("member");
         List<LikeDTO> likes = likeService.getLikeListByMemberId(member.getId());
         model.addAttribute("likes",likes);
-        log.info("likes={}", likes);
         return "/mypage/like-list";
     }
     @PostMapping("delete")

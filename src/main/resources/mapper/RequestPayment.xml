@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youeatieat.mapper.RequestPaymentMapper">
+    <insert id="insertRequestPayment">
+        insert into tbl_request_payment
+        (member_id, request_id , payment_method,payment_status,payment_date)
+        values
+            (#{memberId}, #{requestId}, #{paymentMethod}, #{paymentStatus},#{paymentDate})
+    </insert>
+
+
+</mapper>

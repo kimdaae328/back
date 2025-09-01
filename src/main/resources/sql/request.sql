@@ -25,9 +25,11 @@ INSERT INTO tbl_request
 (request_amount, request_price, request_status, member_id, group_index_number, product_id)
 VALUES
     (10, 600, 'done', 57, 1, 1),
-    (5, 500, 'done', 57, 2, 2),
+    (5, 500, 'done', 57, 1, 3),
     (8, 700, 'cancel', 57, 4, 2);
 select * from tbl_request;
+
+delete from tbl_request where id=18;
 
 
 UPDATE tbl_request

@@ -3,6 +3,12 @@
 <mapper namespace="com.example.youeatieat.mapper.GroupIndexMapper">
     <insert id="insertGroupIndex">
         insert into tbl_group_index (group_index_number,product_id)
-        values (#{group_index_number},#{productid})
+        values (#{groupIndexNumber},#{productId})
     </insert>
+    <select id="selectGroupIndex" >
+        select group_index_number
+        from tbl_group_index gi
+        join tbl_product p on gi.product_id = p.id
+        where product_id = #{productId}
+    </select>
 </mapper>

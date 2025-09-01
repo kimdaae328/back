@@ -4,13 +4,17 @@
     <insert id="insertGroup">
         insert into tbl_group (
             group_index_number,
-            product_id,
-            group_cancelable
+            product_id
         )
         values (
                    #{groupIndexNumber},
-                   #{productId},
-                   #{groupCancelable}
+                   #{productId}
                )
     </insert>
+    <update id="UpdateGroup">
+        update tbl_group
+        set group_cancelable = 'unable'
+        where group_index_number=#{groupIndexNumber}
+            and product_id = #{productId}
+    </update>
 </mapper>

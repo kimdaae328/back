@@ -20,18 +20,12 @@ create table tbl_member(
 ALTER TABLE tbl_member
     ADD COLUMN member_verified BOOLEAN DEFAULT FALSE;
 select * from tbl_member;
+Insert into tbl_member (member_email, member_password, member_name, member_birth, member_phone, member_verified, member_provider, member_gender, member_role, member_status)
+values ("ekdo1234","ekdo1357","김다애","2000-05-02",01020503402,0,'you_i','female','admin','active');
 
 delete from tbl_member
 where id = 13;
 
-select m.id, m.member_name, m.member_email,
-       m.member_phone, m.member_last_login_date, m.created_date, m.updated_date,
-       ifnull(sp.subscription_payment_status, 'failed') as "subscription_payment_status"
-from tbl_member m
-         left join tbl_subscription_payment sp
-                   on m.id = sp.member_id
-where m.member_status = 'active' and m.member_role = 'buyer'
-        order by m.id desc
 
 select count(*)
 from tbl_member

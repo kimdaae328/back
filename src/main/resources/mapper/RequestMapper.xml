@@ -36,4 +36,8 @@
         on r.product_id = p.id
         <include refid="search"></include>
     </select>
+    <select id="selectAmount">
+        select request_amount from tbl_request
+        where group_index_number =#{groupIndexNumber} and product_id = #{productId}
+    </select>
 </mapper>
