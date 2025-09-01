@@ -16,4 +16,6 @@ public interface RequestMapper {
     public List<RequestDTO> selectAll(@Param("criteria") Criteria criteria, @Param("search") MypageSearch search);
 
     public int selectCountAll(@Param("search") MypageSearch search);
+
+    public int selectAmount (@Param("productId") Long productId,@Param("groupIndexId") Long groupIndexNumber);
 }

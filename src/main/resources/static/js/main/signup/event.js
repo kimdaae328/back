@@ -299,7 +299,7 @@ signupbutton.addEventListener("click",(e)=>{
         Error=true;
         alert("주소를입력해주세요.");
     }
-    const errorMessages = document.querySelectorAll("p.error-message");
+    const errorMessages = document.querySelectorAll(".error");
     let hasVisibleErrorMessage = false;
     for (const el of errorMessages) {
         if (window.getComputedStyle(el).display === "block") {
