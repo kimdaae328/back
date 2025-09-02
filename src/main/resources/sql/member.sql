@@ -18,21 +18,3 @@ create table tbl_member(
     updated_date datetime default current_timestamp
 );
 
-select * from tbl_member;
-
-insert into tbl_member (
-    member_email,
-    member_password,
-    member_name,
-    member_role
-) values (
-             'admin@youeatieat.com',
-             '1234',
-             '관리자',
-             'admin'
-         );
-
-update tbl_member
-set member_email='admin@gamil.com'
-where id = 1;
-
