@@ -456,8 +456,11 @@ body #rebound {
 }
 
 .comp-provider-name span.pn-name {
-    display: inline-block;
     vertical-align: middle;
+    text-align: center;
+    display: block !important;
+    font-size: 16px;
+    padding-top: 12px;
 }
 
 #rebound>#rebound-side #side-wrapper .side-header .app-wrapper .app-name {
@@ -2126,4 +2129,5 @@ button * {pointer-events: none;}
 tr.no-data td {
     text-align: center;
     padding: 50px !important;
+    font-size: 15px !important;
 }

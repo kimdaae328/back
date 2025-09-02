@@ -460,7 +460,6 @@ address, dl, ol, ul {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px hsla(0, 0%, 39%, .05), 0 -1px 2px hsla(0, 0%, 39%, .05);
-    padding: 25px;
 }
 .payment-setting-index .page-body .title, .payment-setting-layout .page-body .title, .banner-container .title {
     color: #292929;

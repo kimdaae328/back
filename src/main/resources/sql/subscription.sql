@@ -10,8 +10,3 @@ create table tbl_subscription(
 );
 
 select * from tbl_subscription;
-
-insert into tbl_subscription (subscription_start_date, subscription_end_date, subscription_status)
-values ('2025-08-28','2025-09-28','active');
-
-drop table tbl_subscription;

@@ -17,11 +17,3 @@ create table tbl_subscription_payment (
 );
 
 select * from tbl_subscription_payment;
-delete from tbl_subscription_payment where id=6;
-
-
-insert into tbl_subscription_payment(subscription_payment_price, member_id, subscription_id, subscription_payment_date, subscription_payment_status, subscription_payment_method)
-values ('4000', '2', '1', '2025-08-22', 'success','card');
-
-
-drop table tbl_subscription_payment;

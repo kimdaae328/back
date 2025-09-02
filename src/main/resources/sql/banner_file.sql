@@ -10,6 +10,6 @@ create table tbl_banner_file (
         references tbl_file(id)
 );
 
-drop table tbl_banner_file;
+# drop table tbl_banner_file;
 
 select * from tbl_banner_file;

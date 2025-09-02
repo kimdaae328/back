@@ -17,16 +17,22 @@ create table tbl_member(
     created_date datetime default current_timestamp,
     updated_date datetime default current_timestamp
 );
-ALTER TABLE tbl_member
-    ADD COLUMN member_verified BOOLEAN DEFAULT FALSE;
+
 select * from tbl_member;
-Insert into tbl_member (member_email, member_password, member_name, member_birth, member_phone, member_verified, member_provider, member_gender, member_role, member_status)
-values ("ekdo1234","ekdo1357","김다애","2000-05-02",01020503402,0,'you_i','female','admin','active');
 
-delete from tbl_member
-where id = 13;
+insert into tbl_member (
+    member_email,
+    member_password,
+    member_name,
+    member_role
+) values (
+             'admin@youeatieat.com',
+             '1234',
+             '관리자',
+             'admin'
+         );
 
+update tbl_member
+set member_email='admin@gamil.com'
+where id = 1;
 
-select count(*)
-from tbl_member
-where member_status = 'active' and member_role = 'buyer'

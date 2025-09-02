@@ -1916,31 +1916,33 @@ const bannerLayout = (() => {
                 <div class="page-subtitle">실시간 메인 배너 등록</div>
             </div>
             <div class="page-body temp-page">
-                <div class="pg-box banner-container">
-                    <div class="banner-insert">
-                        <div class="title">
-                            메인페이지 배너등록
+                <div class="page-content pg-box banner-container">
+                    <div class="table-layout white-panel">
+                        <div class="banner-insert">
+                            <div class="title">
+                                메인페이지 배너등록
+                            </div>
+                            <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
+                                <!-- 아래 Li수만큼 Img -->
+                                <div class="dropdown">
+                                    <label>
+                                        <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
+                                        <div class="add-btn">
+                                            <i class="fas fa-plus"></i>
+                                        </div>
+                                        <a>사진등록</a>
+                                    </label>
+                                </div>
+                                <div class="boot-tip tip primary">
+                                    <ul class="pg-list list-unstyled">
+                                    </ul>
+                                    <a href="#" class="register-link">등록</a>
+                                </div>
+                            </form>
                         </div>
-                        <form id="banner-form" action="/api/admin/banners" method="post" enctype="multipart/form-data">
-                            <!-- 아래 Li수만큼 Img -->
-                            <div class="dropdown">
-                                <label>
-                                    <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple >
-                                    <div class="add-btn">
-                                        <i class="fas fa-plus"></i>
-                                    </div>
-                                    <a>사진등록</a>
-                                </label>
-                            </div>
-                            <div class="boot-tip tip primary">
-                                <ul class="pg-list list-unstyled">
-                                </ul>
-                                <a href="#" class="register-link">등록</a>
-                            </div>
-                        </form>
-                    </div>
                     
-                    <table id="banner-table" class="table grey-header-table w-100" style="margin-top: 50px;">
+                    
+                        <table id="banner-table" class="table grey-header-table w-100 text-center receipt-table" style="margin-top: 50px;">
                         <colgroup>
                             <col style="width:16%">
                             <col style="width:16%">
@@ -1963,6 +1965,7 @@ const bannerLayout = (() => {
                             
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         `
@@ -1975,8 +1978,8 @@ const bannerLayout = (() => {
 
         if (!bannerList || bannerList.length === 0) {
             bannersContainer.innerHTML = `
-            <tr>
-                <td colspan="6" style="text-align:center; padding:20px; color:#777;">
+            <tr class="no-data">
+                <td colspan="6">
                     등록된 배너가 없습니다.
                 </td>
             </tr>
@@ -2064,7 +2067,7 @@ const productLayout = (() => {
                                  <thead>
                                     <tr>
                                         <th class="td-name">상품명</th>
-                                        <th>판매자</th>
+                                        <th>관리자 ID</th>
                                         <th class="td-status">가격</th>
                                         <th class="td-user">보유 중량(kg)</th>
                                         <th class="td-at">등록일자</th>
