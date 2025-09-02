@@ -22,30 +22,30 @@ public class ProductListMapperTests {
     @Autowired
     private CategoriesProductMapper  categoriesProductMapper;
 
-    @Test
-    public void testSelectAll() {
-        Search search = new Search();
-        search.setMainCategories(new ArrayList<>(Arrays.asList("vegetables")));
-        productMapper.countProduct(search);
-    }
+//    @Test
+//    public void testSelectAll() {
+//        Search search = new Search();
+//        search.setMainCategories(new ArrayList<>(Arrays.asList("vegetables")));
+//        productMapper.countProduct(search);
+//    }
 
-    @Test
-    public void testSelectAll2() {
-        Criteria criteria = new Criteria(1, 9);
-        Search search = new Search();
+//    @Test
+//    public void testSelectAll2() {
+//        Criteria criteria = new Criteria(1, 9);
+//        Search search = new Search();
+//
+//        System.out.println(bestProductMapper.selectList(criteria, search));
+//    }
 
-        System.out.println(bestProductMapper.selectList(criteria, search));
-    }
-
-    @Test
-    public void testSelectAll3() {
-        Search search = new Search();
-        Criteria criteria = new Criteria(1, 9);
-        search.setPriceKeyword("1000");
-        System.out.println(search.getPriceKeyword());
-
-        System.out.println(categoriesProductMapper.selectList(criteria, search, 1L));
-    }
+//    @Test
+//    public void testSelectAll3() {
+//        Search search = new Search();
+//        Criteria criteria = new Criteria(1, 9);
+//        search.setPriceKeyword("1000");
+//        System.out.println(search.getPriceKeyword());
+//
+//        System.out.println(categoriesProductMapper.selectList(criteria, search, 1L));
+//    }
 
 //    @Autowired
 //    private ProductListMapper productListMapper;

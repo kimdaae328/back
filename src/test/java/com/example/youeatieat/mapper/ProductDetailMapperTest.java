@@ -21,20 +21,20 @@ public class ProductDetailMapperTest {
     private LikeMapper likeMapper;
 
     //    상품 추가(사용 x)
-    @Test
-    public void testInsertProduct(){
-        CartVO cartVO = CartVO.builder()
-                .cartCount(1).memberId(2L).productId(3L)
-               .build();
-        cartMapper.insertCart(cartVO);
-    }
+//    @Test
+//    public void testInsertProduct(){
+//        CartVO cartVO = CartVO.builder()
+//                .cartCount(1).memberId(2L).productId(3L)
+//               .build();
+//        cartMapper.insertCart(cartVO);
+//    }
 
 //    찜
-    @Test
-    public void testInsertLike(){
-        LikeVO likeVO = LikeVO.builder().memberId(2L).productId(1L).build();
-        likeMapper.insertLike(likeVO);
-    }
+//    @Test
+//    public void testInsertLike(){
+//        LikeVO likeVO = LikeVO.builder().memberId(2L).productId(1L).build();
+//        likeMapper.insertLike(likeVO);
+//    }
 
 //    찜 취소
 

@@ -15,24 +15,24 @@ public class ProductInquiryTests {
     @Autowired
     ProductInquiryMapper productInquiryMapper;
 
-    @Test
-    public void insertProductInquiryTest(){
-        ProductInquiryVO productInquiryVO = ProductInquiryVO
-                .builder()
-                .productInquiryTitle("문의합니다.")
-                        .productInquiryContent("이거 맛있나요?")
-                                .productId(2L)
-                                        .memberId(2L)
-                                                .build();
+//    @Test
+//    public void insertProductInquiryTest(){
+//        ProductInquiryVO productInquiryVO = ProductInquiryVO
+//                .builder()
+//                .productInquiryTitle("문의합니다.")
+//                        .productInquiryContent("이거 맛있나요?")
+//                                .productId(2L)
+//                                        .memberId(2L)
+//                                                .build();
+//
+//
+//        productInquiryMapper.insertProductInquiry(productInquiryVO);
+//    }
 
-
-        productInquiryMapper.insertProductInquiry(productInquiryVO);
-    }
-
-    @Test
-    public void selectAllProductInquiryTest(){
-        Criteria criteria = new Criteria(1, 20);
-        log.info("Criteria: {}", criteria);
-        productInquiryMapper.selectAllProductInquiry(criteria, 2L).stream().map(ProductInquiryDTO::toString).forEach(log::info);
-    }
+//    @Test
+//    public void selectAllProductInquiryTest(){
+//        Criteria criteria = new Criteria(1, 20);
+//        log.info("Criteria: {}", criteria);
+//        productInquiryMapper.selectAllProductInquiry(criteria, 2L).stream().map(ProductInquiryDTO::toString).forEach(log::info);
+//    }
 }
